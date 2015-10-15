@@ -6,7 +6,7 @@
 #ifndef NO_SERIALCOMMANDER
 #include "Commander.hpp"
 
-#ifdef UAD_VC
+#ifdef VISUALC
 #include "VStudio/Serial.hpp"
 #endif
 

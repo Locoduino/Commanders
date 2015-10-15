@@ -11,17 +11,13 @@
 
 #define  GPIO2_PREFER_SPEED    1
 
-#ifdef UAD_VC
+#ifdef VISUALC
 #include "VStudio/arduino.h"
 #include "VStudio/arduino2.hpp"
 #include "VStudio/Serial.hpp"
 #else
 #include "arduino2.hpp"
 #endif
-
-#define ACTION_STACK_SIZE	5
-
-#define NO_STEPPER
 
 //////////////////////////////////////////
 //  Exclusion area
@@ -181,54 +177,8 @@
 
 /////////////////////////////////////
 
-#include "Accessories.hpp"
-#include "Driver.hpp"
-#include "DriverPort.hpp"
 #ifndef NO_COMMANDER
 #include "Commander.hpp"
-#endif
-
-#ifndef NO_MOTOR
-#include "AccessoryMotorOneWay.hpp"
-#include "AccessoryMotorTwoWays.hpp"
-#endif
-#ifndef NO_SERVO
-#include "AccessoryServo.hpp"
-#endif
-#ifndef NO_LIGHT
-#include "AccessoryLight.hpp"
-#endif
-
-#ifndef NO_GROUP
-#include "AccessoryGroup.hpp"
-#endif
-
-#include "DriverPortArduino.hpp"
-#ifndef NO_L293D
-#include "DriverPortL293d.hpp"
-#endif
-#ifndef NO_L298N
-#include "DriverPortL298n.hpp"
-#endif
-#ifndef NO_RELAY
-#include "DriverPortRelay.hpp"
-#endif
-#ifndef NO_SERVO
-#include "DriverPortServo.hpp"
-#include "DriverPortServoArduino.hpp"
-#endif
-
-#ifndef NO_ARDUINODRIVER
-#include "DriverArduino.hpp"
-#endif
-#ifndef NO_L293D
-#include "DriverL293d.hpp"
-#endif
-#ifndef NO_L298N
-#include "DriverL298n.hpp"
-#endif
-#ifndef NO_RELAY
-#include "DriverRelay.hpp"
 #endif
 
 #ifndef NO_COMMANDER
@@ -258,6 +208,6 @@
 #endif
 #endif
 
-void UAD_StartSetup();
-void UAD_EndSetup();
-void UAD_Loop();
+void BasicsCommanders_StartSetup();
+void BasicsCommanders_EndSetup();
+void BasicsCommanders_Loop();

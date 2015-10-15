@@ -51,8 +51,8 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions);UAD_VC;ARDUINO=105</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\Mes Documents\Arduino\libraries\UniversalAccessoryDecoder;D:\Mes Documents\Arduino\libraries\UniversalAccessoryDecoder\VStudio</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions);VISUALC;ARDUINO=105</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -77,21 +77,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\Accessories.hpp" />
-    <ClInclude Include="..\Accessory.hpp" />
-    <ClInclude Include="..\AccessoryGroup.hpp" />
-    <ClInclude Include="..\AccessoryLight.hpp" />
-    <ClInclude Include="..\AccessoryMotor.hpp" />
-    <ClInclude Include="..\AccessoryMotorOneWay.hpp" />
-    <ClInclude Include="..\AccessoryMotorTwoWays.hpp" />
-    <ClInclude Include="..\AccessoryServo.hpp" />
-    <ClInclude Include="..\ActionsStack.hpp" />
-    <ClInclude Include="..\AFMotor.hpp" />
     <ClInclude Include="..\arduino2.hpp" />
     <ClInclude Include="..\arduino2_pins_leonardo.hpp" />
     <ClInclude Include="..\arduino2_pins_mega.hpp" />
     <ClInclude Include="..\arduino2_pins_nano.hpp" />
     <ClInclude Include="..\arduino2_pins_standard.hpp" />
+    <ClInclude Include="..\BasicsCommanders.h" />
     <ClInclude Include="..\ButtonsCommander.hpp" />
     <ClInclude Include="..\ButtonsCommanderButton.hpp" />
     <ClInclude Include="..\ButtonsCommanderEncoder.hpp" />
@@ -100,47 +91,13 @@
     <ClInclude Include="..\ButtonsCommanderSwitch.hpp" />
     <ClInclude Include="..\Commander.hpp" />
     <ClInclude Include="..\DccCommander.hpp" />
-    <ClInclude Include="..\Driver.hpp" />
-    <ClInclude Include="..\DriverArduino.hpp" />
-    <ClInclude Include="..\DriverL293d.hpp" />
-    <ClInclude Include="..\DriverL298n.hpp" />
-    <ClInclude Include="..\DriverPort.hpp" />
-    <ClInclude Include="..\DriverPortArduino.hpp" />
-    <ClInclude Include="..\DriverPortL293d.hpp" />
-    <ClInclude Include="..\DriverPortL298n.hpp" />
-    <ClInclude Include="..\DriverPortRelay.hpp" />
-    <ClInclude Include="..\DriverPorts.hpp" />
-    <ClInclude Include="..\DriverPortServo.hpp" />
-    <ClInclude Include="..\DriverPortServoArduino.hpp" />
-    <ClInclude Include="..\DriverRelay.hpp" />
     <ClInclude Include="..\SerialCommander.hpp" />
-    <ClInclude Include="..\Servo.hpp" />
-    <ClInclude Include="..\TextCommunicationHelper.hpp" />
-    <ClInclude Include="..\UniversalAccessoryDecoder.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Accessories.cpp" />
-    <ClCompile Include="..\Accessory.cpp" />
-    <ClCompile Include="..\AccessoryGroup.cpp" />
-    <ClCompile Include="..\AccessoryLight.cpp" />
-    <ClCompile Include="..\AccessoryMotor.cpp" />
-    <ClCompile Include="..\AccessoryMotorOneWay.cpp" />
-    <ClCompile Include="..\AccessoryMotorTwoWays.cpp" />
-    <ClCompile Include="..\AccessoryServo.cpp" />
-    <ClCompile Include="..\ActionsStack.cpp" />
+    <ClCompile Include="..\BasicsCommanders.cpp" />
     <ClCompile Include="..\ButtonsCommanderEncoder.cpp" />
-    <ClCompile Include="..\Driver.cpp" />
-    <ClCompile Include="..\DriverArduino.cpp" />
-    <ClCompile Include="..\DriverPort.cpp" />
-    <ClCompile Include="..\DriverPortArduino.cpp" />
-    <ClCompile Include="..\DriverPortRelay.cpp" />
-    <ClCompile Include="..\DriverPorts.cpp" />
-    <ClCompile Include="..\DriverPortServo.cpp" />
-    <ClCompile Include="..\DriverPortServoArduino.cpp" />
-    <ClCompile Include="..\DriverRelay.cpp" />
-    <ClCompile Include="..\UniversalAccessoryDecoder.cpp" />
     <ClCompile Include="..\VStudio\Arduino.cpp" />
     <ClCompile Include="..\VStudio\stdafx.cpp" />
     <ClCompile Include="..\ButtonsCommander.cpp" />
@@ -151,12 +108,7 @@
     <ClCompile Include="..\Commander.cpp" />
     <ClCompile Include="..\DccCommander.cpp" />
     <ClCompile Include="..\SerialCommander.cpp" />
-    <ClCompile Include="..\TextCommunicationHelper.cpp" />
-    <ClCompile Include="..\DriverL293d.cpp" />
-    <ClCompile Include="..\DriverPortL293d.cpp" />
-    <ClCompile Include="..\DriverL298n.cpp" />
-    <ClCompile Include="..\DriverPortL298n.cpp" />
-    <ClCompile Include="UAD_VStudio.cpp" />
+    <ClCompile Include="VStudio.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\WhatsNew.TXT" />

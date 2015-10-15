@@ -8,7 +8,7 @@ description: <Serial Commander>
 
 #ifndef NO_SERIALCOMMANDER
 #include "SerialCommander.hpp"
-#include "TextCommunicationHelper.hpp"
+//#include "TextCommunicationHelper.hpp"
 
 #ifdef DEBUG_MODE
 #endif

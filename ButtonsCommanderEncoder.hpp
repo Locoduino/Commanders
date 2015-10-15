@@ -3,7 +3,7 @@
 #define __encoder_H__
 //-------------------------------------------------------------------
 
-#ifdef UAD_VC
+#ifdef VISUALC
 #include "VStudio/arduino2.hpp"
 #else
 #include "arduino2.hpp"

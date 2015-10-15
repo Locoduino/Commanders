@@ -4,7 +4,7 @@
 //-------------------------------------------------------------------
 
 #define  GPIO2_PREFER_SPEED    1
-#ifdef UAD_VC
+#ifdef VISUALC
 #include "VStudio/arduino2.hpp"
 #else
 #include "arduino2.hpp"

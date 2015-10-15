@@ -4,13 +4,7 @@ author: <Thierry PARIS>
 description: <Base functions of the library>
 *************************************************************/
 
-#include "UniversalAccessoryDecoder.h"
-
-#ifndef UAD_VC
-#include "MemoryFree.hpp"
-#endif
-
-static int freemem = 0;
+#include "Basicscommanders.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -42,10 +36,12 @@ void DccAccessoryDecoderPacket(int address, boolean activate, byte data)
 		(DccCommander::func_BasicAccPacket)(realAddress, activate, data);
 	else
 	{
+		/*
 		for (int i = 0; i < Accessories::AccessoriesFullList.AccessoriesAddCounter; i++)
 			Accessories::AccessoriesFullList.pAccessoriesFullList[i]->DCCToggle(realAddress, data);
 		for (int i = 0; i < AccessoryGroup::StaticData.AccessoryGroupAddCounter; i++)
 			AccessoryGroup::StaticData.pAccessoryGroupFullList[i]->DCCToggle(realAddress, data);
+			*/
 	}
 }
 
@@ -57,6 +53,7 @@ void AccessoryHandler(unsigned long inId, bool inAnalogData, int inData)
 {	
 	bool found = false;
 
+	/*
 	if (inAnalogData)
 	{
 		for (int i = 0; i < Accessories::AccessoriesFullList.AccessoriesAddCounter; i++)
@@ -69,9 +66,10 @@ void AccessoryHandler(unsigned long inId, bool inAnalogData, int inData)
 		for (int j = 0; j < AccessoryGroup::StaticData.AccessoryGroupAddCounter; j++)
 			found |= AccessoryGroup::StaticData.pAccessoryGroupFullList[j]->DCCToggle(DCCID(inId), DCCACCESSORY(inId));
 	}
+	*/
 }
 
-void UAD_StartSetup()
+void BasicsCommanders_StartSetup()
 {
 #ifdef DEBUG_MODE
 	// Done by the SerialCommander setup...
@@ -80,29 +78,24 @@ void UAD_StartSetup()
 	delay(500);
 
 	Serial.println(F(""));
-	Serial.println(F("Universal Accessories Decoder V4.10."));
+	Serial.println(F("Basics Commanders V0.10."));
 	Serial.println(F("Developed by Thierry Paris."));
 	Serial.println(F(""));
 
 	Serial.println(F("*** Setup started."));
-	freemem = freeMemory();
 #endif
 	Commander::EventHandler = AccessoryHandler;
 	DccCommander::SetBasicAccessoryDecoderPacketHandler(DccAccessoryDecoderPacket);
 }
 
-void UAD_EndSetup()
+void BasicsCommanders_EndSetup()
 {
 #ifdef DEBUG_MODE
-	Serial.print(F("*** Setup Finished."));
-	Serial.print(F("   Memory used = "));
-	Serial.print(freemem - freeMemory());
-	Serial.println(F(" bytes"));
+	Serial.print(F("*** Setup Basics Commanders Finished."));
 #endif
 }
 
-void UAD_Loop()
+void BasicsCommanders_Loop()
 {
 	Commander::Loops();
-	Accessories::Loops();
 }

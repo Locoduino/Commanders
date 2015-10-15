@@ -9,7 +9,7 @@ description: <Dcc Commander>
 #ifndef NO_DCCCOMMANDER
 #include "DccCommander.hpp"
 
-#ifdef UAD_VC
+#ifdef VISUALC
 DCC_Decoder DCC_Decoder::DCCInstance;
 #endif
 

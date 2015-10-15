@@ -7,7 +7,7 @@ description: <Buttons Commander>
 #ifndef NO_BUTTONSCOMMANDER
 #include "ButtonsCommander.hpp"
 
-#ifdef UAD_VC
+#ifdef VISUALC
 #include<stdarg.h>
 #endif
 
@@ -17,7 +17,7 @@ description: <Buttons Commander>
 #define CHECK(val, text)
 #endif
 
-#ifdef UAD_VC
+#ifdef VISUALC
 #include<stdarg.h>
 #endif
 

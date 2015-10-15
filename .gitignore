@@ -1,0 +1,5 @@
+VStudio/Debug/
+VStudio/.vs
+VStudio/*.opensdf
+VStudio/*.sdf
+VStudio/*.user

@@ -1,0 +1,162 @@
+08/07/2015 V4.10
+	- Ajout des encodeurs.
+
+	- Adding encoders buttons.
+
+21/02/2015 V4.03
+	- Ajout du support du Leonardo, le shield L293d est incompatible avec lui !
+	- Corrections de l'exemple Signals5x3.
+	- Correction de quelques warnings 1.0.* .
+	- Correction d'erreurs de compilation IDE 1.6 avec un Nano ou un Uno.
+
+	- Add support of Leonardo, removing L293D shield use, incompatible with the Leonardo.
+	- Fix sample Signals5x3.
+	- Fix some warning with IDE 1.0
+	- Fix errors in IDE 1.6 when compiling for Uno or Nano.
+
+24/01/2015 V4.02
+	- Correction d'un probleme de compilation dans AccessoryServo.hpp uniquement dans l'IDE 1.0.*
+	- Correction de quelques warnings
+
+	- Fix a compilation error in AccessoryServo.hpp only in IDE 1.0.*
+	- Fix some other warnings.
+
+24/01/2015 V4.01
+	- Quelques corrections pour que les exclusions possibles via UniversalAccessoryDecoder.h fonctionnent.
+
+	- Some fixes to add possible exclusions via UniversalAccessoryDecoder.h .
+
+02/01/2015 V4.0
+	- Version officielle !
+
+	- Official version !
+
+30/12/2014 V4.0 Beta 3
+	- Correction de la liste d'accessoires qui n'obéissaient pas aux commanders.
+	- Correction de l'initialisation des ports du Driver L293D.
+	- Deux nouveaux exemples : Signals5x3 et SignalFrench.
+
+	- Fix accessories list. It did not obey to commanders orders.
+	- Fix L293D driver, a crash with servo ports initialization.
+	- Two new samples : Signals5x3 and SignalFrench.
+
+23/12/2014 V4.0 Beta 2
+	- Correction des numéros de pin servo de DriverL293d .
+	- Inversion des valeurs de pin pour les lights.
+	- Ajout de DIGITAL_INVERTED pour gérer les pins à l'inverse : move met à LOW, stop met à HIGH.
+	- Synchro du clignotement des lights dans le même groupe.
+	- Supression de l'argument PortType dans le constructeur de DriverPortArduino, forcément spécifié dans le Setup.
+
+	- Fix servo pin numbers in DP mode in DriverL293d.
+	- Exchange output values for leds : HIGH and LOW on pins.
+	- Add a DIGITAL_INVERTED port type to handle special cases, when HIGH means LOW and so on.
+	- Synchronization of blinking lights when they aparts to the same group.
+	- Delete the PortType argument of DriverPortArduino constructor. It is always specified in the Setup function...
+
+25/11/2014 V4.0 Beta 1
+	- Ajoute une configuration DccCommander::UseRawDccAddresses pour que les adresses Dcc traitées soient telles que reçues dans les paquets. False par défaut.
+	- Ajout dans DccCommander de la possibilité de récupérer les arrivées de paquets d'accessoire pour faire sa propre gestion.
+	- Modification des constructeurs de Accessories et AccessoryGroup pour pouvoir manuellement les remplir.
+	- Modification de la construction de la liste interne de tous les Accessories déclarés pour réduire l'empreinte mémoire.
+	- C'est la fin pour les pins au format DP. Retour à des entiers simples, mais en interne, c'est toujours la bibliothèque fast IO qui tourne...
+	- Ajout d'une fonction SetPowerCommand dans l'AccessoryServo pour gérer l'alimentation d'un servo et couper lorsqu'il n'est pas utilisé...
+
+	- Add a new configuration flag DccCommander::UseRawDccAddresses to get raw dcc addresses directly from the bits of the packets instead of the translated addresses. 
+	- Add a new way to get directly accessory packets from DccCommander to be able to do manual handling.
+	- Changes in Accessories, AccessoryGroup and ButtonCommander to be able to fill them manually.
+	- Reduced memory print by changing the way the global list of accessories is initialized...
+	- End of need of DP pin numbers. Integer pin numbers are back, but internally, the fast io library still works !
+	- Add of a function SetPowerCommand in AccessoryServo to cut power of servos when not used.
+
+21/11/2014 V4.0 Alpha 4
+	- Ajout de UAD_StartSetup() et UAD_EndSetup()
+	- Incorporation de MemoryFree.
+	- Compatibilité avec Ide Arduino 1.5.x.x
+	- Ajout de classes pour le stepper, incomplètes et non testées !
+
+	- Adds UAD_StartSetup() and UAD_EndSetup()
+	- Include MemoryFree library directly in the code.
+	- The library is now compatible with Arduino IDE 1.5.x.x
+	- Adds some classes for stepper motors, but nothing works !
+
+04/11/2014 V4.0 Alpha 3
+	- Le projet est devenu une vraie librairie, installable comme telle par l'IDE Arduino.
+	- Encore des amélios sur la réactivité du DCC.
+	- Les exemples ont été mis à jour.
+	- Les libraries annexes ont été directement intégrées. Plus besoin d'importer motor_shield ou DCC_Decoder.
+
+	- The project is now a real library, which can be installed by the arduino IDE.
+	- Yet more reactivity for DCC.
+	- Samples are all updated.
+	- Referenced libraries has been simply integrated. No more import of motor_shield or DCC_Decoder required.
+
+25/10/2014 V4.0	Alpha
+	- Traitement correct des Ids DCC avec ID decodeur + ID action (0/1) partout.
+	- Gestion de plus d'un Id DCC par accessoire qui le permet.
+	- Ajout de l'Arduino Nano R3 dans arduino2.
+	- Ajout des Commander, un nouveau moyen plus siùmple de gérer le Dcc, les boutons, les entrées en général...
+	- Meilleure gestion du DCC pour une meilleure réactivité.
+	- Gestion des ports dans les drivers revue.
+	- Gestion des groupes revue.
+	- Simplification du .ino .
+	- Projet UAD utilisable dans Visual Studio Express 2013.
+
+	- Dcc ids are now correctly handled, with a decoder number and an action number (0/1)
+	- More than one Dcc id by accessory when it can handle.
+	- Support of Arduino Nano R3 added.
+	- Added Commanders, a new way to handle inputs.
+	- Dcc reactivity has been improved.
+	- Ports lists in drivers has been rewriten.
+	- Group and Accessory list have been improved also.
+	- The .ino file is far less complex !
+	- the UAD helper project is now usable in Visual Studio Express 2013.
+
+19/09/2014 V3.2
+	- Correction du mouvement de départ d'un servo vers le point milieu maintenant c'est toujours la position minimum.
+	- Correction de AccessoryGroup pour tenir compte des identifiants Dcc.
+	- Ajout dans DriverPortServo d'une fonction GetPosition() pour lire la position courante du servo.
+
+	- Fix erratic servo first movement. This is now the minimum position which is forced.
+	- Fix AccessoryGroup to take account of Dcc identifier of GroupState.
+	- Add a new function GetPosition() in DriverPortServo to get the current position from the servo.
+
+05/09/2014 V3.1
+	- Supression des incohérences sur les numéros de pin. Tout est maintenant pilotable grace à DPn° .
+	- Ajout de la fonction GPIO_to_Arduino_pin pour transformer un numéro de pin DP en numéro arduino.
+	- Supression de la classe inutile AccessoryLightDriver, remplacée par AccessoryLight.
+	- Sur DriverPortArduino, gestion des broches analogiques pour le PWM.
+	- Ajout du fading sur les lumières.
+	- Correction de NO_MOTOR qui exclut maintenant automatiquement MOTORONEWAY et MOTORTWOWAYS. 
+	- Les defines NO_* provoquait des erreurs de compilation !
+
+	~ Removed the pin definition by an int everywhere. It must be defined by DPnb now.
+	~ Creation of function GPIO_to_Arduino_pin to convert GPIO_pin_t pin number to a classic Arduino int.
+	~ The class AccessoryLightDriver has been removed. AccessoryLight is the good one now.
+	~ In DriverPortArduino class, it is now possible to handle analogic pins.
+	~ A fading effect is available when lighting on or off a led.
+	~ The NO_MOTOR define now automaticaly exclude also MOTORONEWAY and MOTORTWOWAYS
+	~ Defining NO_* exclusions gave compilation errors. It is fixed.
+
+01/09/2014 V3
+	- Utilisation de arduino2 pour accélérer les entrées sorties.
+	- Ajout des servos.
+	- Simplification des include pour réduire à juste UniversalAccessoryDecoder.h dans le .ino
+	- Simplification des exécutions par création des ButtonToggle() et DccToggle() dans Accessories et AccessoryGroup.
+	- Correction de nombreux bugs...
+	- ajout de divers fichiers .ino pour exemples.
+	- ajout du copyright sur la console en debug.
+	- ajout de WhatsNew !
+
+	~ Use of source arduino2 to speed up input/output access.
+	~ Add servos.
+	~ Only one .h file to include in .ino now : UniversalAccessoryDecoder..
+	~ Simplification of execution routines by adding ButtonToggle() et DccToggle() in Accessories and AccessoryGroup.
+	~ fix a lot of bugs...
+	~ Add .ino samples.
+	~ Add copyright output to console during debug execution
+	~ Add this WhatsNew !
+
+15/04/2014 V2
+
+01/01/2014 V1
+	- UniversalAccessoryDecoder (UAD) is Born !

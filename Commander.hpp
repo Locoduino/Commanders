@@ -31,7 +31,10 @@ public:
 };
 
 typedef void(*EventHandlerFunction)(unsigned long inId, bool inAnalogData, int inData);
+
+#ifndef UNDEFINED_ID
 #define UNDEFINED_ID	((unsigned long)-1)
+#endif
 
 class Commander
 {

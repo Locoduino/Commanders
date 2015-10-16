@@ -4,7 +4,7 @@ author: <Thierry PARIS>
 description: <Base functions of the library>
 *************************************************************/
 
-#include "Basicscommanders.h"
+#include "BasicsCommanders.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -72,10 +72,7 @@ void AccessoryHandler(unsigned long inId, bool inAnalogData, int inData)
 void BasicsCommanders_StartSetup()
 {
 #ifdef DEBUG_MODE
-	// Done by the SerialCommander setup...
 	Serial.begin(115200);
-	// Just for let the time to the PIC to initialize internals...
-	delay(500);
 
 	Serial.println(F(""));
 	Serial.println(F("Basics Commanders V0.10."));
@@ -91,7 +88,7 @@ void BasicsCommanders_StartSetup()
 void BasicsCommanders_EndSetup()
 {
 #ifdef DEBUG_MODE
-	Serial.print(F("*** Setup Basics Commanders Finished."));
+	Serial.println(F("*** Setup Basics Commanders Finished."));
 #endif
 }
 

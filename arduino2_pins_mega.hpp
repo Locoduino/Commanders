@@ -207,6 +207,24 @@ enum GPIO_pin_enum
 
 };
 
+#define DPA8	DP62
+#define DPA9	DP63
+#define DPA10	DP64
+#define DPA11	DP65
+#define DPA12	DP66
+#define DPA13	DP67
+#define DPA14	DP68
+#define DPA15	DP69
+
+#define A8		62
+#define A9		63
+#define A10		64
+#define A11		65
+#define A12		66
+#define A13		67
+#define A14		68
+#define A15		69
+
 typedef	enum GPIO_pin_enum  GPIO_pin_t;
 
 // Number of GPIO pins.

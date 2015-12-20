@@ -112,7 +112,7 @@ byte            DCC_Decoder::gPacketMask;                 // Bit index to write 
 boolean         DCC_Decoder::gPacketEndedWith1;           // Set true if packet ended on 1. Spec requires that the 
                                                           // packet end bit can count as a bit in next preamble. 
     // CV Storage
-byte            DCC_Decoder::gCV[kCV_MAX];                // CV Storage (TODO - Move to PROGMEM)
+byte            DCC_Decoder::gCV[kCV_MAX];                // CV Storage (not const. Only const can go to PROGMEM !)
 
     // Packet arrival timing
 unsigned long   DCC_Decoder::gThisPacketMS;               // Milliseconds of this packet being parsed
@@ -365,7 +365,8 @@ void DCC_Decoder::State_Execute()
             }
             GOTO_DecoderReset( kDCC_OK_BASIC_ACCESSORY );
         }
-            
+        /* In UAD : Only handle idle and accessory packets.
+
             ///////////////////////////////////////////////////////////
             // Handle as a baseline packet
        
@@ -414,6 +415,7 @@ void DCC_Decoder::State_Execute()
                 (*func_BaselineControlPacket)(addressByte,speedBits,directionBit);
             }
         }
+		*/
         GOTO_DecoderReset( kDCC_OK_BASELINE );      
     }
     
@@ -658,9 +660,9 @@ void DCC_Decoder::SetupDecoder(byte mfgID, byte mfgVers, byte interrupt)
     if( gInterruptMicros == 0 )
     {        
             // Save mfg info
-        gCV[kCV_ManufacturerVersionNo] = mfgID;
+        /*gCV[kCV_ManufacturerVersionNo] = mfgID;
         gCV[kCV_ManufacturedID] = mfgVers;
-        
+        */
             // Attach the DCC interrupt
         StartInterrupt(interrupt);
     

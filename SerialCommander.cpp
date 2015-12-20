@@ -4,14 +4,10 @@ author: <Thierry PARIS>
 description: <Serial Commander>
 *************************************************************/
 
-//#include "UniversalAccessoryDecoder.h"
+#include "BasicsCommanders.h"
 
 #ifndef NO_SERIALCOMMANDER
-#include "SerialCommander.hpp"
 //#include "TextCommunicationHelper.hpp"
-
-#ifdef DEBUG_MODE
-#endif
 
 // The use of a pointer to a HardwareSerial object have not run...
 // So this source must use very ugly switches everywhere...
@@ -27,15 +23,23 @@ void SerialCommander::Setup(unsigned long inSpeed, byte inSerialPort)
 
 	switch (inSerialPort)
 	{
+#ifndef NO_SERIALCOMMANDER_SERIAL
 	case 1: Serial.begin(inSpeed); break;
+#endif
+#ifndef NO_SERIALCOMMANDER_SERIAL1
 #if defined(UBRR1H)
 	case 2: Serial1.begin(inSpeed); break;
 #endif
+#endif
+#ifndef NO_SERIALCOMMANDER_SERIAL2
 #if defined(UBRR2H)
 	case 3: Serial2.begin(inSpeed); break;
 #endif
+#endif
+#ifndef NO_SERIALCOMMANDER_SERIAL3
 #if defined(UBRR3H)
 	case 4: Serial3.begin(inSpeed); break;
+#endif
 #endif
 	}
 	this->serialPort = inSerialPort;
@@ -53,15 +57,23 @@ unsigned long SerialCommander::Loop()
 	int avail = 0;
 	switch (this->serialPort)
 	{
+#ifndef NO_SERIALCOMMANDER_SERIAL
 	case 1: avail = Serial.available(); break;
+#endif
+#ifndef NO_SERIALCOMMANDER_SERIAL1
 #if defined(UBRR1H)
 	case 2: avail = Serial1.available(); break;
 #endif
+#endif
+#ifndef NO_SERIALCOMMANDER_SERIAL2
 #if defined(UBRR2H)
 	case 3: avail = Serial2.available(); break;
 #endif
+#endif
+#ifndef NO_SERIALCOMMANDER_SERIAL3
 #if defined(UBRR3H)
 	case 4: avail = Serial3.available(); break;
+#endif
 #endif
 	}
 
@@ -71,16 +83,24 @@ unsigned long SerialCommander::Loop()
 		{
 			switch (this->serialPort)
 			{
+#ifndef NO_SERIALCOMMANDER_SERIAL
 			case 1: character = Serial.read(); break;
+#endif
 #if defined(UBRR1H)
+#ifndef NO_SERIALCOMMANDER_SERIAL1
 			case 2: character = Serial1.read(); break;
 #endif
+#endif
 #if defined(UBRR2H)
+#ifndef NO_SERIALCOMMANDER_SERIAL2
 			case 3: character = Serial2.read(); break;
 #endif
+#endif
 #if defined(UBRR3H)
+#ifndef NO_SERIALCOMMANDER_SERIAL3
 			case 4: character = Serial3.read(); break;
 #endif
+#endif		
 			}
 
 			if ((int)character < 32 || (int)character > 60)
@@ -118,15 +138,23 @@ unsigned long SerialCommander::Loop()
 
 			switch (this->serialPort)
 			{
+#ifndef NO_SERIALCOMMANDER_SERIAL
 			case 1: avail = Serial.available(); break;
+#endif
+#ifndef NO_SERIALCOMMANDER_SERIAL1
 #if defined(UBRR1H)
 			case 2: avail = Serial1.available(); break;
 #endif
+#endif
+#ifndef NO_SERIALCOMMANDER_SERIAL2
 #if defined(UBRR2H)
 			case 3: avail = Serial2.available(); break;
 #endif
+#endif
+#ifndef NO_SERIALCOMMANDER_SERIAL3
 #if defined(UBRR3H)
 			case 4: avail = Serial3.available(); break;
+#endif
 #endif
 			}
 		}

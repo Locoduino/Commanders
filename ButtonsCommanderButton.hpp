@@ -19,7 +19,7 @@ class ButtonsCommanderButton
 
  public:
 	 inline ButtonsCommanderButton(unsigned long inId) { this->Id = inId; }
-	 inline virtual unsigned long GetId() const { return this->Id; }
+	 inline unsigned long GetId() const { return this->Id; }
 	 inline virtual bool IsAnalog() const { return false; }
 	 inline virtual int GetPosition() const { return 0; }
 

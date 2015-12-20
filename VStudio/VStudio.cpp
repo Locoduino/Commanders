@@ -56,12 +56,12 @@ void setup()
 
 	// Buttons setups
 
-	buttons.Setup(5);
-	buttons.Add(new ButtonsCommanderPush(DCCINT(20, 0))); // TURNOUT_LEFT	
-	buttons.Add(new ButtonsCommanderPush(DCCINT(20, 1))); // TURNOUT_DC
-	buttons.Add(new ButtonsCommanderPush(DCCINT(21, 0))); // TURNOUT_RIGHT
-	buttons.Add(new ButtonsCommanderPush(DCCINT(21, 1))); // TURNOUT_EPS
-	buttons.Add(new ButtonsCommanderPush(DCCINT(22, 0))); // TURNOUT_TJD
+	buttons.Setup(1);
+	buttons.Add(new ButtonsCommanderPush(20UL)); // TURNOUT_LEFT	
+	buttons.Add(new ButtonsCommanderPush(21UL)); // TURNOUT_DC
+	buttons.Add(new ButtonsCommanderPush(22UL)); // TURNOUT_RIGHT
+	buttons.Add(new ButtonsCommanderPush(23UL)); // TURNOUT_EPS
+	buttons.Add(new ButtonsCommanderPush(24UL)); // TURNOUT_TJD
 
 	PUSH(buttons, TURNOUT_LEFT)->Setup(30);
 	PUSH(buttons, TURNOUT_DC)->Setup(34);

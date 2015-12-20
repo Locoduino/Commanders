@@ -7,7 +7,7 @@ description: <Switch button with debounce.>
 //#include "UniversalAccessoryDecoder.h"
 #include "ButtonsCommanderSwitch.hpp"
 
-ButtonsCommanderSwitch::ButtonsCommanderSwitch(int inIdNumber) : ButtonsCommanderButton(UNDEFINED_ID)
+ButtonsCommanderSwitch::ButtonsCommanderSwitch(byte inIdNumber) : ButtonsCommanderButton(UNDEFINED_ID)
 {
 	this->IdSize = inIdNumber;
 	this->pId = new IdPin[this->IdSize];
@@ -19,7 +19,7 @@ ButtonsCommanderSwitch::ButtonsCommanderSwitch(int inIdNumber) : ButtonsCommande
 
 void ButtonsCommanderSwitch::Setup()
 {
-	for (int i = 0; i < this->IdAddCounter; i++)
+	for (byte i = 0; i < this->IdAddCounter; i++)
 	{
 		IdPin *id = &(this->pId[i]);
 		if (id->Pin == DP_INVALID)

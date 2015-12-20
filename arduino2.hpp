@@ -24,9 +24,6 @@
 #ifndef ARDUINO2_H_
 #define ARDUINO2_H_
 
-
-
-
 // Standard headers for AVR
 #include <avr/pgmspace.h>
 #include <avr/io.h>
@@ -43,7 +40,7 @@ extern "C"{
 #if defined(__AVR_ATmega2560__)
 #include "arduino2_pins_mega.hpp"
 #else
-#if defined(__AVR_ATmega328p__)
+#if defined(__AVR_ATmega328P__)
 #include "arduino2_pins_nano.hpp"
 #else
 #if defined(__AVR_ATmega32U4__)

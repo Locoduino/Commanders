@@ -22,8 +22,8 @@ public:
 	// Other loops (asscessories, groups) have just to call Commander::StaticData::CommanderPriorityLoop() to be sure
 	// to call priority functions very often.
 	Commander* *pCommanderList;
-	int CommanderSize;
-	int CommanderAddCounter;
+	byte CommanderSize;
+	byte CommanderAddCounter;
 
 	StaticCommanderData();
 
@@ -57,7 +57,7 @@ class Commander
 
 #ifdef DEBUG_MODE
 	public:
-		void CheckIndex(unsigned char inIndex, const __FlashStringHelper *infunc);
+		void CheckIndex(byte inIndex, const __FlashStringHelper *infunc);
 #endif
 };
 

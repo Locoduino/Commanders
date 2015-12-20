@@ -22,7 +22,7 @@ description: <Buttons Commander>
 #endif
 
 #ifdef DEBUG_MODE
-void ButtonsCommander::CheckIndex(unsigned char inIndex, const __FlashStringHelper *inFunc)
+void ButtonsCommander::CheckIndex(byte inIndex, const __FlashStringHelper *inFunc)
 {
 	if (this->size == 0)
 	{
@@ -47,7 +47,7 @@ ButtonsCommander::ButtonsCommander()
 	this->EventHandler = 0;
 }
 
-void ButtonsCommander::Setup(int inSize)
+void ButtonsCommander::Setup(byte inSize)
 {
 #ifdef DEBUG_MODE
 	Serial.println(F("   ButtonsCommander Setup"));
@@ -57,16 +57,11 @@ void ButtonsCommander::Setup(int inSize)
 	this->pButtons = new ButtonsCommanderButton*[inSize];
 }
 
-void ButtonsCommander::Setup(int inSize, ButtonsCommanderButton *inpFirstState, ...)
+void ButtonsCommander::Setup(byte inSize, ButtonsCommanderButton *inpFirstState, ...)
 {
-#ifdef DEBUG_MODE
-	Serial.println(F("   ButtonsCommander Setup"));
-#endif
-	va_list argList;
+	Setup(inSize);
 
-	this->size = inSize;
-	this->addCounter = 0;
-	this->pButtons = new ButtonsCommanderButton*[inSize];
+	va_list argList;
 	this->pButtons[this->addCounter++] = inpFirstState;
 	inSize--;
 
@@ -86,7 +81,7 @@ void ButtonsCommander::Setup(int inSize, ButtonsCommanderButton *inpFirstState, 
 }
 
 // Returns the index of the new added accessory.
-unsigned char ButtonsCommander::Add(ButtonsCommanderButton *inpButton)
+byte ButtonsCommander::Add(ButtonsCommanderButton *inpButton)
 {
 	CHECK(addCounter, "ButtonsCommander::Add");
 	this->pButtons[addCounter++] = inpButton;
@@ -94,7 +89,7 @@ unsigned char ButtonsCommander::Add(ButtonsCommanderButton *inpButton)
 	return addCounter - 1;
 }
 
-void ButtonsCommander::Set(unsigned char inIndex, ButtonsCommanderButton *inpButton)
+void ButtonsCommander::Set(byte inIndex, ButtonsCommanderButton *inpButton)
 {
 	CHECK(inIndex, "ButtonsCommander::Set");
 	this->pButtons[inIndex] = inpButton;

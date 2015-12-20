@@ -12,7 +12,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
-#define DCC_DECODER_VERSION			  "1.01"
+#define DCC_DECODER_VERSION			  "1.02"
 
 #define kDCC_STOP_SPEED     0xFE
 #define kDCC_ESTOP_SPEED    0xFF
@@ -21,7 +21,7 @@
 #define kCV_PrimaryAddress            1
 #define kCV_Vstart                    2
 #define kCV_AccelerationRate          3
-#define kCV_Deceleration Rate         4
+#define kCV_DecelerationRate          4
 #define kCV_ManufacturerVersionNo     7 
 #define kCV_ManufacturedID            8
 #define kCV_ExtendedAddress1          17
@@ -58,7 +58,7 @@
 #define kPACKET_LEN_MAX               6
 
     // CV 1..256 are supported
-#define kCV_MAX                       257
+#define kCV_MAX                       29
 
 #ifdef UAD_VC
 	#define PROG_CHAR	char
@@ -192,9 +192,8 @@ private:
     static byte                     gPacketIndex;                // Byte index to write to.
     static byte                     gPacketMask;                 // Bit index to write to. 0x80,0x40,0x20,...0x01
     static boolean                  gPacketEndedWith1;           // Set true if packet ended on 1. Spec requires that the 
-                                                                 // packet end bit can count as a bit in next preamble. 
-                                                                 // CV Storage
-    static byte                     gCV[kCV_MAX];                // CV Storage (TODO - Storage in PROGMEM)
+												                 // packet end bit can count as a bit in next preamble. 
+    static byte                     gCV[kCV_MAX];		         // CV Storage
     
         // Packet arrival timing
     static unsigned long            gThisPacketMS;               // Milliseconds of this packet being parsed

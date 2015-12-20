@@ -4,8 +4,6 @@ author: <Thierry PARIS>
 description: <Dcc Commander>
 *************************************************************/
 
-//#include "UniversalAccessoryDecoder.h"
-
 #ifndef NO_DCCCOMMANDER
 #include "DccCommander.hpp"
 

@@ -37,9 +37,9 @@ class ButtonsCommanderPush : public ButtonsCommanderButton
 	unsigned long lastDebounceTime;  // the last time the output pin was toggled
 	unsigned long debounceDelay;    // the debounce time; increase if the output flickers
 	
-	int IdSize;
-	int IdAddCounter;
-	int IdLoopCounter;
+	byte IdSize;
+	byte IdAddCounter;
+	byte IdLoopCounter;
 	unsigned long *pId;
 
  public:

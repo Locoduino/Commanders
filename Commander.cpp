@@ -53,7 +53,7 @@ void Commander::Loops()
 }
 
 #ifdef DEBUG_MODE
-void Commander::CheckIndex(unsigned char inIndex, const __FlashStringHelper *inFunc)
+void Commander::CheckIndex(byte inIndex, const __FlashStringHelper *inFunc)
 {
 }
 #endif

@@ -37,57 +37,9 @@
 // from .cpp to .ori, and from .hpp to from ori.
 // See below the file names related to each exclusion:
 //
-//NO_GROUP
-//	AccessoryGroup.cpp
-//	AccessoryGroup.hpp
-//
-//NO_MOTOR
-//	AccessoryMotor.cpp
-//	AccessoryMotor.hpp
-//	AccessoryMotorOneWay.cpp
-//	AccessoryMotorOneWay.hpp
-//	AccessoryMotorTwoWays.cpp
-//	AccessoryMotorTwoWays.hpp
-//	AFMotor.cpp
-//	AFMotor.hpp
-//
-//NO_LIGHT
-//	AccessoryLight.cpp
-//	AccessoryLight.hpp
-//	
-//NO_SERVO
-//	AccessoryServo.cpp
-//	AccessoryServo.hpp
-//	DriverPortServo.cpp
-//	DriverPortServo.hpp
-//	DriverPortServoArduino.cpp
-//	DriverPortServoArduino.hpp
-//	Servo.cpp
-//	Servo.hpp
-//
-//NO_L293D
-//	DriverL293d.cpp
-//	DriverL293d.hpp
-//	DriverPortL293d.cpp
-//	DriverPortL293d.hpp
-//
-//NO_L298D
-//	DriverL298n.cpp
-//	DriverL298n.hpp
-//	DriverPortL298n.cpp
-//	DriverPortL298n.hpp
-//
-//NO_RELAY
-//	DriverRelay.cpp
-//	DriverRelay.hpp
-//	DriverPortRelay.cpp
-//	DriverPortRelay.hpp
-//
 //NO_SERIALCOMMANDER
 //	SerialCommander.cpp
 //	SerialCommander.hpp
-//	TextCommunicationHelper.cpp
-//	TextCommunicationHelper.hpp
 //
 //NO_DCCCOMMANDER
 //	DccCommander.cpp
@@ -125,63 +77,28 @@
 //	ButtonsCommanderPotentiometer.cpp
 //	ButtonsCommanderPotentiometer.hpp
 
-//#define NO_GROUP
-//#define NO_MOTOR
-//#define NO_SERVO
-//#define NO_LIGHT
-//#define NO_L293D
-//#define NO_L298N
-//#define NO_RELAY
-//#define NO_ARDUINODRIVER
-//#define NO_COMMANDER
 //#define NO_BUTTONSCOMMANDER
 //#define NO_BUTTONSCOMMANDERENCODER
 //#define NO_BUTTONSCOMMANDERPUSH
 //#define NO_BUTTONSCOMMANDERSWITCH
 //#define NO_BUTTONSCOMMANDERPOTENTIOMETER
 //#define NO_DCCCOMMANDER
-//#define NO_SERIALCOMMANDER
 
-#ifdef NO_MOTOR
-#ifndef NO_MOTORONEWAY
-#define NO_MOTORONEWAY
-#endif
-#ifndef NO_MOTORTWOWAYS
-#define NO_MOTORTWOWAYS
-#endif
-#endif
-
-#ifdef NO_COMMANDER
-#ifndef NO_BUTTONSCOMMANDER
-#define NO_BUTTONSCOMMANDER
-#ifndef NO_BUTTONSCOMMANDERENCODER
-#define NO_BUTTONSCOMMANDERENCODER
-#endif
-#ifndef NO_BUTTONSCOMMANDERPUSH
-#define NO_BUTTONSCOMMANDERPUSH
-#endif
-#ifndef NO_BUTTONSCOMMANDERSWITCH
-#define NO_BUTTONSCOMMANDERSWITCH
-#endif
-#ifndef NO_BUTTONSCOMMANDERPOTENTIOMETER
-#define NO_BUTTONSCOMMANDERPOTENTIOMETER
-#endif
-#endif
-#ifndef NO_DCCCOMMANDER
-#define NO_DCCCOMMANDER
-#endif
-#ifndef NO_SERIALCOMMANDER
+// Beware of this comander, which uses 150 bytes of dynamic memory for each serial channel open !
 #define NO_SERIALCOMMANDER
-#endif
+
+#ifndef NO_SERIALCOMMANDER
+// Just comment the serial line you want to use !
+#define NO_SERIALCOMMANDER_SERIAL
+#define NO_SERIALCOMMANDER_SERIAL1
+#define NO_SERIALCOMMANDER_SERIAL2
+#define NO_SERIALCOMMANDER_SERIAL3
 #endif
 
 /////////////////////////////////////
 
-#ifndef NO_COMMANDER
 #include "Commander.hpp"
-#endif
 
-#ifndef NO_COMMANDER
 #ifndef NO_BUTTONSCOMMANDER
 #ifndef NO_BUTTONSCOMMANDERENCODER
 #include "ButtonsCommanderEncoder.hpp"
@@ -205,7 +122,6 @@
 #endif
 #ifndef NO_BUTTONSCOMMANDER
 #include "ButtonsCommander.hpp"
-#endif
 #endif
 
 void BasicsCommanders_StartSetup();

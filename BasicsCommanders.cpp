@@ -6,6 +6,7 @@ description: <Base functions of the library>
 
 #include "BasicsCommanders.h"
 
+#ifndef NO_DCCCOMMANDER
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // DCC Basic accessory packet handler 
@@ -44,6 +45,7 @@ void DccAccessoryDecoderPacket(int address, boolean activate, byte data)
 			*/
 	}
 }
+#endif
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -75,14 +77,16 @@ void BasicsCommanders_StartSetup()
 	Serial.begin(115200);
 
 	Serial.println(F(""));
-	Serial.println(F("Basics Commanders V0.10."));
+	Serial.println(F("Basics Commanders V0.20."));
 	Serial.println(F("Developed by Thierry Paris."));
 	Serial.println(F(""));
 
 	Serial.println(F("*** Setup started."));
 #endif
 	Commander::EventHandler = AccessoryHandler;
+#ifndef NO_DCCCOMMANDER
 	DccCommander::SetBasicAccessoryDecoderPacketHandler(DccAccessoryDecoderPacket);
+#endif
 }
 
 void BasicsCommanders_EndSetup()

@@ -39,19 +39,19 @@ class ButtonsCommanderSwitch : public ButtonsCommanderButton
  private:
 	unsigned long debounceDelay;    // the debounce time; increase if the output flickers
 	
-	int IdSize;
-	int IdAddCounter;
-	int IdLoopCounter;
+	byte IdSize;
+	byte IdAddCounter;
+	byte IdLoopCounter;
 	IdPin *pId;
 	int IdState;
 
 public:
-	ButtonsCommanderSwitch(int inIdNumber);
+	ButtonsCommanderSwitch(byte inIdNumber);
 	
 	void Setup();
 	void AddId(unsigned long inId, int inPin);
 	unsigned long Loop();
-	inline unsigned long GetCurrentLoopId() const{ return this->pId[this->IdState].Id; }
+	inline unsigned long GetCurrentLoopId() const { return this->pId[this->IdState].Id; }
 };
 
 //-------------------------------------------------------------------

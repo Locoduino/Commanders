@@ -12,8 +12,6 @@
 
 #include "ButtonsCommanderButton.hpp"
 
-#define PUSH(list, nb)	((ButtonsCommanderPush *) list[nb])
-
 #ifdef DEBUG_MODE
 #define CHECKPORT(type, val, text)	CheckPortNb(type, val, F(text))
 #define CHECKPIN(val, text)		Driver::CheckPinNb(val, F(text))

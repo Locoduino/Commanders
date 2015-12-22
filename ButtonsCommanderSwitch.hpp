@@ -22,8 +22,6 @@
 #define CHECKPIN(val, text)
 #endif
 
-#define SWITCH(list, nb)	((ButtonsCommanderSwitch *) list[nb])
-
 struct IdPin
 {
 	unsigned long Id;

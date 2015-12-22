@@ -37,6 +37,7 @@ void DccAccessoryDecoderPacket(int address, boolean activate, byte data)
 		(DccCommander::func_BasicAccPacket)(realAddress, activate, data);
 	else
 	{
+		Commander::EventHandler(DCCINT(realAddress, data), EVENT_SELECTED, 0);
 		/*
 		for (int i = 0; i < Accessories::AccessoriesFullList.AccessoriesAddCounter; i++)
 			Accessories::AccessoriesFullList.pAccessoriesFullList[i]->DCCToggle(realAddress, data);
@@ -47,43 +48,21 @@ void DccAccessoryDecoderPacket(int address, boolean activate, byte data)
 }
 #endif
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-// Buttons accessory handler 
-//
-void AccessoryHandler(unsigned long inId, bool inAnalogData, int inData)
-{	
-	bool found = false;
-
-	/*
-	if (inAnalogData)
-	{
-		for (int i = 0; i < Accessories::AccessoriesFullList.AccessoriesAddCounter; i++)
-			found |= Accessories::AccessoriesFullList.pAccessoriesFullList[i]->MovePosition(DCCID(inId), DCCACCESSORY(inId), inData);
-	}
-	else
-	{
-		for (int i = 0; i < Accessories::AccessoriesFullList.AccessoriesAddCounter; i++)
-			found |= Accessories::AccessoriesFullList.pAccessoriesFullList[i]->DCCToggle(DCCID(inId), DCCACCESSORY(inId));
-		for (int j = 0; j < AccessoryGroup::StaticData.AccessoryGroupAddCounter; j++)
-			found |= AccessoryGroup::StaticData.pAccessoryGroupFullList[j]->DCCToggle(DCCID(inId), DCCACCESSORY(inId));
-	}
-	*/
-}
-
-void BasicsCommanders_StartSetup()
+void BasicsCommanders_StartSetup(EventHandlerFunction func)
 {
 #ifdef DEBUG_MODE
 	Serial.begin(115200);
 
 	Serial.println(F(""));
-	Serial.println(F("Basics Commanders V0.20."));
+	Serial.println(F("Basics Commanders V0.30."));
 	Serial.println(F("Developed by Thierry Paris."));
 	Serial.println(F(""));
 
 	Serial.println(F("*** Setup started."));
 #endif
-	Commander::EventHandler = AccessoryHandler;
+
+	Commander::EventHandler = func;
+
 #ifndef NO_DCCCOMMANDER
 	DccCommander::SetBasicAccessoryDecoderPacketHandler(DccAccessoryDecoderPacket);
 #endif

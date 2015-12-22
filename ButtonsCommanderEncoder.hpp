@@ -13,8 +13,6 @@
 
 //-------------------------------------------------------------------
 
-#define ENCODER(list, nb)	((ButtonsCommanderEncoder *) list[nb])
-
 class ButtonsCommanderEncoder : public ButtonsCommanderButton
 {
  private:

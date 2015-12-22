@@ -12,8 +12,6 @@
 
 //-------------------------------------------------------------------
 
-#define POTENTIOMETER(list, nb)	((ButtonsCommanderPotentiometer *) list[nb])
-
 class ButtonsCommanderPotentiometer : public ButtonsCommanderButton
 {
  private:

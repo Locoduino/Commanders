@@ -10,27 +10,17 @@
 #include "arduino2.hpp"
 #endif
 
-class Commander;
-
-// Describes static data only intialized once at the beginning of execution.
-
-class StaticCommanderData
+enum COMMANDERS_EVENT_TYPE
 {
-public:
-	// List of all commanders declared.
-	// For instance DCCCommander overrides a function PriorityLoop which must be called as often as possible.
-	// Other loops (asscessories, groups) have just to call Commander::StaticData::CommanderPriorityLoop() to be sure
-	// to call priority functions very often.
-	Commander* *pCommanderList;
-	byte CommanderSize;
-	byte CommanderAddCounter;
-
-	StaticCommanderData();
-
-	void CommanderPriorityLoop();
+	EVENT_NONE = 0,			// Should never appear
+	EVENT_SELECTED = 1,		// If a push button or similar is pressed
+	EVENT_ABSOLUTEMOVE = 2,	// If a potentiometer or similar is moved
+	EVENT_RELATIVEMOVE = 3	// If an encoder or similar is moved
 };
 
-typedef void(*EventHandlerFunction)(unsigned long inId, bool inAnalogData, int inData);
+class Commander;
+
+typedef void(*EventHandlerFunction)(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData);
 
 #ifndef UNDEFINED_ID
 #define UNDEFINED_ID	((unsigned long)-1)
@@ -40,17 +30,20 @@ class Commander
 {
 	public:
 		unsigned long Id;
+		Commander *pNextCommander;
 
-		static StaticCommanderData StaticData;
+		// Start of the linked list of all commanders. Each commander have the address of its follower or NULL !
+		static Commander *pFirstCommander;
 		static EventHandlerFunction EventHandler;
 
 	public:
-		inline Commander() { AddCommander(this); }
+		inline Commander() { AddCommander(this); pNextCommander = 0; }
 		
 	public:
 		virtual void Setup() {}
 		inline virtual unsigned long Loop() { return UNDEFINED_ID; }
 		inline virtual void PriorityLoop() { }
+		void CommanderPriorityLoop();
 
 		static void AddCommander(Commander *inCommander);
 		static void Loops();

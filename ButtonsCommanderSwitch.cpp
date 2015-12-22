@@ -4,7 +4,6 @@ author: <Thierry PARIS>
 description: <Switch button with debounce.>
 *************************************************************/
 
-//#include "UniversalAccessoryDecoder.h"
 #include "ButtonsCommanderSwitch.hpp"
 
 ButtonsCommanderSwitch::ButtonsCommanderSwitch(byte inIdNumber) : ButtonsCommanderButton(UNDEFINED_ID)
@@ -62,7 +61,7 @@ unsigned long ButtonsCommanderSwitch::Loop()
 
 	IdPin *id = &(this->pId[this->IdLoopCounter++]);
 	if (id->Pin == DP_INVALID)
-		return false;
+		return UNDEFINED_ID;
 
 	// read the state of the switch into a local variable:
 	int reading = digitalRead2f(id->Pin);
@@ -78,7 +77,7 @@ unsigned long ButtonsCommanderSwitch::Loop()
 		id->lastDebounceTime = millis();
 	}
 
-	bool haveFound = false;
+	unsigned long haveFound = UNDEFINED_ID;
 
 	if (id->lastDebounceTime > 0 && (millis() - id->lastDebounceTime) > this->debounceDelay)
 	{
@@ -94,7 +93,8 @@ unsigned long ButtonsCommanderSwitch::Loop()
 			if (id->buttonState == HIGH)
 			{
 				this->IdState = this->IdLoopCounter-1;
-				haveFound = true;
+				haveFound = this->GetId();
+				Commander::EventHandler(id->Id, EVENT_SELECTED, 0);
 			}
 		}
 		id->lastDebounceTime = 0;

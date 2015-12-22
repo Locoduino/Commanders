@@ -4,7 +4,6 @@ author: <Thierry PARIS>
 description: <Potentiometer returning a current value.>
 *************************************************************/
 
-//#include "UniversalAccessoryDecoder.h"
 #include "ButtonsCommanderPotentiometer.hpp"
 
 ButtonsCommanderPotentiometer::ButtonsCommanderPotentiometer(unsigned long inId, int inMinimum, int inMaximum) : ButtonsCommanderButton(inId)
@@ -37,6 +36,7 @@ unsigned long ButtonsCommanderPotentiometer::Loop()
 		Serial.println(val, DEC);
 #endif
 		this->currentValue = val;
+		Commander::EventHandler(this->GetId(), EVENT_ABSOLUTEMOVE, val);
 		return this->GetId();
 	}
 

@@ -4,7 +4,6 @@ author: <Thierry PARIS>
 description: <Basic push button with debounce.>
 *************************************************************/
 
-//#include "UniversalAccessoryDecoder.h"
 #include "ButtonsCommanderPush.hpp"
 
 ButtonsCommanderPush ButtonsCommanderPush::Empty = ButtonsCommanderPush(UNDEFINED_ID);
@@ -57,9 +56,9 @@ void ButtonsCommanderPush::AddId(unsigned long inId)
 unsigned long ButtonsCommanderPush::Loop()
 {
 	if (this->buttonPin == DP_INVALID)
-		return false;
+		return UNDEFINED_ID;
 
-	bool haveChanged = false;
+	unsigned long haveChanged = UNDEFINED_ID;
 	
 	// read the state of the switch into a local variable:
 	int reading = digitalRead2f(this->buttonPin);
@@ -87,7 +86,10 @@ unsigned long ButtonsCommanderPush::Loop()
 
 			// only toggle the state if the new button state is HIGH
 			if (this->buttonState == LOW)
-				haveChanged = true;
+			{
+				haveChanged = this->GetId();
+				Commander::EventHandler(this->GetId(), EVENT_SELECTED, 0);
+			}
 		}
 		this->lastDebounceTime = 0;    
 	}

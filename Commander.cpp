@@ -7,8 +7,8 @@ description: <Base Commander>
 #include "Commander.hpp"
 
 #ifndef NO_COMMANDER
-StaticCommanderData Commander::StaticData;
-EventHandlerFunction Commander::EventHandler;
+EventHandlerFunction Commander::EventHandler = 0;
+Commander *Commander::pFirstCommander = 0;
 
 #ifdef DEBUG_MODE
 #define CHECK(val, text)	CheckIndex(val, F(text))
@@ -16,40 +16,42 @@ EventHandlerFunction Commander::EventHandler;
 #define CHECK(val, text)
 #endif
 
-StaticCommanderData::StaticCommanderData()
-{
-	this->CommanderSize = 4;
-	this->pCommanderList = new Commander*[CommanderSize];
-	this->CommanderAddCounter = 0;
-}
-
-void StaticCommanderData::CommanderPriorityLoop()
-{
-	for (int i = 0; i < this->CommanderAddCounter; i++)
-		this->pCommanderList[i]->PriorityLoop();
-}
-
 void Commander::AddCommander(Commander *inCommander)
 {
-	if (Commander::StaticData.CommanderAddCounter == Commander::StaticData.CommanderSize)
+	if (Commander::pFirstCommander == 0)
 	{
-		Commander **pNewList = new Commander*[Commander::StaticData.CommanderSize + 1];
-
-		for (int i = 0; i < Commander::StaticData.CommanderSize; i++)
-			pNewList[i] = Commander::StaticData.pCommanderList[i];
-
-		Commander::StaticData.CommanderSize++;
-		delete Commander::StaticData.pCommanderList;
-		Commander::StaticData.pCommanderList = pNewList;
+		Commander::pFirstCommander = inCommander;
+		return;
 	}
 
-	Commander::StaticData.pCommanderList[Commander::StaticData.CommanderAddCounter++] = inCommander;
+	Commander *pCurr = Commander::pFirstCommander;
+
+	while (pCurr->pNextCommander != 0)
+		pCurr = pCurr->pNextCommander;
+
+	pCurr->pNextCommander = inCommander;
+}
+
+void Commander::CommanderPriorityLoop()
+{
+	Commander *pCurr = Commander::pFirstCommander;
+
+	while (pCurr != 0)
+	{
+		pCurr->PriorityLoop();
+		pCurr = pCurr->pNextCommander;
+	}
 }
 
 void Commander::Loops()
 {
-	for (int i = 0; i < Commander::StaticData.CommanderAddCounter; i++)
-		Commander::StaticData.pCommanderList[i]->Loop();
+	Commander *pCurr = Commander::pFirstCommander;
+
+	while (pCurr != 0)
+	{
+		pCurr->Loop();
+		pCurr = pCurr->pNextCommander;
+	}
 }
 
 #ifdef DEBUG_MODE

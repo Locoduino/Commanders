@@ -4,7 +4,6 @@ author: <Thierry PARIS>
 description: <Encoder returning a current value.>
 *************************************************************/
 
-//#include "UniversalAccessoryDecoder.h"
 #include "ButtonsCommanderEncoder.hpp"
 
 ButtonsCommanderEncoder::ButtonsCommanderEncoder(unsigned long inId, int inStartingValue, int inMinimum, int inMaximum, bool inAssociatedPushButton) : ButtonsCommanderButton(inId)
@@ -56,5 +55,6 @@ unsigned long ButtonsCommanderEncoder::Loop()
 		this->currentValue = this->mini;
 
 	lastEncoded = encoded; //store this value for next time
+	Commander::EventHandler(this->GetId(), EVENT_RELATIVEMOVE, this->currentValue);
 	return this->GetId();
 }

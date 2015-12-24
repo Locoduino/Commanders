@@ -53,7 +53,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions);VISUALC;ARDUINO=105</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..\;$(ProjectDir)..\src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -78,40 +78,40 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\arduino2.hpp" />
-    <ClInclude Include="..\arduino2_pins_leonardo.hpp" />
-    <ClInclude Include="..\arduino2_pins_mega.hpp" />
-    <ClInclude Include="..\arduino2_pins_nano.hpp" />
-    <ClInclude Include="..\arduino2_pins_standard.hpp" />
-    <ClInclude Include="..\BasicsCommanders.h" />
-    <ClInclude Include="..\ButtonsCommander.hpp" />
-    <ClInclude Include="..\ButtonsCommanderButton.hpp" />
-    <ClInclude Include="..\ButtonsCommanderEncoder.hpp" />
-    <ClInclude Include="..\ButtonsCommanderPotentiometer.hpp" />
-    <ClInclude Include="..\ButtonsCommanderPush.hpp" />
-    <ClInclude Include="..\ButtonsCommanderSwitch.hpp" />
-    <ClInclude Include="..\Commander.hpp" />
-    <ClInclude Include="..\DccCommander.hpp" />
-    <ClInclude Include="..\SerialCommander.hpp" />
+    <ClInclude Include="..\src\arduino2.hpp" />
+    <ClInclude Include="..\src\arduino2_pins_leonardo.hpp" />
+    <ClInclude Include="..\src\arduino2_pins_mega.hpp" />
+    <ClInclude Include="..\src\arduino2_pins_nano.hpp" />
+    <ClInclude Include="..\src\arduino2_pins_standard.hpp" />
+    <ClInclude Include="..\src\BasicsCommanders.h" />
+    <ClInclude Include="..\src\ButtonsCommander.hpp" />
+    <ClInclude Include="..\src\ButtonsCommanderButton.hpp" />
+    <ClInclude Include="..\src\ButtonsCommanderEncoder.hpp" />
+    <ClInclude Include="..\src\ButtonsCommanderPotentiometer.hpp" />
+    <ClInclude Include="..\src\ButtonsCommanderPush.hpp" />
+    <ClInclude Include="..\src\ButtonsCommanderSwitch.hpp" />
+    <ClInclude Include="..\src\Commander.hpp" />
+    <ClInclude Include="..\src\DccCommander.hpp" />
+    <ClInclude Include="..\src\SerialCommander.hpp" />
     <ClInclude Include="ButtonsCommanderKeyboard.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\BasicsCommanders.cpp" />
-    <ClCompile Include="..\ButtonsCommanderEncoder.cpp" />
-    <ClCompile Include="..\VStudio\Arduino.cpp" />
-    <ClCompile Include="..\VStudio\stdafx.cpp" />
-    <ClCompile Include="..\ButtonsCommander.cpp" />
-    <ClCompile Include="..\ButtonsCommanderButton.cpp" />
-    <ClCompile Include="..\ButtonsCommanderPotentiometer.cpp" />
-    <ClCompile Include="..\ButtonsCommanderPush.cpp" />
-    <ClCompile Include="..\ButtonsCommanderSwitch.cpp" />
-    <ClCompile Include="..\Commander.cpp" />
-    <ClCompile Include="..\DccCommander.cpp" />
-    <ClCompile Include="..\SerialCommander.cpp" />
+    <ClCompile Include="..\src\BasicsCommanders.cpp" />
+    <ClCompile Include="..\src\ButtonsCommanderEncoder.cpp" />
+    <ClCompile Include="..\src\ButtonsCommander.cpp" />
+    <ClCompile Include="..\src\ButtonsCommanderButton.cpp" />
+    <ClCompile Include="..\src\ButtonsCommanderPotentiometer.cpp" />
+    <ClCompile Include="..\src\ButtonsCommanderPush.cpp" />
+    <ClCompile Include="..\src\ButtonsCommanderSwitch.cpp" />
+    <ClCompile Include="..\src\Commander.cpp" />
+    <ClCompile Include="..\src\DccCommander.cpp" />
+    <ClCompile Include="..\src\SerialCommander.cpp" />
     <ClCompile Include="ButtonsCommanderKeyboard.cpp" />
     <ClCompile Include="VStudio.cpp" />
+    <ClCompile Include="Arduino.cpp" />
+    <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\WhatsNew.TXT" />

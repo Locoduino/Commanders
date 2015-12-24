@@ -76,13 +76,13 @@ void CommandersEventHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, i
 	Serial.print(F(" / "));
 	switch (inEvent)
 	{
-	case EVENT_NONE:			Serial.println(F("NONE"));			break;
-	case EVENT_SELECTED:		Serial.println(F("SELECTED"));		break;
-	case EVENT_ABSOLUTEMOVE:	
+	case COMMANDERS_EVENT_NONE:			Serial.println(F("NONE"));			break;
+	case COMMANDERS_EVENT_SELECTED:		Serial.println(F("SELECTED"));		break;
+	case COMMANDERS_EVENT_ABSOLUTEMOVE:	
 		Serial.print(F("ABSOLUTEMOVE : "));	
 		Serial.println(inData, DEC);
 		break;
-	case EVENT_RELATIVEMOVE:	
+	case COMMANDERS_EVENT_RELATIVEMOVE:	
 		Serial.print(F("RELATIVEMOVE : "));	
 		Serial.println(inData, DEC);
 		break;

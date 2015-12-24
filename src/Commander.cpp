@@ -7,7 +7,7 @@ description: <Base Commander>
 #include "Commander.hpp"
 
 #ifndef NO_COMMANDER
-EventHandlerFunction Commander::EventHandler = 0;
+CommandersEventHandlerFunction Commander::EventHandler = 0;
 Commander *Commander::pFirstCommander = 0;
 
 #ifdef DEBUG_MODE

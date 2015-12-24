@@ -37,7 +37,7 @@ void DccAccessoryDecoderPacket(int address, boolean activate, byte data)
 		(DccCommander::func_BasicAccPacket)(realAddress, activate, data);
 	else
 	{
-		Commander::EventHandler(DCCINT(realAddress, data), EVENT_SELECTED, 0);
+		Commander::EventHandler(DCCINT(realAddress, data), COMMANDERS_EVENT_SELECTED, 0);
 		/*
 		for (int i = 0; i < Accessories::AccessoriesFullList.AccessoriesAddCounter; i++)
 			Accessories::AccessoriesFullList.pAccessoriesFullList[i]->DCCToggle(realAddress, data);
@@ -48,7 +48,7 @@ void DccAccessoryDecoderPacket(int address, boolean activate, byte data)
 }
 #endif
 
-void BasicsCommanders_StartSetup(EventHandlerFunction func)
+void BasicsCommanders_StartSetup(CommandersEventHandlerFunction func)
 {
 #ifdef DEBUG_MODE
 	Serial.begin(115200);

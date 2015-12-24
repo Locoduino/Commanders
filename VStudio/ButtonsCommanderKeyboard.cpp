@@ -8,7 +8,7 @@ description: <Keyboard button.>
 
 #include "conio.h"
 
-char ButtonsCommanderKeyboard::lastLoopKey;
+int ButtonsCommanderKeyboard::lastLoopKey;
 
 ButtonsCommanderKeyboard::ButtonsCommanderKeyboard(unsigned long inId) : ButtonsCommanderButton(inId)
 {
@@ -33,7 +33,7 @@ unsigned long ButtonsCommanderKeyboard::Loop()
 		Serial.print(str);
 		Serial.println(F(" pressed "));
 #endif
-		Commander::EventHandler(this->GetId(), EVENT_SELECTED, 0);
+		Commander::EventHandler(this->GetId(), COMMANDERS_EVENT_SELECTED, 0);
 		return this->GetId();
 	}
 

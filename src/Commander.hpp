@@ -12,15 +12,15 @@
 
 enum COMMANDERS_EVENT_TYPE
 {
-	EVENT_NONE = 0,			// Should never appear
-	EVENT_SELECTED = 1,		// If a push button or similar is pressed
-	EVENT_ABSOLUTEMOVE = 2,	// If a potentiometer or similar is moved
-	EVENT_RELATIVEMOVE = 3	// If an encoder or similar is moved
+	COMMANDERS_EVENT_NONE = 0,			// Should never appear
+	COMMANDERS_EVENT_SELECTED = 1,		// If a push button or similar is pressed
+	COMMANDERS_EVENT_ABSOLUTEMOVE = 2,	// If a potentiometer or similar is moved
+	COMMANDERS_EVENT_RELATIVEMOVE = 3	// If an encoder or similar is moved
 };
 
 class Commander;
 
-typedef void(*EventHandlerFunction)(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData);
+typedef void(*CommandersEventHandlerFunction)(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData);
 
 #ifndef UNDEFINED_ID
 #define UNDEFINED_ID	((unsigned long)-1)
@@ -34,7 +34,7 @@ class Commander
 
 		// Start of the linked list of all commanders. Each commander have the address of its follower or NULL !
 		static Commander *pFirstCommander;
-		static EventHandlerFunction EventHandler;
+		static CommandersEventHandlerFunction EventHandler;
 
 	public:
 		inline Commander() { AddCommander(this); pNextCommander = 0; }
@@ -45,8 +45,10 @@ class Commander
 		inline virtual void PriorityLoop() { }
 		void CommanderPriorityLoop();
 
-		static void AddCommander(Commander *inCommander);
 		static void Loops();
+
+	private:
+		static void AddCommander(Commander *inCommander);
 
 #ifdef DEBUG_MODE
 	public:

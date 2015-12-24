@@ -94,7 +94,7 @@ unsigned long ButtonsCommanderSwitch::Loop()
 			{
 				this->IdState = this->IdLoopCounter-1;
 				haveFound = this->GetId();
-				Commander::EventHandler(id->Id, EVENT_SELECTED, 0);
+				Commander::EventHandler(id->Id, COMMANDERS_EVENT_SELECTED, 0);
 			}
 		}
 		id->lastDebounceTime = 0;

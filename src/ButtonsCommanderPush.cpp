@@ -88,7 +88,7 @@ unsigned long ButtonsCommanderPush::Loop()
 			if (this->buttonState == LOW)
 			{
 				haveChanged = this->GetId();
-				Commander::EventHandler(this->GetId(), EVENT_SELECTED, 0);
+				Commander::EventHandler(this->GetId(), COMMANDERS_EVENT_SELECTED, 0);
 			}
 		}
 		this->lastDebounceTime = 0;    

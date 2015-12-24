@@ -55,6 +55,6 @@ unsigned long ButtonsCommanderEncoder::Loop()
 		this->currentValue = this->mini;
 
 	lastEncoded = encoded; //store this value for next time
-	Commander::EventHandler(this->GetId(), EVENT_RELATIVEMOVE, this->currentValue);
+	Commander::EventHandler(this->GetId(), COMMANDERS_EVENT_RELATIVEMOVE, this->currentValue);
 	return this->GetId();
 }

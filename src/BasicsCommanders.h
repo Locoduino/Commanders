@@ -124,6 +124,6 @@
 #include "ButtonsCommander.hpp"
 #endif
 
-void BasicsCommanders_StartSetup(EventHandlerFunction func);
+void BasicsCommanders_StartSetup(CommandersEventHandlerFunction func);
 void BasicsCommanders_EndSetup();
 void BasicsCommanders_Loop();

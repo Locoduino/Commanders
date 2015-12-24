@@ -3,7 +3,7 @@
 #define __buttonsCommanderKeyboard_H__
 //-------------------------------------------------------------------
 
-#include "../ButtonsCommanderButton.hpp"
+#include "../src/ButtonsCommanderButton.hpp"
 
 #define KEYBOARD(list, nb)	((ButtonsCommanderKeyboard *) list[nb])
 
@@ -14,15 +14,15 @@
 class ButtonsCommanderKeyboard : public ButtonsCommanderButton
 {
  private:
-	char key;	// character to scan...
+	int key;	// character to scan...
 
  public:
-	static char lastLoopKey;
+	static int lastLoopKey;
 
  public:
 	ButtonsCommanderKeyboard(unsigned long inId);
 
-	void Setup(char inKey) { this->key = inKey; lastLoopKey = 0; }
+	void Setup(int inKey) { this->key = inKey; lastLoopKey = 0; }
 	unsigned long Loop();
 	void EndLoop();
 };

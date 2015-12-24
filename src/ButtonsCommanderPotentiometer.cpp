@@ -36,7 +36,7 @@ unsigned long ButtonsCommanderPotentiometer::Loop()
 		Serial.println(val, DEC);
 #endif
 		this->currentValue = val;
-		Commander::EventHandler(this->GetId(), EVENT_ABSOLUTEMOVE, val);
+		Commander::EventHandler(this->GetId(), COMMANDERS_EVENT_ABSOLUTEMOVE, val);
 		return this->GetId();
 	}
 

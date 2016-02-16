@@ -106,6 +106,9 @@
 #ifndef NO_BUTTONSCOMMANDERPUSH
 #include "ButtonsCommanderPush.hpp"
 #endif
+#ifndef NO_BUTTONSCOMMANDERANALOGPUSHES
+#include "ButtonsCommanderAnalogPushes.hpp"
+#endif
 #ifndef NO_BUTTONSCOMMANDERSWITCH
 #include "ButtonsCommanderSwitch.hpp"
 #endif

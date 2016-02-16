@@ -85,6 +85,8 @@
     <ClInclude Include="..\src\arduino2_pins_standard.hpp" />
     <ClInclude Include="..\src\BasicsCommanders.h" />
     <ClInclude Include="..\src\ButtonsCommander.hpp" />
+    <ClInclude Include="..\src\ButtonsCommanderAnalogPushes.hpp" />
+    <ClInclude Include="..\src\ButtonsCommanderAnalogPushesItem.hpp" />
     <ClInclude Include="..\src\ButtonsCommanderButton.hpp" />
     <ClInclude Include="..\src\ButtonsCommanderEncoder.hpp" />
     <ClInclude Include="..\src\ButtonsCommanderPotentiometer.hpp" />
@@ -99,6 +101,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\BasicsCommanders.cpp" />
+    <ClCompile Include="..\src\ButtonsCommanderAnalogPushes.cpp" />
+    <ClCompile Include="..\src\ButtonsCommanderAnalogPushesItem.cpp" />
     <ClCompile Include="..\src\ButtonsCommanderEncoder.cpp" />
     <ClCompile Include="..\src\ButtonsCommander.cpp" />
     <ClCompile Include="..\src\ButtonsCommanderButton.cpp" />

@@ -23,7 +23,7 @@ void ButtonsCommanderPotentiometer::Setup(int inPin, int inMoveAccuracy)
 	this->currentValue = map(val, 0, 1023, this->mini, this->maxi);
 }
 
-unsigned long ButtonsCommanderPotentiometer::Loop()
+BasicsCommanderEvent ButtonsCommanderPotentiometer::Loop()
 {
 	int val = analogRead(pin);
 
@@ -36,9 +36,9 @@ unsigned long ButtonsCommanderPotentiometer::Loop()
 		Serial.println(val, DEC);
 #endif
 		this->currentValue = val;
-		Commander::EventHandler(this->GetId(), COMMANDERS_EVENT_ABSOLUTEMOVE, val);
-		return this->GetId();
+		Commander::RaiseEvent(this->GetId(), COMMANDERS_EVENT_ABSOLUTEMOVE, val);
+		return BasicsCommanderEvent(this->GetId(), COMMANDERS_EVENT_ABSOLUTEMOVE, val);
 	}
 
-	return UNDEFINED_ID;
+	return EmptyEvent;
 }

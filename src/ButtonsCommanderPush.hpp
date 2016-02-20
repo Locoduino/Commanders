@@ -10,14 +10,14 @@
 	#include "arduino2.hpp"
 #endif
 
-#include "ButtonsCommanderButton.hpp"
+#include "BasicsCommanders.h"
 
 #ifdef DEBUG_MODE
 #define CHECKPORT(type, val, text)	CheckPortNb(type, val, F(text))
-#define CHECKPIN(val, text)		Driver::CheckPinNb(val, F(text))
+//#define CHECKPIN(val, text)		Driver::CheckPinNb(val, F(text))
 #else
 #define CHECKPORT(type, val, text)
-#define CHECKPIN(val, text)
+//#define CHECKPIN(val, text)
 #endif
 
 //-------------------------------------------------------------------
@@ -46,8 +46,7 @@ class ButtonsCommanderPush : public ButtonsCommanderButton
 
 	void Setup(int inButtonPin);
 	void AddId(unsigned long inId);
-	unsigned long Loop();
-	void EndLoop();
+	BasicsCommanderEvent Loop();
 
 	inline int GetPin() const { return GPIO_to_Arduino_pin(this->buttonPin); }
 	inline GPIO_pin_t GetPin2() const { return this->buttonPin; }

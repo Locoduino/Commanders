@@ -4,9 +4,9 @@ author: <Thierry PARIS>
 description: <Composite push button array on analog pin with debounce.>
 *************************************************************/
 
-#include "ButtonsCommanderAnalogPushes.hpp"
+#include "BasicsCommanders.h"
 
-ButtonsCommanderAnalogPushes::ButtonsCommanderAnalogPushes(byte inNumberOfItems) : ButtonsCommanderButton(0)
+ButtonsCommanderAnalogPushes::ButtonsCommanderAnalogPushes(byte inNumberOfItems) : ButtonsCommanderButton(UNDEFINED_ID)
 {
 	this->analogPin = 0;
 	this->lastButtonState = LOW;
@@ -18,7 +18,7 @@ ButtonsCommanderAnalogPushes::ButtonsCommanderAnalogPushes(byte inNumberOfItems)
 	this->pButtons = new ButtonsCommanderAnalogPushesItem[this->size];
 }
 
-void ButtonsCommanderAnalogPushes::Setup(int inButtonPin, int *inpButtonValues, int inTolerancy)
+void ButtonsCommanderAnalogPushes::Setup(int inButtonPin, unsigned long *inpIds, int *inpButtonValues, int inTolerancy)
 {	
 	//CHECKPIN(inButtonPin, "ButtonsCommanderAnalogPushes::Setup");
 
@@ -26,17 +26,26 @@ void ButtonsCommanderAnalogPushes::Setup(int inButtonPin, int *inpButtonValues, 
 	this->readingTolerancy = inTolerancy;
 
 	for (int i = 0; i < this->size; i++)
-		this->pButtons[i].Setup(inpButtonValues[i], inTolerancy);
+		this->pButtons[i].Setup(inpIds[i], inpButtonValues[i], inTolerancy);
 
 	pinMode(this->analogPin, INPUT);
 }
 
-unsigned long ButtonsCommanderAnalogPushes::Loop()
+ButtonsCommanderButton* ButtonsCommanderAnalogPushes::GetFromId(unsigned long inId)
+{
+	for (int i = 0; i < this->size; i++)
+		if (this->pButtons[i].GetId() == inId)
+			return &(this->pButtons[i]);
+
+	return 0;
+}			 
+
+BasicsCommanderEvent ButtonsCommanderAnalogPushes::Loop()
 {
 	if (this->analogPin == 0)
-		return false;
+		return EmptyEvent;
 
-	bool haveChanged = false;
+	BasicsCommanderEvent haveChanged = EmptyEvent;
 	
 	// read the state of the switch into a local variable:
 	int reading = analogRead(this->analogPin);
@@ -62,19 +71,19 @@ unsigned long ButtonsCommanderAnalogPushes::Loop()
 		{
 			this->buttonState = reading;
 
-			{
-				haveChanged = true;
-				for (int i = 0; i < this->size; i++)
-					if (this->pButtons[i].IsPushed(reading))
-					{
-						Commander::EventHandler(this->pButtons[i].GetId(), COMMANDERS_EVENT_SELECTED, 0);
+			for (int i = 0; i < this->size; i++)
+				if (this->pButtons[i].IsPushed(reading))
+				{
+					haveChanged.ID = this->pButtons[i].GetId();
+					haveChanged.Event = COMMANDERS_EVENT_SELECTED;
+					haveChanged.Data = 0;
+					Commander::RaiseEvent(this->pButtons[i].GetId(), COMMANDERS_EVENT_SELECTED, 0);
 #ifdef DEBUG_MODE
-						Serial.print(F("Analog push button "));
-						Serial.print(i);
-						Serial.println(F(" pressed"));
+					Serial.print(F("Analog push button "));
+					Serial.print(i);
+					Serial.println(F(" pressed"));
 #endif
-					}
-			}
+				}
 		}
 		this->lastDebounceTime = 0;    
 	}

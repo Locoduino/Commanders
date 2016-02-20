@@ -11,10 +11,52 @@ description: <Dcc Commander>
 DCC_Decoder DCC_Decoder::DCCInstance;
 #endif
 
+unsigned long DccCommander::LastDccId = UNDEFINED_ID;
 GPIO_pin_t DccCommander::dccStatusLedPin;
 boolean DccCommander::UseRawDccAddresses;
 
-void DccAccessoryDecoderPacket(int address, boolean activate, byte data);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// DCC Basic accessory packet handler 
+//
+void DccCommander::DccAccessoryDecoderPacket(int address, boolean activate, byte data)
+{
+	int realAddress = address;
+
+	if (!DccCommander::UseRawDccAddresses)
+	{
+		realAddress -= 1;
+		realAddress *= 4;
+		realAddress += 1;
+		realAddress += (data & 0x06) >> 1;
+		data = data % 2;
+	}
+
+#ifdef DEBUG_VERBOSE_MODE
+	Serial.print(F("Dcc packet found : Address : "));
+	Serial.print(realAddress);
+	Serial.print(F(" / "));
+	Serial.print(data, DEC);
+	Serial.print(F(" / "));
+	Serial.println(activate, DEC);
+#endif
+
+	if (DccCommander::func_BasicAccPacket)
+		(DccCommander::func_BasicAccPacket)(realAddress, activate, data);
+	else
+	{
+		Commander::RaiseEvent(DCCINT(realAddress, data), COMMANDERS_EVENT_SELECTED, 0);
+
+		DccCommander::LastDccId = DCCINT(realAddress, data);
+
+		/*
+		for (int i = 0; i < Accessories::AccessoriesFullList.AccessoriesAddCounter; i++)
+		Accessories::AccessoriesFullList.pAccessoriesFullList[i]->DCCToggle(realAddress, data);
+		for (int i = 0; i < AccessoryGroup::StaticData.AccessoryGroupAddCounter; i++)
+		AccessoryGroup::StaticData.pAccessoryGroupFullList[i]->DCCToggle(realAddress, data);
+		*/
+	}
+}
 
 #ifdef DEBUG_MODE
 #define CHECK(val, text)	CheckIndex(val, F(text))
@@ -65,7 +107,7 @@ static unsigned long start = 0;
 
 #define ELAPSEDTIME	((unsigned long) -2)
 
-unsigned long DccCommander::Loop()
+BasicsCommanderEvent DccCommander::Loop()
 {
 	if (start == 0)
 		start = millis();
@@ -87,10 +129,12 @@ unsigned long DccCommander::Loop()
 #endif
 #endif
 		start = 0;
-		return UNDEFINED_ID;
+		unsigned long last = LastDccId;
+		LastDccId = UNDEFINED_ID;
+		return BasicsCommanderEvent(last, COMMANDERS_EVENT_SELECTED, 0);
 	}
 
-	return ELAPSEDTIME;
+	return EmptyEvent;
 }
 
 DccBasicAccDecoderPacket DccCommander::func_BasicAccPacket = NULL;

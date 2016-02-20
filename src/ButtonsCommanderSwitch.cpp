@@ -35,7 +35,7 @@ void ButtonsCommanderSwitch::AddId(unsigned long inId, int inPin)
 	//Accessory::CHECKDCC(inDccId, inDccIdAccessory, "Accessory constructor");
 #endif
 
-	CHECKPIN(inPin, "ButtonsCommanderSwitch::AddDccId");
+	//CHECKPIN(inPin, "ButtonsCommanderSwitch::AddDccId");
 
 #ifdef DEBUG_MODE
 	if (this->IdAddCounter == this->IdSize)
@@ -54,14 +54,14 @@ void ButtonsCommanderSwitch::AddId(unsigned long inId, int inPin)
 	pinMode2f(this->pId[this->IdAddCounter].Pin, INPUT_PULLUP);
 }
 
-unsigned long ButtonsCommanderSwitch::Loop()
+BasicsCommanderEvent ButtonsCommanderSwitch::Loop()
 {
 	if (this->IdLoopCounter >= this->IdAddCounter)
 		this->IdLoopCounter = 0;
 
 	IdPin *id = &(this->pId[this->IdLoopCounter++]);
 	if (id->Pin == DP_INVALID)
-		return UNDEFINED_ID;
+		return EmptyEvent;
 
 	// read the state of the switch into a local variable:
 	int reading = digitalRead2f(id->Pin);
@@ -77,7 +77,7 @@ unsigned long ButtonsCommanderSwitch::Loop()
 		id->lastDebounceTime = millis();
 	}
 
-	unsigned long haveFound = UNDEFINED_ID;
+	BasicsCommanderEvent haveFound = EmptyEvent;
 
 	if (id->lastDebounceTime > 0 && (millis() - id->lastDebounceTime) > this->debounceDelay)
 	{
@@ -93,8 +93,10 @@ unsigned long ButtonsCommanderSwitch::Loop()
 			if (id->buttonState == HIGH)
 			{
 				this->IdState = this->IdLoopCounter-1;
-				haveFound = this->GetId();
-				Commander::EventHandler(id->Id, COMMANDERS_EVENT_SELECTED, 0);
+				haveFound.ID = id->Id;
+				haveFound.Event = COMMANDERS_EVENT_SELECTED;
+				haveFound.Data = 0;
+				Commander::RaiseEvent(id->Id, COMMANDERS_EVENT_SELECTED, 0);
 			}
 		}
 		id->lastDebounceTime = 0;

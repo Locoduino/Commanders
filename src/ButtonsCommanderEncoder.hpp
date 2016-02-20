@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------
-#ifndef __encoder_H__
-#define __encoder_H__
+#ifndef __buttonsCommanderEncoder_H__
+#define __buttonsCommanderEncoder_H__
 //-------------------------------------------------------------------
 
 #ifdef VISUALC
@@ -8,8 +8,9 @@
 #else
 #include "arduino2.hpp"
 #endif
-#include "ButtonsCommanderButton.hpp"
-#include "ButtonsCommanderPush.hpp"
+#include "BasicsCommanders.h"
+
+class ButtonsCommanderPush;
 
 //-------------------------------------------------------------------
 
@@ -33,7 +34,7 @@ public:
 	inline int GetPosition() const { return this->currentValue; }
 
 	void Setup(int inPin1, int inPin2, int inMoveAccuracy = 1);
-	unsigned long Loop();
+	BasicsCommanderEvent Loop();
 };
 
 //-------------------------------------------------------------------

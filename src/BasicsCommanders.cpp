@@ -6,66 +6,30 @@ description: <Base functions of the library>
 
 #include "BasicsCommanders.h"
 
-#ifndef NO_DCCCOMMANDER
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-// DCC Basic accessory packet handler 
-//
-void DccAccessoryDecoderPacket(int address, boolean activate, byte data)
-{
-	int realAddress = address;
+const BasicsCommanderEvent EmptyEvent = BasicsCommanderEvent(UNDEFINED_ID, COMMANDERS_EVENT_NONE, 0);
 
-	if (!DccCommander::UseRawDccAddresses)
-	{
-		realAddress -= 1;
-		realAddress *= 4;
-		realAddress += 1;
-		realAddress += (data & 0x06) >> 1;
-		data = data % 2;
-	}
-
-#ifdef DEBUG_VERBOSE_MODE
-	Serial.print(F("Dcc packet found : Address : "));
-	Serial.print(realAddress);
-	Serial.print(F(" / "));
-	Serial.print(data, DEC);
-	Serial.print(F(" / "));
-	Serial.println(activate, DEC);
-#endif
-
-	if (DccCommander::func_BasicAccPacket)
-		(DccCommander::func_BasicAccPacket)(realAddress, activate, data);
-	else
-	{
-		Commander::EventHandler(DCCINT(realAddress, data), COMMANDERS_EVENT_SELECTED, 0);
-		/*
-		for (int i = 0; i < Accessories::AccessoriesFullList.AccessoriesAddCounter; i++)
-			Accessories::AccessoriesFullList.pAccessoriesFullList[i]->DCCToggle(realAddress, data);
-		for (int i = 0; i < AccessoryGroup::StaticData.AccessoryGroupAddCounter; i++)
-			AccessoryGroup::StaticData.pAccessoryGroupFullList[i]->DCCToggle(realAddress, data);
-			*/
-	}
-}
-#endif
-
-void BasicsCommanders_StartSetup(CommandersEventHandlerFunction func)
+void BasicsCommanders_StartSetup()
 {
 #ifdef DEBUG_MODE
 	Serial.begin(115200);
 
 	Serial.println(F(""));
-	Serial.println(F("Basics Commanders V0.30."));
+	Serial.println(F("Basics Commanders V0.40."));
 	Serial.println(F("Developed by Thierry Paris."));
 	Serial.println(F(""));
 
 	Serial.println(F("*** Setup started."));
 #endif
 
-	Commander::EventHandler = func;
-
 #ifndef NO_DCCCOMMANDER
-	DccCommander::SetBasicAccessoryDecoderPacketHandler(DccAccessoryDecoderPacket);
+	DccCommander::SetBasicAccessoryDecoderPacketHandler(DccCommander::DccAccessoryDecoderPacket);
 #endif
+}
+
+void BasicsCommanders_StartSetup(CommandersEventHandlerFunction func)
+{
+	Commander::EventHandler = func;
+	BasicsCommanders_StartSetup();
 }
 
 void BasicsCommanders_EndSetup()
@@ -75,7 +39,8 @@ void BasicsCommanders_EndSetup()
 #endif
 }
 
-void BasicsCommanders_Loop()
+BasicsCommanderEvent BasicsCommanders_Loop()
 {
-	Commander::Loops();
+	return Commander::Loops();
 }
+

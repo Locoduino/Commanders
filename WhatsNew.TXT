@@ -1,6 +1,20 @@
+20/02/2016 V0.40
+	- Correction des Ids multiples de PushButton.
+	- Ajout de la classe ButtonsCommanderAnalogPushes
+	- ButtonsCommander::Loop renvoie une structure avec l'id du bouton sélectionné ou UNDEFINED_ID. LastSelectedButton garde en mémoire le dernier, 
+	  même pour un bouton composite comme ButtonsCommanderAnalogPushes. Dans ce cas c'est l'item qui est conservé.
+	- Un exemple SimpleButtonsByIds a été ajouté pour tester cette façon de fonctionner.
+
+	- Fix multiple ids for push button.
+	- New class ButtonsCommanderAnalogPushes added.
+	- Now the ButtonsCommander::Loop function returns the selected id or UNDEFINED_ID. LastSelectedButton is the ...
+	  Last selected button ! Works also with composite buttons like ButtonsCommanderAnalogPushes. In this case, this is the item
+	  which is kept.
+	- A sample SimpleButtonsByIds has been added to test this mode.
+
 22/12/2015 V0.30
-	- EventHandler impl�ment� et fonctionnel
-	- Simplification de la construction des commanders avec des listes chain�es
+	- EventHandler implémenté et fonctionnel
+	- Simplification de la construction des commanders avec des listes chainées
 	- Ajout du traitement clavier pour les tests PC-Windows.
 
 	- EventHandler is implemented and operational.
@@ -8,13 +22,13 @@
 	- Keyboard handling added for PC-Windows tests.
 
 20/12/2015 V0.20
-	- Gros gain de m�moire dynamique entre DccCommander avec sa liste de CVs trop longue, et surtout SerialCommander qui
+	- Gros gain de mémoire dynamique entre DccCommander avec sa liste de CVs trop longue, et surtout SerialCommander qui
 	  utilisait les Serial* du noyau, chacun allouant 150 octets de buffer interne en dur !
 
 	- Big fix on dynamic memory size, because of CV list in DccCommander, but mostly because of SerialCommander which
 	  reference the Serial* default classes from the kernel, each one allocating 150 bytes of internal buffer !
 
 01/09/2015 V0.10
-	- Cr�ation de la librairie, extraite de ma librarie UniversalAccessoryDecoder.
+	- Création de la librairie, extraite de ma librarie UniversalAccessoryDecoder.
 
 	- Creation, extracted from my UniversalAccessoryDecoder library.

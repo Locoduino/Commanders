@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////
 // Add a '//' at the beginning of the line to be in 
 // release mode.
-//#define DEBUG_MODE
+#define DEBUG_MODE
 
 ///////////////////////////////////////////////////////
 // Verbose mode lets you see all actions done by the 
@@ -80,6 +80,7 @@
 //#define NO_BUTTONSCOMMANDER
 //#define NO_BUTTONSCOMMANDERENCODER
 //#define NO_BUTTONSCOMMANDERPUSH
+//#define NO_BUTTONSCOMMANDERANALOGPUSHES
 //#define NO_BUTTONSCOMMANDERSWITCH
 //#define NO_BUTTONSCOMMANDERPOTENTIOMETER
 //#define NO_DCCCOMMANDER
@@ -100,9 +101,6 @@
 #include "Commander.hpp"
 
 #ifndef NO_BUTTONSCOMMANDER
-#ifndef NO_BUTTONSCOMMANDERENCODER
-#include "ButtonsCommanderEncoder.hpp"
-#endif
 #ifndef NO_BUTTONSCOMMANDERPUSH
 #include "ButtonsCommanderPush.hpp"
 #endif
@@ -111,6 +109,9 @@
 #endif
 #ifndef NO_BUTTONSCOMMANDERSWITCH
 #include "ButtonsCommanderSwitch.hpp"
+#endif
+#ifndef NO_BUTTONSCOMMANDERENCODER
+#include "ButtonsCommanderEncoder.hpp"
 #endif
 #ifndef NO_BUTTONSCOMMANDERPOTENTIOMETER
 #include "ButtonsCommanderPotentiometer.hpp"
@@ -128,5 +129,6 @@
 #endif
 
 void BasicsCommanders_StartSetup(CommandersEventHandlerFunction func);
+void BasicsCommanders_StartSetup();
 void BasicsCommanders_EndSetup();
-void BasicsCommanders_Loop();
+BasicsCommanderEvent BasicsCommanders_Loop();

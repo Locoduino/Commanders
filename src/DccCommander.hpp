@@ -28,20 +28,24 @@ typedef void(*DccBasicAccDecoderPacket)(int address, boolean activate, byte data
 
 class DccCommander : Commander
 {
+	private:
+		static unsigned long LastDccId;
+
 	public:
 		static GPIO_pin_t dccStatusLedPin;
 		static boolean UseRawDccAddresses;
 		static DccBasicAccDecoderPacket    func_BasicAccPacket;
 
-	public:
 		inline DccCommander() : Commander() { this->dccStatusLedPin = DP0; }
 		
-	public:
 		void Setup(int i, int j, int k, boolean inUseRawDccAddresses = false);
 		void SetStatusLedPin(int inPin);
 		void PriorityLoop();
-		unsigned long Loop();
+		BasicsCommanderEvent Loop();
 		static void SetBasicAccessoryDecoderPacketHandler(DccBasicAccDecoderPacket func);
+		static void DccAccessoryDecoderPacket(int address, boolean activate, byte data);
+
+		inline unsigned long GetLastDccId() const { return LastDccId; }
 
 #ifdef DEBUG_MODE
 public:

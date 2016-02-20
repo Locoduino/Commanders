@@ -26,13 +26,13 @@ void CommandersEventHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, i
 	Serial.print(F(" / "));
 	switch (inEvent)
 	{
-	case EVENT_NONE:		Serial.println(F("NONE"));		break;
-	case EVENT_SELECTED:		Serial.println(F("SELECTED"));		break;
-	case EVENT_ABSOLUTEMOVE:	
+	case COMMANDERS_EVENT_NONE:		Serial.println(F("NONE"));		break;
+	case COMMANDERS_EVENT_SELECTED:		Serial.println(F("SELECTED"));		break;
+	case COMMANDERS_EVENT_ABSOLUTEMOVE:	
 		Serial.print(F("ABSOLUTEMOVE : "));	
 		Serial.println(inData, DEC);
 		break;
-	case EVENT_RELATIVEMOVE:	
+	case COMMANDERS_EVENT_RELATIVEMOVE:	
 		Serial.print(F("RELATIVEMOVE : "));	
 		Serial.println(inData, DEC);
 		break;
@@ -52,17 +52,17 @@ void setup()
 	// Buttons setups
 
 	buttons.Setup();
-	ButtonsCommanderPush *pLeft = new ButtonsCommanderPush(20UL);
-	ButtonsCommanderPush *pDc = new ButtonsCommanderPush(21UL);
-	ButtonsCommanderPush *pRight = new ButtonsCommanderPush(22UL);
-	ButtonsCommanderPush *pEPS = new ButtonsCommanderPush(23UL);
-	ButtonsCommanderPush *pTJD = new ButtonsCommanderPush(24UL);
+	ButtonsCommanderPush *pLeft = new ButtonsCommanderPush(DCCINT(124, 1));
+	ButtonsCommanderPush *pDc = new ButtonsCommanderPush(DCCINT(126, 1));
+	ButtonsCommanderPush *pRight = new ButtonsCommanderPush(DCCINT(128, 1));
+	ButtonsCommanderPush *pEPS = new ButtonsCommanderPush(DCCINT(130, 1));
+	ButtonsCommanderPush *pTJD = new ButtonsCommanderPush(DCCINT(132, 1));
 
-	pLeft->Setup(30);
-	pDc->Setup(34);
-	pRight->Setup(32);
-	pEPS->Setup(36);
-	pTJD->Setup(38);
+	pLeft->Setup(24);
+	pDc->Setup(26);
+	pRight->Setup(28);
+	pEPS->Setup(30);
+	pTJD->Setup(32);
 
 	buttons.Add(pLeft);
 	buttons.Add(pDc);

@@ -5,7 +5,7 @@ description: <Buttons Commander>
 *************************************************************/
 
 #ifndef NO_BUTTONSCOMMANDER
-#include "ButtonsCommander.hpp"
+#include "BasicsCommanders.h"
 
 #ifdef VISUALC
 #include<stdarg.h>
@@ -51,9 +51,29 @@ ButtonsCommanderButton *ButtonsCommander::Add(ButtonsCommanderButton *inButton)
 	return inButton;
 }
 
+ButtonsCommanderButton* ButtonsCommander::GetFromId(unsigned long inId) const
+{
+	ButtonsCommanderButton *pCurr = ButtonsCommander::pFirstButton;
+
+	while (pCurr != 0)
+	{
+		ButtonsCommanderButton *pButton = pCurr->GetFromId(inId);
+		if (pButton != 0)
+			return pButton;
+		pCurr = pCurr->GetNextButton();
+	}
+
+	return 0;
+}
+
+void ButtonsCommander::RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
+{
+	Commander::RaiseEvent(inId, inEvent, inData);
+}
+
 static ButtonsCommanderButton *pCurrentLoopButton = 0;
 
-unsigned long ButtonsCommander::Loop()
+BasicsCommanderEvent ButtonsCommander::Loop()
 {
 	Commander::CommanderPriorityLoop();
 
@@ -64,16 +84,30 @@ unsigned long ButtonsCommander::Loop()
 		pCurrentLoopButton = this->pFirstButton;
 
 	if (pCurrentLoopButton == 0)
-		return UNDEFINED_ID;
+		return EmptyEvent;
 
-	if (pCurrentLoopButton->Loop() == UNDEFINED_ID)
-		return UNDEFINED_ID;
+	BasicsCommanderEvent event = pCurrentLoopButton->Loop();
+
+#ifdef DEBUG_VERBOSE_MODE
+	Serial.print(F("ButtonsCommanderButton id:"));
+	Serial.print(pCurrentLoopButton->GetId(), DEC);
+	Serial.println(F(" checked !"));
+#endif
+
+	if (event.ID == UNDEFINED_ID)
+		return event;
+
+#ifdef DEBUG_MODE
+	Serial.print(F("ButtonsCommanderButton id:"));
+	Serial.print(event.ID, DEC);
+	Serial.println(F(" selected !"));
+#endif
 
 	pCurrentLoopButton->EndLoop();
 
-	this->pLastSelectedButton = pCurrentLoopButton;
+	this->pLastSelectedButton = this->GetFromId(event.ID);
 
-	return pCurrentLoopButton->GetId();
+	return event;
 }
 
 #endif

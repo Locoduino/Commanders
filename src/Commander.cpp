@@ -43,15 +43,25 @@ void Commander::CommanderPriorityLoop()
 	}
 }
 
-void Commander::Loops()
+void Commander::RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
+{
+	if (Commander::EventHandler != 0)
+		Commander::EventHandler(inId, inEvent, inData);
+}
+
+BasicsCommanderEvent Commander::Loops()
 {
 	Commander *pCurr = Commander::pFirstCommander;
 
 	while (pCurr != 0)
 	{
-		pCurr->Loop();
+		BasicsCommanderEvent ret = pCurr->Loop();
+		if (ret.ID != UNDEFINED_ID)
+			return ret;
 		pCurr = pCurr->pNextCommander;
 	}
+
+	return EmptyEvent;
 }
 
 #ifdef DEBUG_MODE

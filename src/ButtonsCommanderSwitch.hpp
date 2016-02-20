@@ -8,7 +8,7 @@
 #else
 #include "arduino2.hpp"
 #endif
-#include "ButtonsCommanderButton.hpp"
+#include "BasicsCommanders.h"
 
 //-------------------------------------------------------------------
 
@@ -16,10 +16,10 @@
 
 #ifdef DEBUG_MODE
 #define CHECKPORT(type, val, text)	CheckPortNb(type, val, F(text))
-#define CHECKPIN(val, text)		Driver::CheckPinNb(val, F(text))
+//#define CHECKPIN(val, text)		Driver::CheckPinNb(val, F(text))
 #else
 #define CHECKPORT(type, val, text)
-#define CHECKPIN(val, text)
+//#define CHECKPIN(val, text)
 #endif
 
 struct IdPin
@@ -48,7 +48,7 @@ public:
 	
 	void Setup();
 	void AddId(unsigned long inId, int inPin);
-	unsigned long Loop();
+	BasicsCommanderEvent Loop();
 	inline unsigned long GetCurrentLoopId() const { return this->pId[this->IdState].Id; }
 };
 

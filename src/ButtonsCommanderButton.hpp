@@ -14,17 +14,21 @@
 
 class ButtonsCommanderButton
 {
- private:
+ protected:
 	 unsigned long Id;
-	 ButtonsCommanderButton *pNextButton;
+
+ private:
+	ButtonsCommanderButton *pNextButton;
 
  public:
 	 inline ButtonsCommanderButton(unsigned long inId) { this->Id = inId; this->pNextButton = 0; }
 	 inline unsigned long GetId() const { return this->Id; }
+	 inline virtual ButtonsCommanderButton* GetFromId(unsigned long inId) { return this; }
+
 	 inline virtual bool IsAnalog() const { return false; }
 	 inline virtual int GetPosition() const { return 0; }
 
-	 inline virtual unsigned long Loop() { return UNDEFINED_ID; }
+	 inline virtual BasicsCommanderEvent Loop() { return EmptyEvent; }
 	 inline virtual void EndLoop() {}
 
 	 inline void SetNextButton(ButtonsCommanderButton *inButton) { this->pNextButton = inButton; }

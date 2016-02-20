@@ -8,7 +8,7 @@
 #else
 #include "arduino2.hpp"
 #endif
-#include "ButtonsCommanderButton.hpp"
+#include "BasicsCommanders.h"
 
 //-------------------------------------------------------------------
 
@@ -27,7 +27,7 @@ class ButtonsCommanderPotentiometer : public ButtonsCommanderButton
 	inline int GetPosition() const { return this->currentValue; }
 
 	void Setup(int inPin, int inMoveAccuracy = 1);
-	unsigned long Loop();
+	BasicsCommanderEvent Loop();
 };
 
 //-------------------------------------------------------------------

@@ -6,31 +6,55 @@
 # Datatypes (KEYWORD1)
 #######################################
 
-EEPROM_ItemList KEYWORD1
-CircularBuffer KEYWORD1
-EEPROMextent KEYWORD1
+COMMANDERS_EVENT_TYPE				KEYWORD1
+
+Commander							KEYWORD1
+ButtonsCommander					KEYWORD1
+ButtonsCommanderEvent				KEYWORD1
+ButtonsCommanderPush				KEYWORD1
+ButtonsCommanderAnalogPushes		KEYWORD1
+ButtonsCommanderAnalogPushesItem	KEYWORD1
+ButtonsCommanderSwitch 				KEYWORD1
+ButtonsCommanderEncoder 			KEYWORD1
+ButtonsCommanderPotentiometer 		KEYWORD1
+ButtonsCommanderButton 				KEYWORD1
+
+DccCommander						KEYWORD1
+CommandersEventHandlerFunction		KETWORD1
+
+SerialCommander						KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
 
-read KEYWORD2
-write KEYWORD2
-update KEYWORD2
+BasicsCommanders_StartSetup 	KEYWORD2
+BasicsCommanders_EndSetup 		KEYWORD2
+BasicsCommanders_Loop 			KEYWORD2
 
-readAnything KEYWORD2
-writeAnything KEYWORD2
-updateAnything KEYWORD2
+Setup 							KEYWORD2
+Add 							KEYWORD2
+AddId 							KEYWORD2
+GetLastSelectedButton 			KEYWORD2
+Loop 							KEYWORD2
 
-readString KEYWORD2
-writeString KEYWORD2
-updateString KEYWORD2
+GetId 							KEYWORD2
+GetPosition 					KEYWORD2
+EndLoop 						KEYWORD2
 
-clear KEYWORD2
-
+SetStatusLedPin					KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
 #######################################
 
-EEPROMLIST_EMPTY_OWNER		LITERAL1
+COMMANDERS_EVENT_NONE			LITERAL1
+COMMANDERS_EVENT_SELECTED		LITERAL1
+COMMANDERS_EVENT_ABSOLUTEMOVE	LITERAL1
+COMMANDERS_EVENT_RELATIVEMOVE	LITERAL1
+
+UNDEFINED_ID	LITERAL1
+
+DCCID			LITERAL1
+DCCACCESSORY	LITERAL1
+DCCINT			LITERAL1

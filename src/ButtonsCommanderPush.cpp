@@ -28,7 +28,7 @@ ButtonsCommanderPush::ButtonsCommanderPush(unsigned long inId) : ButtonsCommande
 
 void ButtonsCommanderPush::Setup(int inButtonPin)
 {	
-	CHECKPIN(inButtonPin, "ButtonsCommanderPush::Setup");
+	//CHECKPIN(inButtonPin, "ButtonsCommanderPush::Setup");
 
 	this->buttonPin = Arduino_to_GPIO_pin(inButtonPin);
 
@@ -50,21 +50,21 @@ void ButtonsCommanderPush::AddId(unsigned long inId)
 	}
 #endif
 
-	this->pId[this->IdAddCounter] = inId;
+	this->pId[this->IdAddCounter++] = inId;
 }
 
-unsigned long ButtonsCommanderPush::Loop()
+BasicsCommanderEvent ButtonsCommanderPush::Loop()
 {
 	if (this->buttonPin == DP_INVALID)
-		return UNDEFINED_ID;
+		return EmptyEvent;
 
-	unsigned long haveChanged = UNDEFINED_ID;
+	BasicsCommanderEvent haveChanged = EmptyEvent;
 	
 	// read the state of the switch into a local variable:
 	int reading = digitalRead2f(this->buttonPin);
 
 	// check to see if you just pressed the button 
-	// (i.e. the input went from LOW to HIGH),  and you've waited 
+	// (i.e. the input went from LOW to HIGH), and you've waited 
 	// long enough since the last press to ignore any noise:  
 
 	// If the switch changed, due to noise or pressing:
@@ -84,11 +84,21 @@ unsigned long ButtonsCommanderPush::Loop()
 		{
 			this->buttonState = reading;
 
-			// only toggle the state if the new button state is HIGH
+			// only toggle the state if the new button state is LOW
 			if (this->buttonState == LOW)
 			{
-				haveChanged = this->GetId();
-				Commander::EventHandler(this->GetId(), COMMANDERS_EVENT_SELECTED, 0);
+				haveChanged.ID = this->GetCurrentLoopId();
+				haveChanged.Event = COMMANDERS_EVENT_SELECTED;
+				haveChanged.Data = 0;
+				Commander::RaiseEvent(this->GetCurrentLoopId(), COMMANDERS_EVENT_SELECTED, 0);
+				this->IdLoopCounter++;
+				if (this->IdLoopCounter >= this->IdAddCounter)
+					this->IdLoopCounter = 0;
+#ifdef DEBUG_MODE
+				Serial.print(F("ButtonsCommanderPush currentloopid:"));
+				Serial.println(this->IdLoopCounter, DEC);
+#endif
+
 			}
 		}
 		this->lastDebounceTime = 0;    
@@ -98,11 +108,4 @@ unsigned long ButtonsCommanderPush::Loop()
 	// it'll be the lastButtonState:
 	lastButtonState = reading;
 	return haveChanged;
-}
-
-void ButtonsCommanderPush::EndLoop()
-{
-	this->IdLoopCounter++;
-	if (this->IdLoopCounter >= this->IdAddCounter)
-		this->IdLoopCounter = 0;
 }

@@ -3,11 +3,7 @@
 #define __buttonsCommanderAnalogPushes_H__
 //-------------------------------------------------------------------
 
-#ifdef VISUALC
-#else
-#endif
-
-#include "ButtonsCommanderButton.hpp"
+#include "BasicsCommanders.h"
 #include "ButtonsCommanderAnalogPushesItem.hpp"
 
 #define PUSHES(list, nb)	((ButtonsCommanderAnalogPushes *) list[nb])
@@ -36,7 +32,7 @@
 class ButtonsCommanderAnalogPushes : public ButtonsCommanderButton
 {
 private:
-	int analogPin;			// Number of the pushbutton analog pin. This is a normal number, not a arduino2 GPIO_pin_t.
+	int analogPin;			// Number of the pushbutton analog pin. This is a normal number, not an arduino2 GPIO_pin_t.
 	byte number;			// Number of buttons
 	byte lastButtonPressed; // last button pressed number
 	int buttonState;		// the current reading from the input pin
@@ -53,10 +49,11 @@ private:
 public:
 	ButtonsCommanderAnalogPushes(byte inNumber);
 
-	void Setup(int inButtonPin, int *inpButtonValues, int inTolerancy = 5);
-	unsigned long Loop();
+	void Setup(int inButtonPin, unsigned long *inpIds, int *inpButtonValues, int inTolerancy = 5);
+	BasicsCommanderEvent Loop();
 	void EndLoop();
 	ButtonsCommanderAnalogPushesItem *GetItem(byte inNumber) { return &(this->pButtons[inNumber]); }
+	ButtonsCommanderButton* GetFromId(unsigned long inId);
 
 	inline byte GetLastButtonPressed() const { return this->lastButtonPressed; }
 };

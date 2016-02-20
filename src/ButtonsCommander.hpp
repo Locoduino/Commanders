@@ -23,9 +23,11 @@ class ButtonsCommander : Commander
 		void Setup();
 		ButtonsCommanderButton *Add(ButtonsCommanderButton *inpButton);
 		inline ButtonsCommanderButton *GetLastSelectedButton() const { return this->pLastSelectedButton; }
+		ButtonsCommanderButton* GetFromId(unsigned long inId) const;
+		void RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData);
 
 	public:
-		unsigned long Loop();
+		BasicsCommanderEvent Loop();
 };
 
 //-------------------------------------------------------------------

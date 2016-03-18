@@ -1,7 +1,7 @@
 /*************************************************************
 project: <Universal Accessory Decoder>
 author: <Thierry PARIS>
-description: <Basic push button with debounce.>
+description: <Push button with debounce.>
 *************************************************************/
 
 #include "ButtonsCommanderPush.hpp"
@@ -53,12 +53,12 @@ void ButtonsCommanderPush::AddId(unsigned long inId)
 	this->pId[this->IdAddCounter++] = inId;
 }
 
-BasicsCommanderEvent ButtonsCommanderPush::Loop()
+CommanderEvent ButtonsCommanderPush::Loop()
 {
 	if (this->buttonPin == DP_INVALID)
 		return EmptyEvent;
 
-	BasicsCommanderEvent haveChanged = EmptyEvent;
+	CommanderEvent haveChanged = EmptyEvent;
 	
 	// read the state of the switch into a local variable:
 	int reading = digitalRead2f(this->buttonPin);

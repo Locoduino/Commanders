@@ -6,7 +6,7 @@
 #ifndef NO_SERIALCOMMANDER
 #include "Commander.hpp"
 
-#ifdef VISUALC
+#ifdef VISUALSTUDIO
 #include "VStudio/Serial.hpp"
 #endif
 
@@ -23,7 +23,7 @@ class SerialCommander : Commander
 		
 	public:
 		void Setup(unsigned long inSpeed, byte inSerialPort);
-		unsigned long Loop();
+		CommanderEvent Loop();
 };
 
 //-------------------------------------------------------------------

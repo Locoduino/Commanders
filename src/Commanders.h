@@ -11,12 +11,16 @@
 
 #define  GPIO2_PREFER_SPEED    1
 
-#ifdef VISUALC
-#include "VStudio/arduino.h"
-#include "VStudio/arduino2.hpp"
-#include "VStudio/Serial.hpp"
+#ifdef VISUALSTUDIO
+#include "../VStudio/arduino.h"
+#include "../VStudio/arduino2.hpp"
+#include "../VStudio/Serial.hpp"
 #else
 #include "arduino2.hpp"
+#endif
+
+#ifdef VISUALSTUDIO
+#include "../VStudio/ButtonsCommanderKeyboard.hpp"
 #endif
 
 //////////////////////////////////////////
@@ -124,11 +128,44 @@
 #ifndef NO_SERIALCOMMANDER
 #include "SerialCommander.hpp"
 #endif
+
 #ifndef NO_BUTTONSCOMMANDER
 #include "ButtonsCommander.hpp"
 #endif
 
-void BasicsCommanders_StartSetup(CommandersEventHandlerFunction func);
-void BasicsCommanders_StartSetup();
-void BasicsCommanders_EndSetup();
-BasicsCommanderEvent BasicsCommanders_Loop();
+void Commanders_StartSetup(CommandersEventHandlerFunction func);
+void Commanders_StartSetup();
+void Commanders_EndSetup();
+CommanderEvent Commanders_Loop();
+
+////////////////////////////////////////////////
+// Macro area...
+#define DECLARE_BUTTONS_COMMANDER		\
+			ButtonsCommander macro_buttons;
+
+#define START_BUTTONS_COMMANDER_SETUP \
+			Commanders_StartSetup(); \
+			macro_buttons.Setup();
+
+#define START_BUTTONS_COMMANDER_SETUPEVENT(eventFct) \
+			Commanders_StartSetup(eventFct); \
+			macro_buttons.Setup();
+
+#define END_COMMANDER_SETUP \
+			Commanders_EndSetup();
+
+#define DECLARE_DCC_COMMANDER(INTER)	\
+			const byte interrupt = INTER; \
+			DccCommander macro_dcc;
+
+#define START_DCC_COMMANDER_SETUP \
+			Commanders_StartSetup(); \
+			macro_dcc.Setup(0x00, 0x00, interrupt); \
+			macro_dcc.SetStatusLedPin(13);
+
+#define START_DCC_COMMANDER_SETUPEVENT(eventFct) \
+			Commanders_StartSetup(eventFct); \
+			macro_dcc.Setup(0x00, 0x00, interrupt); \
+			macro_dcc.SetStatusLedPin(13);
+
+#define COMMANDER_LOOP	Commanders_Loop();

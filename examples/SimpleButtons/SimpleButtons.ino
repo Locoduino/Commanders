@@ -1,10 +1,10 @@
 /*************************************************************
-project: <Basics Commanders>
+project: <Commanders>
 author: <Thierry PARIS>
 description: <Demo sample>
 *************************************************************/
 
-#include "BasicsCommanders.h"
+#include "Commanders.h"
 
 /* kDCC_INTERRUPT values :
 Board			int.0	int.1	int.2	int.3	int.4	int.5
@@ -47,7 +47,7 @@ void CommandersEventHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, i
 //
 void setup()
 {
-	BasicsCommanders_StartSetup(CommandersEventHandler);
+	Commanders_StartSetup(CommandersEventHandler);
 
 	// Buttons setups
 
@@ -70,7 +70,7 @@ void setup()
 	buttons.Add(pEPS);
 	buttons.Add(pTJD);
 
-#ifdef VISUALC
+#ifdef VISUALSTUDIO
 	ButtonsCommanderKeyboard *pKeyA = new ButtonsCommanderKeyboard(100UL);
 	ButtonsCommanderKeyboard *pKeyB = new ButtonsCommanderKeyboard(200UL);
 	pKeyA->Setup('A');
@@ -84,10 +84,10 @@ void setup()
 	dcc.Setup(0x00, 0x00, kDCC_INTERRUPT);
 	dcc.SetStatusLedPin(13);
 
-	BasicsCommanders_EndSetup();
+	Commanders_EndSetup();
 }
 
 void loop()
 {
-	BasicsCommanders_Loop();
+	Commanders_Loop();
 }

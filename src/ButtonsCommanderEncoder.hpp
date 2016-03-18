@@ -3,12 +3,12 @@
 #define __buttonsCommanderEncoder_H__
 //-------------------------------------------------------------------
 
-#ifdef VISUALC
-#include "VStudio/arduino2.hpp"
+#ifdef VISUALSTUDIO
+#include "../VStudio/arduino2.hpp"
 #else
 #include "arduino2.hpp"
 #endif
-#include "BasicsCommanders.h"
+#include "Commanders.h"
 
 class ButtonsCommanderPush;
 
@@ -28,14 +28,26 @@ public:
 	ButtonsCommanderPush *pPush;
 	
  public:
-	ButtonsCommanderEncoder(unsigned long inId, int inStrtingCurrentValue, int inMinimum, int inMaximum, bool inAssociatedPushButton = false);
+	ButtonsCommanderEncoder(unsigned long inId, int inStartingCurrentValue, int inMinimum, int inMaximum, bool inAssociatedPushButton = false);
 
 	inline bool IsAnalog() const { return false; }
 	inline int GetPosition() const { return this->currentValue; }
 
 	void Setup(int inPin1, int inPin2, int inMoveAccuracy = 1);
-	BasicsCommanderEvent Loop();
+	CommanderEvent Loop();
 };
+
+#define ENCODER_BUTTON(name, pin1, pin2, ID, start, min, max) \
+	ButtonsCommanderEncoder *name = new ButtonsCommanderEncoder(ID, start, min, max); \
+	name->Setup(pin1, pin2); \
+	macro_buttons.Add(name);
+
+#define ENCODER_BUTTON_WITHPUSH(name, pin1, pin2, ID, start, min, max, pushPin, pushID) \
+	ButtonsCommanderEncoder *name = new ButtonsCommanderEncoder(ID, start, min, max, true); \
+	name->Setup(pin1, pin2); \
+	name->pPush->Setup(pushPin); \
+	name->pPush->AddId(pushID); \
+	macro_buttons.Add(name);
 
 //-------------------------------------------------------------------
 #endif

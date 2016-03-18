@@ -4,7 +4,7 @@ author: <Thierry PARIS>
 description: <Composite push button array on analog pin with debounce.>
 *************************************************************/
 
-#include "BasicsCommanders.h"
+#include "Commanders.h"
 
 ButtonsCommanderAnalogPushes::ButtonsCommanderAnalogPushes(byte inNumberOfItems) : ButtonsCommanderButton(UNDEFINED_ID)
 {
@@ -40,12 +40,12 @@ ButtonsCommanderButton* ButtonsCommanderAnalogPushes::GetFromId(unsigned long in
 	return 0;
 }			 
 
-BasicsCommanderEvent ButtonsCommanderAnalogPushes::Loop()
+CommanderEvent ButtonsCommanderAnalogPushes::Loop()
 {
 	if (this->analogPin == 0)
 		return EmptyEvent;
 
-	BasicsCommanderEvent haveChanged = EmptyEvent;
+	CommanderEvent haveChanged = EmptyEvent;
 	
 	// read the state of the switch into a local variable:
 	int reading = analogRead(this->analogPin);

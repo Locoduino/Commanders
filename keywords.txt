@@ -28,9 +28,9 @@ SerialCommander						KEYWORD1
 # Methods and Functions (KEYWORD2)
 #######################################
 
-BasicsCommanders_StartSetup 	KEYWORD2
-BasicsCommanders_EndSetup 		KEYWORD2
-BasicsCommanders_Loop 			KEYWORD2
+Commanders_StartSetup 	KEYWORD2
+Commanders_EndSetup 		KEYWORD2
+Commanders_Loop 			KEYWORD2
 
 Setup 							KEYWORD2
 Add 							KEYWORD2

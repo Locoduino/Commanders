@@ -54,7 +54,7 @@ void ButtonsCommanderSwitch::AddId(unsigned long inId, int inPin)
 	pinMode2f(this->pId[this->IdAddCounter].Pin, INPUT_PULLUP);
 }
 
-BasicsCommanderEvent ButtonsCommanderSwitch::Loop()
+CommanderEvent ButtonsCommanderSwitch::Loop()
 {
 	if (this->IdLoopCounter >= this->IdAddCounter)
 		this->IdLoopCounter = 0;
@@ -77,7 +77,7 @@ BasicsCommanderEvent ButtonsCommanderSwitch::Loop()
 		id->lastDebounceTime = millis();
 	}
 
-	BasicsCommanderEvent haveFound = EmptyEvent;
+	CommanderEvent haveFound = EmptyEvent;
 
 	if (id->lastDebounceTime > 0 && (millis() - id->lastDebounceTime) > this->debounceDelay)
 	{

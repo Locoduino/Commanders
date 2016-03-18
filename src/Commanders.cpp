@@ -4,17 +4,17 @@ author: <Thierry PARIS>
 description: <Base functions of the library>
 *************************************************************/
 
-#include "BasicsCommanders.h"
+#include "Commanders.h"
 
-const BasicsCommanderEvent EmptyEvent = BasicsCommanderEvent(UNDEFINED_ID, COMMANDERS_EVENT_NONE, 0);
+const CommanderEvent EmptyEvent = CommanderEvent(UNDEFINED_ID, COMMANDERS_EVENT_NONE, 0);
 
-void BasicsCommanders_StartSetup()
+void Commanders_StartSetup()
 {
 #ifdef DEBUG_MODE
 	Serial.begin(115200);
 
 	Serial.println(F(""));
-	Serial.println(F("Basics Commanders V0.40."));
+	Serial.println(F("Commanders V0.50."));
 	Serial.println(F("Developed by Thierry Paris."));
 	Serial.println(F(""));
 
@@ -22,24 +22,26 @@ void BasicsCommanders_StartSetup()
 #endif
 
 #ifndef NO_DCCCOMMANDER
-	DccCommander::SetBasicAccessoryDecoderPacketHandler(DccCommander::DccAccessoryDecoderPacket);
+#ifndef VISUALSTUDIO
+	DccCommander::SetAccessoryDecoderPacketHandler(DccCommander::DccAccessoryDecoderPacket);
+#endif
 #endif
 }
 
-void BasicsCommanders_StartSetup(CommandersEventHandlerFunction func)
+void Commanders_StartSetup(CommandersEventHandlerFunction func)
 {
 	Commander::EventHandler = func;
-	BasicsCommanders_StartSetup();
+	Commanders_StartSetup();
 }
 
-void BasicsCommanders_EndSetup()
+void Commanders_EndSetup()
 {
 #ifdef DEBUG_MODE
-	Serial.println(F("*** Setup Basics Commanders Finished."));
+	Serial.println(F("*** Setup Commanders Finished."));
 #endif
 }
 
-BasicsCommanderEvent BasicsCommanders_Loop()
+CommanderEvent Commanders_Loop()
 {
 	return Commander::Loops();
 }

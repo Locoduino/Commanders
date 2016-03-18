@@ -15,7 +15,7 @@ ButtonsCommanderKeyboard::ButtonsCommanderKeyboard(unsigned long inId) : Buttons
 	this->key = 0;
 }
 
-BasicsCommanderEvent ButtonsCommanderKeyboard::Loop()
+CommanderEvent ButtonsCommanderKeyboard::Loop()
 {
 	//this->UnselectLastLoop();
 	if (this->key == 0)
@@ -34,7 +34,7 @@ BasicsCommanderEvent ButtonsCommanderKeyboard::Loop()
 		Serial.println(F(" pressed "));
 #endif
 		Commander::RaiseEvent(this->GetId(), COMMANDERS_EVENT_SELECTED, 0);
-		BasicsCommanderEvent ret(this->GetId(), COMMANDERS_EVENT_SELECTED, 0);
+		CommanderEvent ret(this->GetId(), COMMANDERS_EVENT_SELECTED, 0);
 		return ret;
 	}
 

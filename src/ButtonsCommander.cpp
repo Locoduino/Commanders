@@ -5,9 +5,9 @@ description: <Buttons Commander>
 *************************************************************/
 
 #ifndef NO_BUTTONSCOMMANDER
-#include "BasicsCommanders.h"
+#include "Commanders.h"
 
-#ifdef VISUALC
+#ifdef VISUALSTUDIO
 #include<stdarg.h>
 #endif
 
@@ -17,7 +17,7 @@ description: <Buttons Commander>
 #define CHECK(val, text)
 #endif
 
-#ifdef VISUALC
+#ifdef VISUALSTUDIO
 #include<stdarg.h>
 #endif
 
@@ -73,7 +73,7 @@ void ButtonsCommander::RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEv
 
 static ButtonsCommanderButton *pCurrentLoopButton = 0;
 
-BasicsCommanderEvent ButtonsCommander::Loop()
+CommanderEvent ButtonsCommander::Loop()
 {
 	Commander::CommanderPriorityLoop();
 
@@ -86,7 +86,7 @@ BasicsCommanderEvent ButtonsCommander::Loop()
 	if (pCurrentLoopButton == 0)
 		return EmptyEvent;
 
-	BasicsCommanderEvent event = pCurrentLoopButton->Loop();
+	CommanderEvent event = pCurrentLoopButton->Loop();
 
 #ifdef DEBUG_VERBOSE_MODE
 	Serial.print(F("ButtonsCommanderButton id:"));

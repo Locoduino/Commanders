@@ -3,7 +3,7 @@
 #define __buttonsCommanderAnalogPushes_H__
 //-------------------------------------------------------------------
 
-#include "BasicsCommanders.h"
+#include "Commanders.h"
 #include "ButtonsCommanderAnalogPushesItem.hpp"
 
 #define PUSHES(list, nb)	((ButtonsCommanderAnalogPushes *) list[nb])
@@ -49,14 +49,19 @@ private:
 public:
 	ButtonsCommanderAnalogPushes(byte inNumber);
 
-	void Setup(int inButtonPin, unsigned long *inpIds, int *inpButtonValues, int inTolerancy = 5);
-	BasicsCommanderEvent Loop();
+	void Setup(int inButtonPin, unsigned long *inpIds, int *inpButtonValues, int inTolerancy = 20);
+	CommanderEvent Loop();
 	void EndLoop();
 	ButtonsCommanderAnalogPushesItem *GetItem(byte inNumber) { return &(this->pButtons[inNumber]); }
 	ButtonsCommanderButton* GetFromId(unsigned long inId);
 
 	inline byte GetLastButtonPressed() const { return this->lastButtonPressed; }
 };
+
+#define ANALOGPUSH_BUTTON(name, pin, number, IDS, values) \
+	ButtonsCommanderAnalogPushes *name = new ButtonsCommanderPush(number); \
+	name->Setup(pin, IDS, values); \
+	macro_buttons.Add(name);
 
 //-------------------------------------------------------------------
 #endif

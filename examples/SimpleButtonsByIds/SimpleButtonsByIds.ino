@@ -1,10 +1,10 @@
 /*************************************************************
-project: <Basics Commanders>
+project: <Commanders>
 author: <Thierry PARIS>
 description: <Demo sample>
 *************************************************************/
 
-#include "BasicsCommanders.h"
+#include "Commanders.h"
 
 ButtonsCommander buttons;
 
@@ -15,7 +15,7 @@ ButtonsCommander buttons;
 //
 void setup()
 {
-	BasicsCommanders_StartSetup();
+	Commanders_StartSetup();
 
 	// Buttons setups
 
@@ -38,12 +38,12 @@ void setup()
 	buttons.Add(pEPS);
 	buttons.Add(pTJD);
 
-	BasicsCommanders_EndSetup();
+	Commanders_EndSetup();
 }
 
 void loop()
 {
-	BasicsCommanderEvent event = BasicsCommanders_Loop();
+	CommanderEvent event = BasicsCommanders_Loop();
 
 	if (event.ID != UNDEFINED_ID)
 	{	

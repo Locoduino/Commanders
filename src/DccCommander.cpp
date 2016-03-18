@@ -7,7 +7,7 @@ description: <Dcc Commander>
 #ifndef NO_DCCCOMMANDER
 #include "DccCommander.hpp"
 
-#ifdef VISUALC
+#ifdef VISUALSTUDIO
 DCC_Decoder DCC_Decoder::DCCInstance;
 #endif
 
@@ -17,7 +17,7 @@ boolean DccCommander::UseRawDccAddresses;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// DCC Basic accessory packet handler 
+// DCC accessory packet handler 
 //
 void DccCommander::DccAccessoryDecoderPacket(int address, boolean activate, byte data)
 {
@@ -41,8 +41,8 @@ void DccCommander::DccAccessoryDecoderPacket(int address, boolean activate, byte
 	Serial.println(activate, DEC);
 #endif
 
-	if (DccCommander::func_BasicAccPacket)
-		(DccCommander::func_BasicAccPacket)(realAddress, activate, data);
+	if (DccCommander::func_AccPacket)
+		(DccCommander::func_AccPacket)(realAddress, activate, data);
 	else
 	{
 		Commander::RaiseEvent(DCCINT(realAddress, data), COMMANDERS_EVENT_SELECTED, 0);
@@ -107,7 +107,7 @@ static unsigned long start = 0;
 
 #define ELAPSEDTIME	((unsigned long) -2)
 
-BasicsCommanderEvent DccCommander::Loop()
+CommanderEvent DccCommander::Loop()
 {
 	if (start == 0)
 		start = millis();
@@ -131,17 +131,17 @@ BasicsCommanderEvent DccCommander::Loop()
 		start = 0;
 		unsigned long last = LastDccId;
 		LastDccId = UNDEFINED_ID;
-		return BasicsCommanderEvent(last, COMMANDERS_EVENT_SELECTED, 0);
+		return CommanderEvent(last, COMMANDERS_EVENT_SELECTED, 0);
 	}
 
 	return EmptyEvent;
 }
 
-DccBasicAccDecoderPacket DccCommander::func_BasicAccPacket = NULL;
+DccAccDecoderPacket DccCommander::func_AccPacket = NULL;
 
-void DccCommander::SetBasicAccessoryDecoderPacketHandler(DccBasicAccDecoderPacket func)
+void DccCommander::SetAccessoryDecoderPacketHandler(DccAccDecoderPacket func)
 {
-	DccCommander::func_BasicAccPacket = func;
+	DccCommander::func_AccPacket = func;
 }
 
 #endif

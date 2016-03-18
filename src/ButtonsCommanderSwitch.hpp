@@ -3,12 +3,12 @@
 #define __buttonsCommanderSwitch_H__
 //-------------------------------------------------------------------
 
-#ifdef VISUALC
-#include "VStudio/arduino2.hpp"
+#ifdef VISUALSTUDIO
+#include "../VStudio/arduino2.hpp"
 #else
 #include "arduino2.hpp"
 #endif
-#include "BasicsCommanders.h"
+#include "Commanders.h"
 
 //-------------------------------------------------------------------
 
@@ -48,9 +48,30 @@ public:
 	
 	void Setup();
 	void AddId(unsigned long inId, int inPin);
-	BasicsCommanderEvent Loop();
+	CommanderEvent Loop();
 	inline unsigned long GetCurrentLoopId() const { return this->pId[this->IdState].Id; }
 };
+
+#define SWITCH_BUTTON(name, pin, ID) \
+	ButtonsCommanderSwitch *name = new ButtonsCommanderSwitch(1); \
+	name->AddId(ID); \
+	name->Setup(); \
+	macro_buttons.Add(name);
+
+#define SWITCH_BUTTON_2ID(name, pin, ID1, ID2) \
+	ButtonsCommanderSwitch *name = new ButtonsCommanderSwitch(2); \
+	name->AddId(ID1); \
+	name->AddId(ID2); \
+	name->Setup(); \
+	macro_buttons.Add(name);
+
+#define SWITCH_BUTTON_IDS(name, pin, number) \
+	ButtonsCommanderSwitch *name = new ButtonsCommanderSwitch(number); \
+	name->Setup(); \
+	macro_buttons.Add(name);
+
+#define SWITCH_BUTTON_ADDID(name, pin, ID) \
+	name->AddId(ID, pin);
 
 //-------------------------------------------------------------------
 #endif

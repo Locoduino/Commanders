@@ -3,12 +3,12 @@
 #define __potentiometer_H__
 //-------------------------------------------------------------------
 
-#ifdef VISUALC
-#include "VStudio/arduino2.hpp"
+#ifdef VISUALSTUDIO
+#include "../VStudio/arduino2.hpp"
 #else
 #include "arduino2.hpp"
 #endif
-#include "BasicsCommanders.h"
+#include "Commanders.h"
 
 //-------------------------------------------------------------------
 
@@ -27,7 +27,7 @@ class ButtonsCommanderPotentiometer : public ButtonsCommanderButton
 	inline int GetPosition() const { return this->currentValue; }
 
 	void Setup(int inPin, int inMoveAccuracy = 1);
-	BasicsCommanderEvent Loop();
+	CommanderEvent Loop();
 };
 
 //-------------------------------------------------------------------

@@ -49,13 +49,13 @@ void Commander::RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, in
 		Commander::EventHandler(inId, inEvent, inData);
 }
 
-BasicsCommanderEvent Commander::Loops()
+CommanderEvent Commander::Loops()
 {
 	Commander *pCurr = Commander::pFirstCommander;
 
 	while (pCurr != 0)
 	{
-		BasicsCommanderEvent ret = pCurr->Loop();
+		CommanderEvent ret = pCurr->Loop();
 		if (ret.ID != UNDEFINED_ID)
 			return ret;
 		pCurr = pCurr->pNextCommander;

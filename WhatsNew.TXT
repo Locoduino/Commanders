@@ -1,3 +1,10 @@
+18/03/2016 V0.50
+	- Nouveau nom 'Commanders' pour la bibliothèque. Les classes et les defines ont suivi le mouvement.
+	- Un moyen simple de programmer à l'aide de macros C a été ajouté.
+
+	- New name 'Commanderss' for the library. All classes and defines have been adapted when necessary.
+	- An easy programming way have been added based on C macros.
+
 20/02/2016 V0.40
 	- Correction des Ids multiples de PushButton.
 	- Ajout de la classe ButtonsCommanderAnalogPushes

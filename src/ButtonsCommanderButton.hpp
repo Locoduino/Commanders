@@ -3,7 +3,11 @@
 #define __buttonsCommanderButton_H__
 //-------------------------------------------------------------------
 
-#include "Arduino.h"
+#ifdef VISUALSTUDIO
+	#include "../VStudio/arduino.h"
+#else
+	#include "Arduino.h"
+#endif
 #include "Commander.hpp"
 
 //-------------------------------------------------------------------
@@ -28,7 +32,7 @@ class ButtonsCommanderButton
 	 inline virtual bool IsAnalog() const { return false; }
 	 inline virtual int GetPosition() const { return 0; }
 
-	 inline virtual BasicsCommanderEvent Loop() { return EmptyEvent; }
+	 inline virtual CommanderEvent Loop() { return EmptyEvent; }
 	 inline virtual void EndLoop() {}
 
 	 inline void SetNextButton(ButtonsCommanderButton *inButton) { this->pNextButton = inButton; }

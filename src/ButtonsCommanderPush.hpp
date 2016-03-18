@@ -4,13 +4,13 @@
 //-------------------------------------------------------------------
 
 #define  GPIO2_PREFER_SPEED    1
-#ifdef VISUALC
-	#include "VStudio/arduino2.hpp"
+#ifdef VISUALSTUDIO
+	#include "../VStudio/arduino2.hpp"
 #else
 	#include "arduino2.hpp"
 #endif
 
-#include "BasicsCommanders.h"
+#include "Commanders.h"
 
 #ifdef DEBUG_MODE
 #define CHECKPORT(type, val, text)	CheckPortNb(type, val, F(text))
@@ -46,7 +46,7 @@ class ButtonsCommanderPush : public ButtonsCommanderButton
 
 	void Setup(int inButtonPin);
 	void AddId(unsigned long inId);
-	BasicsCommanderEvent Loop();
+	CommanderEvent Loop();
 
 	inline int GetPin() const { return GPIO_to_Arduino_pin(this->buttonPin); }
 	inline GPIO_pin_t GetPin2() const { return this->buttonPin; }
@@ -55,6 +55,12 @@ class ButtonsCommanderPush : public ButtonsCommanderButton
 	
 	static ButtonsCommanderPush Empty;
 };
+
+#define PUSH_BUTTON(name, pin, ID) \
+	ButtonsCommanderPush *name = new ButtonsCommanderPush(ID); \
+	name->Setup(pin); \
+	macro_buttons.Add(name);
+
 
 //-------------------------------------------------------------------
 #endif

@@ -49,23 +49,20 @@ int _tmain(int argc, _TCHAR* argv[])
 //			ino PART
 //-----------------------------------------
 /*************************************************************
-project: <Basics Commanders>
+project: <Commanders>
 author: <Thierry PARIS>
-description: <Demo sample>
+description: <Demo sample by macros>
 *************************************************************/
 
-#include "BasicsCommanders.h"
+#include "Commanders.h"
 
-/* kDCC_INTERRUPT values :
+/* INTERRUPT values as macro argument :
 Board			int.0	int.1	int.2	int.3	int.4	int.5
 Uno, Ethernet	2		3
 Mega2560		2		3		21		20		19		18
 Leonardo		3		2		0		1		7
 */
-#define kDCC_INTERRUPT            5
-
-ButtonsCommander buttons;
-DccCommander dcc;
+DECLARE_DCC_COMMANDER(3)
 
 void CommandersEventHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
 {
@@ -89,55 +86,16 @@ void CommandersEventHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, i
 	}
 }
 
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-// Setup
-//
 void setup()
 {
-	BasicsCommanders_StartSetup(CommandersEventHandler);
+	START_DCC_COMMANDER_SETUPEVENT(CommandersEventHandler);
 
-	// Buttons setups
-
-	buttons.Setup();
-	ButtonsCommanderPush *pLeft = new ButtonsCommanderPush(20UL);
-	ButtonsCommanderPush *pDc = new ButtonsCommanderPush(21UL);
-	ButtonsCommanderPush *pRight = new ButtonsCommanderPush(22UL);
-	ButtonsCommanderPush *pEPS = new ButtonsCommanderPush(23UL);
-	ButtonsCommanderPush *pTJD = new ButtonsCommanderPush(24UL);
-
-	pLeft->Setup(30);
-	pDc->Setup(34);
-	pRight->Setup(32);
-	pEPS->Setup(36);
-	pTJD->Setup(38);
-
-	buttons.Add(pLeft);
-	buttons.Add(pDc);
-	buttons.Add(pRight);
-	buttons.Add(pEPS);
-	buttons.Add(pTJD);
-
-	ButtonsCommanderKeyboard *pKeyA = new ButtonsCommanderKeyboard(100UL);
-	ButtonsCommanderKeyboard *pKeyB = new ButtonsCommanderKeyboard(200UL);
-	pKeyA->Setup('A');
-	pKeyB->Setup('B');
-	buttons.Add(pKeyA);
-	buttons.Add(pKeyB);
-
-	// Accessories setups
-
-	dcc.Setup(0x00, 0x00, kDCC_INTERRUPT);
-	dcc.SetStatusLedPin(13);
-
-	BasicsCommanders_EndSetup();
+	END_COMMANDER_SETUP;
 }
 
 void loop()
 {
-	BasicsCommanders_Loop();
+	COMMANDER_LOOP;
 }
 
 //-----------------------------------------

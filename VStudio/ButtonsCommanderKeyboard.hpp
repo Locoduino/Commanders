@@ -23,7 +23,7 @@ class ButtonsCommanderKeyboard : public ButtonsCommanderButton
 	ButtonsCommanderKeyboard(unsigned long inId);
 
 	void Setup(int inKey) { this->key = inKey; lastLoopKey = 0; }
-	BasicsCommanderEvent Loop();
+	CommanderEvent Loop();
 	void EndLoop();
 };
 

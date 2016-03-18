@@ -4,7 +4,7 @@ author: <Thierry PARIS>
 description: <Serial Commander>
 *************************************************************/
 
-#include "BasicsCommanders.h"
+#include "Commanders.h"
 
 #ifndef NO_SERIALCOMMANDER
 //#include "TextCommunicationHelper.hpp"
@@ -46,13 +46,13 @@ void SerialCommander::Setup(unsigned long inSpeed, byte inSerialPort)
 	this->addCounter = 0;
 }
 
-unsigned long SerialCommander::Loop()
+CommanderEvent SerialCommander::Loop()
 {
-	unsigned long found;
+	CommanderEvent found = EmptyEvent;
 	char buffer[9];
 	char character;
 
-	Commander::StaticData.CommanderPriorityLoop();
+	Commander::CommanderPriorityLoop();
 
 	int avail = 0;
 	switch (this->serialPort)
@@ -106,7 +106,7 @@ unsigned long SerialCommander::Loop()
 			if ((int)character < 32 || (int)character > 60)
 			{
 				addCounter = 0;
-				return UNDEFINED_ID;
+				return EmptyEvent;
 			}
 
 			Serial.print(F("read "));
@@ -118,7 +118,7 @@ unsigned long SerialCommander::Loop()
 
 			if (addCounter == 8)
 			{
-				Commander::StaticData.CommanderPriorityLoop();
+				Commander::CommanderPriorityLoop();
 
 				buffer[addCounter] = 0;
 #ifdef DEBUG_MODE
@@ -132,7 +132,7 @@ unsigned long SerialCommander::Loop()
 					AccessoryGroup::StaticData.pAccessoryGroupFullList[i]->DCCToggle(TextCommunicationHelper::DecodeID(buffer), TextCommunicationHelper::DecodeIDAccessory(buffer));
 				*/
 				addCounter = 0;
-				/*found.dccId = TextCommunicationHelper::DecodeID(buffer);
+				/*found.ID = TextCommunicationHelper::DecodeID(buffer);
 				found.dccAccessory = TextCommunicationHelper::DecodeIDAccessory(buffer);*/
 			}
 
@@ -162,6 +162,7 @@ unsigned long SerialCommander::Loop()
 	else
 		addCounter = 0;
 
+	Commander::RaiseEvent(found.ID, found.Event, found.Data);
 	return found;
 }
 

@@ -35,7 +35,7 @@ void ButtonsCommanderEncoder::Setup(int inPin1, int inPin2, int inMoveAccuracy)
 		this->moveAccuracy = 1;
 }
 
-BasicsCommanderEvent ButtonsCommanderEncoder::Loop()
+CommanderEvent ButtonsCommanderEncoder::Loop()
 {
 	int MSB = digitalRead2f(this->pin1); //MSB = most significant bit
 	int LSB = digitalRead2f(this->pin2); //LSB = least significant bit
@@ -56,5 +56,5 @@ BasicsCommanderEvent ButtonsCommanderEncoder::Loop()
 
 	lastEncoded = encoded; //store this value for next time
 	Commander::RaiseEvent(this->GetId(), COMMANDERS_EVENT_RELATIVEMOVE, this->currentValue);
-	return BasicsCommanderEvent(this->GetId(), COMMANDERS_EVENT_RELATIVEMOVE, this->currentValue);
+	return CommanderEvent(this->GetId(), COMMANDERS_EVENT_RELATIVEMOVE, this->currentValue);
 }

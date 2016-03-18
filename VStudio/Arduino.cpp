@@ -69,16 +69,19 @@ int freeMemory()
 //////////////////////////////////////////
 // Serial
 
-SerialClass SerialClass::SerialInstance;
+HardwareSerial Serial;
+HardwareSerial Serial1;
+HardwareSerial Serial2;
+HardwareSerial Serial3;
 
 std::string memo;
 
-void SerialClass::print(const char *line)
+void HardwareSerial::print(const char *line)
 {
 	memo.append(line);
 }
 
-void SerialClass::println(const char *line)
+void HardwareSerial::println(const char *line)
 {
 	memo.append(line);
 	printf(memo.c_str());
@@ -86,12 +89,12 @@ void SerialClass::println(const char *line)
 	memo.clear();
 }
 
-void SerialClass::print(int value, int i)
+void HardwareSerial::print(int value, int i)
 {
 	memo.append(std::to_string(value));
 }
 
-void SerialClass::println(int value, int i)
+void HardwareSerial::println(int value, int i)
 {
 	memo.append(std::to_string(value));
 	printf(memo.c_str());

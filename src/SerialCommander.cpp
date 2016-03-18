@@ -1,5 +1,5 @@
 /*************************************************************
-project: <Universal Accessory Decoder>
+project: <Commanders>
 author: <Thierry PARIS>
 description: <Serial Commander>
 *************************************************************/
@@ -14,9 +14,9 @@ description: <Serial Commander>
 
 void SerialCommander::Setup(unsigned long inSpeed, byte inSerialPort)
 {
-	if (inSerialPort <= 0 || inSerialPort > 4)
+	if (inSerialPort < 0 || inSerialPort > 3)
 #ifdef DEBUG_MODE
-		Serial.println(F("SerialCommander::Setup : Invalid serial port, must be 1 to 4 !"));
+		Serial.println(F("SerialCommander::Setup : Invalid serial port, must be 0 to 3 !"));
 #else
 		return;
 #endif
@@ -24,25 +24,26 @@ void SerialCommander::Setup(unsigned long inSpeed, byte inSerialPort)
 	switch (inSerialPort)
 	{
 #ifndef NO_SERIALCOMMANDER_SERIAL
-	case 1: Serial.begin(inSpeed); break;
+	case 0: this->pSerial = &Serial; break;
 #endif
 #ifndef NO_SERIALCOMMANDER_SERIAL1
 #if defined(UBRR1H)
-	case 2: Serial1.begin(inSpeed); break;
+	case 1: this->pSerial = &Serial1; break;
 #endif
 #endif
 #ifndef NO_SERIALCOMMANDER_SERIAL2
 #if defined(UBRR2H)
-	case 3: Serial2.begin(inSpeed); break;
+	case 2: this->pSerial = &Serial2; break;
 #endif
 #endif
 #ifndef NO_SERIALCOMMANDER_SERIAL3
 #if defined(UBRR3H)
-	case 4: Serial3.begin(inSpeed); break;
+	case 3: this->pSerial = &Serial3; break;
 #endif
 #endif
 	}
-	this->serialPort = inSerialPort;
+
+	this->pSerial->begin(inSpeed);
 	this->addCounter = 0;
 }
 
@@ -54,54 +55,13 @@ CommanderEvent SerialCommander::Loop()
 
 	Commander::CommanderPriorityLoop();
 
-	int avail = 0;
-	switch (this->serialPort)
-	{
-#ifndef NO_SERIALCOMMANDER_SERIAL
-	case 1: avail = Serial.available(); break;
-#endif
-#ifndef NO_SERIALCOMMANDER_SERIAL1
-#if defined(UBRR1H)
-	case 2: avail = Serial1.available(); break;
-#endif
-#endif
-#ifndef NO_SERIALCOMMANDER_SERIAL2
-#if defined(UBRR2H)
-	case 3: avail = Serial2.available(); break;
-#endif
-#endif
-#ifndef NO_SERIALCOMMANDER_SERIAL3
-#if defined(UBRR3H)
-	case 4: avail = Serial3.available(); break;
-#endif
-#endif
-	}
+	int avail = this->pSerial->available();
 
 	if (avail > 0)
 	{
 		while (avail > 0)
 		{
-			switch (this->serialPort)
-			{
-#ifndef NO_SERIALCOMMANDER_SERIAL
-			case 1: character = Serial.read(); break;
-#endif
-#if defined(UBRR1H)
-#ifndef NO_SERIALCOMMANDER_SERIAL1
-			case 2: character = Serial1.read(); break;
-#endif
-#endif
-#if defined(UBRR2H)
-#ifndef NO_SERIALCOMMANDER_SERIAL2
-			case 3: character = Serial2.read(); break;
-#endif
-#endif
-#if defined(UBRR3H)
-#ifndef NO_SERIALCOMMANDER_SERIAL3
-			case 4: character = Serial3.read(); break;
-#endif
-#endif		
-			}
+			character = this->pSerial->read();
 
 			if ((int)character < 32 || (int)character > 60)
 			{
@@ -136,27 +96,7 @@ CommanderEvent SerialCommander::Loop()
 				found.dccAccessory = TextCommunicationHelper::DecodeIDAccessory(buffer);*/
 			}
 
-			switch (this->serialPort)
-			{
-#ifndef NO_SERIALCOMMANDER_SERIAL
-			case 1: avail = Serial.available(); break;
-#endif
-#ifndef NO_SERIALCOMMANDER_SERIAL1
-#if defined(UBRR1H)
-			case 2: avail = Serial1.available(); break;
-#endif
-#endif
-#ifndef NO_SERIALCOMMANDER_SERIAL2
-#if defined(UBRR2H)
-			case 3: avail = Serial2.available(); break;
-#endif
-#endif
-#ifndef NO_SERIALCOMMANDER_SERIAL3
-#if defined(UBRR3H)
-			case 4: avail = Serial3.available(); break;
-#endif
-#endif
-			}
+			avail = this->pSerial->available();
 		}
 	}
 	else

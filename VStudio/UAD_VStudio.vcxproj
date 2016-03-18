@@ -96,6 +96,7 @@
     <ClInclude Include="..\src\DccCommander.hpp" />
     <ClInclude Include="..\src\SerialCommander.hpp" />
     <ClInclude Include="ButtonsCommanderKeyboard.hpp" />
+    <ClInclude Include="Serial.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>

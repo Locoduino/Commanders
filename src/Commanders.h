@@ -90,14 +90,14 @@
 //#define NO_DCCCOMMANDER
 
 // Beware of this comander, which uses 150 bytes of dynamic memory for each serial channel open !
-#define NO_SERIALCOMMANDER
+//#define NO_SERIALCOMMANDER
 
 #ifndef NO_SERIALCOMMANDER
 // Just comment the serial line you want to use !
-#define NO_SERIALCOMMANDER_SERIAL
-#define NO_SERIALCOMMANDER_SERIAL1
-#define NO_SERIALCOMMANDER_SERIAL2
-#define NO_SERIALCOMMANDER_SERIAL3
+//#define NO_SERIALCOMMANDER_SERIAL
+//#define NO_SERIALCOMMANDER_SERIAL1
+//#define NO_SERIALCOMMANDER_SERIAL2
+//#define NO_SERIALCOMMANDER_SERIAL3
 #endif
 
 /////////////////////////////////////

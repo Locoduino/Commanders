@@ -8,6 +8,8 @@
 
 #ifdef VISUALSTUDIO
 #include "VStudio/Serial.hpp"
+#else
+#include <HardwareSerial.h>
 #endif
 
 //-------------------------------------------------------------------
@@ -15,7 +17,7 @@
 class SerialCommander : Commander
 {
 	private:
-		byte serialPort;
+		HardwareSerial *pSerial;
 		int addCounter;
 	
 	public:

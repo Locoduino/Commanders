@@ -23,6 +23,10 @@
  *
  */
 
+#include "Arduino.h"
+
+#ifndef _LIB_SAM_
+
 // Standard headers for AVR
 #include <avr/pgmspace.h>
 #include <avr/io.h>
@@ -31,7 +35,6 @@
 
 #define	ARDUINO2_MAIN
 
-#include "Arduino.h"
 #include "arduino2.hpp"
 
 
@@ -114,3 +117,4 @@ int GPIO_to_Arduino_pin(GPIO_pin_t inPin)
 #endif
 	return -1;
 }
+#endif

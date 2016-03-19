@@ -3,13 +3,6 @@
 #define __buttonsCommanderPush_H__
 //-------------------------------------------------------------------
 
-#define  GPIO2_PREFER_SPEED    1
-#ifdef VISUALSTUDIO
-	#include "../VStudio/arduino2.hpp"
-#else
-	#include "arduino2.hpp"
-#endif
-
 #include "Commanders.h"
 
 #ifdef DEBUG_MODE

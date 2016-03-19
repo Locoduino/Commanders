@@ -16,6 +16,7 @@
 #include "../VStudio/arduino2.hpp"
 #include "../VStudio/Serial.hpp"
 #else
+#include "arduino.h"
 #include "arduino2.hpp"
 #endif
 
@@ -42,7 +43,6 @@
 // See below the file names related to each exclusion:
 //
 //NO_SERIALCOMMANDER
-//	SerialCommander.cpp
 //	SerialCommander.hpp
 //
 //NO_DCCCOMMANDER
@@ -89,17 +89,6 @@
 //#define NO_BUTTONSCOMMANDERPOTENTIOMETER
 //#define NO_DCCCOMMANDER
 
-// Beware of this comander, which uses 150 bytes of dynamic memory for each serial channel open !
-#define NO_SERIALCOMMANDER
-
-#ifndef NO_SERIALCOMMANDER
-// Just comment the serial line you want to use !
-#define NO_SERIALCOMMANDER_SERIAL
-#define NO_SERIALCOMMANDER_SERIAL1
-#define NO_SERIALCOMMANDER_SERIAL2
-#define NO_SERIALCOMMANDER_SERIAL3
-#endif
-
 /////////////////////////////////////
 
 #include "Commander.hpp"
@@ -140,6 +129,8 @@ CommanderEvent Commanders_Loop();
 
 ////////////////////////////////////////////////
 // Macro area...
+
+// Buttons
 #define DECLARE_BUTTONS_COMMANDER		\
 			ButtonsCommander macro_buttons;
 
@@ -151,9 +142,7 @@ CommanderEvent Commanders_Loop();
 			Commanders_StartSetup(eventFct); \
 			macro_buttons.Setup();
 
-#define END_COMMANDER_SETUP \
-			Commanders_EndSetup();
-
+// Dcc
 #define DECLARE_DCC_COMMANDER(INTER)	\
 			const byte interrupt = INTER; \
 			DccCommander macro_dcc;
@@ -167,5 +156,23 @@ CommanderEvent Commanders_Loop();
 			Commanders_StartSetup(eventFct); \
 			macro_dcc.Setup(0x00, 0x00, interrupt); \
 			macro_dcc.SetStatusLedPin(13);
+
+// Serial
+#define DECLARE_SERIAL_COMMANDER(PORT, SPEED)	\
+			SERIAL_COMMANDER(PORT) \
+			const unsigned long speed = SPEED; \
+			SerialCommander macro_serial;
+
+#define START_SERIAL_COMMANDER_SETUP \
+			Commanders_StartSetup(); \
+			macro_serial.Setup(speed);
+
+#define START_SERIAL_COMMANDER_SETUPEVENT(eventFct) \
+			Commanders_StartSetup(eventFct); \
+			macro_serial.Setup(speed);
+
+// Common
+#define END_COMMANDER_SETUP \
+			Commanders_EndSetup();
 
 #define COMMANDER_LOOP	Commanders_Loop();

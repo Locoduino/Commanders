@@ -3,14 +3,7 @@
 #define __buttonsCommanderSwitch_H__
 //-------------------------------------------------------------------
 
-#ifdef VISUALSTUDIO
-#include "../VStudio/arduino2.hpp"
-#else
-#include "arduino2.hpp"
-#endif
 #include "Commanders.h"
-
-//-------------------------------------------------------------------
 
 //-------------------------------------------------------------------
 

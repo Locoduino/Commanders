@@ -1,3 +1,12 @@
+19/03/2016 V0.60
+	- Correction et améliorations du SerialCommander. Par macros, et compatible avec tous les types de serial class...
+	- Compatibilité ajoutée avec l'Arduino Due, mais sans bénéficier de l'accélération promise par l'accès direct aux ports.
+
+	- Fix of SerialCommander, to be able to use any kind of serial class, from the hardware serials of Arduinos, to 
+	  software emulations by AltSoftSerial or SoftwareSerial .
+	- Added Arduino Due compatibility, but by using the classic IDE functions to access the pins, not the fast direct 
+	  addressing of processor ports.
+
 18/03/2016 V0.50
 	- Nouveau nom 'Commanders' pour la bibliothèque. Les classes et les defines ont suivi le mouvement.
 	- Un moyen simple de programmer à l'aide de macros C a été ajouté.

@@ -95,6 +95,7 @@
     <ClInclude Include="..\src\Commanders.h" />
     <ClInclude Include="..\src\DccCommander.hpp" />
     <ClInclude Include="..\src\SerialCommander.hpp" />
+    <ClInclude Include="arduino.h" />
     <ClInclude Include="ButtonsCommanderKeyboard.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -111,7 +112,6 @@
     <ClCompile Include="..\src\Commander.cpp" />
     <ClCompile Include="..\src\Commanders.cpp" />
     <ClCompile Include="..\src\DccCommander.cpp" />
-    <ClCompile Include="..\src\SerialCommander.cpp" />
     <ClCompile Include="ButtonsCommanderKeyboard.cpp" />
     <ClCompile Include="VStudio.cpp" />
     <ClCompile Include="Arduino.cpp" />

@@ -3,16 +3,13 @@
 #define __dccCommander_H__
 //-------------------------------------------------------------------
 
-#define  GPIO2_PREFER_SPEED    1
+#include "Commanders.h"
+
 #ifdef VISUALSTUDIO
-#include "../VStudio/arduino2.hpp"
 #include "../VStudio/Dcc_Decoder.hpp"
 #else
-#include "arduino2.hpp"
 #include "DCC_Decoder.hpp"
 #endif
-
-#include "Commander.hpp"
 
 #ifndef NO_DCC
 #ifndef NO_COMMANDER

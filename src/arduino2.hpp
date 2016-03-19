@@ -24,6 +24,36 @@
 #ifndef ARDUINO2_H_
 #define ARDUINO2_H_
 
+#ifdef _LIB_SAM_
+// DUE version
+// The due is probably fast enough to access ports very efficiency (and i dont know how to make better !) .
+// So the functions are dummies, and conduct to original Arduino functions...
+
+typedef int GPIO_pin_t;
+static inline void pinMode2(uint8_t pin, uint8_t mode) { pinMode(pin, mode); }
+static inline void digitalWrite2(uint8_t pin, uint8_t value) { digitalWrite(pin, value); }
+static inline uint8_t digitalRead2(uint8_t pin) { return digitalRead(pin); }
+
+// New version of functions which take pin code (GPIO_pin_t) as input parameter
+static inline void pinMode2f(GPIO_pin_t pin, uint8_t mode ) { pinMode(pin, mode); }
+static inline uint8_t digitalRead2f(GPIO_pin_t pin) { return digitalRead(pin); }
+static inline void digitalWrite2f(GPIO_pin_t pin, uint8_t value)  { digitalWrite(pin, value); }
+
+static inline GPIO_pin_t Arduino_to_GPIO_pin(uint8_t pin) { return pin; }
+static inline int GPIO_to_Arduino_pin(GPIO_pin_t inPin) { return inPin; }
+
+#define DP_INVALID	0xFFFF
+#define DP0	0
+#define DP1	1
+#define DP2	2
+#define DP3	3
+#define DP4	4
+#define DP5	5
+#define DP6	6
+#define DP7	7
+
+#else
+
 // Standard headers for AVR
 #include <avr/pgmspace.h>
 #include <avr/io.h>
@@ -388,5 +418,5 @@ int GPIO_to_Arduino_pin(GPIO_pin_t inPin);
 #ifdef __cplusplus
 } // extern "C"
 #endif
-
+#endif
 #endif /* ARDUINO2_H_ */

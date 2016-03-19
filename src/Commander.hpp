@@ -3,13 +3,6 @@
 #define __commander_H__
 //-------------------------------------------------------------------
 
-#define  GPIO2_PREFER_SPEED    1
-#ifdef VISUALSTUDIO
-#include "../VStudio/arduino2.hpp"
-#else
-#include "arduino2.hpp"
-#endif
-
 enum COMMANDERS_EVENT_TYPE
 {
 	COMMANDERS_EVENT_NONE = 0,			// Should never appear

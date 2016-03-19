@@ -97,6 +97,7 @@
     <ClInclude Include="..\src\SerialCommander.hpp" />
     <ClInclude Include="arduino.h" />
     <ClInclude Include="ButtonsCommanderKeyboard.hpp" />
+    <ClInclude Include="Serial.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>

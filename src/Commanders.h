@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////
 // Add a '//' at the beginning of the line to be in 
 // release mode.
-#define DEBUG_MODE
+//#define DEBUG_MODE
 
 ///////////////////////////////////////////////////////
 // Verbose mode lets you see all actions done by the 
@@ -117,7 +117,6 @@
 #ifndef NO_SERIALCOMMANDER
 #include "SerialCommander.hpp"
 #endif
-
 #ifndef NO_BUTTONSCOMMANDER
 #include "ButtonsCommander.hpp"
 #endif

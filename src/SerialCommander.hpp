@@ -6,7 +6,7 @@
 #include "Commanders.h"
 
 #ifdef VISUALSTUDIO
-#include "VStudio/Serial.hpp"
+#include "../VStudio/Serial.hpp"
 #endif
 
 //-------------------------------------------------------------------

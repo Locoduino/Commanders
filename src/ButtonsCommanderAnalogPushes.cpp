@@ -40,13 +40,13 @@ ButtonsCommanderButton* ButtonsCommanderAnalogPushes::GetFromId(unsigned long in
 	return 0;
 }			 
 
-CommanderEvent ButtonsCommanderAnalogPushes::Loop()
+unsigned long ButtonsCommanderAnalogPushes::Loop()
 {
-	if (this->analogPin == 0)
-		return EmptyEvent;
+	unsigned long foundID = UNDEFINED_ID;
 
-	CommanderEvent haveChanged = EmptyEvent;
-	
+	if (this->analogPin == 0)
+		return foundID;
+
 	// read the state of the switch into a local variable:
 	int reading = analogRead(this->analogPin);
 
@@ -74,9 +74,9 @@ CommanderEvent ButtonsCommanderAnalogPushes::Loop()
 			for (int i = 0; i < this->size; i++)
 				if (this->pButtons[i].IsPushed(reading))
 				{
-					haveChanged.ID = this->pButtons[i].GetId();
-					haveChanged.Event = COMMANDERS_EVENT_SELECTED;
-					haveChanged.Data = 0;
+					foundID = this->pButtons[i].GetId();
+					eventType = COMMANDERS_EVENT_SELECTED;
+					eventData = 0;
 					Commander::RaiseEvent(this->pButtons[i].GetId(), COMMANDERS_EVENT_SELECTED, 0);
 #ifdef DEBUG_MODE
 					Serial.print(F("Analog push button "));
@@ -91,7 +91,7 @@ CommanderEvent ButtonsCommanderAnalogPushes::Loop()
 	// save the reading.  Next time through the loop,
 	// it'll be the lastButtonState:
 	lastButtonState = reading;
-	return haveChanged;
+	return foundID;
 }
 
 void ButtonsCommanderAnalogPushes::EndLoop()

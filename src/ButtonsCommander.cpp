@@ -73,7 +73,7 @@ void ButtonsCommander::RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEv
 
 static ButtonsCommanderButton *pCurrentLoopButton = 0;
 
-CommanderEvent ButtonsCommander::Loop()
+unsigned long ButtonsCommander::Loop()
 {
 	Commander::CommanderPriorityLoop();
 
@@ -84,30 +84,33 @@ CommanderEvent ButtonsCommander::Loop()
 		pCurrentLoopButton = this->pFirstButton;
 
 	if (pCurrentLoopButton == 0)
-		return EmptyEvent;
+		return UNDEFINED_ID;
 
-	CommanderEvent event = pCurrentLoopButton->Loop();
+	unsigned long ID = pCurrentLoopButton->Loop();
 
 #ifdef DEBUG_VERBOSE_MODE
 	Serial.print(F("ButtonsCommanderButton id:"));
-	Serial.print(pCurrentLoopButton->GetId(), DEC);
+	Serial.print(ID, DEC);
 	Serial.println(F(" checked !"));
 #endif
 
-	if (event.ID == UNDEFINED_ID)
-		return event;
+	if (ID == UNDEFINED_ID)
+		return UNDEFINED_ID;
 
 #ifdef DEBUG_MODE
 	Serial.print(F("ButtonsCommanderButton id:"));
-	Serial.print(event.ID, DEC);
+	Serial.print(ID, DEC);
 	Serial.println(F(" selected !"));
 #endif
 
 	pCurrentLoopButton->EndLoop();
 
-	this->pLastSelectedButton = this->GetFromId(event.ID);
+	this->pLastSelectedButton = this->GetFromId(ID);
 
-	return event;
+	Commanders_SetLastEventType(ButtonsCommanderButton::GetLastEventType());
+	Commanders_SetLastEventData(ButtonsCommanderButton::GetLastEventData());
+
+	return ID;
 }
 
 #endif

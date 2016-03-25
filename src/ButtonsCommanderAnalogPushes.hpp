@@ -50,7 +50,7 @@ public:
 	ButtonsCommanderAnalogPushes(byte inNumber);
 
 	void Setup(int inButtonPin, unsigned long *inpIds, int *inpButtonValues, int inTolerancy = 20);
-	CommanderEvent Loop();
+	unsigned long Loop();
 	void EndLoop();
 	ButtonsCommanderAnalogPushesItem *GetItem(byte inNumber) { return &(this->pButtons[inNumber]); }
 	ButtonsCommanderButton* GetFromId(unsigned long inId);

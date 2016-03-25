@@ -18,15 +18,29 @@
 			Serial.println(incomingByte, DEC); 
 	#define SERIAL_MACRO_DEBUG_EVENT \
 			Serial.print(F("Event "));\
-			Serial.print(found.ID, DEC);\
+			Serial.print(foundID, DEC);\
 			Serial.print(F(" / "));\
-			Serial.print((int)found.Event, DEC);\
+			Serial.print((int)foundEvent, DEC);\
 			Serial.print(F(" / "));\
-			Serial.println(found.Data, DEC);
+			Serial.println(foundData, DEC);
 #endif
 
 // SERIAL_PORT argument can be any of the available serials of the used card, but also any other
 // class implementing begin(), read() and available() functions, like in SoftwareSerial or AltSoftSerial !
+//
+// The accepted syntax is 
+// id separator event separator data
+// where id can be a number from 0 to 4 000 000 000,
+// where separator can be ',' , '-' , '|' or ';'
+// event can be any string of 9 characters long maximum, but must begin with
+//		's' or 'S' to select
+//		'a' or 'A' to make an absolute move, data is necessary in this case
+//		'r' or 'R' to make a relative move, data is necessary in this case
+// and where the data can be any number	between -32767 and 32768
+//
+// ex : 123 means ID 123 selected
+// ex : 456 | s means ID 456 selected
+// ex : 789 - a - 100  means ID 789 make an absolute movement to 100 .
 
 #define SERIAL_COMMANDER(SERIAL_PORT) \
 \
@@ -37,7 +51,7 @@ public:\
 \
 	inline void Setup(unsigned long inSpeed) { SERIAL_PORT.begin(inSpeed); }\
 \
-	inline CommanderEvent Loop() \
+	inline unsigned long Loop() \
 	{\
 		enum STEP\
 		{\
@@ -47,7 +61,9 @@ public:\
 			STEP_END\
 		};\
 \
-		CommanderEvent found = EmptyEvent;\
+		unsigned long foundID = UNDEFINED_ID;\
+		COMMANDERS_EVENT_TYPE foundEvent = COMMANDERS_EVENT_NONE; \
+		int foundData = 0; \
 \
 		Commander::CommanderPriorityLoop();\
 \
@@ -55,9 +71,10 @@ public:\
 		{\
 			char buffer[10];\
 			byte buffer_pos = 0;\
+			bool neg_sign = false;\
 			STEP step = STEP_ID;\
 \
-			found.ID = 0;		/* reset */ \
+			foundID = 0;		/* reset */ \
 			while (1)			/* loop until 'enter' is received */ \
 			{\
 				char incomingByte = SERIAL_PORT.read();\
@@ -78,13 +95,13 @@ public:\
 						break;\
 					case STEP_TYPE:\
 						if (buffer[0] == 's' || buffer[0] == 'S')\
-							found.Event = COMMANDERS_EVENT_SELECTED;\
+							foundEvent = COMMANDERS_EVENT_SELECTED;\
 						if (buffer[0] == 'a' || buffer[0] == 'A')\
-							found.Event = COMMANDERS_EVENT_ABSOLUTEMOVE;\
+							foundEvent = COMMANDERS_EVENT_ABSOLUTEMOVE;\
 						if (buffer[0] == 'r' || buffer[0] == 'R')\
-							found.Event = COMMANDERS_EVENT_RELATIVEMOVE;\
+							foundEvent = COMMANDERS_EVENT_RELATIVEMOVE;\
 						step = STEP_DATA;\
-						found.Data = 0;\
+						foundData = 0;\
 						break;\
 					case STEP_DATA:\
 						step = STEP_END;\
@@ -104,30 +121,41 @@ public:\
 				case STEP_ID:\
 					if (incomingByte < 48 || incomingByte > 57)\
 						break;\
-					found.ID *= 10;                    /* *10 => shift to left */ \
-					found.ID = ((incomingByte - 48) + found.ID);  /* 48 because of ASCII value (1 => 49 in ASCII) */ \
+					foundID *= 10;                    /* *10 => shift to left */ \
+					foundID = ((incomingByte - 48) + foundID);  /* 48 because of ASCII value (1 => 49 in ASCII) */ \
+					foundEvent = COMMANDERS_EVENT_SELECTED;/* If an ID has been used, use it as a selection */ \
+					foundData = 0; \
 					break;\
 				case STEP_TYPE:\
 					if (buffer_pos < 10)\
 						buffer[buffer_pos++] = incomingByte;\
 					break;\
 				case STEP_DATA:\
+					if (incomingByte == '-')\
+						neg_sign = true;\
 					if (incomingByte < 48 || incomingByte > 57)\
 						break;\
-					found.Data *= 10;                    /* *10 => shift to left */ \
-					found.Data = ((incomingByte - 48) + found.Data);  /* 48 because of ASCII value (1 => 49 in ASCII) */ \
+					foundData *= 10;                    /* *10 => shift to left */ \
+					foundData = ((incomingByte - 48) + foundData);  /* 48 because of ASCII value (1 => 49 in ASCII) */ \
 					break;\
 				default:\
 					break;\
 				}\
 			}\
 \
+\
+		if (neg_sign == true)\
+			foundData = -foundData;\
+ \
 		SERIAL_MACRO_DEBUG_EVENT \
 		}\
 \
-		if (found.ID != UNDEFINED_ID)\
-			Commander::RaiseEvent(found.ID, found.Event, found.Data);\
-		return found;\
+		if (foundID != UNDEFINED_ID)\
+			Commander::RaiseEvent(foundID, foundEvent, foundData);\
+		Commanders_SetLastEventType(foundEvent); \
+		Commanders_SetLastEventData(foundData); \
+\
+		return foundID;\
 	}\
 \
 };

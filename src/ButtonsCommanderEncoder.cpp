@@ -35,14 +35,14 @@ void ButtonsCommanderEncoder::Setup(int inPin1, int inPin2, int inMoveAccuracy)
 		this->moveAccuracy = 1;
 }
 
-CommanderEvent ButtonsCommanderEncoder::Loop()
+unsigned long ButtonsCommanderEncoder::Loop()
 {
 	int MSB = digitalRead2f(this->pin1); //MSB = most significant bit
 	int LSB = digitalRead2f(this->pin2); //LSB = least significant bit
 
 	int encoded = (MSB << 1) | LSB; //converting the 2 pin value to single number
 	if (encoded == 0)
-		return EmptyEvent;
+		return UNDEFINED_ID;
 	int sum = (lastEncoded << 2) | encoded; //adding it to the previous encoded value
 
 	if (sum == 13 || sum == 4 || sum == 2 || sum == 11) this->currentValue++;
@@ -55,6 +55,8 @@ CommanderEvent ButtonsCommanderEncoder::Loop()
 		this->currentValue = this->mini;
 
 	lastEncoded = encoded; //store this value for next time
+	eventType = COMMANDERS_EVENT_RELATIVEMOVE;
+	eventData = this->currentValue;
 	Commander::RaiseEvent(this->GetId(), COMMANDERS_EVENT_RELATIVEMOVE, this->currentValue);
-	return CommanderEvent(this->GetId(), COMMANDERS_EVENT_RELATIVEMOVE, this->currentValue);
+	return this->GetId();
 }

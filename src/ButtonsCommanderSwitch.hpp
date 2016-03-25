@@ -41,7 +41,7 @@ public:
 	
 	void Setup();
 	void AddId(unsigned long inId, int inPin);
-	CommanderEvent Loop();
+	unsigned long Loop();
 	inline unsigned long GetCurrentLoopId() const { return this->pId[this->IdState].Id; }
 };
 

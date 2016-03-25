@@ -49,19 +49,19 @@ void Commander::RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, in
 		Commander::EventHandler(inId, inEvent, inData);
 }
 
-CommanderEvent Commander::Loops()
+unsigned long Commander::Loops()
 {
 	Commander *pCurr = Commander::pFirstCommander;
 
 	while (pCurr != 0)
 	{
-		CommanderEvent ret = pCurr->Loop();
-		if (ret.ID != UNDEFINED_ID)
+		unsigned long ret = pCurr->Loop();
+		if (ret != UNDEFINED_ID)
 			return ret;
 		pCurr = pCurr->pNextCommander;
 	}
 
-	return EmptyEvent;
+	return UNDEFINED_ID;
 }
 
 #ifdef DEBUG_MODE

@@ -43,25 +43,25 @@ void setup()
 
 void loop()
 {
-	CommanderEvent event = BasicsCommanders_Loop();
+	unsigned long eventID = Commanders_Loop();
 
-	if (event.ID != UNDEFINED_ID)
+	if (eventID != UNDEFINED_ID)
 	{	
 		Serial.print(F("Commander id found : "));
-		Serial.print(event.ID, DEC);
+		Serial.print(eventID, DEC);
 		Serial.print(F(" / "));
 		
-		switch (event.Event)
+		switch (Commanders_GetLastEventType())
 		{
 		case COMMANDERS_EVENT_NONE:			Serial.println(F("NONE"));		break;
 		case COMMANDERS_EVENT_SELECTED:		Serial.println(F("SELECTED"));	break;
 		case COMMANDERS_EVENT_ABSOLUTEMOVE:	
 			Serial.print(F("ABSOLUTEMOVE : "));	
-			Serial.println(event.Data, DEC);
+			Serial.println(Commanders_GetLastEventData(), DEC);
 			break;
 		case COMMANDERS_EVENT_RELATIVEMOVE:	
 			Serial.print(F("RELATIVEMOVE : "));	
-			Serial.println(event.Data, DEC);
+			Serial.println(Commanders_GetLastEventData(), DEC);
 			break;
 		}
 	}

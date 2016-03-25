@@ -39,7 +39,7 @@ class ButtonsCommanderPush : public ButtonsCommanderButton
 
 	void Setup(int inButtonPin);
 	void AddId(unsigned long inId);
-	CommanderEvent Loop();
+	unsigned long Loop();
 
 	inline int GetPin() const { return GPIO_to_Arduino_pin(this->buttonPin); }
 	inline GPIO_pin_t GetPin2() const { return this->buttonPin; }
@@ -50,7 +50,7 @@ class ButtonsCommanderPush : public ButtonsCommanderButton
 };
 
 #define PUSH_BUTTON(name, pin, ID) \
-	ButtonsCommanderPush *name = new ButtonsCommanderPush(ID); \
+	ButtonsCommanderPush *name = new ButtonsCommanderPush((unsigned long) ID); \
 	name->Setup(pin); \
 	macro_buttons.Add(name);
 

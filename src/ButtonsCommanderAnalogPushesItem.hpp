@@ -18,4 +18,5 @@ class ButtonsCommanderAnalogPushesItem : public ButtonsCommanderButton
 
 //-------------------------------------------------------------------
 #endif
+
 //-------------------------------------------------------------------

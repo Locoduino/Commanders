@@ -125,7 +125,13 @@
 void Commanders_StartSetup(CommandersEventHandlerFunction func);
 void Commanders_StartSetup();
 void Commanders_EndSetup();
-CommanderEvent Commanders_Loop();
+unsigned long Commanders_Loop();
+
+COMMANDERS_EVENT_TYPE Commanders_GetLastEventType();
+int Commanders_GetLastEventData();
+
+void Commanders_SetLastEventType(COMMANDERS_EVENT_TYPE inEvent);
+void Commanders_SetLastEventData(int inEvent);
 
 ////////////////////////////////////////////////
 // Macro area...

@@ -30,7 +30,7 @@ void CommandersEventHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, i
 
 void setup()
 {
-	START_BUTTONS_COMMANDER_SETUP(CommandersEventHandler);
+	START_BUTTONS_COMMANDER_SETUPEVENT(CommandersEventHandler);
 
 	PUSH_BUTTON(pLeft, 20UL, 30);
 	PUSH_BUTTON(pDc, 21UL, 34);

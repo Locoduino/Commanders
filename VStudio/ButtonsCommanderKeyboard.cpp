@@ -15,11 +15,11 @@ ButtonsCommanderKeyboard::ButtonsCommanderKeyboard(unsigned long inId) : Buttons
 	this->key = 0;
 }
 
-CommanderEvent ButtonsCommanderKeyboard::Loop()
+unsigned long ButtonsCommanderKeyboard::Loop()
 {
 	//this->UnselectLastLoop();
 	if (this->key == 0)
-		return EmptyEvent;
+		return UNDEFINED_ID;
 
 	if (lastLoopKey == this->key)
 	{
@@ -34,11 +34,12 @@ CommanderEvent ButtonsCommanderKeyboard::Loop()
 		Serial.println(F(" pressed "));
 #endif
 		Commander::RaiseEvent(this->GetId(), COMMANDERS_EVENT_SELECTED, 0);
-		CommanderEvent ret(this->GetId(), COMMANDERS_EVENT_SELECTED, 0);
-		return ret;
+		eventType = COMMANDERS_EVENT_SELECTED;
+		eventData = 0;
+		return this->GetId();
 	}
 
-	return EmptyEvent;
+	return UNDEFINED_ID;
 }
 
 void ButtonsCommanderKeyboard::EndLoop()

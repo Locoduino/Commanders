@@ -27,7 +27,7 @@ class ButtonsCommander : Commander
 		void RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData);
 
 	public:
-		CommanderEvent Loop();
+		unsigned long Loop();
 };
 
 //-------------------------------------------------------------------

@@ -22,8 +22,13 @@ class ButtonsCommanderPotentiometer : public ButtonsCommanderButton
 	inline int GetPosition() const { return this->currentValue; }
 
 	void Setup(int inPin, int inMoveAccuracy = 1);
-	CommanderEvent Loop();
+	unsigned long Loop();
 };
+
+#define POTENTIOMETER(name, pin, ID, min, max) \
+	ButtonsCommanderPotentiometer *name = new ButtonsCommanderPotentiometer(ID, min, max); \
+	name->Setup(pin); \
+	macro_buttons.Add(name);
 
 //-------------------------------------------------------------------
 #endif

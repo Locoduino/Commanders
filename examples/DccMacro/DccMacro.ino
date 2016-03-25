@@ -38,7 +38,7 @@ void CommandersEventHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, i
 
 void setup()
 {
-	START_DCC_COMMANDER_SETUP(CommandersEventHandler);
+	START_DCC_COMMANDER_SETUPEVENT(CommandersEventHandler);
 
 	END_COMMANDER_SETUP;
 }

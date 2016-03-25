@@ -38,7 +38,7 @@ class DccCommander : Commander
 		void Setup(int i, int j, int k, boolean inUseRawDccAddresses = false);
 		void SetStatusLedPin(int inPin);
 		void PriorityLoop();
-		CommanderEvent Loop();
+		unsigned long Loop();
 		static void SetAccessoryDecoderPacketHandler(DccAccDecoderPacket func);
 		static void DccAccessoryDecoderPacket(int address, boolean activate, byte data);
 

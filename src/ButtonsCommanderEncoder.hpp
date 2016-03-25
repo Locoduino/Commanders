@@ -29,7 +29,7 @@ public:
 	inline int GetPosition() const { return this->currentValue; }
 
 	void Setup(int inPin1, int inPin2, int inMoveAccuracy = 1);
-	CommanderEvent Loop();
+	unsigned long Loop();
 };
 
 #define ENCODER_BUTTON(name, pin1, pin2, ID, start, min, max) \

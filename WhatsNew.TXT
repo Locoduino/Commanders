@@ -1,3 +1,8 @@
+25/03/2016 V0.61
+	- Correction de problèmes de consommation mémoire.
+
+	- Fix memory Consumption in events.
+
 19/03/2016 V0.60
 	- Correction et améliorations du SerialCommander. Par macros, et compatible avec tous les types de serial class...
 	- Compatibilité ajoutée avec l'Arduino Due, mais sans bénéficier de l'accélération promise par l'accès direct aux ports.

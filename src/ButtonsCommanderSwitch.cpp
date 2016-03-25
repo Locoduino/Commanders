@@ -54,14 +54,14 @@ void ButtonsCommanderSwitch::AddId(unsigned long inId, int inPin)
 	pinMode2f(this->pId[this->IdAddCounter].Pin, INPUT_PULLUP);
 }
 
-CommanderEvent ButtonsCommanderSwitch::Loop()
+unsigned long ButtonsCommanderSwitch::Loop()
 {
 	if (this->IdLoopCounter >= this->IdAddCounter)
 		this->IdLoopCounter = 0;
 
 	IdPin *id = &(this->pId[this->IdLoopCounter++]);
 	if (id->Pin == DP_INVALID)
-		return EmptyEvent;
+		return UNDEFINED_ID;
 
 	// read the state of the switch into a local variable:
 	int reading = digitalRead2f(id->Pin);
@@ -77,7 +77,7 @@ CommanderEvent ButtonsCommanderSwitch::Loop()
 		id->lastDebounceTime = millis();
 	}
 
-	CommanderEvent haveFound = EmptyEvent;
+	unsigned long haveFound = UNDEFINED_ID;
 
 	if (id->lastDebounceTime > 0 && (millis() - id->lastDebounceTime) > this->debounceDelay)
 	{
@@ -93,9 +93,9 @@ CommanderEvent ButtonsCommanderSwitch::Loop()
 			if (id->buttonState == HIGH)
 			{
 				this->IdState = this->IdLoopCounter-1;
-				haveFound.ID = id->Id;
-				haveFound.Event = COMMANDERS_EVENT_SELECTED;
-				haveFound.Data = 0;
+				haveFound = id->Id;
+				eventType = COMMANDERS_EVENT_SELECTED;
+				eventData = 0;
 				Commander::RaiseEvent(id->Id, COMMANDERS_EVENT_SELECTED, 0);
 			}
 		}

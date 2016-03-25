@@ -107,7 +107,7 @@ static unsigned long start = 0;
 
 #define ELAPSEDTIME	((unsigned long) -2)
 
-CommanderEvent DccCommander::Loop()
+unsigned long DccCommander::Loop()
 {
 	if (start == 0)
 		start = millis();
@@ -131,10 +131,12 @@ CommanderEvent DccCommander::Loop()
 		start = 0;
 		unsigned long last = LastDccId;
 		LastDccId = UNDEFINED_ID;
-		return CommanderEvent(last, COMMANDERS_EVENT_SELECTED, 0);
+		Commanders_SetLastEventType(COMMANDERS_EVENT_SELECTED);
+		Commanders_SetLastEventData(0);
+		return last;
 	}
 
-	return EmptyEvent;
+	return UNDEFINED_ID;
 }
 
 DccAccDecoderPacket DccCommander::func_AccPacket = NULL;

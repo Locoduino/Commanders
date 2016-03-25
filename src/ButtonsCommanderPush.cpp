@@ -53,13 +53,13 @@ void ButtonsCommanderPush::AddId(unsigned long inId)
 	this->pId[this->IdAddCounter++] = inId;
 }
 
-CommanderEvent ButtonsCommanderPush::Loop()
+unsigned long ButtonsCommanderPush::Loop()
 {
-	if (this->buttonPin == DP_INVALID)
-		return EmptyEvent;
+	unsigned long foundID = UNDEFINED_ID;
 
-	CommanderEvent haveChanged = EmptyEvent;
-	
+	if (this->buttonPin == DP_INVALID)
+		return foundID;
+
 	// read the state of the switch into a local variable:
 	int reading = digitalRead2f(this->buttonPin);
 
@@ -87,9 +87,9 @@ CommanderEvent ButtonsCommanderPush::Loop()
 			// only toggle the state if the new button state is LOW
 			if (this->buttonState == LOW)
 			{
-				haveChanged.ID = this->GetCurrentLoopId();
-				haveChanged.Event = COMMANDERS_EVENT_SELECTED;
-				haveChanged.Data = 0;
+				foundID = this->GetCurrentLoopId();
+				eventType = COMMANDERS_EVENT_SELECTED;
+				eventData = 0;
 				Commander::RaiseEvent(this->GetCurrentLoopId(), COMMANDERS_EVENT_SELECTED, 0);
 				this->IdLoopCounter++;
 				if (this->IdLoopCounter >= this->IdAddCounter)
@@ -107,5 +107,5 @@ CommanderEvent ButtonsCommanderPush::Loop()
 	// save the reading.  Next time through the loop,
 	// it'll be the lastButtonState:
 	lastButtonState = reading;
-	return haveChanged;
+	return foundID;
 }

@@ -6,7 +6,8 @@ description: <Base functions of the library>
 
 #include "Commanders.h"
 
-const CommanderEvent EmptyEvent = CommanderEvent(UNDEFINED_ID, COMMANDERS_EVENT_NONE, 0);
+static COMMANDERS_EVENT_TYPE lastEventType;
+static int lastEventData;
 
 void Commanders_StartSetup()
 {
@@ -14,7 +15,7 @@ void Commanders_StartSetup()
 	Serial.begin(115200);
 
 	Serial.println(F(""));
-	Serial.println(F("Commanders V0.50."));
+	Serial.println(F("Commanders V0.61."));
 	Serial.println(F("Developed by Thierry Paris."));
 	Serial.println(F(""));
 
@@ -41,8 +42,31 @@ void Commanders_EndSetup()
 #endif
 }
 
-CommanderEvent Commanders_Loop()
+unsigned long Commanders_Loop()
 {
 	return Commander::Loops();
 }
+
+COMMANDERS_EVENT_TYPE Commanders_GetLastEventType()
+{
+	return lastEventType;
+}
+
+int Commanders_GetLastEventData()
+{
+	return lastEventData;
+}
+
+void Commanders_SetLastEventType(COMMANDERS_EVENT_TYPE inType)
+{
+	lastEventType = inType;
+	lastEventData = 0;
+}
+
+void Commanders_SetLastEventData(int inData)
+{
+	lastEventData = inData;
+}
+
+
 

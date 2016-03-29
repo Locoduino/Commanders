@@ -59,7 +59,7 @@ public:
 };
 
 #define ANALOGPUSH_BUTTON(name, pin, number, IDS, values) \
-	ButtonsCommanderAnalogPushes *name = new ButtonsCommanderPush(number); \
+	ButtonsCommanderAnalogPushes *name = new ButtonsCommanderAnalogPushes(number); \
 	name->Setup(pin, IDS, values); \
 	macro_buttons.Add(name);
 

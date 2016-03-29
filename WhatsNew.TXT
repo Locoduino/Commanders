@@ -1,3 +1,14 @@
+29/03/2016 V0.62
+	- Changement de syntaxe des macros générales avec COMMANDERS au lieu de COMMANDER
+	- Suppression de point-virgules à la fin des macros.
+	- DCCACCESSORY devient DCCACTIVATION
+	- Correction de la macro ANALOGPUSH_BUTTON .
+
+	- Name change of global macros from COMMANDER to COMMANDERS
+	- Semi-colon removed at the end of macros.
+	- DCCACCESSORY changed to DCCACTIVATION
+	- Fix ANALOGPUSH_BUTTON macro.
+
 25/03/2016 V0.61
 	- Correction de problèmes de consommation mémoire.
 

@@ -22,7 +22,7 @@ void CommandersEventHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, i
 	Serial.print(F("Commander event : Address : "));
 	Serial.print(DCCID(inId), DEC);
 	Serial.print(F(" / "));
-	Serial.print(DCCACCESSORY(inId), DEC);
+	Serial.print(DCCACTIVATION(inId), DEC);
 	Serial.print(F(" / "));
 	switch (inEvent)
 	{

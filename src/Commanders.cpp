@@ -15,7 +15,7 @@ void Commanders_StartSetup()
 	Serial.begin(115200);
 
 	Serial.println(F(""));
-	Serial.println(F("Commanders V0.61."));
+	Serial.println(F("Commanders V0.62."));
 	Serial.println(F("Developed by Thierry Paris."));
 	Serial.println(F(""));
 

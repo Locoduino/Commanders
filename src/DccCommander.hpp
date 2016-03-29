@@ -20,7 +20,7 @@ typedef void(*DccAccDecoderPacket)(int address, boolean activate, byte data);
 
 // A dcc id is a long int with accessory id * 10000 + dcc id .
 #define DCCID(id)			((id) % 10000)
-#define DCCACCESSORY(id)	((byte)((id) / 10000))
+#define DCCACTIVATION(id)	((byte)((id) / 10000))
 #define DCCINT(id, acc)		((acc) * 10000UL + (id))
 
 class DccCommander : Commander

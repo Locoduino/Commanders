@@ -6,7 +6,7 @@ description: <Demo sample by macros>
 
 #include "Commanders.h"
 
-DECLARE_BUTTONS_COMMANDER
+DECLARE_BUTTONS_COMMANDER;
 
 void CommandersEventHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
 {
@@ -38,10 +38,10 @@ void setup()
 	PUSH_BUTTON(pEPS, 23UL, 36);
 	PUSH_BUTTON(pTJD, 24UL, 38);
 
-	END_COMMANDER_SETUP;
+	END_COMMANDERS_SETUP;
 }
 
 void loop()
 {
-	COMMANDER_LOOP;
+	COMMANDERS_LOOP;
 }

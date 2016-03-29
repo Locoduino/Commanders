@@ -6,7 +6,7 @@ description: <Demo Serial sample by macros>
 
 #include "Commanders.h"
 
-DECLARE_SERIAL_COMMANDER(Serial, 115200)
+DECLARE_SERIAL_COMMANDER(Serial, 115200);
 
 void CommandersEventHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
 {
@@ -32,10 +32,10 @@ void setup()
 {
 	START_SERIAL_COMMANDER_SETUPEVENT(CommandersEventHandler);
 
-	END_COMMANDER_SETUP;
+	END_COMMANDERS_SETUP;
 }
 
 void loop()
 {
-	COMMANDER_LOOP;
+	COMMANDERS_LOOP;
 }

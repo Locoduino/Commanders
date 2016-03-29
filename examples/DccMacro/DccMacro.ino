@@ -19,7 +19,7 @@ void CommandersEventHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, i
 	Serial.print(F("Commander event : Address : "));
 	Serial.print(DCCID(inId), DEC);
 	Serial.print(F(" / "));
-	Serial.print(DCCACCESSORY(inId), DEC);
+	Serial.print(DCCACTIVATION(inId), DEC);
 	Serial.print(F(" / "));
 	switch (inEvent)
 	{
@@ -40,10 +40,10 @@ void setup()
 {
 	START_DCC_COMMANDER_SETUPEVENT(CommandersEventHandler);
 
-	END_COMMANDER_SETUP;
+	END_COMMANDERS_SETUP;
 }
 
 void loop()
 {
-	COMMANDER_LOOP;
+	COMMANDERS_LOOP;
 }

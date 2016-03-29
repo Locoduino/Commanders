@@ -23,6 +23,10 @@
 			Serial.print((int)foundEvent, DEC);\
 			Serial.print(F(" / "));\
 			Serial.println(foundData, DEC);
+#else
+	#define SERIAL_MACRO_DEBUG_SEPARATOR
+	#define SERIAL_MACRO_DEBUG_READ
+	#define SERIAL_MACRO_DEBUG_EVENT
 #endif
 
 // SERIAL_PORT argument can be any of the available serials of the used card, but also any other

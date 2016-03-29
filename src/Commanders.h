@@ -137,30 +137,30 @@ void Commanders_SetLastEventData(int inEvent);
 
 // Buttons
 #define DECLARE_BUTTONS_COMMANDER		\
-			ButtonsCommander macro_buttons;
+			ButtonsCommander macro_buttons
 
 #define START_BUTTONS_COMMANDER_SETUP \
 			Commanders_StartSetup(); \
-			macro_buttons.Setup();
+			macro_buttons.Setup()
 
 #define START_BUTTONS_COMMANDER_SETUPEVENT(eventFct) \
 			Commanders_StartSetup(eventFct); \
-			macro_buttons.Setup();
+			macro_buttons.Setup()
 
 // Dcc
 #define DECLARE_DCC_COMMANDER(INTER)	\
 			const byte interrupt = INTER; \
-			DccCommander macro_dcc;
+			DccCommander macro_dcc
 
 #define START_DCC_COMMANDER_SETUP \
 			Commanders_StartSetup(); \
 			macro_dcc.Setup(0x00, 0x00, interrupt); \
-			macro_dcc.SetStatusLedPin(13);
+			macro_dcc.SetStatusLedPin(13)
 
 #define START_DCC_COMMANDER_SETUPEVENT(eventFct) \
 			Commanders_StartSetup(eventFct); \
 			macro_dcc.Setup(0x00, 0x00, interrupt); \
-			macro_dcc.SetStatusLedPin(13);
+			macro_dcc.SetStatusLedPin(13)
 
 // Serial
 #define DECLARE_SERIAL_COMMANDER(PORT, SPEED)	\
@@ -170,14 +170,12 @@ void Commanders_SetLastEventData(int inEvent);
 
 #define START_SERIAL_COMMANDER_SETUP \
 			Commanders_StartSetup(); \
-			macro_serial.Setup(speed);
+			macro_serial.Setup(speed)
 
 #define START_SERIAL_COMMANDER_SETUPEVENT(eventFct) \
 			Commanders_StartSetup(eventFct); \
-			macro_serial.Setup(speed);
+			macro_serial.Setup(speed)
 
 // Common
-#define END_COMMANDER_SETUP \
-			Commanders_EndSetup();
-
-#define COMMANDER_LOOP	Commanders_Loop();
+#define END_COMMANDERS_SETUP 	Commanders_EndSetup()
+#define COMMANDERS_LOOP			Commanders_Loop()

@@ -1,3 +1,8 @@
+30/03/2016 V0.63
+	- Correction de la compilation de ButtonsCommanderButton
+
+	- Fix compiling of ButtonsCommanderButton
+
 29/03/2016 V0.62
 	- Changement de syntaxe des macros générales avec COMMANDERS au lieu de COMMANDER
 	- Suppression de point-virgules à la fin des macros.

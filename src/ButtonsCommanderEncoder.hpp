@@ -15,7 +15,6 @@ class ButtonsCommanderEncoder : public ButtonsCommanderButton
 	int currentValue;
 	GPIO_pin_t pin1;
 	GPIO_pin_t pin2;
-	int moveAccuracy;
 	int mini, maxi;
 	int lastEncoded;
 
@@ -23,16 +22,21 @@ public:
 	ButtonsCommanderPush *pPush;
 	
  public:
-	ButtonsCommanderEncoder(unsigned long inId, int inStartingCurrentValue, int inMinimum, int inMaximum, bool inAssociatedPushButton = false);
+	ButtonsCommanderEncoder(unsigned long inId, int inStartingCurrentValue = 0, int inMinimum = 0, int inMaximum = 0, bool inAssociatedPushButton = false);
 
 	inline bool IsAnalog() const { return false; }
 	inline int GetPosition() const { return this->currentValue; }
 
-	void Setup(int inPin1, int inPin2, int inMoveAccuracy = 1);
+	void Setup(int inPin1, int inPin2);
 	unsigned long Loop();
 };
 
-#define ENCODER_BUTTON(name, pin1, pin2, ID, start, min, max) \
+#define ENCODER_BUTTON(name, pin1, pin2, ID) \
+	ButtonsCommanderEncoder *name = new ButtonsCommanderEncoder(ID); \
+	name->Setup(pin1, pin2); \
+	macro_buttons.Add(name);
+
+#define ENCODER_BUTTON_VALUE(name, pin1, pin2, ID, start, min, max) \
 	ButtonsCommanderEncoder *name = new ButtonsCommanderEncoder(ID, start, min, max); \
 	name->Setup(pin1, pin2); \
 	macro_buttons.Add(name);

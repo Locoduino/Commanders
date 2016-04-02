@@ -44,7 +44,7 @@
 //
 // ex : 123 means ID 123 selected
 // ex : 456 | s means ID 456 selected
-// ex : 789 - a - 100  means ID 789 make an absolute movement to 100 .
+// ex : 789 , A , 100  means ID 789 make an absolute movement to 100 .
 
 #define SERIAL_COMMANDER(SERIAL_PORT) \
 \
@@ -73,8 +73,6 @@ public:\
 \
 		if (SERIAL_PORT.available() > 0)\
 		{\
-			char buffer[10];\
-			byte buffer_pos = 0;\
 			bool neg_sign = false;\
 			STEP step = STEP_ID;\
 \
@@ -84,34 +82,18 @@ public:\
 				char incomingByte = SERIAL_PORT.read();\
 \
 				if (incomingByte == '\n') break;   /* exit the while(1) : data OK */ \
+				if (incomingByte == ' ') continue;   /* spaces dont matter */ \
 				if (incomingByte == (char)-1) continue;  /* loop if empty buffer */ \
 \
-				if (incomingByte == ',' || incomingByte == ';' || incomingByte == '/' || incomingByte == '-')\
+				if (incomingByte == ',' || incomingByte == ';' || incomingByte == '/' || incomingByte == ':')\
 				{\
 					SERIAL_MACRO_DEBUG_SEPARATOR \
 					switch (step)\
 					{\
-					case STEP_ID:\
-						step = STEP_TYPE;\
-						for (int i = 0; i < 10; i++)\
-							buffer[i] = 0;\
-						buffer_pos = 0;\
-						break;\
-					case STEP_TYPE:\
-						if (buffer[0] == 's' || buffer[0] == 'S')\
-							foundEvent = COMMANDERS_EVENT_SELECTED;\
-						if (buffer[0] == 'a' || buffer[0] == 'A')\
-							foundEvent = COMMANDERS_EVENT_ABSOLUTEMOVE;\
-						if (buffer[0] == 'r' || buffer[0] == 'R')\
-							foundEvent = COMMANDERS_EVENT_RELATIVEMOVE;\
-						step = STEP_DATA;\
-						foundData = 0;\
-						break;\
-					case STEP_DATA:\
-						step = STEP_END;\
-						break;\
-					default:\
-						break;\
+					case STEP_ID:	step = STEP_TYPE;		break;\
+					case STEP_TYPE:	step = STEP_DATA;	foundData = 0;	break;\
+					case STEP_DATA:	step = STEP_END;		break;\
+					default:								break;\
 					}\
 \
 					continue;\
@@ -123,22 +105,22 @@ public:\
 				switch (step)\
 				{\
 				case STEP_ID:\
-					if (incomingByte < 48 || incomingByte > 57)\
-						break;\
+					if (incomingByte < 48 || incomingByte > 57) 	break;\
 					foundID *= 10;                    /* *10 => shift to left */ \
 					foundID = ((incomingByte - 48) + foundID);  /* 48 because of ASCII value (1 => 49 in ASCII) */ \
-					foundEvent = COMMANDERS_EVENT_SELECTED;/* If an ID has been used, use it as a selection */ \
 					foundData = 0; \
 					break;\
-				case STEP_TYPE:\
-					if (buffer_pos < 10)\
-						buffer[buffer_pos++] = incomingByte;\
+				case STEP_TYPE: \
+					if (foundEvent == COMMANDERS_EVENT_NONE) \
+					{\
+						if (incomingByte == 's' || incomingByte == 'S')		foundEvent = COMMANDERS_EVENT_SELECTED;\
+						if (incomingByte == 'a' || incomingByte == 'A')		foundEvent = COMMANDERS_EVENT_ABSOLUTEMOVE;\
+						if (incomingByte == 'r' || incomingByte == 'R')		foundEvent = COMMANDERS_EVENT_RELATIVEMOVE;\
+					}\
 					break;\
 				case STEP_DATA:\
-					if (incomingByte == '-')\
-						neg_sign = true;\
-					if (incomingByte < 48 || incomingByte > 57)\
-						break;\
+					if (incomingByte == '-') neg_sign = true; \
+					if (incomingByte < 48 || incomingByte > 57)	break;\
 					foundData *= 10;                    /* *10 => shift to left */ \
 					foundData = ((incomingByte - 48) + foundData);  /* 48 because of ASCII value (1 => 49 in ASCII) */ \
 					break;\
@@ -147,15 +129,17 @@ public:\
 				}\
 			}\
 \
+			if (foundID != 0)\
+			{\
+				if (foundEvent == COMMANDERS_EVENT_NONE)	foundEvent = COMMANDERS_EVENT_SELECTED; \
 \
-		if (neg_sign == true)\
-			foundData = -foundData;\
- \
-		SERIAL_MACRO_DEBUG_EVENT \
+				if (neg_sign == true)	foundData = -foundData;\
+			}\
+\
+			SERIAL_MACRO_DEBUG_EVENT \
 		}\
 \
-		if (foundID != UNDEFINED_ID)\
-			Commander::RaiseEvent(foundID, foundEvent, foundData);\
+		if (foundID != UNDEFINED_ID)	Commander::RaiseEvent(foundID, foundEvent, foundData);\
 		Commanders_SetLastEventType(foundEvent); \
 		Commanders_SetLastEventData(foundData); \
 \

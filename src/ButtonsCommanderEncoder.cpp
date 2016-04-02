@@ -1,7 +1,7 @@
 /*************************************************************
-project: <Universal Accessory Decoder>
+project: <Commanders>
 author: <Thierry PARIS>
-description: <Encoder returning a current value.>
+description: <Encoder returning a current value, or a moving direction.>
 *************************************************************/
 
 #include "ButtonsCommanderEncoder.hpp"
@@ -22,17 +22,15 @@ ButtonsCommanderEncoder::ButtonsCommanderEncoder(unsigned long inId, int inStart
 	}
 }
 
-void ButtonsCommanderEncoder::Setup(int inPin1, int inPin2, int inMoveAccuracy)
+void ButtonsCommanderEncoder::Setup(int inPin1, int inPin2)
 {
 	this->pin1 = Arduino_to_GPIO_pin(inPin1);
 	this->pin2 = Arduino_to_GPIO_pin(inPin2);
 	pinMode2f(this->pin1, INPUT);
 	pinMode2f(this->pin2, INPUT);
 	digitalWrite2f(this->pin1, HIGH); //turn pullup resistor on
-	digitalWrite2f(this->pin2, HIGH); //turn pullup resistor on	this->moveAccuracy = inMoveAccuracy - 1;
+	digitalWrite2f(this->pin2, HIGH); //turn pullup resistor on
 	this->lastEncoded = 0;
-	if (this->moveAccuracy <= 0)
-		this->moveAccuracy = 1;
 }
 
 unsigned long ButtonsCommanderEncoder::Loop()
@@ -45,18 +43,31 @@ unsigned long ButtonsCommanderEncoder::Loop()
 		return UNDEFINED_ID;
 	int sum = (lastEncoded << 2) | encoded; //adding it to the previous encoded value
 
-	if (sum == 13 || sum == 4 || sum == 2 || sum == 11) this->currentValue++;
-	if (sum == 14 || sum == 7 || sum == 1 || sum ==  8) this->currentValue--;
+	char inc = 0;
+	if (sum == 13 || sum == 4 || sum == 2 || sum == 11) inc = 1;
+	if (sum == 14 || sum == 7 || sum == 1 || sum ==  8) inc = -1;
 	
-	if (this->currentValue > this->maxi)
-		this->currentValue = this->maxi;
-
-	if (this->currentValue < this->mini)
-		this->currentValue = this->mini;
-
 	lastEncoded = encoded; //store this value for next time
 	eventType = COMMANDERS_EVENT_RELATIVEMOVE;
-	eventData = this->currentValue;
-	Commander::RaiseEvent(this->GetId(), COMMANDERS_EVENT_RELATIVEMOVE, this->currentValue);
+
+	if (this->mini != this->maxi)
+	{
+		// If the encoder has been defined with a mini/maxi interval,
+		// move the value and return it !
+		this->currentValue += inc;
+
+		if (this->currentValue > this->maxi)
+			this->currentValue = this->maxi;
+
+		if (this->currentValue < this->mini)
+			this->currentValue = this->mini;
+
+		eventData = this->currentValue;
+	}
+	else
+		// if no interval defined, just return the move direction.
+		eventData = inc;
+
+	Commander::RaiseEvent(this->GetId(), COMMANDERS_EVENT_RELATIVEMOVE, eventData);
 	return this->GetId();
 }

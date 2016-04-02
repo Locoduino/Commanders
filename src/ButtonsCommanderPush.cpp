@@ -8,40 +8,47 @@ description: <Push button with debounce.>
 
 ButtonsCommanderPush ButtonsCommanderPush::Empty = ButtonsCommanderPush(UNDEFINED_ID);
 
-ButtonsCommanderPush::ButtonsCommanderPush(byte inIdNumber) : ButtonsCommanderButton(UNDEFINED_ID)
+ButtonsCommanderPush::ButtonsCommanderPush() : ButtonsCommanderButton(UNDEFINED_ID)
 {
 	this->buttonPin = (GPIO_pin_t)DP_INVALID;
 	this->lastButtonState = LOW;
-	this->IdSize = inIdNumber;
-	this->pId = new unsigned long[this->IdSize];
 	this->IdAddCounter = 0;
 	this->IdLoopCounter = 0;
-
+	this->IdSize = 0;
+	this->pId = NULL;
 	this->lastDebounceTime = 0;
 	this->debounceDelay = 50;
 }
 
-ButtonsCommanderPush::ButtonsCommanderPush(unsigned long inId) : ButtonsCommanderPush((byte)1)
+ButtonsCommanderPush::ButtonsCommanderPush(unsigned long inId) : ButtonsCommanderPush()
 {
+	this->IdSize = 1;
+	this->pId = new unsigned long[1];
+
 	this->AddId(inId);
 }
 
-void ButtonsCommanderPush::Setup(int inButtonPin)
+void ButtonsCommanderPush::Setup(int inButtonPin, byte inIdNumber)
 {	
 	//CHECKPIN(inButtonPin, "ButtonsCommanderPush::Setup");
 
+#ifdef DEBUG_MODE
+	if (this->IdSize > 0)
+	{
+		Serial.println(F("ButtonsCommanderPush::Setup : the constructor has already defined only 1 ID !"));
+		return;
+	}
+#endif
 	this->buttonPin = Arduino_to_GPIO_pin(inButtonPin);
 
 	pinMode2f(this->buttonPin, INPUT_PULLUP);
+	this->IdSize = inIdNumber;
+	this->pId = new unsigned long[inIdNumber];
 }
 
 // Returns the index of the new added position.
 void ButtonsCommanderPush::AddId(unsigned long inId)
 {
-#ifdef DEBUG_MODE
-	//Accessory::CHECKDCC(inDccId, inDccIdAccessory, "Accessory constructor");
-#endif
-
 #ifdef DEBUG_MODE
 	if (this->IdAddCounter == this->IdSize)
 	{

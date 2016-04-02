@@ -34,10 +34,10 @@ class ButtonsCommanderPush : public ButtonsCommanderButton
 	unsigned long *pId;
 
  public:
-	ButtonsCommanderPush(byte inIdNumber = 1);
+	ButtonsCommanderPush();
 	ButtonsCommanderPush(unsigned long inId);
 
-	void Setup(int inButtonPin);
+	void Setup(int inButtonPin, byte inIdNumber = 1);
 	void AddId(unsigned long inId);
 	unsigned long Loop();
 
@@ -50,8 +50,13 @@ class ButtonsCommanderPush : public ButtonsCommanderButton
 };
 
 #define PUSH_BUTTON(name, pin, ID) \
-	ButtonsCommanderPush *name = new ButtonsCommanderPush((unsigned long) ID); \
+	ButtonsCommanderPush *name = new ButtonsCommanderPush(ID); \
 	name->Setup(pin); \
+	macro_buttons.Add(name);
+
+#define PUSH_BUTTON_IDS(name, pin, number) \
+	ButtonsCommanderPush *name = new ButtonsCommanderPush(); \
+	name->Setup(pin, number); \
 	macro_buttons.Add(name);
 
 

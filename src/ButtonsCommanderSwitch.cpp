@@ -31,10 +31,6 @@ void ButtonsCommanderSwitch::Setup()
 // Returns the index of the new added position.
 void ButtonsCommanderSwitch::AddId(unsigned long inId, int inPin)
 {
-#ifdef DEBUG_MODE
-	//Accessory::CHECKDCC(inDccId, inDccIdAccessory, "Accessory constructor");
-#endif
-
 	//CHECKPIN(inPin, "ButtonsCommanderSwitch::AddDccId");
 
 #ifdef DEBUG_MODE

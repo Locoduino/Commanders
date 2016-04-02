@@ -63,6 +63,11 @@ public:
 	name->Setup(pin, IDS, values); \
 	macro_buttons.Add(name);
 
+#define ANALOGPUSH_BUTTON_TOL(name, pin, number, IDS, values, tol) \
+	ButtonsCommanderAnalogPushes *name = new ButtonsCommanderAnalogPushes(number); \
+	name->Setup(pin, IDS, values, tol); \
+	macro_buttons.Add(name);
+
 //-------------------------------------------------------------------
 #endif
 //-------------------------------------------------------------------

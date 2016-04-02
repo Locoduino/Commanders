@@ -77,7 +77,7 @@ unsigned long ButtonsCommanderAnalogPushes::Loop()
 					foundID = this->pButtons[i].GetId();
 					eventType = COMMANDERS_EVENT_SELECTED;
 					eventData = 0;
-					Commander::RaiseEvent(this->pButtons[i].GetId(), COMMANDERS_EVENT_SELECTED, 0);
+					Commander::RaiseEvent(foundID, COMMANDERS_EVENT_SELECTED, 0);
 #ifdef DEBUG_MODE
 					Serial.print(F("Analog push button "));
 					Serial.print(i);

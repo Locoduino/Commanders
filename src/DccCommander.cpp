@@ -1,5 +1,5 @@
 /*************************************************************
-project: <Universal Accessory Decoder>
+project: <Commanders>
 author: <Thierry PARIS>
 description: <Dcc Commander>
 *************************************************************/
@@ -12,7 +12,6 @@ DCC_Decoder DCC_Decoder::DCCInstance;
 #endif
 
 unsigned long DccCommander::LastDccId = UNDEFINED_ID;
-GPIO_pin_t DccCommander::dccStatusLedPin;
 boolean DccCommander::UseRawDccAddresses;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -70,30 +69,25 @@ void DccCommander::CheckIndex(unsigned char inIndex, const __FlashStringHelper *
 }
 #endif
 
-void DccCommander::Setup(int i, int j, int k, boolean inUseRawDccAddresses)
-{
-	DCC.SetupDecoder(i, j, k);
-	DccCommander::UseRawDccAddresses = inUseRawDccAddresses;
-}
-
 bool status = false;
 void StatusBlink_handler()
 {
-	digitalWrite2f(DccCommander::dccStatusLedPin, status ? HIGH : LOW);
+	digitalWrite2f(Commander::StatusLedPin, status ? HIGH : LOW);
 	status = !status;
 }
 
-void DccCommander::SetStatusLedPin(int inLedPin)
+void DccCommander::begin(int i, int j, int k, boolean inUseRawDccAddresses)
 {
-	DccCommander::dccStatusLedPin = Arduino_to_GPIO_pin(inLedPin);
-	pinMode2f(DccCommander::dccStatusLedPin, OUTPUT);
+	DCC.SetupDecoder(i, j, k);
+	DccCommander::UseRawDccAddresses = inUseRawDccAddresses;
 
-	DCC.SetInterruptMonitor(StatusBlink_handler);
+	if (Commander::StatusLedPin != DP_INVALID)
+		DCC.SetInterruptMonitor(StatusBlink_handler);
 }
 
 void DccCommander::PriorityLoop()
 {
-	DccCommander::Loop();
+	DccCommander::loop();
 }
 
 #define MINTIME	2
@@ -107,7 +101,7 @@ static unsigned long start = 0;
 
 #define ELAPSEDTIME	((unsigned long) -2)
 
-unsigned long DccCommander::Loop()
+unsigned long DccCommander::loop()
 {
 	if (start == 0)
 		start = millis();
@@ -131,8 +125,8 @@ unsigned long DccCommander::Loop()
 		start = 0;
 		unsigned long last = LastDccId;
 		LastDccId = UNDEFINED_ID;
-		Commanders_SetLastEventType(COMMANDERS_EVENT_SELECTED);
-		Commanders_SetLastEventData(0);
+		Commanders::SetLastEventType(COMMANDERS_EVENT_SELECTED);
+		Commanders::SetLastEventData(0);
 		return last;
 	}
 

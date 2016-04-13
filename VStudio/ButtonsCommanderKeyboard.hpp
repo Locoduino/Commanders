@@ -22,8 +22,8 @@ class ButtonsCommanderKeyboard : public ButtonsCommanderButton
  public:
 	ButtonsCommanderKeyboard(unsigned long inId);
 
-	void Setup(int inKey) { this->key = inKey; lastLoopKey = 0; }
-	unsigned long Loop();
+	void begin(int inKey) { this->key = inKey; lastLoopKey = 0; }
+	unsigned long loop();
 	void EndLoop();
 };
 

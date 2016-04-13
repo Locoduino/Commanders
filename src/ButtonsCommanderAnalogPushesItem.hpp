@@ -12,7 +12,7 @@ class ButtonsCommanderAnalogPushesItem : public ButtonsCommanderButton
  public:
 	ButtonsCommanderAnalogPushesItem(unsigned long inId = 0) : ButtonsCommanderButton(inId) { this->analogValue = 0; }
 
-	void Setup(unsigned long inId, int inAnalogValue, int inTolerancy) { this->Id = inId;  this->analogValue = inAnalogValue; this->readingTolerancy = inTolerancy; }
+	void begin(unsigned long inId, int inAnalogValue, int inTolerancy) { this->Id = inId;  this->analogValue = inAnalogValue; this->readingTolerancy = inTolerancy; }
 	bool IsPushed(int inCurrentValue);
 };
 

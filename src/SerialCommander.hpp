@@ -53,9 +53,9 @@ class SerialCommander : Commander \
 public:\
 	inline SerialCommander() : Commander() { }\
 \
-	inline void Setup(unsigned long inSpeed) { SERIAL_PORT.begin(inSpeed); }\
+	inline void begin(unsigned long inSpeed) { SERIAL_PORT.begin(inSpeed); }\
 \
-	inline unsigned long Loop() \
+	inline unsigned long loop() \
 	{\
 		enum STEP\
 		{\
@@ -140,8 +140,8 @@ public:\
 		}\
 \
 		if (foundID != UNDEFINED_ID)	Commander::RaiseEvent(foundID, foundEvent, foundData);\
-		Commanders_SetLastEventType(foundEvent); \
-		Commanders_SetLastEventData(foundData); \
+		Commanders::SetLastEventType(foundEvent); \
+		Commanders::SetLastEventData(foundData); \
 \
 		return foundID;\
 	}\

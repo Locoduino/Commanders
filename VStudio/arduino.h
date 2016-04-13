@@ -3,8 +3,8 @@
 #define __arduino_H__
 //-------------------------------------------------------------------
 
-#define uint8_t		int
-#define uint16_t	unsigned long int
+#define uint8_t		unsigned __int8
+#define uint16_t	unsigned __int16
 #define boolean		bool
 #define byte		unsigned char
 

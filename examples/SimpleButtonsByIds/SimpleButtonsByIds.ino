@@ -15,22 +15,22 @@ ButtonsCommander buttons;
 //
 void setup()
 {
-	Commanders_StartSetup();
+	Commanders::StartSetup();
 
 	// Buttons setups
 
-	buttons.Setup();
+	buttons.begin();
 	ButtonsCommanderPush *pLeft = new ButtonsCommanderPush(102UL); //id. UL is to force an unsigned long as constant.
 	ButtonsCommanderPush *pDc = new ButtonsCommanderPush(103UL);
 	ButtonsCommanderPush *pRight = new ButtonsCommanderPush(104UL);
 	ButtonsCommanderPush *pEPS = new ButtonsCommanderPush(105UL);
 	ButtonsCommanderPush *pTJD = new ButtonsCommanderPush(106UL);
 
-	pLeft->Setup(24);  // pin number
-	pDc->Setup(26);
-	pRight->Setup(28);
-	pEPS->Setup(30);
-	pTJD->Setup(32);
+	pLeft->begin(24);  // pin number
+	pDc->begin(26);
+	pRight->begin(28);
+	pEPS->begin(30);
+	pTJD->begin(32);
 
 	buttons.Add(pLeft);
 	buttons.Add(pDc);
@@ -38,12 +38,12 @@ void setup()
 	buttons.Add(pEPS);
 	buttons.Add(pTJD);
 
-	Commanders_EndSetup();
+	Commanders::EndSetup();
 }
 
 void loop()
 {
-	unsigned long eventID = Commanders_Loop();
+	unsigned long eventID = Commanders::loop();
 
 	if (eventID != UNDEFINED_ID)
 	{	
@@ -51,17 +51,17 @@ void loop()
 		Serial.print(eventID, DEC);
 		Serial.print(F(" / "));
 		
-		switch (Commanders_GetLastEventType())
+		switch (Commanders::GetLastEventType())
 		{
 		case COMMANDERS_EVENT_NONE:			Serial.println(F("NONE"));		break;
 		case COMMANDERS_EVENT_SELECTED:		Serial.println(F("SELECTED"));	break;
 		case COMMANDERS_EVENT_ABSOLUTEMOVE:	
 			Serial.print(F("ABSOLUTEMOVE : "));	
-			Serial.println(Commanders_GetLastEventData(), DEC);
+			Serial.println(Commanders::GetLastEventData(), DEC);
 			break;
 		case COMMANDERS_EVENT_RELATIVEMOVE:	
 			Serial.print(F("RELATIVEMOVE : "));	
-			Serial.println(Commanders_GetLastEventData(), DEC);
+			Serial.println(Commanders::GetLastEventData(), DEC);
 			break;
 		}
 	}

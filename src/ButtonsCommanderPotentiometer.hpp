@@ -21,13 +21,13 @@ class ButtonsCommanderPotentiometer : public ButtonsCommanderButton
 	inline bool IsAnalog() const { return true; }
 	inline int GetPosition() const { return this->currentValue; }
 
-	void Setup(int inPin, int inMoveAccuracy = 1);
-	unsigned long Loop();
+	void begin(int inPin, int inMoveAccuracy = 1);
+	unsigned long loop();
 };
 
 #define POTENTIOMETER(name, pin, ID, min, max) \
 	ButtonsCommanderPotentiometer *name = new ButtonsCommanderPotentiometer(ID, min, max); \
-	name->Setup(pin); \
+	name->begin(pin); \
 	macro_buttons.Add(name);
 
 //-------------------------------------------------------------------

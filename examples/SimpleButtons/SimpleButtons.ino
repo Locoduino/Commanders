@@ -47,22 +47,22 @@ void CommandersEventHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, i
 //
 void setup()
 {
-	Commanders_StartSetup(CommandersEventHandler);
+	Commanders::StartSetup(CommandersEventHandler);
 
 	// Buttons setups
 
-	buttons.Setup();
+	buttons.begin();
 	ButtonsCommanderPush *pLeft = new ButtonsCommanderPush(DCCINT(124, 1));
 	ButtonsCommanderPush *pDc = new ButtonsCommanderPush(DCCINT(126, 1));
 	ButtonsCommanderPush *pRight = new ButtonsCommanderPush(DCCINT(128, 1));
 	ButtonsCommanderPush *pEPS = new ButtonsCommanderPush(DCCINT(130, 1));
 	ButtonsCommanderPush *pTJD = new ButtonsCommanderPush(DCCINT(132, 1));
 
-	pLeft->Setup(24);
-	pDc->Setup(26);
-	pRight->Setup(28);
-	pEPS->Setup(30);
-	pTJD->Setup(32);
+	pLeft->begin(24);
+	pDc->begin(26);
+	pRight->begin(28);
+	pEPS->begin(30);
+	pTJD->begin(32);
 
 	buttons.Add(pLeft);
 	buttons.Add(pDc);
@@ -73,21 +73,21 @@ void setup()
 #ifdef VISUALSTUDIO
 	ButtonsCommanderKeyboard *pKeyA = new ButtonsCommanderKeyboard(100UL);
 	ButtonsCommanderKeyboard *pKeyB = new ButtonsCommanderKeyboard(200UL);
-	pKeyA->Setup('A');
-	pKeyB->Setup('B');
+	pKeyA->begin('A');
+	pKeyB->begin('B');
 	buttons.Add(pKeyA);
 	buttons.Add(pKeyB);
 #endif
 
 	// Accessories setups
 
-	dcc.Setup(0x00, 0x00, kDCC_INTERRUPT);
-	dcc.SetStatusLedPin(13);
+	dcc.begin(0x00, 0x00, kDCC_INTERRUPT);
+	Commanders::SetStatusLedPin(13);
 
-	Commanders_EndSetup();
+	Commanders::EndSetup();
 }
 
 void loop()
 {
-	Commanders_Loop();
+	Commanders::loop();
 }

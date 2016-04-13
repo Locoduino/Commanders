@@ -1,3 +1,10 @@
+05/04/2016 V0.64
+	- Ajout d'une Led de statut commune à tous les Commanders.
+	- Renommage de tous les 'Setup' en 'begin' et 'Loop' en 'loop'.
+	
+	- Added a global status Led for all the commanders.
+	- All 'Setup' have been renamed in 'begin' and 'Loop' in 'loop'.
+	
 02/04/2016 V0.63
 	- Correction du constructeur de ButtonsCommanderPush avec le nombre d'ids passés maintenant en argument du setup.
 	- Ajout d'une macro PUSH_BUTTON_IDS pour les ID multiples d'un poussoir.

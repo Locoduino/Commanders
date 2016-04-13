@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////
 // Add a '//' at the beginning of the line to be in 
 // release mode.
-//#define DEBUG_MODE
+#define DEBUG_MODE
 
 ///////////////////////////////////////////////////////
 // Verbose mode lets you see all actions done by the 
@@ -42,9 +42,6 @@
 // from .cpp to .ori, and from .hpp to from ori.
 // See below the file names related to each exclusion:
 //
-//NO_SERIALCOMMANDER
-//	SerialCommander.hpp
-//
 //NO_DCCCOMMANDER
 //	DccCommander.cpp
 //	DccCommander.hpp
@@ -72,6 +69,10 @@
 //NO_BUTTONSCOMMANDERPUSH
 //	ButtonsCommanderPush.cpp
 //	ButtonsCommanderPush.hpp
+//
+//NO_BUTTONSCOMMANDERANALOGPUSHES
+//	ButtonsCommanderAnalogPush.cpp
+//	ButtonsCommanderAnalogPush.hpp
 //
 //NO_BUTTONSCOMMANDERSWITCH
 //	ButtonsCommanderSwitch.cpp
@@ -114,23 +115,13 @@
 #ifndef NO_DCCCOMMANDER
 #include "DccCommander.hpp"
 #endif
-#ifndef NO_SERIALCOMMANDER
-#include "SerialCommander.hpp"
-#endif
+
 #ifndef NO_BUTTONSCOMMANDER
 #include "ButtonsCommander.hpp"
 #endif
 
-void Commanders_StartSetup(CommandersEventHandlerFunction func);
-void Commanders_StartSetup();
-void Commanders_EndSetup();
-unsigned long Commanders_Loop();
-
-COMMANDERS_EVENT_TYPE Commanders_GetLastEventType();
-int Commanders_GetLastEventData();
-
-void Commanders_SetLastEventType(COMMANDERS_EVENT_TYPE inEvent);
-void Commanders_SetLastEventData(int inEvent);
+#include "SerialCommander.hpp"
+#include "Commanders.hpp"
 
 ////////////////////////////////////////////////
 // Macro area...
@@ -140,12 +131,12 @@ void Commanders_SetLastEventData(int inEvent);
 			ButtonsCommander macro_buttons
 
 #define START_BUTTONS_COMMANDER_SETUP \
-			Commanders_StartSetup(); \
-			macro_buttons.Setup()
+			Commanders::StartSetup(); \
+			macro_buttons.begin()
 
 #define START_BUTTONS_COMMANDER_SETUPEVENT(eventFct) \
-			Commanders_StartSetup(eventFct); \
-			macro_buttons.Setup()
+			Commanders::StartSetup(eventFct); \
+			macro_buttons.begin()
 
 // Dcc
 #define DECLARE_DCC_COMMANDER(INTER)	\
@@ -153,14 +144,12 @@ void Commanders_SetLastEventData(int inEvent);
 			DccCommander macro_dcc
 
 #define START_DCC_COMMANDER_SETUP \
-			Commanders_StartSetup(); \
-			macro_dcc.Setup(0x00, 0x00, interrupt); \
-			macro_dcc.SetStatusLedPin(13)
+			Commanders::StartSetup(); \
+			macro_dcc.begin(0x00, 0x00, interrupt)
 
 #define START_DCC_COMMANDER_SETUPEVENT(eventFct) \
-			Commanders_StartSetup(eventFct); \
-			macro_dcc.Setup(0x00, 0x00, interrupt); \
-			macro_dcc.SetStatusLedPin(13)
+			Commanders::StartSetup(eventFct); \
+			macro_dcc.begin(0x00, 0x00, interrupt)
 
 // Serial
 #define DECLARE_SERIAL_COMMANDER(PORT, SPEED)	\
@@ -169,13 +158,15 @@ void Commanders_SetLastEventData(int inEvent);
 			SerialCommander macro_serial;
 
 #define START_SERIAL_COMMANDER_SETUP \
-			Commanders_StartSetup(); \
-			macro_serial.Setup(speed)
+			Commanders::StartSetup(); \
+			macro_serial.begin(speed)
 
 #define START_SERIAL_COMMANDER_SETUPEVENT(eventFct) \
-			Commanders_StartSetup(eventFct); \
-			macro_serial.Setup(speed)
+			Commanders::StartSetup(eventFct); \
+			macro_serial.begin(speed)
 
 // Common
-#define END_COMMANDERS_SETUP 	Commanders_EndSetup()
-#define COMMANDERS_LOOP			Commanders_Loop()
+#define COMMANDERS_SET_EVENTHANDLER(func)	Commanders::SetEventHandler(func)
+#define COMMANDERS_SET_STATUSLED(pin)		Commanders::SetStatusLedPin(pin)
+#define END_COMMANDERS_SETUP 	Commanders::EndSetup()
+#define COMMANDERS_LOOP			Commanders::loop()

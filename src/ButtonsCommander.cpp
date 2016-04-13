@@ -1,5 +1,5 @@
 /*************************************************************
-project: <Universal Accessory Decoder>
+project: <Commanders>
 author: <Thierry PARIS>
 description: <Buttons Commander>
 *************************************************************/
@@ -26,10 +26,10 @@ ButtonsCommander::ButtonsCommander()
 	this->pLastSelectedButton = 0;
 }
 
-void ButtonsCommander::Setup()
+void ButtonsCommander::begin()
 {
 #ifdef DEBUG_MODE
-	Serial.println(F("   ButtonsCommander Setup"));
+	Serial.println(F("   ButtonsCommander begin"));
 #endif
 }
 
@@ -73,7 +73,7 @@ void ButtonsCommander::RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEv
 
 static ButtonsCommanderButton *pCurrentLoopButton = 0;
 
-unsigned long ButtonsCommander::Loop()
+unsigned long ButtonsCommander::loop()
 {
 	Commander::CommanderPriorityLoop();
 
@@ -86,7 +86,7 @@ unsigned long ButtonsCommander::Loop()
 	if (pCurrentLoopButton == 0)
 		return UNDEFINED_ID;
 
-	unsigned long ID = pCurrentLoopButton->Loop();
+	unsigned long ID = pCurrentLoopButton->loop();
 
 #ifdef DEBUG_VERBOSE_MODE
 	Serial.print(F("ButtonsCommanderButton id:"));
@@ -107,8 +107,8 @@ unsigned long ButtonsCommander::Loop()
 
 	this->pLastSelectedButton = this->GetFromId(ID);
 
-	Commanders_SetLastEventType(ButtonsCommanderButton::GetLastEventType());
-	Commanders_SetLastEventData(ButtonsCommanderButton::GetLastEventData());
+	Commanders::SetLastEventType(ButtonsCommanderButton::GetLastEventType());
+	Commanders::SetLastEventData(ButtonsCommanderButton::GetLastEventData());
 
 	return ID;
 }

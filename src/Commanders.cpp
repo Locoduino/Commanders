@@ -1,27 +1,33 @@
 /*************************************************************
-project: <Universal Accessory Decoder>
+project: <Commanders>
 author: <Thierry PARIS>
 description: <Base functions of the library>
 *************************************************************/
 
 #include "Commanders.h"
 
-static COMMANDERS_EVENT_TYPE lastEventType;
-static int lastEventData;
+COMMANDERS_EVENT_TYPE Commanders::lastEventType;
+int Commanders::lastEventData;
 
-void Commanders_StartSetup()
+void Commanders::StartSetup(int inStatusLedPin)
 {
 #ifdef DEBUG_MODE
 	Serial.begin(115200);
 
 	Serial.println(F(""));
-	Serial.println(F("Commanders V0.63."));
+	Serial.println(F("Commanders V0.64."));
 	Serial.println(F("Developed by Thierry Paris."));
 	Serial.println(F(""));
 
 	Serial.println(F("*** Setup started."));
 #endif
 
+	if (inStatusLedPin != 0)
+	{
+		Commander::StatusLedPin = Arduino_to_GPIO_pin(inStatusLedPin);
+		pinMode2f(Commander::StatusLedPin, OUTPUT);
+	}
+		
 #ifndef NO_DCCCOMMANDER
 #ifndef VISUALSTUDIO
 	DccCommander::SetAccessoryDecoderPacketHandler(DccCommander::DccAccessoryDecoderPacket);
@@ -29,43 +35,22 @@ void Commanders_StartSetup()
 #endif
 }
 
-void Commanders_StartSetup(CommandersEventHandlerFunction func)
+void Commanders::StartSetup(CommandersEventHandlerFunction func, int inStatusLedPin)
 {
 	Commander::EventHandler = func;
-	Commanders_StartSetup();
+	Commanders::StartSetup(inStatusLedPin);
 }
 
-void Commanders_EndSetup()
+void Commanders::EndSetup()
 {
 #ifdef DEBUG_MODE
 	Serial.println(F("*** Setup Commanders Finished."));
 #endif
 }
 
-unsigned long Commanders_Loop()
+unsigned long Commanders::loop()
 {
-	return Commander::Loops();
-}
-
-COMMANDERS_EVENT_TYPE Commanders_GetLastEventType()
-{
-	return lastEventType;
-}
-
-int Commanders_GetLastEventData()
-{
-	return lastEventData;
-}
-
-void Commanders_SetLastEventType(COMMANDERS_EVENT_TYPE inType)
-{
-	lastEventType = inType;
-	lastEventData = 0;
-}
-
-void Commanders_SetLastEventData(int inData)
-{
-	lastEventData = inData;
+	return Commander::loops();
 }
 
 

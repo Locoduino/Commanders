@@ -51,25 +51,15 @@ int _tmain(int argc, _TCHAR* argv[])
 /*************************************************************
 project: <Commanders>
 author: <Thierry PARIS>
-description: <Demo sample by macros>
+description: <I2C commander demo>
 *************************************************************/
 
 #include "Commanders.h"
 
-/* INTERRUPT values as macro argument :
-Board			int.0	int.1	int.2	int.3	int.4	int.5
-Uno, Ethernet	2		3
-Mega2560		2		3		21		20		19		18
-Leonardo		3		2		0		1		7
-*/
-DECLARE_DCC_COMMANDER(3);
-
 void CommandersEventHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
 {
 	Serial.print(F("Commander event : Address : "));
-	Serial.print(DCCID(inId), DEC);
-	Serial.print(F(" / "));
-	Serial.print(DCCACTIVATION(inId), DEC);
+	Serial.print(inId, DEC);
 	Serial.print(F(" / "));
 	switch (inEvent)
 	{
@@ -88,7 +78,7 @@ void CommandersEventHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, i
 
 void setup()
 {
-	START_DCC_COMMANDER_SETUPEVENT(CommandersEventHandler);
+	COMMANDERS_SET_STATUSLED(13);
 
 	END_COMMANDERS_SETUP;
 }

@@ -12,7 +12,6 @@
 #endif
 
 #ifndef NO_DCC
-#ifndef NO_COMMANDER
 
 //-------------------------------------------------------------------
 
@@ -29,16 +28,14 @@ class DccCommander : Commander
 		static unsigned long LastDccId;
 
 	public:
-		static GPIO_pin_t dccStatusLedPin;
 		static boolean UseRawDccAddresses;
 		static DccAccDecoderPacket    func_AccPacket;
 
-		inline DccCommander() : Commander() { this->dccStatusLedPin = DP0; }
+		inline DccCommander() : Commander() {}
 		
-		void Setup(int i, int j, int k, boolean inUseRawDccAddresses = false);
-		void SetStatusLedPin(int inPin);
+		void begin(int i, int j, int k, boolean inUseRawDccAddresses = false);
 		void PriorityLoop();
-		unsigned long Loop();
+		unsigned long loop();
 		static void SetAccessoryDecoderPacketHandler(DccAccDecoderPacket func);
 		static void DccAccessoryDecoderPacket(int address, boolean activate, byte data);
 
@@ -51,7 +48,6 @@ public:
 };
 
 //-------------------------------------------------------------------
-#endif
 #endif
 #endif
 //-------------------------------------------------------------------

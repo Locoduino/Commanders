@@ -9,6 +9,7 @@
 COMMANDERS_EVENT_TYPE				KEYWORD1
 
 Commander							KEYWORD1
+Commanders							KEYWORD1
 ButtonsCommander					KEYWORD1
 ButtonsCommanderEvent				KEYWORD1
 ButtonsCommanderPush				KEYWORD1
@@ -28,23 +29,23 @@ SerialCommander						KEYWORD1
 # Methods and Functions (KEYWORD2)
 #######################################
 
-Commanders_StartSetup 			KEYWORD2
-Commanders_EndSetup 			KEYWORD2
-Commanders_Loop 				KEYWORD2
-Commanders_GetLastEventType		KEYWORD2
-Commanders_GetLastEventData		KEYWORD2
+StartSetup 					KEYWORD2
+EndSetup 					KEYWORD2
+GetLastEventType			KEYWORD2
+GetLastEventData			KEYWORD2
+SetLastEventType			KEYWORD2
+SetLastEventData			KEYWORD2
 
-Setup 							KEYWORD2
-Add 							KEYWORD2
-AddId 							KEYWORD2
-GetLastSelectedButton 			KEYWORD2
-Loop 							KEYWORD2
+Add 						KEYWORD2
+AddId 						KEYWORD2
+GetLastSelectedButton 		KEYWORD2
 
-GetId 							KEYWORD2
-GetPosition 					KEYWORD2
-EndLoop 						KEYWORD2
+GetId 						KEYWORD2
+GetPosition 				KEYWORD2
+EndLoop 					KEYWORD2
 
-SetStatusLedPin					KEYWORD2
+SetStatusLedPin				KEYWORD2
+SetEventHandler				KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
@@ -74,8 +75,10 @@ DECLARE_SERIAL_COMMANDER			LITERAL1
 START_SERIAL_COMMANDER_SETUP		LITERAL1
 START_SERIAL_COMMANDER_SETUPEVENT	LITERAL1
 
-END_COMMANDERS_SETUP				LITERAL1
-COMMANDERS_LOOP						LITERAL1
+COMMANDERS_SET_EVENTHANDLER	LITERAL1
+COMMANDERS_SET_STATUSLED	LITERAL1
+END_COMMANDERS_SETUP		LITERAL1
+COMMANDERS_LOOP				LITERAL1
 
 SWITCH_BUTTON				LITERAL1
 SWITCH_BUTTON_2ID			LITERAL1

@@ -1,14 +1,14 @@
 /*************************************************************
-project: <Universal Accessory Decoder>
+project: <Commanders>
 author: <Thierry PARIS>
 description: <Base Commander>
 *************************************************************/
 
-#include "Commander.hpp"
+#include "Commanders.h"
 
-#ifndef NO_COMMANDER
 CommandersEventHandlerFunction Commander::EventHandler = 0;
 Commander *Commander::pFirstCommander = 0;
+GPIO_pin_t Commander::StatusLedPin = DP_INVALID;
 
 #ifdef DEBUG_MODE
 #define CHECK(val, text)	CheckIndex(val, F(text))
@@ -45,20 +45,37 @@ void Commander::CommanderPriorityLoop()
 
 void Commander::RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
 {
+	Commander::StatusBlink();
 	if (Commander::EventHandler != 0)
 		Commander::EventHandler(inId, inEvent, inData);
 }
 
-unsigned long Commander::Loops()
+static unsigned long start_status_led = 0;
+void Commander::StatusBlink()
+{
+	if (Commander::StatusLedPin != DP_INVALID && start_status_led == 0)
+	{
+		start_status_led = millis();
+		digitalWrite2f(Commander::StatusLedPin, HIGH);
+	}
+}
+
+unsigned long Commander::loops()
 {
 	Commander *pCurr = Commander::pFirstCommander;
 
 	while (pCurr != 0)
 	{
-		unsigned long ret = pCurr->Loop();
+		unsigned long ret = pCurr->loop();
 		if (ret != UNDEFINED_ID)
 			return ret;
 		pCurr = pCurr->pNextCommander;
+	}
+
+	if (Commander::StatusLedPin != DP_INVALID && start_status_led > 0 && millis() - start_status_led > 1000)
+	{
+		digitalWrite2f(Commander::StatusLedPin, LOW);
+		start_status_led = 0;
 	}
 
 	return UNDEFINED_ID;
@@ -68,6 +85,4 @@ unsigned long Commander::Loops()
 void Commander::CheckIndex(byte inIndex, const __FlashStringHelper *inFunc)
 {
 }
-#endif
-
 #endif

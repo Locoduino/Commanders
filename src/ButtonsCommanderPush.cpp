@@ -1,5 +1,5 @@
 /*************************************************************
-project: <Universal Accessory Decoder>
+project: <Commanders>
 author: <Thierry PARIS>
 description: <Push button with debounce.>
 *************************************************************/
@@ -28,7 +28,7 @@ ButtonsCommanderPush::ButtonsCommanderPush(unsigned long inId) : ButtonsCommande
 	this->AddId(inId);
 }
 
-void ButtonsCommanderPush::Setup(int inButtonPin, byte inIdNumber)
+void ButtonsCommanderPush::begin(int inButtonPin, byte inIdNumber)
 {	
 	//CHECKPIN(inButtonPin, "ButtonsCommanderPush::Setup");
 
@@ -60,7 +60,7 @@ void ButtonsCommanderPush::AddId(unsigned long inId)
 	this->pId[this->IdAddCounter++] = inId;
 }
 
-unsigned long ButtonsCommanderPush::Loop()
+unsigned long ButtonsCommanderPush::loop()
 {
 	unsigned long foundID = UNDEFINED_ID;
 

@@ -1,5 +1,5 @@
 /*************************************************************
-project: <Dc/Dcc Controler>
+project: <Commanders>
 author: <Thierry PARIS>
 description: <Composite push button array on analog pin with debounce.>
 *************************************************************/
@@ -18,7 +18,7 @@ ButtonsCommanderAnalogPushes::ButtonsCommanderAnalogPushes(byte inNumberOfItems)
 	this->pButtons = new ButtonsCommanderAnalogPushesItem[this->size];
 }
 
-void ButtonsCommanderAnalogPushes::Setup(int inButtonPin, unsigned long *inpIds, int *inpButtonValues, int inTolerancy)
+void ButtonsCommanderAnalogPushes::begin(int inButtonPin, unsigned long *inpIds, int *inpButtonValues, int inTolerancy)
 {	
 	//CHECKPIN(inButtonPin, "ButtonsCommanderAnalogPushes::Setup");
 
@@ -26,7 +26,7 @@ void ButtonsCommanderAnalogPushes::Setup(int inButtonPin, unsigned long *inpIds,
 	this->readingTolerancy = inTolerancy;
 
 	for (int i = 0; i < this->size; i++)
-		this->pButtons[i].Setup(inpIds[i], inpButtonValues[i], inTolerancy);
+		this->pButtons[i].begin(inpIds[i], inpButtonValues[i], inTolerancy);
 
 	pinMode(this->analogPin, INPUT);
 }
@@ -40,7 +40,7 @@ ButtonsCommanderButton* ButtonsCommanderAnalogPushes::GetFromId(unsigned long in
 	return 0;
 }			 
 
-unsigned long ButtonsCommanderAnalogPushes::Loop()
+unsigned long ButtonsCommanderAnalogPushes::loop()
 {
 	unsigned long foundID = UNDEFINED_ID;
 

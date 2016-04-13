@@ -22,7 +22,7 @@ ButtonsCommanderEncoder::ButtonsCommanderEncoder(unsigned long inId, int inStart
 	}
 }
 
-void ButtonsCommanderEncoder::Setup(int inPin1, int inPin2)
+void ButtonsCommanderEncoder::begin(int inPin1, int inPin2)
 {
 	this->pin1 = Arduino_to_GPIO_pin(inPin1);
 	this->pin2 = Arduino_to_GPIO_pin(inPin2);
@@ -33,7 +33,7 @@ void ButtonsCommanderEncoder::Setup(int inPin1, int inPin2)
 	this->lastEncoded = 0;
 }
 
-unsigned long ButtonsCommanderEncoder::Loop()
+unsigned long ButtonsCommanderEncoder::loop()
 {
 	int MSB = digitalRead2f(this->pin1); //MSB = most significant bit
 	int LSB = digitalRead2f(this->pin2); //LSB = least significant bit
@@ -48,7 +48,6 @@ unsigned long ButtonsCommanderEncoder::Loop()
 	if (sum == 14 || sum == 7 || sum == 1 || sum ==  8) inc = -1;
 	
 	lastEncoded = encoded; //store this value for next time
-	eventType = COMMANDERS_EVENT_RELATIVEMOVE;
 
 	if (this->mini != this->maxi)
 	{
@@ -62,12 +61,16 @@ unsigned long ButtonsCommanderEncoder::Loop()
 		if (this->currentValue < this->mini)
 			this->currentValue = this->mini;
 
+		eventType = COMMANDERS_EVENT_ABSOLUTEMOVE;
 		eventData = this->currentValue;
 	}
 	else
+	{
 		// if no interval defined, just return the move direction.
+		eventType = COMMANDERS_EVENT_RELATIVEMOVE;
 		eventData = inc;
+	}
 
-	Commander::RaiseEvent(this->GetId(), COMMANDERS_EVENT_RELATIVEMOVE, eventData);
+	Commander::RaiseEvent(this->GetId(), eventType, eventData);
 	return this->GetId();
 }

@@ -31,7 +31,7 @@ class ButtonsCommanderButton
 	inline virtual bool IsAnalog() const { return false; }
 	inline virtual int GetPosition() const { return 0; }
 
-	inline virtual unsigned long Loop() { this->eventType = COMMANDERS_EVENT_NONE;  return UNDEFINED_ID; }
+	inline virtual unsigned long loop() { this->eventType = COMMANDERS_EVENT_NONE;  return UNDEFINED_ID; }
 	inline virtual void EndLoop() {}
 
 	inline void SetNextButton(ButtonsCommanderButton *inButton) { this->pNextButton = inButton; }

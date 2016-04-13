@@ -49,8 +49,8 @@ private:
 public:
 	ButtonsCommanderAnalogPushes(byte inNumber);
 
-	void Setup(int inButtonPin, unsigned long *inpIds, int *inpButtonValues, int inTolerancy = 20);
-	unsigned long Loop();
+	void begin(int inButtonPin, unsigned long *inpIds, int *inpButtonValues, int inTolerancy = 20);
+	unsigned long loop();
 	void EndLoop();
 	ButtonsCommanderAnalogPushesItem *GetItem(byte inNumber) { return &(this->pButtons[inNumber]); }
 	ButtonsCommanderButton* GetFromId(unsigned long inId);
@@ -60,12 +60,12 @@ public:
 
 #define ANALOGPUSH_BUTTON(name, pin, number, IDS, values) \
 	ButtonsCommanderAnalogPushes *name = new ButtonsCommanderAnalogPushes(number); \
-	name->Setup(pin, IDS, values); \
+	name->begin(pin, IDS, values); \
 	macro_buttons.Add(name);
 
 #define ANALOGPUSH_BUTTON_TOL(name, pin, number, IDS, values, tol) \
 	ButtonsCommanderAnalogPushes *name = new ButtonsCommanderAnalogPushes(number); \
-	name->Setup(pin, IDS, values, tol); \
+	name->begin(pin, IDS, values, tol); \
 	macro_buttons.Add(name);
 
 //-------------------------------------------------------------------

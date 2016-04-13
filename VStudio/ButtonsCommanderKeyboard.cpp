@@ -1,5 +1,5 @@
 /*************************************************************
-project: <Dc/Dcc Controler>
+project: <Commanders>
 author: <Thierry PARIS>
 description: <Keyboard button.>
 *************************************************************/
@@ -15,7 +15,7 @@ ButtonsCommanderKeyboard::ButtonsCommanderKeyboard(unsigned long inId) : Buttons
 	this->key = 0;
 }
 
-unsigned long ButtonsCommanderKeyboard::Loop()
+unsigned long ButtonsCommanderKeyboard::loop()
 {
 	//this->UnselectLastLoop();
 	if (this->key == 0)

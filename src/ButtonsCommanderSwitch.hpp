@@ -39,28 +39,28 @@ class ButtonsCommanderSwitch : public ButtonsCommanderButton
 public:
 	ButtonsCommanderSwitch(byte inIdNumber);
 	
-	void Setup();
+	void begin();
 	void AddId(unsigned long inId, int inPin);
-	unsigned long Loop();
+	unsigned long loop();
 	inline unsigned long GetCurrentLoopId() const { return this->pId[this->IdState].Id; }
 };
 
 #define SWITCH_BUTTON(name, pin, ID) \
 	ButtonsCommanderSwitch *name = new ButtonsCommanderSwitch(1); \
 	name->AddId(ID); \
-	name->Setup(); \
+	name->begin(); \
 	macro_buttons.Add(name);
 
 #define SWITCH_BUTTON_2ID(name, pin, ID1, ID2) \
 	ButtonsCommanderSwitch *name = new ButtonsCommanderSwitch(2); \
 	name->AddId(ID1); \
 	name->AddId(ID2); \
-	name->Setup(); \
+	name->begin(); \
 	macro_buttons.Add(name);
 
 #define SWITCH_BUTTON_IDS(name, pin, number) \
 	ButtonsCommanderSwitch *name = new ButtonsCommanderSwitch(number); \
-	name->Setup(); \
+	name->begin(); \
 	macro_buttons.Add(name);
 
 #define SWITCH_BUTTON_ADDID(name, pin, ID) \

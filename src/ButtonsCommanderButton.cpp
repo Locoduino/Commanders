@@ -1,5 +1,5 @@
 /*************************************************************
-project: <Universal Accessory Decoder>
+project: <Commanders>
 author: <Thierry PARIS>
 description: <Basic button.>
 *************************************************************/

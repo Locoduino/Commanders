@@ -1,5 +1,5 @@
 /*************************************************************
-project: <Universal Accessory Decoder>
+project: <Commanders>
 author: <Thierry PARIS>
 description: <Potentiometer returning a current value.>
 *************************************************************/
@@ -12,7 +12,7 @@ ButtonsCommanderPotentiometer::ButtonsCommanderPotentiometer(unsigned long inId,
 	this->maxi = inMaximum;
 }
 
-void ButtonsCommanderPotentiometer::Setup(int inPin, int inMoveAccuracy)
+void ButtonsCommanderPotentiometer::begin(int inPin, int inMoveAccuracy)
 {
 	this->pin = inPin;
 	this->moveAccuracy = inMoveAccuracy - 1;
@@ -23,7 +23,7 @@ void ButtonsCommanderPotentiometer::Setup(int inPin, int inMoveAccuracy)
 	this->currentValue = map(val, 0, 1023, this->mini, this->maxi);
 }
 
-unsigned long ButtonsCommanderPotentiometer::Loop()
+unsigned long ButtonsCommanderPotentiometer::loop()
 {
 	int val = analogRead(pin);
 

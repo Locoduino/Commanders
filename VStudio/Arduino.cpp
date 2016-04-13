@@ -5,6 +5,7 @@
 
 #include "arduino.h"
 #include "Serial.hpp"
+#include "Wire.h"
 #include "arduino2.hpp"
 
 //////////////////////////////////////////
@@ -98,6 +99,11 @@ void SerialClass::println(int value, int i)
 	printf("\n");
 	memo.clear();
 }
+
+//////////////////////////////////////////
+// Wire
+
+WireClass WireClass::WireInstance;
 
 //////////////////////////////////////////
 // Arduino 2

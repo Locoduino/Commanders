@@ -1,5 +1,5 @@
 /*************************************************************
-project: <Universal Accessory Decoder>
+project: <Commanders>
 author: <Thierry PARIS>
 description: <Switch button with debounce.>
 *************************************************************/
@@ -16,7 +16,7 @@ ButtonsCommanderSwitch::ButtonsCommanderSwitch(byte inIdNumber) : ButtonsCommand
 	this->debounceDelay = 50;
 }
 
-void ButtonsCommanderSwitch::Setup()
+void ButtonsCommanderSwitch::begin()
 {
 	for (byte i = 0; i < this->IdAddCounter; i++)
 	{
@@ -50,7 +50,7 @@ void ButtonsCommanderSwitch::AddId(unsigned long inId, int inPin)
 	pinMode2f(this->pId[this->IdAddCounter].Pin, INPUT_PULLUP);
 }
 
-unsigned long ButtonsCommanderSwitch::Loop()
+unsigned long ButtonsCommanderSwitch::loop()
 {
 	if (this->IdLoopCounter >= this->IdAddCounter)
 		this->IdLoopCounter = 0;

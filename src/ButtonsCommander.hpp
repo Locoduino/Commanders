@@ -20,14 +20,14 @@ class ButtonsCommander : Commander
 	public:
 		ButtonsCommander();
 
-		void Setup();
+		void begin();
 		ButtonsCommanderButton *Add(ButtonsCommanderButton *inpButton);
 		inline ButtonsCommanderButton *GetLastSelectedButton() const { return this->pLastSelectedButton; }
 		ButtonsCommanderButton* GetFromId(unsigned long inId) const;
 		void RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData);
 
 	public:
-		unsigned long Loop();
+		unsigned long loop();
 };
 
 //-------------------------------------------------------------------

@@ -131,16 +131,25 @@
   <ItemGroup>
     <ClCompile Include="..\src\ButtonsCommander.cpp" />
     <ClCompile Include="..\src\ButtonsCommanderButton.cpp" />
+    <ClCompile Include="..\src\CANCommander.cpp" />
     <ClCompile Include="..\src\Commander.cpp" />
     <ClCompile Include="..\src\Commanders.cpp" />
+    <ClCompile Include="..\src\DccCommander.cpp" />
+    <ClCompile Include="..\src\TextInterpreter.cpp" />
     <ClCompile Include="ButtonsCommanderKeyboard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\ButtonsCommander.hpp" />
     <ClInclude Include="..\src\ButtonsCommanderButton.hpp" />
+    <ClInclude Include="..\src\CANCommander.hpp" />
     <ClInclude Include="..\src\Commander.hpp" />
     <ClInclude Include="..\src\Commanders.h" />
+    <ClInclude Include="..\src\DccCommander.hpp" />
+    <ClInclude Include="..\src\TextInterpreter.hpp" />
     <ClInclude Include="ButtonsCommanderKeyboard.hpp" />
+    <ClInclude Include="DCC_Decoder.hpp" />
+    <ClInclude Include="mcp_can.h" />
+    <ClInclude Include="mcp_can_dfs.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

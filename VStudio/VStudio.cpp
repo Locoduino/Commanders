@@ -79,8 +79,13 @@ void CommandersEventHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, i
 void setup()
 {
 	COMMANDERS_SET_STATUSLED(13);
+	COMMANDERS_SET_EVENTHANDLER(CommandersEventHandler);
 
 	END_COMMANDERS_SETUP;
+
+	TextInterpreter TI;
+
+	TI.SendString("127/a/200");
 }
 
 void loop()

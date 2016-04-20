@@ -42,6 +42,10 @@
 // from .cpp to .ori, and from .hpp to from ori.
 // See below the file names related to each exclusion:
 //
+//NO_CANCOMMANDER
+//	CANCommander.cpp
+//	CANCommander.hpp
+//
 //NO_DCCCOMMANDER
 //	DccCommander.cpp
 //	DccCommander.hpp
@@ -89,6 +93,7 @@
 //#define NO_BUTTONSCOMMANDERSWITCH
 //#define NO_BUTTONSCOMMANDERPOTENTIOMETER
 //#define NO_DCCCOMMANDER
+#define NO_CANCOMMANDER
 
 /////////////////////////////////////
 
@@ -112,6 +117,10 @@
 #endif
 #endif
 
+#ifndef NO_CANCOMMANDER
+#include "CANCommander.hpp"
+#endif
+
 #ifndef NO_DCCCOMMANDER
 #include "DccCommander.hpp"
 #endif
@@ -121,6 +130,7 @@
 #endif
 
 #include "SerialCommander.hpp"
+#include "TextInterpreter.hpp"
 #include "Commanders.hpp"
 
 ////////////////////////////////////////////////

@@ -1,3 +1,12 @@
+20/04/2016 V0.70
+	- Ajout de TextInterpreter.
+	- Utilisation de TextInterpreter dans SerialCommander
+	- Exclusion de CANCommander quand NO_CANCOMMANDER défini.
+
+	- TextInterpreter added.
+	- Use of TextInterpreter inside SerialCommander.
+	- Exclusion of CANCommander when asked with define NO_CANCOMMANDER.
+
 05/04/2016 V0.64
 	- Ajout d'une Led de statut commune à tous les Commanders.
 	- Renommage de tous les 'Setup' en 'begin' et 'Loop' en 'loop'.

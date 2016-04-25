@@ -52,6 +52,10 @@
 //	DCC_Decoder.cpp
 //	DCC_Decoder.hpp
 //
+//NO_I2CCOMMANDER
+//	I2CCommander.cpp
+//	I2CCommander.hpp
+//
 //NO_BUTTONSCOMMANDER
 //	ButtonsCommander.cpp
 //	ButtonsCommander.hpp
@@ -125,6 +129,10 @@
 #include "DccCommander.hpp"
 #endif
 
+#ifndef NO_I2CCOMMANDER
+#include "I2CCommander.hpp"
+#endif
+
 #ifndef NO_BUTTONSCOMMANDER
 #include "ButtonsCommander.hpp"
 #endif
@@ -174,6 +182,29 @@
 #define START_SERIAL_COMMANDER_SETUPEVENT(eventFct) \
 			Commanders::StartSetup(eventFct); \
 			macro_serial.begin(speed)
+
+// I2C
+#define DECLARE_I2C_SLAVE_COMMANDER(SLAVE_NUMBER)	\
+			I2CCommander macro_i2c_slave(SLAVE_NUMBER);
+
+#define START_I2C_SLAVE_COMMANDER_SETUP \
+			Commanders::StartSetup(); \
+			macro_i2c_slave.begin()
+
+#define START_I2C_SLAVE_COMMANDER_SETUPEVENT(eventFct) \
+			Commanders::StartSetup(eventFct); \
+			macro_i2c_slave.begin()
+
+#define DECLARE_I2C_MASTER_COMMANDER	\
+			I2CCommander macro_i2c_master;
+
+#define START_I2C_MASTER_COMMANDER_SETUP \
+			Commanders::StartSetup(); \
+			macro_i2c_master.begin()
+
+#define START_I2C_MASTER_COMMANDER_SETUPEVENT(eventFct) \
+			Commanders::StartSetup(eventFct); \
+			macro_i2c_master.begin()
 
 // Common
 #define COMMANDERS_SET_EVENTHANDLER(func)	Commanders::SetEventHandler(func)

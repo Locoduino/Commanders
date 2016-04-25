@@ -96,6 +96,7 @@
     <ClInclude Include="..\src\Commanders.h" />
     <ClInclude Include="..\src\Commanders.hpp" />
     <ClInclude Include="..\src\DccCommander.hpp" />
+    <ClInclude Include="..\src\I2CCommander.hpp" />
     <ClInclude Include="..\src\SerialCommander.hpp" />
     <ClInclude Include="..\src\TextInterpreter.hpp" />
     <ClInclude Include="arduino.h" />
@@ -120,6 +121,7 @@
     <ClCompile Include="..\src\Commander.cpp" />
     <ClCompile Include="..\src\Commanders.cpp" />
     <ClCompile Include="..\src\DccCommander.cpp" />
+    <ClCompile Include="..\src\I2CCommander.cpp" />
     <ClCompile Include="..\src\TextInterpreter.cpp" />
     <ClCompile Include="ButtonsCommanderKeyboard.cpp" />
     <ClCompile Include="VStudio.cpp" />

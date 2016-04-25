@@ -96,8 +96,9 @@
 //#define NO_BUTTONSCOMMANDERANALOGPUSHES
 //#define NO_BUTTONSCOMMANDERSWITCH
 //#define NO_BUTTONSCOMMANDERPOTENTIOMETER
-//#define NO_DCCCOMMANDER
 #define NO_CANCOMMANDER
+//#define NO_DCCCOMMANDER
+//#define NO_I2CCOMMANDER
 
 /////////////////////////////////////
 
@@ -184,27 +185,16 @@
 			macro_serial.begin(speed)
 
 // I2C
-#define DECLARE_I2C_SLAVE_COMMANDER(SLAVE_NUMBER)	\
+#define DECLARE_I2C_COMMANDER(SLAVE_NUMBER)	\
 			I2CCommander macro_i2c_slave(SLAVE_NUMBER);
 
-#define START_I2C_SLAVE_COMMANDER_SETUP \
+#define START_I2C_COMMANDER_SETUP \
 			Commanders::StartSetup(); \
 			macro_i2c_slave.begin()
 
-#define START_I2C_SLAVE_COMMANDER_SETUPEVENT(eventFct) \
+#define START_I2C_COMMANDER_SETUPEVENT(eventFct) \
 			Commanders::StartSetup(eventFct); \
 			macro_i2c_slave.begin()
-
-#define DECLARE_I2C_MASTER_COMMANDER	\
-			I2CCommander macro_i2c_master;
-
-#define START_I2C_MASTER_COMMANDER_SETUP \
-			Commanders::StartSetup(); \
-			macro_i2c_master.begin()
-
-#define START_I2C_MASTER_COMMANDER_SETUPEVENT(eventFct) \
-			Commanders::StartSetup(eventFct); \
-			macro_i2c_master.begin()
 
 // Common
 #define COMMANDERS_SET_EVENTHANDLER(func)	Commanders::SetEventHandler(func)

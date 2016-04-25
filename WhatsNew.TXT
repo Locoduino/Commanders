@@ -1,3 +1,8 @@
+25/04/2016 V0.71
+	- Ajout de I2CCommander, en receveur uniquement pour des questions de timing.
+
+	- I2CCommander added. Only a receiver to avoid timing problems.
+
 20/04/2016 V0.70
 	- Ajout de TextInterpreter.
 	- Utilisation de TextInterpreter dans SerialCommander

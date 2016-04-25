@@ -20,7 +20,7 @@ ButtonsCommanderAnalogPushes::ButtonsCommanderAnalogPushes(byte inNumberOfItems)
 
 void ButtonsCommanderAnalogPushes::begin(int inButtonPin, unsigned long *inpIds, int *inpButtonValues, int inTolerancy)
 {	
-	//CHECKPIN(inButtonPin, "ButtonsCommanderAnalogPushes::Setup");
+	//CHECKPIN(inButtonPin, "ButtonsCommanderAnalogPushes::begin");
 
 	this->analogPin = inButtonPin;
 	this->readingTolerancy = inTolerancy;

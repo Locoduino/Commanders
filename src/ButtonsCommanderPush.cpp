@@ -30,12 +30,12 @@ ButtonsCommanderPush::ButtonsCommanderPush(unsigned long inId) : ButtonsCommande
 
 void ButtonsCommanderPush::begin(int inButtonPin, byte inIdNumber)
 {	
-	//CHECKPIN(inButtonPin, "ButtonsCommanderPush::Setup");
+	//CHECKPIN(inButtonPin, "ButtonsCommanderPush::begin");
 
 #ifdef DEBUG_MODE
 	if (this->IdSize > 0)
 	{
-		Serial.println(F("ButtonsCommanderPush::Setup : the constructor has already defined only 1 ID !"));
+		Serial.println(F("ButtonsCommanderPush::begin : the constructor has already defined only 1 ID !"));
 		return;
 	}
 #endif

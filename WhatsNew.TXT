@@ -1,3 +1,8 @@
+27/04/2016 V0.72
+	- Renommage de Setup en begin dans les sources Dcc.
+
+	- Rename of Setup to begin in Dcc sources.
+	
 25/04/2016 V0.71
 	- Ajout de I2CCommander, en receveur uniquement pour des questions de timing.
 

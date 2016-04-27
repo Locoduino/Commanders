@@ -68,8 +68,8 @@ class DCC_Decoder
 public:
 	DCC_Decoder() {}
 
-	void SetupDecoder(byte mfgID, byte mfgVers, byte interrupt) {}    // Used for Decoder
-	void SetupMonitor(byte interrupt) {}                              // Used when building a monitor
+	void beginDecoder(byte mfgID, byte mfgVers, byte interrupt) {}    // Used for Decoder
+	void beginMonitor(byte interrupt) {}                              // Used when building a monitor
 
 	void SetBasicAccessoryDecoderPacketHandler(BasicAccDecoderPacket func, boolean allPackets) {}
 	void SetInterruptMonitor(InterruptMonitor func) {}

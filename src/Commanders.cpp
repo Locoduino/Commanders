@@ -15,7 +15,7 @@ void Commanders::StartSetup(int inStatusLedPin)
 	Serial.begin(115200);
 
 	Serial.println(F(""));
-	Serial.println(F("Commanders V0.70"));
+	Serial.println(F("Commanders V0.71"));
 	Serial.println(F("Developed by Thierry Paris."));
 	Serial.println(F(""));
 

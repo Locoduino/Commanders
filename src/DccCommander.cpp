@@ -78,7 +78,7 @@ void StatusBlink_handler()
 
 void DccCommander::begin(int i, int j, int k, boolean inUseRawDccAddresses)
 {
-	DCC.SetupDecoder(i, j, k);
+	DCC.beginDecoder(i, j, k);
 	DccCommander::UseRawDccAddresses = inUseRawDccAddresses;
 
 	if (Commander::StatusLedPin != DP_INVALID)

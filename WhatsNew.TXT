@@ -1,3 +1,8 @@
+27/04/2016 V0.71
+	- Renommage de Setup en begin dans les sources Dcc.
+
+	- Rename of Setup to begin in Dcc sources.
+
 20/04/2016 V0.70
 	- Ajout de TextInterpreter.
 	- Utilisation de TextInterpreter dans SerialCommander

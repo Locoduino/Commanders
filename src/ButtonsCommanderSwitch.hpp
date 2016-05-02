@@ -4,21 +4,16 @@
 //-------------------------------------------------------------------
 
 #include "Commanders.h"
+#include "Chain.hpp"
 
 //-------------------------------------------------------------------
 
-#ifdef DEBUG_MODE
-#define CHECKPORT(type, val, text)	CheckPortNb(type, val, F(text))
-//#define CHECKPIN(val, text)		Driver::CheckPinNb(val, F(text))
-#else
-#define CHECKPORT(type, val, text)
-//#define CHECKPIN(val, text)
-#endif
-
 struct IdPin
 {
-	unsigned long Id;
 	GPIO_pin_t Pin;
+	unsigned long Id;
+	COMMANDERS_EVENT_TYPE Event;
+	int Data;
 
 	int buttonState;       // the current reading from the input pin
 	int lastButtonState;   // the previous reading from the input pin
@@ -29,42 +24,41 @@ class ButtonsCommanderSwitch : public ButtonsCommanderButton
 {
  private:
 	unsigned long debounceDelay;    // the debounce time; increase if the output flickers
-	
-	byte IdSize;
-	byte IdAddCounter;
-	byte IdLoopCounter;
-	IdPin *pId;
-	int IdState;
+	CHAINLIST<IdPin> IdPins;
 
 public:
-	ButtonsCommanderSwitch(byte inIdNumber);
+	ButtonsCommanderSwitch();
 	
 	void begin();
-	void AddId(unsigned long inId, int inPin);
+	void AddId(int inPin, unsigned long inId, COMMANDERS_EVENT_TYPE inEvent = COMMANDERS_EVENT_TOGGLE, int inData = 0);
 	unsigned long loop();
-	inline unsigned long GetCurrentLoopId() const { return this->pId[this->IdState].Id; }
 };
 
 #define SWITCH_BUTTON(name, pin, ID) \
-	ButtonsCommanderSwitch *name = new ButtonsCommanderSwitch(1); \
-	name->AddId(ID); \
+	ButtonsCommanderSwitch *name = new ButtonsCommanderSwitch(); \
+	name->AddId(pin, ID); \
 	name->begin(); \
 	macro_buttons.Add(name);
 
-#define SWITCH_BUTTON_2ID(name, pin, ID1, ID2) \
-	ButtonsCommanderSwitch *name = new ButtonsCommanderSwitch(2); \
-	name->AddId(ID1); \
-	name->AddId(ID2); \
+#define SWITCH_BUTTON_2ID_MOTOR(name, pin1, ID1, pin2, ID2) \
+	ButtonsCommanderSwitch *name = new ButtonsCommanderSwitch(); \
+	name->AddId(pin1, ID1, COMMANDERS_EVENT_MOVELEFT); \
+	name->AddId(pin2, ID2, COMMANDERS_EVENT_MOVERIGHT); \
 	name->begin(); \
 	macro_buttons.Add(name);
 
-#define SWITCH_BUTTON_IDS(name, pin, number) \
-	ButtonsCommanderSwitch *name = new ButtonsCommanderSwitch(number); \
+#define SWITCH_BUTTON_2ID_LIGHT(name, pin1, ID1, pin2, ID2) \
+	ButtonsCommanderSwitch *name = new ButtonsCommanderSwitch(); \
+	name->AddId(pin1, ID1, COMMANDERS_EVENT_MOVESTOP); \
+	name->AddId(pin2, ID2, COMMANDERS_EVENT_MOVELEFT); \
 	name->begin(); \
 	macro_buttons.Add(name);
 
 #define SWITCH_BUTTON_ADDID(name, pin, ID) \
-	name->AddId(ID, pin);
+	name->AddId(pin, ID);
+
+#define SWITCH_BUTTON_ADDID_EVENT(name, pin, ID, EVENT, data) \
+	name->AddId(pin, ID, EVENT, data);
 
 //-------------------------------------------------------------------
 #endif

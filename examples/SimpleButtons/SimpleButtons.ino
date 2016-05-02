@@ -19,26 +19,8 @@ DccCommander dcc;
 
 void CommandersEventHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
 {
-	Serial.print(F("Commander event : Address : "));
-	Serial.print(DCCID(inId), DEC);
-	Serial.print(F(" / "));
-	Serial.print(DCCACTIVATION(inId), DEC);
-	Serial.print(F(" / "));
-	switch (inEvent)
-	{
-	case COMMANDERS_EVENT_NONE:		Serial.println(F("NONE"));		break;
-	case COMMANDERS_EVENT_SELECTED:		Serial.println(F("SELECTED"));		break;
-	case COMMANDERS_EVENT_ABSOLUTEMOVE:	
-		Serial.print(F("ABSOLUTEMOVE : "));	
-		Serial.println(inData, DEC);
-		break;
-	case COMMANDERS_EVENT_RELATIVEMOVE:	
-		Serial.print(F("RELATIVEMOVE : "));	
-		Serial.println(inData, DEC);
-		break;
-	}
+	DccCommander::printEvent(inId, inEvent, inData);
 }
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

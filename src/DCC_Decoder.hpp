@@ -97,7 +97,7 @@ public:
     DCC_Decoder();
     
         // Called from setup in Arduino Sketch. Set mfgID, mfgVers and interrupt. Call one SetupXXX
-    void SetupDecoder(byte mfgID, byte mfgVers, byte interrupt);    // Used for Decoder
+    void beginDecoder(byte mfgID, byte mfgVers, byte interrupt);    // Used for Decoder
     void SetupMonitor(byte interrupt);                              // Used when building a monitor
     
         // All packets are sent to RawPacketHandler. Return true to stop dispatching to other handlers.

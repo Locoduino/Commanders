@@ -25,7 +25,7 @@ unsigned long ButtonsCommanderKeyboard::loop()
 	{
 		//this->SelectLastLoop();
 		lastLoopKey = 0;
-#ifdef DEBUG_MODE
+#ifdef COMMANDERS_DEBUG_MODE
 		Serial.print(F("Keyboard "));
 		char str[3];
 		str[0] = key;
@@ -33,8 +33,8 @@ unsigned long ButtonsCommanderKeyboard::loop()
 		Serial.print(str);
 		Serial.println(F(" pressed "));
 #endif
-		Commander::RaiseEvent(this->GetId(), COMMANDERS_EVENT_SELECTED, 0);
-		eventType = COMMANDERS_EVENT_SELECTED;
+		Commander::RaiseEvent(this->GetId(), COMMANDERS_EVENT_TOGGLE, 0);
+		eventType = COMMANDERS_EVENT_TOGGLE;
 		eventData = 0;
 		return this->GetId();
 	}

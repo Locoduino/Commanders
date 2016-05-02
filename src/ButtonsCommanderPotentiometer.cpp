@@ -31,7 +31,7 @@ unsigned long ButtonsCommanderPotentiometer::loop()
 
 	if (val < this->currentValue - this->moveAccuracy || val > this->currentValue + this->moveAccuracy)
 	{
-#ifdef DEBUG_MODE
+#ifdef COMMANDERS_DEBUG_MODE
 		Serial.print(F("Potentiometer new value : "));
 		Serial.println(val, DEC);
 #endif

@@ -11,11 +11,11 @@ int Commanders::lastEventData;
 
 void Commanders::StartSetup(int inStatusLedPin)
 {
-#ifdef DEBUG_MODE
+#ifdef COMMANDERS_DEBUG_MODE
 	Serial.begin(115200);
 
 	Serial.println(F(""));
-	Serial.println(F("Commanders V0.72"));
+	Serial.println(F("Commanders V0.80"));
 	Serial.println(F("Developed by Thierry Paris."));
 	Serial.println(F(""));
 
@@ -43,10 +43,35 @@ void Commanders::StartSetup(CommandersEventHandlerFunction func, int inStatusLed
 
 void Commanders::EndSetup()
 {
-#ifdef DEBUG_MODE
+#ifdef COMMANDERS_DEBUG_MODE
 	Serial.println(F("*** Setup Commanders Finished."));
 #endif
 }
+
+#ifdef COMMANDERS_DEBUG_MODE
+void Commanders::printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inEventData)
+{
+	Serial.print(F("Commander event : Address : "));
+	Serial.print(inId, DEC);
+	Serial.print(F(" / "));
+	switch (inEventType)
+	{
+	case COMMANDERS_EVENT_NONE:			Serial.println(F("NONE"));		break;
+	case COMMANDERS_EVENT_TOGGLE:		Serial.println(F("TOGGLE"));		break;
+	case COMMANDERS_EVENT_MOVELEFT:		Serial.println(F("MOVELEFT"));		break;
+	case COMMANDERS_EVENT_MOVERIGHT:	Serial.println(F("MOVERIGHT"));		break;
+	case COMMANDERS_EVENT_MOVESTOP:		Serial.println(F("MOVESTOP"));		break;
+	case COMMANDERS_EVENT_ABSOLUTEMOVE:
+		Serial.print(F("ABSOLUTEMOVE : "));
+		Serial.println(inEventData, DEC);
+		break;
+	case COMMANDERS_EVENT_RELATIVEMOVE:
+		Serial.print(F("RELATIVEMOVE : "));
+		Serial.println(inEventData, DEC);
+		break;
+	}
+}
+#endif
 
 unsigned long Commanders::loop()
 {

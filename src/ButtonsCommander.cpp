@@ -11,7 +11,7 @@ description: <Buttons Commander>
 #include<stdarg.h>
 #endif
 
-#ifdef DEBUG_MODE
+#ifdef COMMANDERS_DEBUG_MODE
 #define CHECK(val, text)	CheckIndex(val, F(text))
 #else
 #define CHECK(val, text)
@@ -23,19 +23,19 @@ description: <Buttons Commander>
 
 ButtonsCommander::ButtonsCommander()
 {
-	this->pLastSelectedButton = 0;
+	this->pLastSelectedButton = NULL;
 }
 
 void ButtonsCommander::begin()
 {
-#ifdef DEBUG_MODE
+#ifdef COMMANDERS_DEBUG_MODE
 	Serial.println(F("   ButtonsCommander begin"));
 #endif
 }
 
 ButtonsCommanderButton *ButtonsCommander::Add(ButtonsCommanderButton *inButton)
 {
-	if (ButtonsCommander::pFirstButton == 0)
+	if (ButtonsCommander::pFirstButton == NULL)
 	{
 		ButtonsCommander::pFirstButton = inButton;
 		return inButton;
@@ -43,7 +43,7 @@ ButtonsCommanderButton *ButtonsCommander::Add(ButtonsCommanderButton *inButton)
 
 	ButtonsCommanderButton *pCurr = ButtonsCommander::pFirstButton;
 
-	while (pCurr->GetNextButton() != 0)
+	while (pCurr->GetNextButton() != NULL)
 		pCurr = pCurr->GetNextButton();
 
 	pCurr->SetNextButton(inButton);
@@ -55,10 +55,10 @@ ButtonsCommanderButton* ButtonsCommander::GetFromId(unsigned long inId) const
 {
 	ButtonsCommanderButton *pCurr = ButtonsCommander::pFirstButton;
 
-	while (pCurr != 0)
+	while (pCurr != NULL)
 	{
 		ButtonsCommanderButton *pButton = pCurr->GetFromId(inId);
-		if (pButton != 0)
+		if (pButton != NULL)
 			return pButton;
 		pCurr = pCurr->GetNextButton();
 	}
@@ -71,19 +71,19 @@ void ButtonsCommander::RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEv
 	Commander::RaiseEvent(inId, inEvent, inData);
 }
 
-static ButtonsCommanderButton *pCurrentLoopButton = 0;
+static ButtonsCommanderButton *pCurrentLoopButton = NULL;
 
 unsigned long ButtonsCommander::loop()
 {
 	Commander::CommanderPriorityLoop();
 
-	if (pCurrentLoopButton != 0)
+	if (pCurrentLoopButton != NULL)
 		pCurrentLoopButton = pCurrentLoopButton->GetNextButton();
 
-	if (pCurrentLoopButton == 0)
+	if (pCurrentLoopButton == NULL)
 		pCurrentLoopButton = this->pFirstButton;
 
-	if (pCurrentLoopButton == 0)
+	if (pCurrentLoopButton == NULL)
 		return UNDEFINED_ID;
 
 	unsigned long ID = pCurrentLoopButton->loop();
@@ -97,7 +97,7 @@ unsigned long ButtonsCommander::loop()
 	if (ID == UNDEFINED_ID)
 		return UNDEFINED_ID;
 
-#ifdef DEBUG_MODE
+#ifdef COMMANDERS_DEBUG_MODE
 	Serial.print(F("ButtonsCommanderButton id:"));
 	Serial.print(ID, DEC);
 	Serial.println(F(" selected !"));

@@ -11,7 +11,7 @@
 #include "DCC_Decoder.hpp"
 #endif
 
-#ifndef NO_DCC
+#ifndef NO_DCCCOMMANDER
 
 //-------------------------------------------------------------------
 
@@ -41,9 +41,10 @@ class DccCommander : Commander
 
 		inline unsigned long GetLastDccId() const { return LastDccId; }
 
-#ifdef DEBUG_MODE
+#ifdef COMMANDERS_DEBUG_MODE
 public:
 	void CheckIndex(unsigned char inIndex, const __FlashStringHelper *infunc);
+	static void printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inEventData);
 #endif
 };
 

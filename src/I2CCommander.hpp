@@ -7,7 +7,7 @@
 
 #ifndef NO_I2CCOMMANDER
 #ifdef VISUALSTUDIO
-	#include "../VStudio/Wire.h"
+	#include "../VStudio/Wire.hpp"
 #else
 	#include <Wire.h>
 #endif

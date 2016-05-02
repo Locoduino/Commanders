@@ -1,23 +1,26 @@
+//-------------------------------------------------------------------
+#ifndef __commanders_H__
+#define __commanders_H__
+//-------------------------------------------------------------------
+
 ////////////////////////////////////////////////////////
 // Add a '//' at the beginning of the line to be in 
 // release mode.
-#define DEBUG_MODE
+#define COMMANDERS_DEBUG_MODE
 
 ///////////////////////////////////////////////////////
 // Verbose mode lets you see all actions done by the 
 // library, but with a real flood of text to console...
-// Has no effect if DEBUG_MODE is not activated.
+// Has no effect if COMMANDERS_DEBUG_MODEis not activated.
 //#define DEBUG_VERBOSE_MODE
 
 #define  GPIO2_PREFER_SPEED    1
 
 #ifdef VISUALSTUDIO
-#include "../VStudio/arduino.h"
-#include "../VStudio/arduino2.hpp"
-#include "../VStudio/Serial.hpp"
+#include "../../DIO2/VStudio/DIO2.h"
 #else
 #include "arduino.h"
-#include "arduino2.hpp"
+#include "DIO2.h"
 #endif
 
 #ifdef VISUALSTUDIO
@@ -96,31 +99,13 @@
 //#define NO_BUTTONSCOMMANDERANALOGPUSHES
 //#define NO_BUTTONSCOMMANDERSWITCH
 //#define NO_BUTTONSCOMMANDERPOTENTIOMETER
-#define NO_CANCOMMANDER
+//#define NO_CANCOMMANDER
 //#define NO_DCCCOMMANDER
 //#define NO_I2CCOMMANDER
 
 /////////////////////////////////////
 
 #include "Commander.hpp"
-
-#ifndef NO_BUTTONSCOMMANDER
-#ifndef NO_BUTTONSCOMMANDERPUSH
-#include "ButtonsCommanderPush.hpp"
-#endif
-#ifndef NO_BUTTONSCOMMANDERANALOGPUSHES
-#include "ButtonsCommanderAnalogPushes.hpp"
-#endif
-#ifndef NO_BUTTONSCOMMANDERSWITCH
-#include "ButtonsCommanderSwitch.hpp"
-#endif
-#ifndef NO_BUTTONSCOMMANDERENCODER
-#include "ButtonsCommanderEncoder.hpp"
-#endif
-#ifndef NO_BUTTONSCOMMANDERPOTENTIOMETER
-#include "ButtonsCommanderPotentiometer.hpp"
-#endif
-#endif
 
 #ifndef NO_CANCOMMANDER
 #include "CANCommander.hpp"
@@ -140,6 +125,7 @@
 
 #include "SerialCommander.hpp"
 #include "TextInterpreter.hpp"
+
 #include "Commanders.hpp"
 
 ////////////////////////////////////////////////
@@ -184,20 +170,35 @@
 			Commanders::StartSetup(eventFct); \
 			macro_serial.begin(speed)
 
+// CAN
+#define DECLARE_CAN_COMMANDER(SLAVE_NUMBER)	\
+			CANCommander macro_can(SLAVE_NUMBER);
+
+#define START_CAN_COMMANDER_SETUP(inPin, inSpeed, inInterrupt) \
+			Commanders::StartSetup(); \
+			macro_can.begin(inPin, inSpeed, inInterrupt)
+
+#define START_CAN_COMMANDER_SETUPEVENT(eventFct, inPin, inSpeed, inInterrupt) \
+			Commanders::StartSetup(eventFct); \
+			macro_can.begin(inPin, inSpeed, inInterrupt)
+
 // I2C
 #define DECLARE_I2C_COMMANDER(SLAVE_NUMBER)	\
-			I2CCommander macro_i2c_slave(SLAVE_NUMBER);
+			const uint8_t I2CslaveNb = SLAVE_NUMBER; \
+			I2CCommander macro_i2c;
 
 #define START_I2C_COMMANDER_SETUP \
 			Commanders::StartSetup(); \
-			macro_i2c_slave.begin()
+			macro_i2c.begin(I2CslaveNb)
 
 #define START_I2C_COMMANDER_SETUPEVENT(eventFct) \
 			Commanders::StartSetup(eventFct); \
-			macro_i2c_slave.begin()
+			macro_i2c.begin(I2CslaveNb)
 
 // Common
 #define COMMANDERS_SET_EVENTHANDLER(func)	Commanders::SetEventHandler(func)
 #define COMMANDERS_SET_STATUSLED(pin)		Commanders::SetStatusLedPin(pin)
 #define END_COMMANDERS_SETUP 	Commanders::EndSetup()
 #define COMMANDERS_LOOP			Commanders::loop()
+
+#endif

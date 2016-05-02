@@ -12,52 +12,32 @@ ButtonsCommanderPush::ButtonsCommanderPush() : ButtonsCommanderButton(UNDEFINED_
 {
 	this->buttonPin = (GPIO_pin_t)DP_INVALID;
 	this->lastButtonState = LOW;
-	this->IdAddCounter = 0;
-	this->IdLoopCounter = 0;
-	this->IdSize = 0;
-	this->pId = NULL;
 	this->lastDebounceTime = 0;
 	this->debounceDelay = 50;
 }
 
-ButtonsCommanderPush::ButtonsCommanderPush(unsigned long inId) : ButtonsCommanderPush()
+ButtonsCommanderPush::ButtonsCommanderPush(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inData) : ButtonsCommanderPush()
 {
-	this->IdSize = 1;
-	this->pId = new unsigned long[1];
-
-	this->AddId(inId);
+	this->AddEvent(inId, inEventType, inData);
 }
 
-void ButtonsCommanderPush::begin(int inButtonPin, byte inIdNumber)
+void ButtonsCommanderPush::begin(int inButtonPin)
 {	
 	//CHECKPIN(inButtonPin, "ButtonsCommanderPush::begin");
 
-#ifdef DEBUG_MODE
-	if (this->IdSize > 0)
-	{
-		Serial.println(F("ButtonsCommanderPush::begin : the constructor has already defined only 1 ID !"));
-		return;
-	}
-#endif
 	this->buttonPin = Arduino_to_GPIO_pin(inButtonPin);
 
 	pinMode2f(this->buttonPin, INPUT_PULLUP);
-	this->IdSize = inIdNumber;
-	this->pId = new unsigned long[inIdNumber];
 }
 
 // Returns the index of the new added position.
-void ButtonsCommanderPush::AddId(unsigned long inId)
+void ButtonsCommanderPush::AddEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inData)
 {
-#ifdef DEBUG_MODE
-	if (this->IdAddCounter == this->IdSize)
-	{
-		Serial.println(F("ButtonsCommanderPush::AddId : Too many Ids for this push button !"));
-		return;
-	}
-#endif
-
-	this->pId[this->IdAddCounter++] = inId;
+	Event event;
+	event.Id = inId;
+	event.EventType = inEventType;
+	event.Data = inData;
+	this->Events.AddItem(event);
 }
 
 unsigned long ButtonsCommanderPush::loop()
@@ -94,18 +74,12 @@ unsigned long ButtonsCommanderPush::loop()
 			// only toggle the state if the new button state is LOW
 			if (this->buttonState == LOW)
 			{
-				foundID = this->GetCurrentLoopId();
-				eventType = COMMANDERS_EVENT_SELECTED;
-				eventData = 0;
-				Commander::RaiseEvent(this->GetCurrentLoopId(), COMMANDERS_EVENT_SELECTED, 0);
-				this->IdLoopCounter++;
-				if (this->IdLoopCounter >= this->IdAddCounter)
-					this->IdLoopCounter = 0;
-#ifdef DEBUG_MODE
-				Serial.print(F("ButtonsCommanderPush currentloopid:"));
-				Serial.println(this->IdLoopCounter, DEC);
-#endif
+				foundID = this->Events.pCurrentItem->Obj.Id;
+				eventType = this->Events.pCurrentItem->Obj.EventType;
+				eventData = this->Events.pCurrentItem->Obj.Data;
+				Commander::RaiseEvent(foundID, eventType, eventData);
 
+				this->Events.NextCurrent();
 			}
 		}
 		this->lastDebounceTime = 0;    

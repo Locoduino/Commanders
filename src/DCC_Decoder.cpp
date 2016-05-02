@@ -655,7 +655,7 @@ void DCC_Decoder::State_Boot()
 //
 // SetupDecoder
 //
-void DCC_Decoder::SetupDecoder(byte mfgID, byte mfgVers, byte interrupt)  
+void DCC_Decoder::beginDecoder(byte mfgID, byte mfgVers, byte interrupt)  
 {
 	if( gInterruptMicros == 0 )
 	{        

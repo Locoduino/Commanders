@@ -6,101 +6,80 @@ description: <Switch button with debounce.>
 
 #include "ButtonsCommanderSwitch.hpp"
 
-ButtonsCommanderSwitch::ButtonsCommanderSwitch(byte inIdNumber) : ButtonsCommanderButton(UNDEFINED_ID)
+ButtonsCommanderSwitch::ButtonsCommanderSwitch() : ButtonsCommanderButton(UNDEFINED_ID)
 {
-	this->IdSize = inIdNumber;
-	this->pId = new IdPin[this->IdSize];
-	this->IdAddCounter = 0;
-	this->IdLoopCounter = 0;
-
 	this->debounceDelay = 50;
+}
+
+void beginItem(const IdPin &inIdPin)
+{
+	if (inIdPin.Pin != DP_INVALID)
+		pinMode2f(inIdPin.Pin, INPUT_PULLUP);
 }
 
 void ButtonsCommanderSwitch::begin()
 {
-	for (byte i = 0; i < this->IdAddCounter; i++)
-	{
-		IdPin *id = &(this->pId[i]);
-		if (id->Pin == DP_INVALID)
-			continue;
-
-		pinMode2f(id->Pin, INPUT_PULLUP);
-	}
+	CHAIN_ENUMERATE(IdPin, this->IdPins, beginItem);
 }
 
 // Returns the index of the new added position.
-void ButtonsCommanderSwitch::AddId(unsigned long inId, int inPin)
+void ButtonsCommanderSwitch::AddId(int inPin, unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
 {
-	//CHECKPIN(inPin, "ButtonsCommanderSwitch::AddDccId");
+	IdPin idpin;
+	idpin.Pin = Arduino_to_GPIO_pin(inPin);
+	idpin.Id = inId;
+	idpin.Event = inEvent;
+	idpin.Data = inData;
+	this->IdPins.AddItem(idpin);
 
-#ifdef DEBUG_MODE
-	if (this->IdAddCounter == this->IdSize)
-	{
-		Serial.println(F("ButtonsCommanderSwitch::AddId : Too many Id for this switch !"));
-		return;
-	}
-#endif
-
-	this->pId[this->IdAddCounter].Id = inId;
-	this->pId[this->IdAddCounter].Pin = Arduino_to_GPIO_pin(inPin);
-	this->pId[this->IdAddCounter].buttonState = 0;
-	this->pId[this->IdAddCounter].lastButtonState = LOW;
-	this->pId[this->IdAddCounter++].lastDebounceTime = 0;
-
-	pinMode2f(this->pId[this->IdAddCounter].Pin, INPUT_PULLUP);
+	pinMode2f(idpin.Pin, INPUT_PULLUP);
 }
 
 unsigned long ButtonsCommanderSwitch::loop()
 {
-	if (this->IdLoopCounter >= this->IdAddCounter)
-		this->IdLoopCounter = 0;
-
-	IdPin *id = &(this->pId[this->IdLoopCounter++]);
-	if (id->Pin == DP_INVALID)
-		return UNDEFINED_ID;
-
 	// read the state of the switch into a local variable:
-	int reading = digitalRead2f(id->Pin);
+	int reading = digitalRead2f(this->IdPins.pCurrentItem->Obj.Pin);
 
 	// check to see if you just pressed the button 
 	// (i.e. the input went from LOW to HIGH),  and you've waited 
 	// long enough since the last press to ignore any noise:  
 
 	// If the switch changed, due to noise or pressing:
-	if (reading != id->lastButtonState)
+	if (reading != this->IdPins.pCurrentItem->Obj.lastButtonState)
 	{
 		// reset the debouncing timer
-		id->lastDebounceTime = millis();
+		this->IdPins.pCurrentItem->Obj.lastDebounceTime = millis();
 	}
 
 	unsigned long haveFound = UNDEFINED_ID;
 
-	if (id->lastDebounceTime > 0 && (millis() - id->lastDebounceTime) > this->debounceDelay)
+	if (this->IdPins.pCurrentItem->Obj.lastDebounceTime > 0 && (millis() - this->IdPins.pCurrentItem->Obj.lastDebounceTime) > this->debounceDelay)
 	{
 		// whatever the reading is at, it's been there for longer
 		// than the debounce delay, so take it as the actual current state:
 
 		// if the button state has changed:
-		if (reading != id->buttonState)
+		if (reading != this->IdPins.pCurrentItem->Obj.buttonState)
 		{
-			id->buttonState = reading;
+			this->IdPins.pCurrentItem->Obj.buttonState = reading;
 
 			// only toggle the state if the new button state is HIGH
-			if (id->buttonState == HIGH)
+			if (this->IdPins.pCurrentItem->Obj.buttonState == HIGH)
 			{
-				this->IdState = this->IdLoopCounter-1;
-				haveFound = id->Id;
-				eventType = COMMANDERS_EVENT_SELECTED;
-				eventData = 0;
-				Commander::RaiseEvent(id->Id, COMMANDERS_EVENT_SELECTED, 0);
+				haveFound = this->IdPins.pCurrentItem->Obj.Id;
+				eventType = this->IdPins.pCurrentItem->Obj.Event;
+				eventData = this->IdPins.pCurrentItem->Obj.Data;
+				Commander::RaiseEvent(haveFound, eventType, eventData);
 			}
 		}
-		id->lastDebounceTime = 0;
+		this->IdPins.pCurrentItem->Obj.lastDebounceTime = 0;
 	}
 
 	// save the reading.  Next time through the loop,
 	// it'll be the lastButtonState:
-	id->lastButtonState = reading;
+	this->IdPins.pCurrentItem->Obj.lastButtonState = reading;
+
+	this->IdPins.NextCurrent();
 
 	return haveFound;
 }

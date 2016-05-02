@@ -78,11 +78,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\arduino2.hpp" />
-    <ClInclude Include="..\src\arduino2_pins_leonardo.hpp" />
-    <ClInclude Include="..\src\arduino2_pins_mega.hpp" />
-    <ClInclude Include="..\src\arduino2_pins_nano.hpp" />
-    <ClInclude Include="..\src\arduino2_pins_standard.hpp" />
     <ClInclude Include="..\src\ButtonsCommander.hpp" />
     <ClInclude Include="..\src\ButtonsCommanderAnalogPushes.hpp" />
     <ClInclude Include="..\src\ButtonsCommanderAnalogPushesItem.hpp" />
@@ -92,6 +87,7 @@
     <ClInclude Include="..\src\ButtonsCommanderPush.hpp" />
     <ClInclude Include="..\src\ButtonsCommanderSwitch.hpp" />
     <ClInclude Include="..\src\CANCommander.hpp" />
+    <ClInclude Include="..\src\Chain.hpp" />
     <ClInclude Include="..\src\Commander.hpp" />
     <ClInclude Include="..\src\Commanders.h" />
     <ClInclude Include="..\src\Commanders.hpp" />
@@ -99,14 +95,13 @@
     <ClInclude Include="..\src\I2CCommander.hpp" />
     <ClInclude Include="..\src\SerialCommander.hpp" />
     <ClInclude Include="..\src\TextInterpreter.hpp" />
-    <ClInclude Include="arduino.h" />
     <ClInclude Include="ButtonsCommanderKeyboard.hpp" />
     <ClInclude Include="mcp_can.h" />
     <ClInclude Include="mcp_can_dfs.h" />
     <ClInclude Include="Serial.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="Wire.h" />
+    <ClInclude Include="Wire.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\ButtonsCommanderAnalogPushes.cpp" />
@@ -125,11 +120,16 @@
     <ClCompile Include="..\src\TextInterpreter.cpp" />
     <ClCompile Include="ButtonsCommanderKeyboard.cpp" />
     <ClCompile Include="VStudio.cpp" />
-    <ClCompile Include="Arduino.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="Wire.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\WhatsNew.TXT" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DIO2\VStudio\DIO2.vcxproj">
+      <Project>{9d02c580-36d6-41e4-9c52-43b7d2719017}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

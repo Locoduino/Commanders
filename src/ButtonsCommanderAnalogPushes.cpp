@@ -75,10 +75,10 @@ unsigned long ButtonsCommanderAnalogPushes::loop()
 				if (this->pButtons[i].IsPushed(reading))
 				{
 					foundID = this->pButtons[i].GetId();
-					eventType = COMMANDERS_EVENT_SELECTED;
+					eventType = COMMANDERS_EVENT_TOGGLE;
 					eventData = 0;
-					Commander::RaiseEvent(foundID, COMMANDERS_EVENT_SELECTED, 0);
-#ifdef DEBUG_MODE
+					Commander::RaiseEvent(foundID, COMMANDERS_EVENT_TOGGLE, 0);
+#ifdef COMMANDERS_DEBUG_MODE
 					Serial.print(F("Analog push button "));
 					Serial.print(i);
 					Serial.println(F(" pressed"));

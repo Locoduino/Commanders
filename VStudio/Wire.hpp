@@ -3,6 +3,8 @@
 #define __Wire_H__
 //-------------------------------------------------------------------
 
+#include "../../DIO2/VStudio/arduino.h"
+
 #define HardwareWire	WireClass
 #define Wire			WireClass::WireInstance
 

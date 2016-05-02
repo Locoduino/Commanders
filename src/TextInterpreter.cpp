@@ -25,10 +25,10 @@ unsigned long TextInterpreter::SendChar(char inCharacter)
 		{
 			{
 				if (this->eventType == COMMANDERS_EVENT_NONE)
-					this->eventType = COMMANDERS_EVENT_SELECTED;
+					this->eventType = COMMANDERS_EVENT_TOGGLE;
 
-#ifdef DEBUG_MODE
-				if (this->eventType != COMMANDERS_EVENT_SELECTED)
+#ifdef COMMANDERS_DEBUG_MODE
+				if (this->eventType != COMMANDERS_EVENT_TOGGLE)
 				{
 					Serial.print(F("data = "));
 					if (this->neg_sign)
@@ -64,14 +64,14 @@ unsigned long TextInterpreter::SendChar(char inCharacter)
 			switch (step)
 			{
 			case TEXTINTERPRETER_STEP_ID:	
-#ifdef DEBUG_MODE
+#ifdef COMMANDERS_DEBUG_MODE
 				Serial.print(F("id = "));
 				Serial.println(this->id);
 #endif
 				this->step = TEXTINTERPRETER_STEP_TYPE;
 				break;
 			case TEXTINTERPRETER_STEP_TYPE:	
-#ifdef DEBUG_MODE
+#ifdef COMMANDERS_DEBUG_MODE
 				Serial.print(F("event = "));
 				Serial.println(this->eventType);
 #endif
@@ -79,7 +79,7 @@ unsigned long TextInterpreter::SendChar(char inCharacter)
 				this->data = 0;	
 				break;
 			case TEXTINTERPRETER_STEP_DATA:	
-#ifdef DEBUG_MODE
+#ifdef COMMANDERS_DEBUG_MODE
 				Serial.print(F("data = "));
 				if (this->neg_sign)
 					Serial.print(F("-"));
@@ -115,9 +115,12 @@ unsigned long TextInterpreter::SendChar(char inCharacter)
 		case TEXTINTERPRETER_STEP_TYPE:
 			if (this->eventType == COMMANDERS_EVENT_NONE)
 			{
-				if (inCharacter == 's' || inCharacter == 'S')		this->eventType = COMMANDERS_EVENT_SELECTED;
+				if (inCharacter == 't' || inCharacter == 'T')		this->eventType = COMMANDERS_EVENT_TOGGLE;
+				if (inCharacter == 's' || inCharacter == 'S')		this->eventType = COMMANDERS_EVENT_MOVESTOP;
+				if (inCharacter == 'l' || inCharacter == 'L')		this->eventType = COMMANDERS_EVENT_MOVELEFT;
+				if (inCharacter == 'r' || inCharacter == 'R')		this->eventType = COMMANDERS_EVENT_MOVERIGHT;
 				if (inCharacter == 'a' || inCharacter == 'A')		this->eventType = COMMANDERS_EVENT_ABSOLUTEMOVE;
-				if (inCharacter == 'r' || inCharacter == 'R')		this->eventType = COMMANDERS_EVENT_RELATIVEMOVE;
+				if (inCharacter == 'e' || inCharacter == 'E')		this->eventType = COMMANDERS_EVENT_RELATIVEMOVE;
 			}
 			break;
 

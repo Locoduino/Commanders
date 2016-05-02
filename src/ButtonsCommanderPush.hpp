@@ -4,14 +4,14 @@
 //-------------------------------------------------------------------
 
 #include "Commanders.h"
+#include "Chain.hpp"
 
-#ifdef DEBUG_MODE
-#define CHECKPORT(type, val, text)	CheckPortNb(type, val, F(text))
-//#define CHECKPIN(val, text)		Driver::CheckPinNb(val, F(text))
-#else
-#define CHECKPORT(type, val, text)
-//#define CHECKPIN(val, text)
-#endif
+struct Event
+{
+	unsigned long Id;
+	COMMANDERS_EVENT_TYPE EventType;
+	int Data;
+};
 
 //-------------------------------------------------------------------
 // A push button is a hardware device giving a time limited impulsion.
@@ -28,23 +28,19 @@ class ButtonsCommanderPush : public ButtonsCommanderButton
 	unsigned long lastDebounceTime;  // the last time the output pin was toggled
 	unsigned long debounceDelay;    // the debounce time; increase if the output flickers
 	
-	byte IdSize;
-	byte IdAddCounter;
-	byte IdLoopCounter;
-	unsigned long *pId;
+	CHAINLIST<Event> Events;
 
  public:
 	ButtonsCommanderPush();
-	ButtonsCommanderPush(unsigned long inId);
+	ButtonsCommanderPush(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType = COMMANDERS_EVENT_TOGGLE, int inData = 0);
 
-	void begin(int inButtonPin, byte inIdNumber = 1);
-	void AddId(unsigned long inId);
+	void begin(int inButtonPin);
+	void AddEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType = COMMANDERS_EVENT_TOGGLE, int inData = 0);
 	unsigned long loop();
 
 	inline int GetPin() const { return GPIO_to_Arduino_pin(this->buttonPin); }
 	inline GPIO_pin_t GetPin2() const { return this->buttonPin; }
 	inline int GetState() const { return this->buttonState; }
-	inline unsigned long GetCurrentLoopId() const { return this->pId[this->IdLoopCounter]; }
 	
 	static ButtonsCommanderPush Empty;
 };
@@ -54,10 +50,16 @@ class ButtonsCommanderPush : public ButtonsCommanderButton
 	name->begin(pin); \
 	macro_buttons.Add(name);
 
-#define PUSH_BUTTON_IDS(name, pin, number) \
-	ButtonsCommanderPush *name = new ButtonsCommanderPush(); \
-	name->begin(pin, number); \
+#define PUSH_BUTTON_EVENT(name, pin, ID, Event, data) \
+	ButtonsCommanderPush *name = new ButtonsCommanderPush(inId, ID, Event, data); \
+	name->begin(pin); \
 	macro_buttons.Add(name);
+
+#define PUSH_BUTTON_ADDID(name, pin, ID) \
+	name->AddEvent(ID);
+
+#define PUSH_BUTTON_ADDID_EVENT(name, pin, ID, EVENT, data) \
+	name->AddEvent(ID, EVENT, data);
 
 
 //-------------------------------------------------------------------

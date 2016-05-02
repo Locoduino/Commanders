@@ -23,6 +23,9 @@ public:
 	static inline int GetLastEventData() { return lastEventData; }
 	static inline void SetLastEventType(COMMANDERS_EVENT_TYPE inEvent) { lastEventType = inEvent; lastEventData = 0; }
 	static inline void SetLastEventData(int inData) { lastEventData = inData; }
+#ifdef COMMANDERS_DEBUG_MODE
+	static void printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inEventData);
+#endif
 };
 
 #endif

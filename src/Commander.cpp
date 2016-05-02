@@ -10,7 +10,7 @@ CommandersEventHandlerFunction Commander::EventHandler = 0;
 Commander *Commander::pFirstCommander = 0;
 GPIO_pin_t Commander::StatusLedPin = DP_INVALID;
 
-#ifdef DEBUG_MODE
+#ifdef COMMANDERS_DEBUG_MODE
 #define CHECK(val, text)	CheckIndex(val, F(text))
 #else
 #define CHECK(val, text)
@@ -81,7 +81,7 @@ unsigned long Commander::loops()
 	return UNDEFINED_ID;
 }
 
-#ifdef DEBUG_MODE
+#ifdef COMMANDERS_DEBUG_MODE
 void Commander::CheckIndex(byte inIndex, const __FlashStringHelper *inFunc)
 {
 }

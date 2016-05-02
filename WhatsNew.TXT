@@ -1,3 +1,20 @@
+02/05/2016 V0.80
+	- Utilisation de listes chainées (avec le template Chain.hpp) pour éviter les dimensionnements inutiles.
+	- Ajout du type d'événement et du data associé dans les push et les switches.
+	- Ajout des événements MOVELEFT, MOVERIGHT et MOVESTOP . SELECTED devient TOGGLE.
+	- Utilisation de la bibliothèque externe DIO2 au lieu de la version interne Arduino2.
+	- Pour éviter des conflits, DEBUG_MODE est renommé en COMMANDERS_DEBUG_MODE.
+	- NULL est utilisé aussi souvent que possible.
+	- CANCommander fonctionne ! Mais seulement en réception. Un exemple d'émeteur a été ajouté.
+
+	- Use of chained lists (via the template Chain.hpp) instead of classic lists.
+	- Event types and associated data added for event lists in pushes and switches.
+	- New events MOVELEFT, MOVERIGHT and MOVESTOP added. SELECTED becomes TOGGLE.
+	- Using external DIO2 library instead of internal Arduino2.
+	- To avoid conflicts, DEBUG_MODE has been renamed in COMMANDERS_DEBUG_MOSE.
+	- NULL is now used as frequently as possible.
+	- CANCommander works, but in reception only. A sample of sender is added in examples folder.
+
 27/04/2016 V0.72
 	- Renommage de Setup en begin dans les sources Dcc.
 

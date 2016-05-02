@@ -23,7 +23,6 @@ class CANCommander : Commander
 	public:
 		inline CANCommander() : Commander() {}
 		
-		bool SendEvent(uint8_t inID, unsigned long inEventID, COMMANDERS_EVENT_TYPE inEventType, int inEventData);
 		void begin(byte inPin, byte inSpeed, byte inInterrupt);
 		unsigned long loop();
 };

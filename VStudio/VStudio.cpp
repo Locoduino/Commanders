@@ -55,6 +55,7 @@ description: <I2C commander demo>
 *************************************************************/
 
 #include "Commanders.h"
+#include "Chain.hpp"
 
 void CommandersEventHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
 {
@@ -64,7 +65,10 @@ void CommandersEventHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, i
 	switch (inEvent)
 	{
 	case COMMANDERS_EVENT_NONE:			Serial.println(F("NONE"));			break;
-	case COMMANDERS_EVENT_SELECTED:		Serial.println(F("SELECTED"));		break;
+	case COMMANDERS_EVENT_TOGGLE:		Serial.println(F("TOGGLE"));		break;
+	case COMMANDERS_EVENT_MOVESTOP:		Serial.println(F("MOVESTOP"));		break;
+	case COMMANDERS_EVENT_MOVELEFT:		Serial.println(F("MOVELEFT"));		break;
+	case COMMANDERS_EVENT_MOVERIGHT:	Serial.println(F("MOVERIGHT"));		break;
 	case COMMANDERS_EVENT_ABSOLUTEMOVE:	
 		Serial.print(F("ABSOLUTEMOVE : "));	
 		Serial.println(inData, DEC);
@@ -76,8 +80,36 @@ void CommandersEventHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, i
 	}
 }
 
+struct EventTest
+{
+	unsigned long Id;
+	COMMANDERS_EVENT_TYPE EventType;
+	int Data;
+};
+
 void setup()
 {
+	CHAINLIST<EventTest> list;
+
+	EventTest a;
+	a.Id = 10;
+	a.EventType = COMMANDERS_EVENT_TOGGLE;
+	a.Data = 255;
+
+	EventTest b;
+	b.Id = 1020;
+	b.EventType = COMMANDERS_EVENT_MOVELEFT;
+	b.Data = 2550;
+
+	list.AddItem(a);
+	list.AddItem(b);
+
+	EventTest curr = list.pCurrentItem->Obj;	 // a
+	list.NextCurrent();
+	curr = list.pCurrentItem->Obj;	// b
+	list.NextCurrent();
+	curr = list.pCurrentItem->Obj;	// a
+
 	COMMANDERS_SET_STATUSLED(13);
 	COMMANDERS_SET_EVENTHANDLER(CommandersEventHandler);
 

@@ -4,19 +4,21 @@
 //-------------------------------------------------------------------
 
 #ifdef VISUALSTUDIO
-	#include "../VStudio/arduino.h"
-	#include "../VStudio/arduino2.hpp"
+	#include "../../DIO2/VStudio/DIO2.h"
 #else
 	#include "arduino.h"
-	#include "arduino2.hpp"
+	#include "DIO2.h"
 #endif
 
 enum COMMANDERS_EVENT_TYPE
 {
 	COMMANDERS_EVENT_NONE = 0,			// Should never appear
-	COMMANDERS_EVENT_SELECTED = 1,		// If a push button or similar is pressed
-	COMMANDERS_EVENT_ABSOLUTEMOVE = 2,	// If a potentiometer or similar is moved
-	COMMANDERS_EVENT_RELATIVEMOVE = 3	// If an encoder or similar is moved
+	COMMANDERS_EVENT_TOGGLE = 1,		// If a push button or similar is pressed
+	COMMANDERS_EVENT_MOVELEFT = 2,		// If a push 'left' button or similar is pressed
+	COMMANDERS_EVENT_MOVERIGHT = 3,		// If a push 'right' button or similar is pressed
+	COMMANDERS_EVENT_MOVESTOP = 4,		// If a push 'stop' button or similar is pressed
+	COMMANDERS_EVENT_ABSOLUTEMOVE = 5,	// If a potentiometer or similar is moved
+	COMMANDERS_EVENT_RELATIVEMOVE = 6	// If an encoder or similar is moved
 };
 
 typedef void(*CommandersEventHandlerFunction)(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData);
@@ -51,7 +53,7 @@ class Commander
 	private:
 		static void AddCommander(Commander *inCommander);
 
-#ifdef DEBUG_MODE
+#ifdef COMMANDERS_DEBUG_MODE
 	public:
 		void CheckIndex(byte inIndex, const __FlashStringHelper *infunc);
 #endif

@@ -34,13 +34,13 @@ void CANCommander::begin(byte inSPIpin, byte inSpeed, byte inInterrupt)
 	this->pCan = new MCP_CAN(inSPIpin);
 	while (CAN_OK != this->pCan->begin(inSpeed))              // init can bus with baudrate
 	{
-#ifdef DEBUG_MODE
+#ifdef COMMANDERS_DEBUG_MODE
 		Serial.println(F("CAN BUS Shield init fail"));
 		Serial.println(F("Init CAN BUS Shield again"));
 #endif
 		delay(100);
 	}
-#ifdef DEBUG_MODE
+#ifdef COMMANDERS_DEBUG_MODE
 	Serial.println(F("CAN BUS Shield init ok!"));
 #endif
 
@@ -51,44 +51,6 @@ void CANCommander::begin(byte inSPIpin, byte inSpeed, byte inInterrupt)
 	Leonardo		3		2		0		1		7
 	*/
 	attachInterrupt(inInterrupt, MCP2515_ISR, FALLING);
-}
-
-unsigned char stmp[8];
-
-bool CANCommander::SendEvent(uint8_t inID, unsigned long inEventID, COMMANDERS_EVENT_TYPE inEventType, int inEventData)
-{
-	Commander::StatusBlink();
-#ifdef DEBUG_MODE
-	Serial.print(F("CAN commander : send data "));
-	Serial.print(inEventID, DEC);
-	Serial.print(F("/"));
-	Serial.print((char) ('0' + (char)inEventType));
-	Serial.print(F("/"));
-	Serial.println(inEventData, DEC);
-#endif
-	
-	byte *pEvent;
-
-	pEvent = (byte *)&inEventID;
-	stmp[0] = *pEvent;
-	stmp[1] = *(pEvent+1);
-	stmp[2] = *(pEvent+2);
-	stmp[3] = *(pEvent+3);
-	stmp[4] = (byte)inEventType;
-	pEvent = (byte *)&inEventData;
-	stmp[5] = *pEvent;
-	stmp[6] = *(pEvent + 1);
-
-	// send data:  id = inID, standard frame, data len = 7, stmp: data buf
-	byte nb = this->pCan->sendMsgBuf(inID, 0, 7, stmp);
-	delay(100);                       // send data per 100ms
-
-#ifdef DEBUG_MODE
-	Serial.print(F("CAN commander : nb byte transmitted : "));
-	Serial.println(nb, DEC);
-#endif
-
-	return true;
 }
 
 // Variables globales pour la gestion des Messages reçus et émis
@@ -110,13 +72,13 @@ void CAN_recup(MCP_CAN *apCan)
 {
 	unsigned char len = 0;  // nombre d'octets du message
 	unsigned char buf[8];   // message
-	unsigned char Id;   // Id (on devrait plutôt utiliser un int car il y a 11 bits)
+	unsigned long Id;   // Id (on devrait plutôt utiliser un int car il y a 11 bits)
 
 	while (CAN_MSGAVAIL == apCan->checkReceive()) 
 	{
 		apCan->readMsgBuf(&len, buf);        // read data, len: data length, buf: data buf
 		Id = apCan->getCanId();
-		if ((_Ncan + len + 2) < sizeof(_Circule)) 
+		if ((unsigned int) (_Ncan + len + 2) < sizeof(_Circule)) 
 		{ // il reste de la place dans _Circule
 			_Circule[_indexW] = Id;         // enregistrement de Id
 			_indexW++;
@@ -147,7 +109,7 @@ void CAN_recup(MCP_CAN *apCan)
 
 unsigned long CANCommander::loop()
 {
-	if (Flag_Recv) 
+	if (Flag_Recv)
 	{
 		Flag_Recv = 0;  // Flag MCP2515 ready for a new  IRQ
 		CAN_recup(this->pCan);    // Get all the messages
@@ -170,7 +132,7 @@ unsigned long CANCommander::loop()
 		_indexR++;
 		if (_indexR == sizeof(_Circule)) 
 			_indexR = 0;
-#ifdef DEBUG_MODE
+#ifdef COMMANDERS_DEBUG_MODE
 		Serial.print(F("CAN id "));
 		Serial.print(RId);
 		Serial.print(F(", data "));
@@ -182,12 +144,12 @@ unsigned long CANCommander::loop()
 			_indexR++;
 			if (_indexR == sizeof(_Circule)) 
 				_indexR = 0;
-#ifdef DEBUG_MODE
+#ifdef COMMANDERS_DEBUG_MODE
 			Serial.print(F("0x"));
 			Serial.print(Rbuf[k], HEX);
 #endif
 		}
-#ifdef DEBUG_MODE
+#ifdef COMMANDERS_DEBUG_MODE
 		Serial.println("");
 #endif
 		// le message est maintenant dans les globales RId, Rlen et Rbuf[..]

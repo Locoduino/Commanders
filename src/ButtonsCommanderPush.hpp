@@ -55,10 +55,10 @@ class ButtonsCommanderPush : public ButtonsCommanderButton
 	name->begin(pin); \
 	macro_buttons.Add(name);
 
-#define PUSH_BUTTON_ADDID(name, pin, ID) \
+#define PUSH_BUTTON_ADDID(name, ID) \
 	name->AddEvent(ID);
 
-#define PUSH_BUTTON_ADDID_EVENT(name, pin, ID, EVENT, data) \
+#define PUSH_BUTTON_ADDID_EVENT(name, ID, EVENT, data) \
 	name->AddEvent(ID, EVENT, data);
 
 

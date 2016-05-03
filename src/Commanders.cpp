@@ -15,7 +15,7 @@ void Commanders::StartSetup(int inStatusLedPin)
 	Serial.begin(115200);
 
 	Serial.println(F(""));
-	Serial.println(F("Commanders V0.81"));
+	Serial.println(F("Commanders V0.82"));
 	Serial.println(F("Developed by Thierry Paris."));
 	Serial.println(F("(c) Locoduino 2016"));
 	Serial.println(F(""));

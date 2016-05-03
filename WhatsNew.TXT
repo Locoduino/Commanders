@@ -1,3 +1,14 @@
+03/05/2016 V0.82
+	- Correction de l'exemple CANCommander.
+	- Mise à jour de DIO2 dans extra.
+	- Renommage de AddId en AddEvent dans les switchs.
+	- Ajout des masques et des filtres dans  CANCommander.
+
+	- Fixes of the sample CANCommander.
+	- Update of DIO2 library in extra.
+	- Rename of AddId by AddEvent in switches
+	- Added masks and filters in CANCommander.
+
 03/05/2016 V0.81
 	- I2C fonctionne !
 	- Deux exemples simplissimes de récepteurs CAN et I2C ajoutés.

@@ -23,7 +23,7 @@ class CANCommander : Commander
 	public:
 		inline CANCommander() : Commander() {}
 		
-		void begin(byte inPin, byte inSpeed, byte inInterrupt);
+		void begin(byte inPin, byte inSpeed, byte inInterrupt, uint16_t inId);
 		unsigned long loop();
 };
 

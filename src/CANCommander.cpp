@@ -29,7 +29,7 @@ void MCP2515_ISR()
 	Flag_Recv = 1;
 }
 
-void CANCommander::begin(byte inSPIpin, byte inSpeed, byte inInterrupt)
+void CANCommander::begin(byte inSPIpin, byte inSpeed, byte inInterrupt, uint16_t inId)
 {
 	this->pCan = new MCP_CAN(inSPIpin);
 	while (CAN_OK != this->pCan->begin(inSpeed))              // init can bus with baudrate
@@ -51,6 +51,20 @@ void CANCommander::begin(byte inSPIpin, byte inSpeed, byte inInterrupt)
 	Leonardo		3		2		0		1		7
 	*/
 	attachInterrupt(inInterrupt, MCP2515_ISR, FALLING);
+
+	/*
+	* set mask & filter
+	*/
+
+	this->pCan->init_Mask(0, 0, 0xFFFF);	// All is tested
+	this->pCan->init_Mask(1, 0, 0xFFFF);
+
+	this->pCan->init_Filt(0, 0, inId);
+	this->pCan->init_Filt(1, 0, 0);        // idem
+	this->pCan->init_Filt(2, 0, 0);        // Reception possible : Id 40 à 4F (hex) 
+	this->pCan->init_Filt(3, 0, 0);        // idem
+	this->pCan->init_Filt(4, 0, 0);        // Reception possible : Id 00 à 0F
+	this->pCan->init_Filt(5, 0, 0);        // Idem
 }
 
 // Variables globales pour la gestion des Messages reçus et émis

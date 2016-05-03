@@ -45,7 +45,7 @@ public:
 	ButtonsCommanderEncoder *name = new ButtonsCommanderEncoder(ID, start, min, max, true); \
 	name->begin(pin1, pin2); \
 	name->pPush->begin(pushPin); \
-	name->pPush->AddId(pushID); \
+	name->pPush->AddEvent(pushID); \
 	macro_buttons.Add(name);
 
 //-------------------------------------------------------------------

@@ -53,6 +53,8 @@ void setup()
     Serial.begin(115200);
 
 	Wire.begin(); // join i2c bus
+	
+    Serial.println("Setup finished.");
 }
 
 unsigned long time = 0;
@@ -64,7 +66,7 @@ void loop()
 {
 	if (millis() - time > EVENT_DELAY)
 	{
-		Commanders_I2C_SendEvent(0x10, 100, COMMANDERS_EVENT_TYPE::TOGGLE, 200);
+		Commanders_I2C_SendEvent(0x10, 12131415, COMMANDERS_EVENT_TYPE::ABSOLUTEMOVE, 2016);
 		time = millis();
 	}
 }

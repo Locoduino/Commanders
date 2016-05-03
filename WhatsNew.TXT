@@ -1,3 +1,10 @@
+03/05/2016 V0.81
+	- I2C fonctionne !
+	- Deux exemples simplissimes de récepteurs CAN et I2C ajoutés.
+
+	- I2C is working !
+	- Two new samples with basics CAN and I2C receptors.
+
 02/05/2016 V0.80
 	- Utilisation de listes chainées (avec le template Chain.hpp) pour éviter les dimensionnements inutiles.
 	- Ajout du type d'événement et du data associé dans les push et les switches.

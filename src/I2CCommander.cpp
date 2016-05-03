@@ -16,27 +16,16 @@ void OnReceiveHandler(int inNbBytes)
 {
 	I2CCommander::LastEventId = UNDEFINED_ID;
 
-	Commander *pCurr = Commander::pFirstCommander;
-
-	while (pCurr != 0)
-	{
-		if (Wire.requestFrom(I2CCommander::I2CSlaveId, sizeof(unsigned long) + 1 + sizeof(int)) > 0)
-			break;
-		pCurr = pCurr->pNextCommander;
-	}
-
-	char buf[I2C_BUFFERLENGTH];
+	unsigned char buf[I2C_BUFFERLENGTH];
 	byte count = 0;
 
-	Serial.println("I2CCommander::ReceiveHandler chars available");
-
 	while (Wire.available() && count < I2C_BUFFERLENGTH)
-	{
 		buf[count++] = Wire.read();
-	}
 
+#ifdef COMMANDERS_DEBUG_MODE
 	Serial.print("I2CCommander::ReceiveHandler: chars read : ");
-	Serial.println(count);
+	Serial.println(count, DEC);
+#endif
 
 	long four = buf[0];
 	long three = buf[1];
@@ -61,6 +50,7 @@ void OnReceiveHandler(int inNbBytes)
 
 void I2CCommander::begin(uint8_t inSlaveID)
 {
+	Wire.begin(inSlaveID);
 	Wire.onReceive(OnReceiveHandler);
 	I2CCommander::I2CSlaveId = inSlaveID;
 	I2CCommander::LastEventId = UNDEFINED_ID;

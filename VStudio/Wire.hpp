@@ -17,7 +17,7 @@ private:
 	unsigned char readCount;
 
 public:
-	void begin() {}
+	void begin(uint8_t) {}
 	void beginTransmission(uint8_t val) { this->writeCount = 0; bufferID = val; }
 	uint8_t endTransmission(bool stop = true) { return 0; }
 	void onReceive(void(*)(int)) {}

@@ -28,7 +28,7 @@ class ButtonsCommanderPush : public ButtonsCommanderButton
 	unsigned long lastDebounceTime;  // the last time the output pin was toggled
 	unsigned long debounceDelay;    // the debounce time; increase if the output flickers
 	
-	CHAINLIST<Event> Events;
+	CHAINEDLIST<Event> Events;
 
  public:
 	ButtonsCommanderPush();

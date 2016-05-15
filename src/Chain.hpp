@@ -3,36 +3,36 @@
 #define __Chain_H__
 //-------------------------------------------------------------------
 
-template<class T> class CHAINLISTITEM
+template<class T> class CHAINEDLISTITEM
 {
 public:
 	T Obj;					// Element carried by the link.
-	CHAINLISTITEM *pNext;
+	CHAINEDLISTITEM *pNext;
 
-	inline CHAINLISTITEM<T>() { this->pNext = NULL; }
+	inline CHAINEDLISTITEM<T>() { this->pNext = NULL; }
 };
 
-template<class T> class CHAINLIST
+template<class T> class CHAINEDLIST
 {
 public:							
-	CHAINLISTITEM<T> *pFirst;		// Address of next element in chain, or NULL for none.
-	CHAINLISTITEM<T> *pCurrentItem;	// Address of the cutrent item.
+	CHAINEDLISTITEM<T> *pFirst;		// Address of next element in chain, or NULL for none.
+	CHAINEDLISTITEM<T> *pCurrentItem;	// Address of the cutrent item.
 	
-	inline CHAINLIST() { this->pFirst = NULL; this->pCurrentItem = NULL; }
+	inline CHAINEDLIST() { this->pFirst = NULL; this->pCurrentItem = NULL; }
 	void AddItem(const T &t);
 	void NextCurrent();
 };
 
-#define CHAIN_ENUMERATE(T, list, func) CHAINLISTITEM<T> *pCurr = list.pFirst; while (pCurr != NULL) { func(pCurr->Obj); pCurr = pCurr->pNext; }
+#define CHAIN_ENUMERATE(T, list, func) CHAINEDLISTITEM<T> *pCurr = list.pFirst; while (pCurr != NULL) { func(pCurr->Obj); pCurr = pCurr->pNext; }
 
 // This function appends element into chain.
-template<class T> void CHAINLIST<T>::AddItem(const T &t)
+template<class T> void CHAINEDLIST<T>::AddItem(const T &t)
 {
-	CHAINLISTITEM<T> *pCurr = this->pFirst;
+	CHAINEDLISTITEM<T> *pCurr = this->pFirst;
 
 	if (pCurr == NULL)
 	{
-		this->pFirst = new CHAINLISTITEM<T>();
+		this->pFirst = new CHAINEDLISTITEM<T>();
 		this->pCurrentItem = this->pFirst;
 		pCurr = this->pFirst;
 	}
@@ -41,7 +41,7 @@ template<class T> void CHAINLIST<T>::AddItem(const T &t)
 		{
 			if (pCurr->pNext == NULL)
 			{
-				pCurr->pNext = new CHAINLISTITEM<T>();
+				pCurr->pNext = new CHAINEDLISTITEM<T>();
 				pCurr = pCurr->pNext;
 				break;
 			}
@@ -52,7 +52,7 @@ template<class T> void CHAINLIST<T>::AddItem(const T &t)
 }
 
 // This function move the current item to the next in the chain.
-template<class T> void CHAINLIST<T>::NextCurrent()
+template<class T> void CHAINEDLIST<T>::NextCurrent()
 {
 	if (this->pFirst == NULL)
 		return;

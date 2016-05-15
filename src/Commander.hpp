@@ -18,7 +18,8 @@ enum COMMANDERS_EVENT_TYPE
 	COMMANDERS_EVENT_MOVERIGHT = 3,		// If a push 'right' button or similar is pressed
 	COMMANDERS_EVENT_MOVESTOP = 4,		// If a push 'stop' button or similar is pressed
 	COMMANDERS_EVENT_ABSOLUTEMOVE = 5,	// If a potentiometer or similar is moved
-	COMMANDERS_EVENT_RELATIVEMOVE = 6	// If an encoder or similar is moved
+	COMMANDERS_EVENT_RELATIVEMOVE = 6,	// If an encoder or similar is moved
+	COMMANDERS_EVENT_CONFIG = 7			// Configuration address and value
 };
 
 typedef void(*CommandersEventHandlerFunction)(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData);
@@ -26,6 +27,10 @@ typedef void(*CommandersEventHandlerFunction)(unsigned long inId, COMMANDERS_EVE
 #ifndef UNDEFINED_ID
 #define UNDEFINED_ID	((unsigned long)-1)
 #endif
+
+#define COMMANDERSCONFIG(address, value)	( ((int)address<<8) | value )
+#define COMMANDERSCONFIGADDRESS(data)		( (int)data >> 8 )
+#define COMMANDERSCONFIGVALUE(data)			( (int)data & 0x00FF )
 
 class Commander
 {

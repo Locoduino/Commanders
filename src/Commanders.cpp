@@ -70,6 +70,12 @@ void Commanders::printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventTyp
 		Serial.print(F("RELATIVEMOVE : "));
 		Serial.println(inEventData, DEC);
 		break;
+	case COMMANDERS_EVENT_CONFIG:
+		Serial.print(F("CONFIG : "));
+		Serial.print(COMMANDERSCONFIGADDRESS(inEventData), DEC);
+		Serial.print(F(" / "));
+		Serial.println(COMMANDERSCONFIGVALUE(inEventData), DEC);
+		break;
 	}
 }
 #endif

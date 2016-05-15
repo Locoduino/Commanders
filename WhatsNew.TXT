@@ -1,3 +1,8 @@
+15/05/2016 V0.90
+	- Ajout de l'événement CONFIG avec un octet pour l'adresse, et un autre pour la valeur.
+
+	- Add of CONFIG event, with a byte for the address, and another one for the value.
+
 03/05/2016 V0.82
 	- Correction de l'exemple CANCommander.
 	- Mise à jour de DIO2 dans extra.

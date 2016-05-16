@@ -59,25 +59,7 @@ description: <I2C commander demo>
 
 void CommandersEventHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
 {
-	Serial.print(F("Commander event : Address : "));
-	Serial.print(inId, DEC);
-	Serial.print(F(" / "));
-	switch (inEvent)
-	{
-	case COMMANDERS_EVENT_NONE:			Serial.println(F("NONE"));			break;
-	case COMMANDERS_EVENT_TOGGLE:		Serial.println(F("TOGGLE"));		break;
-	case COMMANDERS_EVENT_MOVESTOP:		Serial.println(F("MOVESTOP"));		break;
-	case COMMANDERS_EVENT_MOVELEFT:		Serial.println(F("MOVELEFT"));		break;
-	case COMMANDERS_EVENT_MOVERIGHT:	Serial.println(F("MOVERIGHT"));		break;
-	case COMMANDERS_EVENT_ABSOLUTEMOVE:	
-		Serial.print(F("ABSOLUTEMOVE : "));	
-		Serial.println(inData, DEC);
-		break;
-	case COMMANDERS_EVENT_RELATIVEMOVE:	
-		Serial.print(F("RELATIVEMOVE : "));	
-		Serial.println(inData, DEC);
-		break;
-	}
+	Commanders::printEvent(inId, inEvent, inData);
 }
 
 struct EventTest
@@ -89,7 +71,7 @@ struct EventTest
 
 void setup()
 {
-	CHAINLIST<EventTest> list;
+	CHAINEDLIST<EventTest> list;
 
 	EventTest a;
 	a.Id = 10;

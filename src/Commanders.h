@@ -11,7 +11,7 @@
 ///////////////////////////////////////////////////////
 // Verbose mode lets you see all actions done by the 
 // library, but with a real flood of text to console...
-// Has no effect if COMMANDERS_DEBUG_MODEis not activated.
+// Has no effect if COMMANDERS_DEBUG_MODE is not activated.
 //#define DEBUG_VERBOSE_MODE
 
 #define  GPIO2_PREFER_SPEED    1

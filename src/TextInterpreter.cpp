@@ -121,6 +121,7 @@ unsigned long TextInterpreter::SendChar(char inCharacter)
 				if (inCharacter == 'r' || inCharacter == 'R')		this->eventType = COMMANDERS_EVENT_MOVERIGHT;
 				if (inCharacter == 'a' || inCharacter == 'A')		this->eventType = COMMANDERS_EVENT_ABSOLUTEMOVE;
 				if (inCharacter == 'e' || inCharacter == 'E')		this->eventType = COMMANDERS_EVENT_RELATIVEMOVE;
+				if (inCharacter == 'c' || inCharacter == 'C')		this->eventType = COMMANDERS_EVENT_CONFIG;
 			}
 			break;
 

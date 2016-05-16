@@ -33,7 +33,7 @@ class DccCommander : Commander
 
 		inline DccCommander() : Commander() {}
 		
-		void begin(int i, int j, int k, boolean inUseRawDccAddresses = false);
+		void begin(int i, int j, int k, boolean inInterruptMonitor = false, boolean inUseRawDccAddresses = false);
 		void PriorityLoop();
 		unsigned long loop();
 		static void SetAccessoryDecoderPacketHandler(DccAccDecoderPacket func);

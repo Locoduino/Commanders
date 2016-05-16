@@ -22,6 +22,17 @@ void DccCommander::DccAccessoryDecoderPacket(int address, boolean activate, byte
 {
 	int realAddress = address;
 
+#ifdef COMMANDERS_DEBUG_MODE
+#ifdef DEBUG_VERBOSE_MODE
+	Serial.print(F("Dcc packet found : real data : "));
+	Serial.print(realAddress);
+	Serial.print(F(" / "));
+	Serial.print(data, DEC);
+	Serial.print(F(" / "));
+	Serial.print(activate, DEC);
+#endif
+#endif
+
 	if (!DccCommander::UseRawDccAddresses)
 	{
 		realAddress -= 1;
@@ -31,29 +42,34 @@ void DccCommander::DccAccessoryDecoderPacket(int address, boolean activate, byte
 		data = data % 2;
 	}
 
+#ifdef COMMANDERS_DEBUG_MODE
 #ifdef DEBUG_VERBOSE_MODE
-	Serial.print(F("Dcc packet found : Address : "));
+	Serial.print(F("  converted : "));
 	Serial.print(realAddress);
 	Serial.print(F(" / "));
 	Serial.print(data, DEC);
 	Serial.print(F(" / "));
 	Serial.println(activate, DEC);
 #endif
+#endif
 
-	if (DccCommander::func_AccPacket)
-		(DccCommander::func_AccPacket)(realAddress, activate, data);
-	else
+	// Sent packets are (on my MS2 !) :
+	// id / data / 1
+	// id / data / 1		 
+	// id / data / 1		 
+	// id / data / 0
+	// The last byte is to activate for a while (three times at 1 !) and then desactivate the motor !
+	// DccCommander will react only on the desactivate flag to avoid double events.
+	if (activate == 0)
 	{
-		Commander::RaiseEvent(DCCINT(realAddress, data), COMMANDERS_EVENT_TOGGLE, 0);
+		if (DccCommander::func_AccPacket)
+			(DccCommander::func_AccPacket)(realAddress, activate, data);
+		else
+		{
+			Commander::RaiseEvent(DCCID(realAddress), data ? COMMANDERS_EVENT_MOVELEFT : COMMANDERS_EVENT_MOVERIGHT, data);
 
-		DccCommander::LastDccId = DCCINT(realAddress, data);
-
-		/*
-		for (int i = 0; i < Accessories::AccessoriesFullList.AccessoriesAddCounter; i++)
-		Accessories::AccessoriesFullList.pAccessoriesFullList[i]->DCCToggle(realAddress, data);
-		for (int i = 0; i < AccessoryGroup::StaticData.AccessoryGroupAddCounter; i++)
-		AccessoryGroup::StaticData.pAccessoryGroupFullList[i]->DCCToggle(realAddress, data);
-		*/
+			DccCommander::LastDccId = DCCID(realAddress);
+		}
 	}
 }
 
@@ -76,12 +92,14 @@ void StatusBlink_handler()
 	status = !status;
 }
 
-void DccCommander::begin(int i, int j, int k, boolean inUseRawDccAddresses)
+void DccCommander::begin(int i, int j, int k, boolean inInterruptMonitor, boolean inUseRawDccAddresses)
 {
 	DCC.beginDecoder(i, j, k);
 	DccCommander::UseRawDccAddresses = inUseRawDccAddresses;
 
-	if (Commander::StatusLedPin != DP_INVALID)
+	DCC.SetBasicAccessoryDecoderPacketHandler(DccAccessoryDecoderPacket, true);
+
+	if (inInterruptMonitor)
 		DCC.SetInterruptMonitor(StatusBlink_handler);
 }
 
@@ -117,14 +135,14 @@ unsigned long DccCommander::loop()
 	{
 #ifdef COMMANDERS_DEBUG_MODE
 #ifdef DEBUG_VERBOSE_MODE
-		Serial.print("DCC commander : ");
+		Serial.print("DCC commander loop : ");
 		Serial.println(countLoop, DEC);
 		countLoop = 0;
 #endif
 #endif
 		start = 0;
-		unsigned long last = LastDccId;
-		LastDccId = UNDEFINED_ID;
+		unsigned long last = this->LastDccId;
+		this->LastDccId = UNDEFINED_ID;
 		Commanders::SetLastEventType(COMMANDERS_EVENT_TOGGLE);
 		Commanders::SetLastEventData(0);
 		return last;
@@ -162,6 +180,12 @@ void DccCommander::printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventT
 	case COMMANDERS_EVENT_RELATIVEMOVE:
 		Serial.print(F("RELATIVEMOVE : "));
 		Serial.println(inEventData, DEC);
+		break;
+	case COMMANDERS_EVENT_CONFIG:
+		Serial.print(F("CONFIG : "));
+		Serial.print(COMMANDERSCONFIGADDRESS(inEventData), DEC);
+		Serial.print(F(" / "));
+		Serial.println(COMMANDERSCONFIGVALUE(inEventData), DEC);
 		break;
 	}
 }

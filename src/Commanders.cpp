@@ -15,7 +15,7 @@ void Commanders::StartSetup(int inStatusLedPin)
 	Serial.begin(115200);
 
 	Serial.println(F(""));
-	Serial.println(F("Commanders V0.82"));
+	Serial.println(F("Commanders V0.90"));
 	Serial.println(F("Developed by Thierry Paris."));
 	Serial.println(F("(c) Locoduino 2016"));
 	Serial.println(F(""));
@@ -28,12 +28,6 @@ void Commanders::StartSetup(int inStatusLedPin)
 		Commander::StatusLedPin = Arduino_to_GPIO_pin(inStatusLedPin);
 		pinMode2f(Commander::StatusLedPin, OUTPUT);
 	}
-		
-#ifndef NO_DCCCOMMANDER
-#ifndef VISUALSTUDIO
-	DccCommander::SetAccessoryDecoderPacketHandler(DccCommander::DccAccessoryDecoderPacket);
-#endif
-#endif
 }
 
 void Commanders::StartSetup(CommandersEventHandlerFunction func, int inStatusLedPin)

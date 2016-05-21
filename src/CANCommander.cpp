@@ -14,7 +14,8 @@ description: <CAN Commander>
 #include <SPI.h>
 #endif
 
-unsigned long CANCommander::lastEventId;
+unsigned long CANCommanderClass::lastEventId;
+CANCommanderClass *CANCommanderClass::pCANCommander;
 
 volatile byte Flag_Recv = 0;   // variable d'échange avec l'interruption IRQ
 							   
@@ -29,7 +30,7 @@ void MCP2515_ISR()
 	Flag_Recv = 1;
 }
 
-void CANCommander::begin(byte inSPIpin, byte inSpeed, byte inInterrupt, uint16_t inId)
+void CANCommanderClass::begin(byte inSPIpin, byte inSpeed, byte inInterrupt, uint16_t inId)
 {
 	this->pCan = new MCP_CAN(inSPIpin);
 	while (CAN_OK != this->pCan->begin(inSpeed))              // init can bus with baudrate
@@ -77,11 +78,11 @@ unsigned char bufS[8];          // tampon d'emission
 unsigned char _Circule[256];    // récepteur circulaire des messages CAN sous IT
 int _indexW, _indexR, _Ncan;    // index d'écriture et lecture, nb d'octets a lire
 byte _CANoverflow = 0;          // flag overflow (buffer _Circule plein)
-								/*
-								* Routine de récupération des messages CAN dans la mémoire circulaire _Circule
-								* appelée par LOOP lorsque Flag_Recv = 1;
-								*/
 
+/*
+* Routine de récupération des messages CAN dans la mémoire circulaire _Circule
+* appelée par LOOP lorsque Flag_Recv = 1;
+*/
 void CAN_recup(MCP_CAN *apCan)
 {
 	unsigned char len = 0;  // nombre d'octets du message
@@ -121,7 +122,7 @@ void CAN_recup(MCP_CAN *apCan)
 	}
 }
 
-unsigned long CANCommander::loop()
+unsigned long CANCommanderClass::loop()
 {
 	if (Flag_Recv)
 	{

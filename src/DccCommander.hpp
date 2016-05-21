@@ -13,6 +13,8 @@
 
 #ifndef NO_DCCCOMMANDER
 
+#define DccCommander DccCommanderClass::GetCurrent()
+
 //-------------------------------------------------------------------
 
 typedef void(*DccAccDecoderPacket)(int address, boolean activate, byte data);
@@ -22,7 +24,7 @@ typedef void(*DccAccDecoderPacket)(int address, boolean activate, byte data);
 #define DCCACTIVATION(id)	((byte)((id) / 10000))
 #define DCCINT(id, acc)		((acc) * 10000UL + (id))
 
-class DccCommander : Commander
+class DccCommanderClass : Commander
 {
 	private:
 		static unsigned long LastDccId;
@@ -31,7 +33,7 @@ class DccCommander : Commander
 		static boolean UseRawDccAddresses;
 		static DccAccDecoderPacket    func_AccPacket;
 
-		inline DccCommander() : Commander() {}
+		inline DccCommanderClass() : Commander() {}
 		
 		void begin(int i, int j, int k, boolean inInterruptMonitor = false, boolean inUseRawDccAddresses = false);
 		void PriorityLoop();
@@ -39,7 +41,17 @@ class DccCommander : Commander
 		static void SetAccessoryDecoderPacketHandler(DccAccDecoderPacket func);
 		static void DccAccessoryDecoderPacket(int address, boolean activate, byte data);
 
-		inline unsigned long GetLastDccId() const { return LastDccId; }
+		static inline unsigned long GetLastDccId() { return LastDccId; }
+
+	public:
+		static DccCommanderClass *pDccCommander;
+		static inline DccCommanderClass &GetCurrent() 
+		{ 
+			if (pDccCommander == NULL)
+				pDccCommander = new DccCommanderClass();
+
+			return *(DccCommanderClass::pDccCommander); 
+		}
 
 #ifdef COMMANDERS_DEBUG_MODE
 public:

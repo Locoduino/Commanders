@@ -21,27 +21,38 @@ description: <Buttons Commander>
 #include<stdarg.h>
 #endif
 
-ButtonsCommander::ButtonsCommander()
+ButtonsCommanderClass *ButtonsCommanderClass::pButtonsCommander;
+
+ButtonsCommanderClass::ButtonsCommanderClass()
 {
 	this->pLastSelectedButton = NULL;
+	this->pFirstButton = NULL;
 }
 
-void ButtonsCommander::begin()
+void ButtonsCommanderClass::begin()
 {
 #ifdef COMMANDERS_DEBUG_MODE
 	Serial.println(F("   ButtonsCommander begin"));
 #endif
 }
 
-ButtonsCommanderButton *ButtonsCommander::Add(ButtonsCommanderButton *inButton)
+ButtonsCommanderButton *ButtonsCommanderClass::AddButton(ButtonsCommanderButton *inButton)
 {
-	if (ButtonsCommander::pFirstButton == NULL)
+	if (pButtonsCommander == NULL)
+		pButtonsCommander = new ButtonsCommanderClass();
+
+	return pButtonsCommander->Add(inButton);
+}
+
+ButtonsCommanderButton *ButtonsCommanderClass::Add(ButtonsCommanderButton *inButton)
+{
+	if (this->pFirstButton == NULL)				
 	{
-		ButtonsCommander::pFirstButton = inButton;
+		this->pFirstButton = inButton;
 		return inButton;
 	}
 
-	ButtonsCommanderButton *pCurr = ButtonsCommander::pFirstButton;
+	ButtonsCommanderButton *pCurr = this->pFirstButton;
 
 	while (pCurr->GetNextButton() != NULL)
 		pCurr = pCurr->GetNextButton();
@@ -51,9 +62,9 @@ ButtonsCommanderButton *ButtonsCommander::Add(ButtonsCommanderButton *inButton)
 	return inButton;
 }
 
-ButtonsCommanderButton* ButtonsCommander::GetFromId(unsigned long inId) const
+ButtonsCommanderButton* ButtonsCommanderClass::GetFromId(unsigned long inId) const
 {
-	ButtonsCommanderButton *pCurr = ButtonsCommander::pFirstButton;
+	ButtonsCommanderButton *pCurr = this->pFirstButton;
 
 	while (pCurr != NULL)
 	{
@@ -66,14 +77,14 @@ ButtonsCommanderButton* ButtonsCommander::GetFromId(unsigned long inId) const
 	return 0;
 }
 
-void ButtonsCommander::RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
+void ButtonsCommanderClass::RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
 {
 	Commander::RaiseEvent(inId, inEvent, inData);
 }
 
 static ButtonsCommanderButton *pCurrentLoopButton = NULL;
 
-unsigned long ButtonsCommander::loop()
+unsigned long ButtonsCommanderClass::loop()
 {
 	Commander::CommanderPriorityLoop();
 

@@ -6,35 +6,35 @@ description: <Encoder returning a current value, or a moving direction.>
 
 #include "ButtonsCommanderEncoder.hpp"
 
-ButtonsCommanderEncoder::ButtonsCommanderEncoder(unsigned long inId, int inStartingValue, int inMinimum, int inMaximum, bool inAssociatedPushButton) : ButtonsCommanderButton(inId)
+ButtonsCommanderEncoder::ButtonsCommanderEncoder() : ButtonsCommanderButton(UNDEFINED_ID)
 {
-	this->mini = inMinimum;
-	this->maxi = inMaximum;
-	this->currentValue = inStartingValue;
-
-	if (inAssociatedPushButton)
-	{
-		this->pPush = new ButtonsCommanderPush((byte)1);
-	}
-	else
-	{
-		this->pPush = 0;
-	}
 }
 
-void ButtonsCommanderEncoder::begin(int inPin1, int inPin2)
+void ButtonsCommanderEncoder::begin(int inPin1, int inPin2, unsigned long inId, int inStartingValue, int inMinimum, int inMaximum)
 {
+	this->Id = inId;
+
 	this->pin1 = Arduino_to_GPIO_pin(inPin1);
 	this->pin2 = Arduino_to_GPIO_pin(inPin2);
 	pinMode2f(this->pin1, INPUT);
 	pinMode2f(this->pin2, INPUT);
 	digitalWrite2f(this->pin1, HIGH); //turn pullup resistor on
 	digitalWrite2f(this->pin2, HIGH); //turn pullup resistor on
+
 	this->lastEncoded = 0;
+	this->mini = inMinimum;
+	this->maxi = inMaximum;
+	this->currentValue = inStartingValue;
+	this->startingCurrentValue = inStartingValue;
 }
 
 unsigned long ButtonsCommanderEncoder::loop()
 {
+#ifdef COMMANDERS_DEBUG_MODE
+	if (this->Id == UNDEFINED_ID)
+		Serial.println(F("This encoder have no ID defined : call begin() !"));
+#endif
+
 	int MSB = digitalRead2f(this->pin1); //MSB = most significant bit
 	int LSB = digitalRead2f(this->pin2); //LSB = least significant bit
 

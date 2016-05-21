@@ -6,14 +6,15 @@ description: <Potentiometer returning a current value.>
 
 #include "ButtonsCommanderPotentiometer.hpp"
 
-ButtonsCommanderPotentiometer::ButtonsCommanderPotentiometer(unsigned long inId, int inMinimum, int inMaximum) : ButtonsCommanderButton(inId)
+ButtonsCommanderPotentiometer::ButtonsCommanderPotentiometer() : ButtonsCommanderButton(UNDEFINED_ID)
 {
-	this->mini = inMinimum;
-	this->maxi = inMaximum;
 }
 
-void ButtonsCommanderPotentiometer::begin(int inPin, int inMoveAccuracy)
+void ButtonsCommanderPotentiometer::begin(int inPin, unsigned long inId, int inMinimum, int inMaximum, int inMoveAccuracy)
 {
+	this->Id = inId;
+	this->mini = inMinimum;
+	this->maxi = inMaximum;
 	this->pin = inPin;
 	this->moveAccuracy = inMoveAccuracy - 1;
 	if (this->moveAccuracy <= 0)
@@ -25,6 +26,11 @@ void ButtonsCommanderPotentiometer::begin(int inPin, int inMoveAccuracy)
 
 unsigned long ButtonsCommanderPotentiometer::loop()
 {
+#ifdef COMMANDERS_DEBUG_MODE
+	if (this->Id == UNDEFINED_ID)
+		Serial.println(F("This potentiometer have no ID defined : call begin() !"));
+#endif
+
 	int val = analogRead(pin);
 
 	val = map(val, 0, 1023, this->mini, this->maxi);

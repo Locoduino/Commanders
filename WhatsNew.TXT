@@ -1,3 +1,14 @@
+19/05/2016 V0.92
+	- Retrait des macros
+	- Simplification de l'écriture pour les utilisateurs par l'instanciation automatique des commanders et la suppression des  
+	  arguments des constructeurs renvoyés vers les begin(). Plus de pointeurs à manipuler !
+	- Ajout de test.bat pour compiler automatiquement les exemples et obtenir un rapport.
+
+	- Macros removed.
+	- Simplification of code writing for library users by automatic instanciation of commanders,
+	  and removing of all constructor arguments moved to the begin() functions. No more pointers in the .ino file !
+	- Added test.bat to check syntax of all examples and reading a final text report.
+
 17/05/2016 V0.91
 	- Correction de DccCommander qui ne marchait pas du tout !
 	- Exemple DccMacro adapté.
@@ -7,7 +18,7 @@
 15/05/2016 V0.90
 	- Ajout de l'événement CONFIG avec un octet pour l'adresse, et un autre pour la valeur.
 
-	- Add of CONFIG event, with a byte for the address, and another one for the value.
+	- Added CONFIG event, with a byte for the address, and another one for the value.
 
 03/05/2016 V0.82
 	- Correction de l'exemple CANCommander.
@@ -152,4 +163,4 @@
 01/09/2015 V0.10
 	- Création de la librairie, extraite de ma librarie UniversalAccessoryDecoder.
 
-	- Creation, extracted from my UniversalAccessoryDecoder library.
+	- Creation, extracted from my UniversalAccessoryDecoder library v4.

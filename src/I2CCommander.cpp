@@ -4,17 +4,19 @@ author: <Thierry PARIS>
 description: <I2C Commander>
 *************************************************************/
 
-#ifndef NO_I2CCOMMANDER
-#include "I2CCommander.hpp"
+#include "Commanders.h"
 
-uint8_t I2CCommander::I2CSlaveId;
-unsigned long I2CCommander::LastEventId;
+#ifndef NO_I2CCOMMANDER
+
+uint8_t I2CCommanderClass::I2CSlaveId;
+unsigned long I2CCommanderClass::LastEventId;
+I2CCommanderClass *I2CCommanderClass::pI2cCommander;
 
 #define I2C_BUFFERLENGTH	(sizeof(unsigned long) + 1 + sizeof(int) + 5)
 
 void OnReceiveHandler(int inNbBytes)
 {
-	I2CCommander::LastEventId = UNDEFINED_ID;
+	I2CCommanderClass::LastEventId = UNDEFINED_ID;
 
 	unsigned char buf[I2C_BUFFERLENGTH];
 	byte count = 0;
@@ -45,23 +47,23 @@ void OnReceiveHandler(int inNbBytes)
 
 	Commanders::SetLastEventType(eventType);
 	Commanders::SetLastEventData(foundData);
-	I2CCommander::LastEventId = foundID;
+	I2CCommanderClass::LastEventId = foundID;
 }
 
-void I2CCommander::begin(uint8_t inSlaveID)
+void I2CCommanderClass::begin(uint8_t inSlaveID)
 {
 	Wire.begin(inSlaveID);
 	Wire.onReceive(OnReceiveHandler);
-	I2CCommander::I2CSlaveId = inSlaveID;
-	I2CCommander::LastEventId = UNDEFINED_ID;
+	I2CCommanderClass::I2CSlaveId = inSlaveID;
+	I2CCommanderClass::LastEventId = UNDEFINED_ID;
 }
 
-unsigned long I2CCommander::loop()
+unsigned long I2CCommanderClass::loop()
 {
-	if (I2CCommander::LastEventId != UNDEFINED_ID)
+	if (I2CCommanderClass::LastEventId != UNDEFINED_ID)
 	{
-		unsigned long id = I2CCommander::LastEventId;
-		I2CCommander::LastEventId = UNDEFINED_ID;
+		unsigned long id = I2CCommanderClass::LastEventId;
+		I2CCommanderClass::LastEventId = UNDEFINED_ID;
 		return id;
 	}
 

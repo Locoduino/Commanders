@@ -1,14 +1,12 @@
 /*************************************************************
 project: <Commanders>
 author: <Thierry PARIS>
-description: <Demo Serial sample by macros>
+description: <Demo Serial sample>
 *************************************************************/
 
 #include "Commanders.h"
 
 SERIAL_COMMANDER(Serial);
-
-SerialCommander commander;
 
 void CommandersEventHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
 {
@@ -17,8 +15,9 @@ void CommandersEventHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, i
 
 void setup()
 {
-	Commanders::StartSetup(CommandersEventHandler);
-	commander.begin(115200);
+	Commanders::StartSetup(CommandersEventHandler, LED_BUILTIN);
+	
+	SerialCommander.begin(115200);
 
 	Commanders::EndSetup();
 }

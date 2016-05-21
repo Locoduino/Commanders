@@ -9,6 +9,8 @@ description: <Base Commander>
 CommandersEventHandlerFunction Commander::EventHandler = 0;
 Commander *Commander::pFirstCommander = 0;
 GPIO_pin_t Commander::StatusLedPin = DP_INVALID;
+unsigned int Commander::BlinkDelay = 1000;
+unsigned long Commander::StartStatusLed = 0;
 
 #ifdef COMMANDERS_DEBUG_MODE
 #define CHECK(val, text)	CheckIndex(val, F(text))
@@ -50,12 +52,11 @@ void Commander::RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, in
 		Commander::EventHandler(inId, inEvent, inData);
 }
 
-static unsigned long start_status_led = 0;
 void Commander::StatusBlink()
 {
-	if (Commander::StatusLedPin != DP_INVALID && start_status_led == 0)
+	if (Commander::StatusLedPin != DP_INVALID && StartStatusLed == 0)
 	{
-		start_status_led = millis();
+		StartStatusLed = millis();
 		digitalWrite2f(Commander::StatusLedPin, HIGH);
 	}
 }
@@ -72,10 +73,10 @@ unsigned long Commander::loops()
 		pCurr = pCurr->pNextCommander;
 	}
 
-	if (Commander::StatusLedPin != DP_INVALID && start_status_led > 0 && millis() - start_status_led > 1000)
+	if (Commander::StatusLedPin != DP_INVALID && StartStatusLed > 0 && millis() - StartStatusLed > BlinkDelay)
 	{
 		digitalWrite2f(Commander::StatusLedPin, LOW);
-		start_status_led = 0;
+		StartStatusLed = 0;
 	}
 
 	return UNDEFINED_ID;

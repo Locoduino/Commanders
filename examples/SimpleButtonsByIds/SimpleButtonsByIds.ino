@@ -1,42 +1,27 @@
 /*************************************************************
 project: <Commanders>
 author: <Thierry PARIS>
-description: <Demo sample>
+description: <Demo sample with buttons>
 *************************************************************/
 
 #include "Commanders.h"
 
-ButtonsCommander buttons;
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-// Setup
-//
+ButtonsCommanderPush Left;
+ButtonsCommanderPush Dc;
+ButtonsCommanderPush Right;
+ButtonsCommanderPush EPS;
+ButtonsCommanderPush TJD;
+	
 void setup()
 {
 	Commanders::StartSetup();
+	Commanders::SetStatusLedPin(LED_BUILTIN);
 
-	// Buttons setups
-
-	buttons.begin();
-	ButtonsCommanderPush *pLeft = new ButtonsCommanderPush(102);
-	ButtonsCommanderPush *pDc = new ButtonsCommanderPush(103);
-	ButtonsCommanderPush *pRight = new ButtonsCommanderPush(104);
-	ButtonsCommanderPush *pEPS = new ButtonsCommanderPush(105);
-	ButtonsCommanderPush *pTJD = new ButtonsCommanderPush(106);
-
-	pLeft->begin(24);  // pin number
-	pDc->begin(26);
-	pRight->begin(28);
-	pEPS->begin(30);
-	pTJD->begin(32);
-
-	buttons.Add(pLeft);
-	buttons.Add(pDc);
-	buttons.Add(pRight);
-	buttons.Add(pEPS);
-	buttons.Add(pTJD);
+	Left.begin(24, 100);
+	Dc.begin(26, 101);
+	Right.begin(28, 102);
+	EPS.begin(30, 103);
+	TJD.begin(32, 104);
 
 	Commanders::EndSetup();
 }

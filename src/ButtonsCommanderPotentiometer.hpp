@@ -16,19 +16,14 @@ class ButtonsCommanderPotentiometer : public ButtonsCommanderButton
 	int mini, maxi;
 	
  public:
-	ButtonsCommanderPotentiometer(unsigned long inId, int inMinimum, int inMaximum);
+	ButtonsCommanderPotentiometer();
 
 	inline bool IsAnalog() const { return true; }
 	inline int GetPosition() const { return this->currentValue; }
 
-	void begin(int inPin, int inMoveAccuracy = 1);
+	void begin(int inPin, unsigned long inId, int inMinimum, int inMaximum, int inMoveAccuracy = 1);
 	unsigned long loop();
 };
-
-#define POTENTIOMETER(name, pin, ID, min, max) \
-	ButtonsCommanderPotentiometer *name = new ButtonsCommanderPotentiometer(ID, min, max); \
-	name->begin(pin); \
-	macro_buttons.Add(name);
 
 //-------------------------------------------------------------------
 #endif

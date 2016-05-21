@@ -9,31 +9,26 @@ description: <Base functions of the library>
 COMMANDERS_EVENT_TYPE Commanders::lastEventType;
 int Commanders::lastEventData;
 
-void Commanders::StartSetup(int inStatusLedPin)
+void Commanders::StartSetup(int inStatusLedPin, unsigned int inBlinkDelay)
 {
 #ifdef COMMANDERS_DEBUG_MODE
 	Serial.begin(115200);
 
 	Serial.println(F(""));
-	Serial.println(F("Commanders V0.90"));
+	Serial.println(F("Commanders V0.92"));
 	Serial.println(F("Developed by Thierry Paris."));
 	Serial.println(F("(c) Locoduino 2016"));
 	Serial.println(F(""));
 
 	Serial.println(F("*** Setup started."));
 #endif
-
-	if (inStatusLedPin != 0)
-	{
-		Commander::StatusLedPin = Arduino_to_GPIO_pin(inStatusLedPin);
-		pinMode2f(Commander::StatusLedPin, OUTPUT);
-	}
+	Commanders::SetStatusLedPin(inStatusLedPin, inBlinkDelay);
 }
 
-void Commanders::StartSetup(CommandersEventHandlerFunction func, int inStatusLedPin)
+void Commanders::StartSetup(CommandersEventHandlerFunction func, int inStatusLedPin, unsigned int inBlinkDelay)
 {
 	Commander::EventHandler = func;
-	Commanders::StartSetup(inStatusLedPin);
+	Commanders::StartSetup(inStatusLedPin, inBlinkDelay);
 }
 
 void Commanders::EndSetup()

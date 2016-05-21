@@ -37,6 +37,11 @@ void ButtonsCommanderSwitch::AddEvent(int inPin, unsigned long inId, COMMANDERS_
 
 unsigned long ButtonsCommanderSwitch::loop()
 {
+#ifdef COMMANDERS_DEBUG_MODE
+	if (this->EventPins.pFirst == NULL)
+		Serial.println(F("This switch button have no ID defined : call AddEvent() and begin() !"));
+#endif
+
 	// read the state of the switch into a local variable:
 	int reading = digitalRead2f(this->EventPins.pCurrentItem->Obj.Pin);
 

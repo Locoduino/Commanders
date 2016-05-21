@@ -24,7 +24,7 @@ class ButtonsCommanderButton
 	ButtonsCommanderButton *pNextButton;
 
  public:
-	inline ButtonsCommanderButton(unsigned long inId) { this->Id = inId; this->pNextButton = 0; }
+	ButtonsCommanderButton(unsigned long inId);
 	inline unsigned long GetId() const { return this->Id; }
 	inline virtual ButtonsCommanderButton* GetFromId(unsigned long inId) { return this; }
 

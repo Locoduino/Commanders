@@ -42,7 +42,9 @@ class Commander
 		static Commander *pFirstCommander;
 		static CommandersEventHandlerFunction EventHandler;
 		static GPIO_pin_t StatusLedPin;
-		
+		static unsigned int BlinkDelay;
+		static unsigned long StartStatusLed;
+
 	public:
 		inline Commander() { AddCommander(this); pNextCommander = 0; }
 		

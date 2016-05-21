@@ -6,7 +6,7 @@ description: <Push button with debounce.>
 
 #include "ButtonsCommanderPush.hpp"
 
-ButtonsCommanderPush ButtonsCommanderPush::Empty = ButtonsCommanderPush(UNDEFINED_ID);
+ButtonsCommanderPush ButtonsCommanderPush::Empty;
 
 ButtonsCommanderPush::ButtonsCommanderPush() : ButtonsCommanderButton(UNDEFINED_ID)
 {
@@ -16,18 +16,14 @@ ButtonsCommanderPush::ButtonsCommanderPush() : ButtonsCommanderButton(UNDEFINED_
 	this->debounceDelay = 50;
 }
 
-ButtonsCommanderPush::ButtonsCommanderPush(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inData) : ButtonsCommanderPush()
-{
-	this->AddEvent(inId, inEventType, inData);
-}
-
-void ButtonsCommanderPush::begin(int inButtonPin)
+void ButtonsCommanderPush::begin(unsigned long inId, int inButtonPin, COMMANDERS_EVENT_TYPE inEventType, int inData)
 {	
-	//CHECKPIN(inButtonPin, "ButtonsCommanderPush::begin");
-
+	this->Id = inId;
 	this->buttonPin = Arduino_to_GPIO_pin(inButtonPin);
 
 	pinMode2f(this->buttonPin, INPUT_PULLUP);
+
+	this->AddEvent(inId, inEventType, inData);
 }
 
 // Returns the index of the new added position.
@@ -42,6 +38,10 @@ void ButtonsCommanderPush::AddEvent(unsigned long inId, COMMANDERS_EVENT_TYPE in
 
 unsigned long ButtonsCommanderPush::loop()
 {
+#ifdef COMMANDERS_DEBUG_MODE
+	if (this->Events.pFirst == NULL)
+		Serial.println(F("This push button have no ID defined : call begin() !"));
+#endif
 	unsigned long foundID = UNDEFINED_ID;
 
 	if (this->buttonPin == DP_INVALID)

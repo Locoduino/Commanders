@@ -4,21 +4,23 @@ author: <Thierry PARIS>
 description: <Dcc Commander>
 *************************************************************/
 
+#include "Commanders.h"
+
 #ifndef NO_DCCCOMMANDER
-#include "DccCommander.hpp"
 
 #ifdef VISUALSTUDIO
 DCC_Decoder DCC_Decoder::DCCInstance;
 #endif
 
-unsigned long DccCommander::LastDccId = UNDEFINED_ID;
-boolean DccCommander::UseRawDccAddresses;
+unsigned long DccCommanderClass::LastDccId = UNDEFINED_ID;
+boolean DccCommanderClass::UseRawDccAddresses;
+DccCommanderClass *DccCommanderClass::pDccCommander;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // DCC accessory packet handler 
 //
-void DccCommander::DccAccessoryDecoderPacket(int address, boolean activate, byte data)
+void DccCommanderClass::DccAccessoryDecoderPacket(int address, boolean activate, byte data)
 {
 	int realAddress = address;
 
@@ -33,7 +35,7 @@ void DccCommander::DccAccessoryDecoderPacket(int address, boolean activate, byte
 #endif
 #endif
 
-	if (!DccCommander::UseRawDccAddresses)
+	if (!DccCommanderClass::UseRawDccAddresses)
 	{
 		realAddress -= 1;
 		realAddress *= 4;
@@ -62,13 +64,13 @@ void DccCommander::DccAccessoryDecoderPacket(int address, boolean activate, byte
 	// DccCommander will react only on the desactivate flag to avoid double events.
 	if (activate == 0)
 	{
-		if (DccCommander::func_AccPacket)
-			(DccCommander::func_AccPacket)(realAddress, activate, data);
+		if (DccCommanderClass::func_AccPacket)
+			(DccCommanderClass::func_AccPacket)(realAddress, activate, data);
 		else
 		{
 			Commander::RaiseEvent(DCCID(realAddress), data ? COMMANDERS_EVENT_MOVELEFT : COMMANDERS_EVENT_MOVERIGHT, data);
 
-			DccCommander::LastDccId = DCCID(realAddress);
+			DccCommanderClass::LastDccId = DCCID(realAddress);
 		}
 	}
 }
@@ -80,7 +82,7 @@ void DccCommander::DccAccessoryDecoderPacket(int address, boolean activate, byte
 #endif
 
 #ifdef COMMANDERS_DEBUG_MODE
-void DccCommander::CheckIndex(unsigned char inIndex, const __FlashStringHelper *inFunc)
+void DccCommanderClass::CheckIndex(unsigned char inIndex, const __FlashStringHelper *inFunc)
 {
 }
 #endif
@@ -92,10 +94,10 @@ void StatusBlink_handler()
 	status = !status;
 }
 
-void DccCommander::begin(int i, int j, int k, boolean inInterruptMonitor, boolean inUseRawDccAddresses)
+void DccCommanderClass::begin(int i, int j, int k, boolean inInterruptMonitor, boolean inUseRawDccAddresses)
 {
 	DCC.beginDecoder(i, j, k);
-	DccCommander::UseRawDccAddresses = inUseRawDccAddresses;
+	DccCommanderClass::UseRawDccAddresses = inUseRawDccAddresses;
 
 	DCC.SetBasicAccessoryDecoderPacketHandler(DccAccessoryDecoderPacket, true);
 
@@ -103,9 +105,9 @@ void DccCommander::begin(int i, int j, int k, boolean inInterruptMonitor, boolea
 		DCC.SetInterruptMonitor(StatusBlink_handler);
 }
 
-void DccCommander::PriorityLoop()
+void DccCommanderClass::PriorityLoop()
 {
-	DccCommander::loop();
+	DccCommanderClass::loop();
 }
 
 #define MINTIME	2
@@ -119,7 +121,7 @@ static unsigned long start = 0;
 
 #define ELAPSEDTIME	((unsigned long) -2)
 
-unsigned long DccCommander::loop()
+unsigned long DccCommanderClass::loop()
 {
 	if (start == 0)
 		start = millis();
@@ -141,25 +143,28 @@ unsigned long DccCommander::loop()
 #endif
 #endif
 		start = 0;
-		unsigned long last = this->LastDccId;
-		this->LastDccId = UNDEFINED_ID;
-		Commanders::SetLastEventType(COMMANDERS_EVENT_TOGGLE);
-		Commanders::SetLastEventData(0);
-		return last;
+		if (this->LastDccId != UNDEFINED_ID)
+		{
+			unsigned long last = this->LastDccId;
+			this->LastDccId = UNDEFINED_ID;
+			Commanders::SetLastEventType(COMMANDERS_EVENT_TOGGLE);
+			Commanders::SetLastEventData(0);
+			return last;
+		}
 	}
 
 	return UNDEFINED_ID;
 }
 
-DccAccDecoderPacket DccCommander::func_AccPacket = NULL;
+DccAccDecoderPacket DccCommanderClass::func_AccPacket = NULL;
 
-void DccCommander::SetAccessoryDecoderPacketHandler(DccAccDecoderPacket func)
+void DccCommanderClass::SetAccessoryDecoderPacketHandler(DccAccDecoderPacket func)
 {
-	DccCommander::func_AccPacket = func;
+	DccCommanderClass::func_AccPacket = func;
 }
 
 #ifdef COMMANDERS_DEBUG_MODE
-void DccCommander::printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inEventData)
+void DccCommanderClass::printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inEventData)
 {
 	Serial.print(F("DCC Commander event : Address : "));
 	Serial.print(DCCID(inId), DEC);

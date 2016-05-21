@@ -32,35 +32,17 @@ class ButtonsCommanderPush : public ButtonsCommanderButton
 
  public:
 	ButtonsCommanderPush();
-	ButtonsCommanderPush(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType = COMMANDERS_EVENT_TOGGLE, int inData = 0);
 
-	void begin(int inButtonPin);
+	void begin(unsigned long inId, int inButtonPin, COMMANDERS_EVENT_TYPE inEventType = COMMANDERS_EVENT_TOGGLE, int inData = 0);
 	void AddEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType = COMMANDERS_EVENT_TOGGLE, int inData = 0);
 	unsigned long loop();
 
 	inline int GetPin() const { return GPIO_to_Arduino_pin(this->buttonPin); }
-	inline GPIO_pin_t GetPin2() const { return this->buttonPin; }
+	inline GPIO_pin_t GetDIO2Pin() const { return this->buttonPin; }
 	inline int GetState() const { return this->buttonState; }
 	
 	static ButtonsCommanderPush Empty;
 };
-
-#define PUSH_BUTTON(name, pin, ID) \
-	ButtonsCommanderPush *name = new ButtonsCommanderPush(ID); \
-	name->begin(pin); \
-	macro_buttons.Add(name);
-
-#define PUSH_BUTTON_EVENT(name, pin, ID, Event, data) \
-	ButtonsCommanderPush *name = new ButtonsCommanderPush(inId, ID, Event, data); \
-	name->begin(pin); \
-	macro_buttons.Add(name);
-
-#define PUSH_BUTTON_ADDID(name, ID) \
-	name->AddEvent(ID);
-
-#define PUSH_BUTTON_ADDID_EVENT(name, ID, EVENT, data) \
-	name->AddEvent(ID, EVENT, data);
-
 
 //-------------------------------------------------------------------
 #endif

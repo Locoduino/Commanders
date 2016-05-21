@@ -12,19 +12,31 @@
 	#include <mcp_can.h>
 #endif
 
+#define CANCommander CANCommanderClass::GetCurrent()
+
 //-------------------------------------------------------------------
 
-class CANCommander : Commander
+class CANCommanderClass : Commander
 {
 	private:
 		MCP_CAN *pCan;
 		static unsigned long lastEventId;
 
 	public:
-		inline CANCommander() : Commander() {}
+		inline CANCommanderClass() : Commander() {}
 		
 		void begin(byte inPin, byte inSpeed, byte inInterrupt, uint16_t inId);
 		unsigned long loop();
+
+	public:
+		static CANCommanderClass *pCANCommander;
+		static inline CANCommanderClass &GetCurrent()
+		{
+			if (pCANCommander == NULL)
+				pCANCommander = new CANCommanderClass();
+
+			return *(CANCommanderClass::pCANCommander);
+		}
 };
 
 //-------------------------------------------------------------------

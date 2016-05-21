@@ -6,7 +6,7 @@ description: <Composite push button array on analog pin with debounce.>
 
 #include "Commanders.h"
 
-ButtonsCommanderAnalogPushes::ButtonsCommanderAnalogPushes(byte inNumberOfItems) : ButtonsCommanderButton(UNDEFINED_ID)
+ButtonsCommanderAnalogPushes::ButtonsCommanderAnalogPushes() : ButtonsCommanderButton(UNDEFINED_ID)
 {
 	this->analogPin = 0;
 	this->lastButtonState = LOW;
@@ -14,19 +14,31 @@ ButtonsCommanderAnalogPushes::ButtonsCommanderAnalogPushes(byte inNumberOfItems)
 	this->lastDebounceTime = 0;
 	this->debounceDelay = 50;
 
-	this->size = inNumberOfItems;
-	this->pButtons = new ButtonsCommanderAnalogPushesItem[this->size];
+	this->size = 0;
 }
 
-void ButtonsCommanderAnalogPushes::begin(int inButtonPin, unsigned long *inpIds, int *inpButtonValues, int inTolerancy)
+void ButtonsCommanderAnalogPushes::begin(int inButtonPin, byte inNumberOfItems, unsigned long *inpIds, int *inpButtonValues, int inTolerancy)
 {	
-	//CHECKPIN(inButtonPin, "ButtonsCommanderAnalogPushes::begin");
+	this->size = inNumberOfItems;
+	this->pButtons = new ButtonsCommanderAnalogPushesItem[this->size];
 
 	this->analogPin = inButtonPin;
 	this->readingTolerancy = inTolerancy;
 
 	for (int i = 0; i < this->size; i++)
+	{
+#ifdef COMMANDERS_DEBUG_MODE
+		if (inpButtonValues[i] < 0 || inpButtonValues[i] > 1023)
+		{
+			Serial.print(F("Analog push buttons. Invalid value "));
+			Serial.print(inpButtonValues[i]);
+			Serial.print(F(" for button "));
+			Serial.print(i);
+			Serial.println(F(". Value must betwwen 0 and 1023 !"));
+		}
+#endif
 		this->pButtons[i].begin(inpIds[i], inpButtonValues[i], inTolerancy);
+	}
 
 	pinMode(this->analogPin, INPUT);
 }

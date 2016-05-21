@@ -34,32 +34,6 @@ public:
 	unsigned long loop();
 };
 
-#define SWITCH_BUTTON(name, pin, ID) \
-	ButtonsCommanderSwitch *name = new ButtonsCommanderSwitch(); \
-	name->AddEvent(pin, ID); \
-	name->begin(); \
-	macro_buttons.Add(name);
-
-#define SWITCH_BUTTON_2ID_MOTOR(name, pin1, ID1, pin2, ID2) \
-	ButtonsCommanderSwitch *name = new ButtonsCommanderSwitch(); \
-	name->AddEvent(pin1, ID1, COMMANDERS_EVENT_MOVELEFT); \
-	name->AddEvent(pin2, ID2, COMMANDERS_EVENT_MOVERIGHT); \
-	name->begin(); \
-	macro_buttons.Add(name);
-
-#define SWITCH_BUTTON_2ID_LIGHT(name, pin1, ID1, pin2, ID2) \
-	ButtonsCommanderSwitch *name = new ButtonsCommanderSwitch(); \
-	name->AddEvent(pin1, ID1, COMMANDERS_EVENT_MOVESTOP); \
-	name->AddEvent(pin2, ID2, COMMANDERS_EVENT_MOVELEFT); \
-	name->begin(); \
-	macro_buttons.Add(name);
-
-#define SWITCH_BUTTON_ADDID(name, pin, ID) \
-	name->AddEvent(pin, ID);
-
-#define SWITCH_BUTTON_ADDID_EVENT(name, pin, ID, EVENT, data) \
-	name->AddEvent(pin, ID, EVENT, data);
-
 //-------------------------------------------------------------------
 #endif
 //-------------------------------------------------------------------

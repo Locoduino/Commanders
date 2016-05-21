@@ -25,9 +25,11 @@
 #endif
 #endif
 
+#define ButtonsCommander ButtonsCommanderClass::GetCurrent()
+
 //-------------------------------------------------------------------
 
-class ButtonsCommander : Commander
+class ButtonsCommanderClass : Commander
 {
 	private:
 		ButtonsCommanderButton *pLastSelectedButton;
@@ -36,7 +38,7 @@ class ButtonsCommander : Commander
 		ButtonsCommanderButton *pFirstButton;
 
 	public:
-		ButtonsCommander();
+		ButtonsCommanderClass();
 
 		void begin();
 		ButtonsCommanderButton *Add(ButtonsCommanderButton *inpButton);
@@ -44,9 +46,17 @@ class ButtonsCommander : Commander
 		ButtonsCommanderButton* GetFromId(unsigned long inId) const;
 		void RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData);
 
-	public:
 		unsigned long loop();
+
+	public:
+		static ButtonsCommanderClass *pButtonsCommander;
+
+	public:
+		static ButtonsCommanderButton *AddButton(ButtonsCommanderButton *inpButton);
+		static inline ButtonsCommanderClass &GetCurrent() {	return *(ButtonsCommanderClass::pButtonsCommander);}
 };
+
+#define DECLARE_BUTTONS_COMMANDER_STATIC		ButtonsCommanderClass::Declare();
 
 //-------------------------------------------------------------------
 #endif

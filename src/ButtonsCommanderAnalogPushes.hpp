@@ -6,9 +6,6 @@
 #include "Commanders.h"
 #include "ButtonsCommanderAnalogPushesItem.hpp"
 
-#define PUSHES(list, nb)	((ButtonsCommanderAnalogPushes *) list[nb])
-#define PUSHESITEM(list, nb, item)	(((ButtonsCommanderAnalogPushes *) list[nb])->GetItem(item))
-
 //-------------------------------------------------------------------
 // A push button is a hardware device giving a time limited impulsion.
 // It will return one Dccid at a time, passing through the whole list of DccIds.
@@ -47,9 +44,9 @@ private:
 	unsigned long debounceDelay;    // the debounce time; increase if the output flickers
 
 public:
-	ButtonsCommanderAnalogPushes(byte inNumber);
+	ButtonsCommanderAnalogPushes();
 
-	void begin(int inButtonPin, unsigned long *inpIds, int *inpButtonValues, int inTolerancy = 20);
+	void begin(int inButtonPin, byte inNumber, unsigned long *inpIds, int *inpButtonValues, int inTolerancy = 20);
 	unsigned long loop();
 	void EndLoop();
 	ButtonsCommanderAnalogPushesItem *GetItem(byte inNumber) { return &(this->pButtons[inNumber]); }
@@ -57,16 +54,6 @@ public:
 
 	inline byte GetLastButtonPressed() const { return this->lastButtonPressed; }
 };
-
-#define ANALOGPUSH_BUTTON(name, pin, number, IDS, values) \
-	ButtonsCommanderAnalogPushes *name = new ButtonsCommanderAnalogPushes(number); \
-	name->begin(pin, IDS, values); \
-	macro_buttons.Add(name);
-
-#define ANALOGPUSH_BUTTON_TOL(name, pin, number, IDS, values, tol) \
-	ButtonsCommanderAnalogPushes *name = new ButtonsCommanderAnalogPushes(number); \
-	name->begin(pin, IDS, values, tol); \
-	macro_buttons.Add(name);
 
 //-------------------------------------------------------------------
 #endif

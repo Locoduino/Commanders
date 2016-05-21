@@ -1,5 +1,5 @@
 /*************************************************************
-project: <Carte 8 Servos Locoduino by UAD>
+project: <Commanders>
 author: <Thierry PARIS>
 *************************************************************/
 
@@ -8,8 +8,6 @@ author: <Thierry PARIS>
 #else
 #include <Commanders.h>
 #endif
-
-CANCommander canCommander;
 
 void ReceiveEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inEventData)
 {
@@ -24,7 +22,7 @@ void setup()
 {
 	Commanders::StartSetup(ReceiveEvent, LED_BUILTIN);
 
-	canCommander.begin(10, CAN_125KBPS, digitalPinToInterrupt(3), 0x10);
+	CANCommander.begin(10, CAN_500KBPS, digitalPinToInterrupt(3), 0x10);
 
 	Commanders::EndSetup();
 }

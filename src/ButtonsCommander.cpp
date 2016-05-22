@@ -4,8 +4,8 @@ author: <Thierry PARIS>
 description: <Buttons Commander>
 *************************************************************/
 
-#ifndef NO_BUTTONSCOMMANDER
 #include "Commanders.h"
+#ifndef NO_BUTTONSCOMMANDER
 
 #ifdef VISUALSTUDIO
 #include<stdarg.h>
@@ -77,11 +77,6 @@ ButtonsCommanderButton* ButtonsCommanderClass::GetFromId(unsigned long inId) con
 	return 0;
 }
 
-void ButtonsCommanderClass::RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
-{
-	Commander::RaiseEvent(inId, inEvent, inData);
-}
-
 static ButtonsCommanderButton *pCurrentLoopButton = NULL;
 
 unsigned long ButtonsCommanderClass::loop()
@@ -115,12 +110,6 @@ unsigned long ButtonsCommanderClass::loop()
 #endif
 
 	pCurrentLoopButton->EndLoop();
-
-	this->pLastSelectedButton = this->GetFromId(ID);
-
-	Commanders::SetLastEventType(ButtonsCommanderButton::GetLastEventType());
-	Commanders::SetLastEventData(ButtonsCommanderButton::GetLastEventData());
-
 	return ID;
 }
 

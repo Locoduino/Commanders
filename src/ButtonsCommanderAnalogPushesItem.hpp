@@ -3,6 +3,9 @@
 #define __buttonsCommanderAnalogPushesItem_H__
 //-------------------------------------------------------------------
 
+#include "Commanders.h"
+#ifndef NO_BUTTONSCOMMANDER
+
 class ButtonsCommanderAnalogPushesItem : public ButtonsCommanderButton
 {
  private:
@@ -18,5 +21,4 @@ class ButtonsCommanderAnalogPushesItem : public ButtonsCommanderButton
 
 //-------------------------------------------------------------------
 #endif
-
-//-------------------------------------------------------------------
+#endif

@@ -4,7 +4,8 @@ author: <Thierry PARIS>
 description: <Push button with debounce.>
 *************************************************************/
 
-#include "ButtonsCommanderPush.hpp"
+#include "Commanders.h"
+#ifndef NO_BUTTONSCOMMANDER
 
 ButtonsCommanderPush ButtonsCommanderPush::Empty;
 
@@ -75,9 +76,9 @@ unsigned long ButtonsCommanderPush::loop()
 			if (this->buttonState == LOW)
 			{
 				foundID = this->Events.pCurrentItem->Obj.Id;
-				eventType = this->Events.pCurrentItem->Obj.EventType;
-				eventData = this->Events.pCurrentItem->Obj.Data;
-				Commander::RaiseEvent(foundID, eventType, eventData);
+				Commander::RaiseEvent(foundID, 
+					this->Events.pCurrentItem->Obj.EventType,
+					this->Events.pCurrentItem->Obj.Data);
 
 				this->Events.NextCurrent();
 			}
@@ -87,6 +88,7 @@ unsigned long ButtonsCommanderPush::loop()
   
 	// save the reading.  Next time through the loop,
 	// it'll be the lastButtonState:
-	lastButtonState = reading;
+	this->lastButtonState = reading;
 	return foundID;
 }
+#endif

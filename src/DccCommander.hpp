@@ -27,10 +27,10 @@ typedef void(*DccAccDecoderPacket)(int address, boolean activate, byte data);
 class DccCommanderClass : Commander
 {
 	private:
-		static unsigned long LastDccId;
+		unsigned long LastDccId;
 
 	public:
-		static boolean UseRawDccAddresses;
+		boolean UseRawDccAddresses;
 		static DccAccDecoderPacket    func_AccPacket;
 
 		inline DccCommanderClass() : Commander() {}
@@ -41,7 +41,7 @@ class DccCommanderClass : Commander
 		static void SetAccessoryDecoderPacketHandler(DccAccDecoderPacket func);
 		static void DccAccessoryDecoderPacket(int address, boolean activate, byte data);
 
-		static inline unsigned long GetLastDccId() { return LastDccId; }
+		inline unsigned long GetLastDccId() { return LastDccId; }
 
 	public:
 		static DccCommanderClass *pDccCommander;

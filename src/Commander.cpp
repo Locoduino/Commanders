@@ -6,7 +6,6 @@ description: <Base Commander>
 
 #include "Commanders.h"
 
-CommandersEventHandlerFunction Commander::EventHandler = 0;
 Commander *Commander::pFirstCommander = 0;
 GPIO_pin_t Commander::StatusLedPin = DP_INVALID;
 unsigned int Commander::BlinkDelay = 1000;
@@ -45,11 +44,15 @@ void Commander::CommanderPriorityLoop()
 	}
 }
 
-void Commander::RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
+unsigned long Commander::RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
 {
 	Commander::StatusBlink();
-	if (Commander::EventHandler != 0)
-		Commander::EventHandler(inId, inEvent, inData);
+	Commanders::SetLastEventType(inEvent);
+	Commanders::SetLastEventData(inData);
+	if (Commanders::EventHandler != 0)
+		Commanders::EventHandler(inId, inEvent, inData);
+
+	return inId;
 }
 
 void Commander::StatusBlink()

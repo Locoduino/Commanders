@@ -12,8 +12,7 @@ description: <Dcc Commander>
 DCC_Decoder DCC_Decoder::DCCInstance;
 #endif
 
-unsigned long DccCommanderClass::LastDccId = UNDEFINED_ID;
-boolean DccCommanderClass::UseRawDccAddresses;
+DccAccDecoderPacket DccCommanderClass::func_AccPacket;
 DccCommanderClass *DccCommanderClass::pDccCommander;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -35,7 +34,7 @@ void DccCommanderClass::DccAccessoryDecoderPacket(int address, boolean activate,
 #endif
 #endif
 
-	if (!DccCommanderClass::UseRawDccAddresses)
+	if (!DccCommander.UseRawDccAddresses)
 	{
 		realAddress -= 1;
 		realAddress *= 4;
@@ -68,9 +67,9 @@ void DccCommanderClass::DccAccessoryDecoderPacket(int address, boolean activate,
 			(DccCommanderClass::func_AccPacket)(realAddress, activate, data);
 		else
 		{
-			Commander::RaiseEvent(DCCID(realAddress), data ? COMMANDERS_EVENT_MOVELEFT : COMMANDERS_EVENT_MOVERIGHT, data);
+			Commander::RaiseEvent(DCCID(realAddress), COMMANDERS_EVENT_MOVE, data ? COMMANDERS_MOVE_LEFT : COMMANDERS_MOVE_RIGHT);
 
-			DccCommanderClass::LastDccId = DCCID(realAddress);
+			DccCommander.LastDccId = DCCID(realAddress);
 		}
 	}
 }
@@ -97,7 +96,8 @@ void StatusBlink_handler()
 void DccCommanderClass::begin(int i, int j, int k, boolean inInterruptMonitor, boolean inUseRawDccAddresses)
 {
 	DCC.beginDecoder(i, j, k);
-	DccCommanderClass::UseRawDccAddresses = inUseRawDccAddresses;
+	this->UseRawDccAddresses = inUseRawDccAddresses;
+	this->LastDccId = UNDEFINED_ID;
 
 	DCC.SetBasicAccessoryDecoderPacketHandler(DccAccessoryDecoderPacket, true);
 
@@ -156,7 +156,7 @@ unsigned long DccCommanderClass::loop()
 	return UNDEFINED_ID;
 }
 
-DccAccDecoderPacket DccCommanderClass::func_AccPacket = NULL;
+//DccAccDecoderPacket DccCommanderClass::func_AccPacket = NULL;
 
 void DccCommanderClass::SetAccessoryDecoderPacketHandler(DccAccDecoderPacket func)
 {
@@ -174,16 +174,25 @@ void DccCommanderClass::printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inE
 	switch (inEventType)
 	{
 	case COMMANDERS_EVENT_NONE:			Serial.println(F("NONE"));		break;
-	case COMMANDERS_EVENT_TOGGLE:		Serial.println(F("TOGGLE"));		break;
-	case COMMANDERS_EVENT_MOVELEFT:		Serial.println(F("MOVELEFT"));		break;
-	case COMMANDERS_EVENT_MOVERIGHT:	Serial.println(F("MOVERIGHT"));		break;
-	case COMMANDERS_EVENT_MOVESTOP:		Serial.println(F("MOVESTOP"));		break;
-	case COMMANDERS_EVENT_ABSOLUTEMOVE:
-		Serial.print(F("ABSOLUTEMOVE : "));
-		Serial.println(inEventData, DEC);
+	case COMMANDERS_EVENT_TOGGLE:		Serial.println(F("TOGGLE"));	break;
+	case COMMANDERS_EVENT_MOVE:			
+		Serial.print(F("MOVE "));		
+		switch ((COMMANDERS_MOVE_TYPE)inEventData)
+		{
+		case COMMANDERS_MOVE_MORE:		Serial.println(F("MORE"));		break;
+		case COMMANDERS_MOVE_LESS:		Serial.println(F("LESS"));		break;
+		case COMMANDERS_MOVE_STOP:		Serial.println(F("STOP"));		break;
+		case COMMANDERS_MOVE_LEFT:		Serial.println(F("LEFT"));		break;
+		case COMMANDERS_MOVE_RIGHT:		Serial.println(F("RIGHT"));		break;
+		case COMMANDERS_MOVE_CENTER:	Serial.println(F("CENTER"));	break;
+		case COMMANDERS_MOVE_TOP:		Serial.println(F("TOP"));		break;
+		case COMMANDERS_MOVE_BOTTOM:	Serial.println(F("BOTTOM"));	break;
+		case COMMANDERS_MOVE_ON:		Serial.println(F("ON"));		break;
+		case COMMANDERS_MOVE_OFF:		Serial.println(F("OFF"));		break;
+		}
 		break;
-	case COMMANDERS_EVENT_RELATIVEMOVE:
-		Serial.print(F("RELATIVEMOVE : "));
+	case COMMANDERS_EVENT_MOVEPOSITION:
+		Serial.print(F("MOVEPOSITION : "));
 		Serial.println(inEventData, DEC);
 		break;
 	case COMMANDERS_EVENT_CONFIG:

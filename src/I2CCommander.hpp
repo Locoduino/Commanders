@@ -25,13 +25,13 @@ by the static method begin().
 class I2CCommanderClass : Commander
 {
 	public:
-		static uint8_t I2CSlaveId;
-		static unsigned long LastEventId;
+		uint8_t I2CSlaveId;
+		unsigned long LastEventId;
 
 		inline I2CCommanderClass() : Commander() {}
 		unsigned long loop();
 
-		static void begin(uint8_t inI2CSlaveID);
+		void begin(uint8_t inI2CSlaveID);
 
 	public:
 		static I2CCommanderClass *pI2cCommander;

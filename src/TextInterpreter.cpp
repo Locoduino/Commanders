@@ -8,7 +8,7 @@ TextInterpreter::TextInterpreter()
 void TextInterpreter::Init()
 {
 	this->id = 0;
-	this->eventType = COMMANDERS_EVENT_NONE;
+	this->lastEventType = COMMANDERS_EVENT_NONE;
 	this->data = 0;
 	this->neg_sign = false;
 	this->step = TEXTINTERPRETER_STEP_ID;
@@ -24,11 +24,11 @@ unsigned long TextInterpreter::SendChar(char inCharacter)
 		if (this->id != UNDEFINED_ID && this->id != 0)
 		{
 			{
-				if (this->eventType == COMMANDERS_EVENT_NONE)
-					this->eventType = COMMANDERS_EVENT_TOGGLE;
+				if (this->lastEventType == COMMANDERS_EVENT_NONE)
+					this->lastEventType = COMMANDERS_EVENT_TOGGLE;
 
 #ifdef COMMANDERS_DEBUG_MODE
-				if (this->eventType != COMMANDERS_EVENT_TOGGLE)
+				if (this->lastEventType != COMMANDERS_EVENT_TOGGLE)
 				{
 					Serial.print(F("data = "));
 					if (this->neg_sign)
@@ -41,8 +41,8 @@ unsigned long TextInterpreter::SendChar(char inCharacter)
 					this->data = -this->data;
 			}
 
-			Commander::RaiseEvent(this->id, this->eventType, this->data);
-			Commanders::SetLastEventType(this->eventType);
+			Commander::RaiseEvent(this->id, this->lastEventType, this->data);
+			Commanders::SetLastEventType(this->lastEventType);
 			Commanders::SetLastEventData(this->data);
 			foundID = this->id;
 		}
@@ -73,7 +73,7 @@ unsigned long TextInterpreter::SendChar(char inCharacter)
 			case TEXTINTERPRETER_STEP_TYPE:	
 #ifdef COMMANDERS_DEBUG_MODE
 				Serial.print(F("event = "));
-				Serial.println(this->eventType);
+				Serial.println(this->lastEventType);
 #endif
 				this->step = TEXTINTERPRETER_STEP_DATA;
 				this->data = 0;	
@@ -113,15 +113,12 @@ unsigned long TextInterpreter::SendChar(char inCharacter)
 			break;
 
 		case TEXTINTERPRETER_STEP_TYPE:
-			if (this->eventType == COMMANDERS_EVENT_NONE)
+			if (this->lastEventType == COMMANDERS_EVENT_NONE)
 			{
-				if (inCharacter == 't' || inCharacter == 'T')		this->eventType = COMMANDERS_EVENT_TOGGLE;
-				if (inCharacter == 's' || inCharacter == 'S')		this->eventType = COMMANDERS_EVENT_MOVESTOP;
-				if (inCharacter == 'l' || inCharacter == 'L')		this->eventType = COMMANDERS_EVENT_MOVELEFT;
-				if (inCharacter == 'r' || inCharacter == 'R')		this->eventType = COMMANDERS_EVENT_MOVERIGHT;
-				if (inCharacter == 'a' || inCharacter == 'A')		this->eventType = COMMANDERS_EVENT_ABSOLUTEMOVE;
-				if (inCharacter == 'e' || inCharacter == 'E')		this->eventType = COMMANDERS_EVENT_RELATIVEMOVE;
-				if (inCharacter == 'c' || inCharacter == 'C')		this->eventType = COMMANDERS_EVENT_CONFIG;
+				if (inCharacter == 't' || inCharacter == 'T')		this->lastEventType = COMMANDERS_EVENT_TOGGLE;
+				if (inCharacter == 'm' || inCharacter == 'M')		this->lastEventType = COMMANDERS_EVENT_MOVE;
+				if (inCharacter == 'p' || inCharacter == 'P')		this->lastEventType = COMMANDERS_EVENT_MOVEPOSITION;
+				if (inCharacter == 'c' || inCharacter == 'C')		this->lastEventType = COMMANDERS_EVENT_CONFIG;
 			}
 			break;
 

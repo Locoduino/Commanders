@@ -3,8 +3,9 @@
 #define __buttonsCommander_H__
 //-------------------------------------------------------------------
 
-#ifndef NO_BUTTONSCOMMANDER
 #include "Commander.hpp"
+
+#ifndef NO_BUTTONSCOMMANDER
 #include "ButtonsCommanderButton.hpp"
 
 #ifndef NO_BUTTONSCOMMANDER
@@ -44,7 +45,6 @@ class ButtonsCommanderClass : Commander
 		ButtonsCommanderButton *Add(ButtonsCommanderButton *inpButton);
 		inline ButtonsCommanderButton *GetLastSelectedButton() const { return this->pLastSelectedButton; }
 		ButtonsCommanderButton* GetFromId(unsigned long inId) const;
-		void RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData);
 
 		unsigned long loop();
 

@@ -14,7 +14,6 @@ description: <CAN Commander>
 #include <SPI.h>
 #endif
 
-unsigned long CANCommanderClass::lastEventId;
 CANCommanderClass *CANCommanderClass::pCANCommander;
 
 volatile byte Flag_Recv = 0;   // variable d'échange avec l'interruption IRQ
@@ -68,55 +67,45 @@ void CANCommanderClass::begin(byte inSPIpin, byte inSpeed, byte inInterrupt, uin
 	this->pCan->init_Filt(5, 0, 0);        // Idem
 }
 
-// Variables globales pour la gestion des Messages reçus et émis
-byte IdR;                       // Id pour la routine CAN_recup()
-unsigned char lenR = 0;         // Longueur "    "       "
-unsigned char bufR[8];          // tampon de reception      "
-unsigned char bufS[8];          // tampon d'emission
-
-								// Variable globale Mémoire circulaire pour le stockage des messages reçus
-unsigned char _Circule[256];    // récepteur circulaire des messages CAN sous IT
-int _indexW, _indexR, _Ncan;    // index d'écriture et lecture, nb d'octets a lire
-byte _CANoverflow = 0;          // flag overflow (buffer _Circule plein)
 
 /*
 * Routine de récupération des messages CAN dans la mémoire circulaire _Circule
 * appelée par LOOP lorsque Flag_Recv = 1;
 */
-void CAN_recup(MCP_CAN *apCan)
+void CANCommanderClass::CAN_recup()
 {
 	unsigned char len = 0;  // nombre d'octets du message
 	unsigned char buf[8];   // message
 	unsigned long Id;   // Id (on devrait plutôt utiliser un int car il y a 11 bits)
 
-	while (CAN_MSGAVAIL == apCan->checkReceive()) 
+	while (CAN_MSGAVAIL == this->pCan->checkReceive())
 	{
-		apCan->readMsgBuf(&len, buf);        // read data, len: data length, buf: data buf
-		Id = apCan->getCanId();
-		if ((unsigned int) (_Ncan + len + 2) < sizeof(_Circule)) 
+		this->pCan->readMsgBuf(&len, buf);        // read data, len: data length, buf: data buf
+		Id = this->pCan->getCanId();
+		if ((unsigned int) (this->Ncan + len + 2) < sizeof(this->Circule))
 		{ // il reste de la place dans _Circule
-			_Circule[_indexW] = Id;         // enregistrement de Id
-			_indexW++;
-			_Ncan++;
-			if (_indexW == sizeof(_Circule)) 
-				_indexW = 0;
-			_Circule[_indexW] = len;        // enregistrement de len
-			_indexW++;
-			_Ncan++;
-			if (_indexW == sizeof(_Circule)) 
-				_indexW = 0;
+			this->Circule[this->indexW] = Id;         // enregistrement de Id
+			this->indexW++;
+			this->Ncan++;
+			if (this->indexW == sizeof(this->Circule))
+				this->indexW = 0;
+			this->Circule[this->indexW] = len;        // enregistrement de len
+			this->indexW++;
+			this->Ncan++;
+			if (this->indexW == sizeof(this->Circule))
+				this->indexW = 0;
 			for (byte z = 0; z<len; z++) 
 			{
-				_Circule[_indexW] = buf[z];    // enregistrement du message
-				_indexW++;
-				_Ncan++;
-				if (_indexW == sizeof(_Circule))
-					_indexW = 0;
+				this->Circule[this->indexW] = buf[z];    // enregistrement du message
+				this->indexW++;
+				this->Ncan++;
+				if (this->indexW == sizeof(this->Circule))
+					this->indexW = 0;
 			}
 		}
 		else 
 		{
-			_CANoverflow = 1;  // dépassement de la capacite de Circule
+			this->CANoverflow = 1;  // dépassement de la capacite de Circule
 							   // le message est perdu
 		}
 	}
@@ -127,7 +116,7 @@ unsigned long CANCommanderClass::loop()
 	if (Flag_Recv)
 	{
 		Flag_Recv = 0;  // Flag MCP2515 ready for a new  IRQ
-		CAN_recup(this->pCan);    // Get all the messages
+		this->CAN_recup();    // Get all the messages
 	}
 
 	// Handle the first message in the buffer _Circule...
@@ -135,18 +124,18 @@ unsigned long CANCommanderClass::loop()
 	byte Rlen;
 	byte Rbuf[8];
 
-	while (_Ncan > 2) 
+	while (this->Ncan > 2)
 	{    // The minimal size of one message is 3 bytes long !
-		_Ncan--;
-		RId = _Circule[_indexR];        // recup Id
-		_indexR++;
-		if (_indexR == sizeof(_Circule)) 
-			_indexR = 0;
-		_Ncan--;
-		Rlen = _Circule[_indexR];       // recup length
-		_indexR++;
-		if (_indexR == sizeof(_Circule)) 
-			_indexR = 0;
+		this->Ncan--;
+		RId = this->Circule[this->indexR];        // recup Id
+		this->indexR++;
+		if (this->indexR == sizeof(this->Circule))
+			this->indexR = 0;
+		this->Ncan--;
+		Rlen = this->Circule[this->indexR];       // recup length
+		this->indexR++;
+		if (this->indexR == sizeof(this->Circule))
+			this->indexR = 0;
 #ifdef COMMANDERS_DEBUG_MODE
 		Serial.print(F("CAN id "));
 		Serial.print(RId);
@@ -154,11 +143,11 @@ unsigned long CANCommanderClass::loop()
 #endif
 		for (int k = 0; k < Rlen; k++) 
 		{
-			_Ncan--;
-			Rbuf[k] = _Circule[_indexR];  // recup octets message
-			_indexR++;
-			if (_indexR == sizeof(_Circule)) 
-				_indexR = 0;
+			this->Ncan--;
+			Rbuf[k] = this->Circule[this->indexR];  // recup octets message
+			this->indexR++;
+			if (this->indexR == sizeof(this->Circule))
+				this->indexR = 0;
 #ifdef COMMANDERS_DEBUG_MODE
 			Serial.print(F("0x"));
 			Serial.print(Rbuf[k], HEX);
@@ -177,15 +166,15 @@ unsigned long CANCommanderClass::loop()
 		//Rebuild the recomposed long by using bitshift.
 		unsigned long foundID = ((four << 0) & 0xFF) + ((three << 8) & 0xFFFF) + ((two << 16) & 0xFFFFFF) + ((one << 24) & 0xFFFFFFFF);
 
-		COMMANDERS_EVENT_TYPE eventType = (COMMANDERS_EVENT_TYPE)Rbuf[4];
+		COMMANDERS_EVENT_TYPE lastEventType = (COMMANDERS_EVENT_TYPE)Rbuf[4];
 
 		int foundData = Rbuf[6];
 		foundData = foundData << 8;
 		foundData |= Rbuf[5];
 		
-		Commander::RaiseEvent(foundID, eventType, foundData);
+		Commander::RaiseEvent(foundID, lastEventType, foundData);
 
-		Commanders::SetLastEventType(eventType);
+		Commanders::SetLastEventType(lastEventType);
 		Commanders::SetLastEventData(foundData);
 		return foundID;
 	}

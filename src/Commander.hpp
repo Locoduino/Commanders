@@ -10,37 +10,44 @@
 	#include "DIO2.h"
 #endif
 
+enum COMMANDERS_MOVE_TYPE
+{
+	COMMANDERS_MOVE_MORE = +1,
+	COMMANDERS_MOVE_LESS = -1,
+	COMMANDERS_MOVE_STOP = 0,
+	COMMANDERS_MOVE_LEFT = -2,
+	COMMANDERS_MOVE_RIGHT = -3,
+	COMMANDERS_MOVE_CENTER = -4,
+	COMMANDERS_MOVE_TOP = -5,
+	COMMANDERS_MOVE_BOTTOM = -6,
+	COMMANDERS_MOVE_ON = -7,
+	COMMANDERS_MOVE_OFF = -8
+};
+
 enum COMMANDERS_EVENT_TYPE
 {
 	COMMANDERS_EVENT_NONE = 0,			// Should never appear
-	COMMANDERS_EVENT_TOGGLE = 1,		// If a push button or similar is pressed
-	COMMANDERS_EVENT_MOVELEFT = 2,		// If a push 'left' button or similar is pressed
-	COMMANDERS_EVENT_MOVERIGHT = 3,		// If a push 'right' button or similar is pressed
-	COMMANDERS_EVENT_MOVESTOP = 4,		// If a push 'stop' button or similar is pressed
-	COMMANDERS_EVENT_ABSOLUTEMOVE = 5,	// If a potentiometer or similar is moved
-	COMMANDERS_EVENT_RELATIVEMOVE = 6,	// If an encoder or similar is moved
-	COMMANDERS_EVENT_CONFIG = 7			// Configuration address and value
+	COMMANDERS_EVENT_TOGGLE = 1,		// If a push button or similar is pressed, invert the state/position
+	COMMANDERS_EVENT_MOVE = 2,			// If a push 'left' button or similar is pressed, data is a COMMANDERS_MOVE_TYPE
+	COMMANDERS_EVENT_MOVEPOSITION = 3,	// If a potentiometer or similar is moved, data is the position to reach
+	COMMANDERS_EVENT_CONFIG = 4			// Data is the configuration address and value
 };
-
-typedef void(*CommandersEventHandlerFunction)(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData);
 
 #ifndef UNDEFINED_ID
 #define UNDEFINED_ID	((unsigned long)-1)
 #endif
 
 #define COMMANDERSCONFIG(address, value)	( ((int)address<<8) | value )
-#define COMMANDERSCONFIGADDRESS(data)		( (int)data >> 8 )
-#define COMMANDERSCONFIGVALUE(data)			( (int)data & 0x00FF )
+#define COMMANDERSCONFIGADDRESS(data)		highByte((int)data)
+#define COMMANDERSCONFIGVALUE(data)			lowByte((int)data)
 
 class Commander
 {
 	public:
-		unsigned long Id;
 		Commander *pNextCommander;
 
 		// Start of the linked list of all commanders. Each commander have the address of its follower or NULL !
 		static Commander *pFirstCommander;
-		static CommandersEventHandlerFunction EventHandler;
 		static GPIO_pin_t StatusLedPin;
 		static unsigned int BlinkDelay;
 		static unsigned long StartStatusLed;
@@ -48,12 +55,11 @@ class Commander
 	public:
 		inline Commander() { AddCommander(this); pNextCommander = 0; }
 		
-		virtual void begin(int inStatusLedPin = 0) {}
 		inline virtual unsigned long loop() { return UNDEFINED_ID; }
 		inline virtual void PriorityLoop() { }
 		static void StatusBlink();
 		void CommanderPriorityLoop();
-		static void RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData);
+		static unsigned long RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData);
 
 		static unsigned long loops();
 
@@ -68,4 +74,3 @@ class Commander
 
 //-------------------------------------------------------------------
 #endif
-//-------------------------------------------------------------------

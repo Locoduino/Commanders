@@ -4,7 +4,8 @@ author: <Thierry PARIS>
 description: <Switch button with debounce.>
 *************************************************************/
 
-#include "ButtonsCommanderSwitch.hpp"
+#include "Commanders.h"
+#ifndef NO_BUTTONSCOMMANDER
 
 ButtonsCommanderSwitch::ButtonsCommanderSwitch() : ButtonsCommanderButton(UNDEFINED_ID)
 {
@@ -72,9 +73,9 @@ unsigned long ButtonsCommanderSwitch::loop()
 			if (this->EventPins.pCurrentItem->Obj.buttonState == HIGH)
 			{
 				haveFound = this->EventPins.pCurrentItem->Obj.Id;
-				eventType = this->EventPins.pCurrentItem->Obj.Event;
-				eventData = this->EventPins.pCurrentItem->Obj.Data;
-				Commander::RaiseEvent(haveFound, eventType, eventData);
+				Commander::RaiseEvent(haveFound, 
+					this->EventPins.pCurrentItem->Obj.Event, 
+					this->EventPins.pCurrentItem->Obj.Data);
 			}
 		}
 		this->EventPins.pCurrentItem->Obj.lastDebounceTime = 0;
@@ -88,3 +89,4 @@ unsigned long ButtonsCommanderSwitch::loop()
 
 	return haveFound;
 }
+#endif

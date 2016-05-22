@@ -4,6 +4,7 @@
 //-------------------------------------------------------------------
 
 #include "Commanders.h"
+#ifndef NO_BUTTONSCOMMANDER
 
 //-------------------------------------------------------------------
 
@@ -18,7 +19,7 @@ class ButtonsCommanderPotentiometer : public ButtonsCommanderButton
  public:
 	ButtonsCommanderPotentiometer();
 
-	inline bool IsAnalog() const { return true; }
+	//inline bool IsAnalog() const { return true; }
 	inline int GetPosition() const { return this->currentValue; }
 
 	void begin(int inPin, unsigned long inId, int inMinimum, int inMaximum, int inMoveAccuracy = 1);
@@ -27,4 +28,4 @@ class ButtonsCommanderPotentiometer : public ButtonsCommanderButton
 
 //-------------------------------------------------------------------
 #endif
-//-------------------------------------------------------------------
+#endif

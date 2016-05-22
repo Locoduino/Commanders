@@ -5,9 +5,7 @@ description: <Basic button.>
 *************************************************************/
 
 #include "Commanders.h"
-
-COMMANDERS_EVENT_TYPE ButtonsCommanderButton::eventType;
-int ButtonsCommanderButton::eventData;
+#ifndef NO_BUTTONSCOMMANDER
 
 ButtonsCommanderButton::ButtonsCommanderButton(unsigned long inId) 
 { 
@@ -16,3 +14,4 @@ ButtonsCommanderButton::ButtonsCommanderButton(unsigned long inId)
 
 	ButtonsCommanderClass::AddButton(this);
 }
+#endif

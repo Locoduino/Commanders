@@ -4,6 +4,7 @@
 //-------------------------------------------------------------------
 
 #include "Commanders.h"
+#ifndef NO_BUTTONSCOMMANDER
 #include "Chain.hpp"
 
 struct Event
@@ -46,4 +47,4 @@ class ButtonsCommanderPush : public ButtonsCommanderButton
 
 //-------------------------------------------------------------------
 #endif
-//-------------------------------------------------------------------
+#endif

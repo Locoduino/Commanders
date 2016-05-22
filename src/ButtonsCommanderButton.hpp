@@ -3,7 +3,8 @@
 #define __buttonsCommanderButton_H__
 //-------------------------------------------------------------------
 
-#include "Commander.hpp"
+#include "Commanders.h"
+#ifndef NO_BUTTONSCOMMANDER
 
 //-------------------------------------------------------------------
 // A button is a hardware device allowing user to act when this device 
@@ -13,10 +14,6 @@
 
 class ButtonsCommanderButton
 {
- protected:
-	static COMMANDERS_EVENT_TYPE eventType;
-	static int eventData;
-
  protected:
 	unsigned long Id;
 
@@ -28,19 +25,21 @@ class ButtonsCommanderButton
 	inline unsigned long GetId() const { return this->Id; }
 	inline virtual ButtonsCommanderButton* GetFromId(unsigned long inId) { return this; }
 
-	inline virtual bool IsAnalog() const { return false; }
+	//inline virtual bool IsAnalog() const { return false; }
 	inline virtual int GetPosition() const { return 0; }
 
-	inline virtual unsigned long loop() { this->eventType = COMMANDERS_EVENT_NONE;  return UNDEFINED_ID; }
+	inline virtual unsigned long loop()
+	{ 
+		Commanders::SetLastEventType(COMMANDERS_EVENT_NONE);
+		Commanders::SetLastEventData(0);
+		return UNDEFINED_ID; 
+	}
 	inline virtual void EndLoop() {}
 
 	inline void SetNextButton(ButtonsCommanderButton *inButton) { this->pNextButton = inButton; }
 	inline ButtonsCommanderButton *GetNextButton() const { return this->pNextButton; }
-
-	static inline COMMANDERS_EVENT_TYPE GetLastEventType() { return eventType; }
-	static inline int GetLastEventData() { return eventData; }
 };
 
 //-------------------------------------------------------------------
 #endif
-//-------------------------------------------------------------------
+#endif

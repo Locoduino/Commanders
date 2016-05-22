@@ -23,10 +23,6 @@
 #include "DIO2.h"
 #endif
 
-#ifdef VISUALSTUDIO
-#include "../VStudio/ButtonsCommanderKeyboard.hpp"
-#endif
-
 //////////////////////////////////////////
 //  Exclusion area
 //
@@ -106,6 +102,7 @@
 /////////////////////////////////////
 
 #include "Commander.hpp"
+#include "Commanders.hpp"
 
 #ifndef NO_CANCOMMANDER
 #include "CANCommander.hpp"
@@ -126,6 +123,8 @@
 #include "SerialCommander.hpp"
 #include "TextInterpreter.hpp"
 
-#include "Commanders.hpp"
+#ifdef VISUALSTUDIO
+#include "../VStudio/ButtonsCommanderKeyboard.hpp"
+#endif
 
 #endif

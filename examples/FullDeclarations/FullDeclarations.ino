@@ -50,7 +50,6 @@ void setup()
 	Commanders::SetStatusLedPin(LED_BUILTIN);
 	Commanders::SetEventHandler(CommandersEventHandler);
 
-	//ButtonsCommander.begin();
 	I2CCommander.begin(01);
 	DccCommander.begin(0, 0, 1);
 	CANCommander.begin(0, 0, 1, 1);
@@ -62,11 +61,11 @@ void setup()
 	push_simple.begin(100, 10);
 
 	// Simple button for moving event at pos 90, with Id 101, on pin 11
-	push_special_event.begin(101, 11, COMMANDERS_EVENT_ABSOLUTEMOVE, 90);
+	push_special_event.begin(101, 11, COMMANDERS_EVENT_MOVEPOSITION, 90);
 
-	// Complex push button which iterates through a list of three events : id 200 TOGGLE, id 201 MOVESTOP and id 202 MOVE to 135..
-	push_event_list.AddEvent(201, COMMANDERS_EVENT_MOVESTOP);
-	push_event_list.AddEvent(202, COMMANDERS_EVENT_ABSOLUTEMOVE, 135);
+	// Complex push button which iterates through a list of three events : id 201 MOVESTOP, id 202 MOVE to 135 and id 200 TOGGLE, ..
+	push_event_list.AddEvent(201, COMMANDERS_EVENT_MOVE, COMMANDERS_MOVE_STOP);
+	push_event_list.AddEvent(202, COMMANDERS_EVENT_MOVEPOSITION, 135);
 	push_event_list.begin(200, 12);	// begin only when all events are pushed in the class !
 
 	////////////////////////////////////////////////////////////////////////////////////
@@ -81,20 +80,20 @@ void setup()
 	switch_simple.begin();
 
 	// Switch button switching a motor between two positions, with pins 14 and 15, and Ids 402 & 403
-	switch_motor.AddEvent(14, 402, COMMANDERS_EVENT_MOVELEFT);
-	switch_motor.AddEvent(15, 403, COMMANDERS_EVENT_MOVERIGHT);
+	switch_motor.AddEvent(14, 402, COMMANDERS_EVENT_MOVE, COMMANDERS_MOVE_LEFT);
+	switch_motor.AddEvent(15, 403, COMMANDERS_EVENT_MOVE, COMMANDERS_MOVE_RIGHT);
 	switch_motor.begin();
 
 	// Switch button switching a light on and off, with pins 16 and 17, and Ids 404 and 405
-	switch_light.AddEvent(16, 404, COMMANDERS_EVENT_MOVELEFT);	// light on
-	switch_light.AddEvent(17, 405, COMMANDERS_EVENT_MOVESTOP);	// light off
+	switch_light.AddEvent(16, 404, COMMANDERS_EVENT_MOVE, COMMANDERS_MOVE_ON);
+	switch_light.AddEvent(17, 405, COMMANDERS_EVENT_MOVE, COMMANDERS_MOVE_OFF);
 	switch_light.begin();
 
 	// Rotator with four positions, commanding a servo, using pins 18 to 21 and Ids from 410 to 413
-	switch_rotator.AddEvent(18, 410, COMMANDERS_EVENT_ABSOLUTEMOVE, 15);
-	switch_rotator.AddEvent(19, 411, COMMANDERS_EVENT_ABSOLUTEMOVE, 45);
-	switch_rotator.AddEvent(20, 412, COMMANDERS_EVENT_ABSOLUTEMOVE, 100);
-	switch_rotator.AddEvent(21, 413, COMMANDERS_EVENT_ABSOLUTEMOVE, 135);
+	switch_rotator.AddEvent(18, 410, COMMANDERS_EVENT_MOVEPOSITION, 15);
+	switch_rotator.AddEvent(19, 411, COMMANDERS_EVENT_MOVEPOSITION, 45);
+	switch_rotator.AddEvent(20, 412, COMMANDERS_EVENT_MOVEPOSITION, 100);
+	switch_rotator.AddEvent(21, 413, COMMANDERS_EVENT_MOVEPOSITION, 135);
 	switch_rotator.begin();
 
 	////////////////////////////////////////////////////////////////////////////////////

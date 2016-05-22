@@ -4,6 +4,7 @@
 //-------------------------------------------------------------------
 
 #include "Commanders.h"
+#ifndef NO_BUTTONSCOMMANDER
 
 class ButtonsCommanderPush;
 
@@ -22,24 +23,12 @@ class ButtonsCommanderEncoder : public ButtonsCommanderButton
  public:
 	ButtonsCommanderEncoder();
 
-	inline bool IsAnalog() const { return false; }
 	inline int GetPosition() const { return this->currentValue; }
 	inline void ResetStartingPosition() { this->currentValue = this->startingCurrentValue; }
 
 	void begin(int inPin1, int inPin2, unsigned long inId, int inStartingCurrentValue = 0, int inMinimum = 0, int inMaximum = 0);
 	unsigned long loop();
 };
-
-#define ENCODER_BUTTON(name, pin1, pin2, ID) \
-	ButtonsCommanderEncoder *name = new ButtonsCommanderEncoder(ID); \
-	name->begin(pin1, pin2); \
-	macro_buttons.Add(name);
-
-#define ENCODER_BUTTON_VALUE(name, pin1, pin2, ID, start, min, max) \
-	ButtonsCommanderEncoder *name = new ButtonsCommanderEncoder(ID, start, min, max); \
-	name->begin(pin1, pin2); \
-	macro_buttons.Add(name);
-
 //-------------------------------------------------------------------
 #endif
-//-------------------------------------------------------------------
+#endif

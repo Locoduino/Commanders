@@ -4,7 +4,8 @@ author: <Thierry PARIS>
 description: <Keyboard button.>
 *************************************************************/
 
-#include "ButtonsCommanderKeyboard.hpp"
+#include "Commanders.h"
+#ifndef NO_BUTTONSCOMMANDER
 
 #include "conio.h"
 
@@ -33,10 +34,7 @@ unsigned long ButtonsCommanderKeyboard::loop()
 		Serial.print(str);
 		Serial.println(F(" pressed "));
 #endif
-		Commander::RaiseEvent(this->GetId(), COMMANDERS_EVENT_TOGGLE, 0);
-		eventType = COMMANDERS_EVENT_TOGGLE;
-		eventData = 0;
-		return this->GetId();
+		return Commander::RaiseEvent(this->GetId(), COMMANDERS_EVENT_TOGGLE, 0);
 	}
 
 	return UNDEFINED_ID;
@@ -45,3 +43,4 @@ unsigned long ButtonsCommanderKeyboard::loop()
 void ButtonsCommanderKeyboard::EndLoop()
 {
 }
+#endif

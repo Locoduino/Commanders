@@ -11,15 +11,17 @@
 // id separator event separator data
 // where id can be a number from 0 to 4 000 000 000,
 // where separator can be ',' , ';' , '/' or ':'
-// event can be any string of 9 characters long maximum, but must begin with
-//		's' or 'S' to select
-//		'a' or 'A' to make an absolute move, data is necessary in this case
-//		'r' or 'R' to make a relative move, data is necessary in this case
-// and where the data can be any number	between -32767 and 32768
+// where event can be any string of 9 characters long maximum, but must begin with
+//		't' to toggle
+//		'm' to make a move, data is necessary a COMMANDERS_MOVE_TYPE enum value in this case
+//		'p' to make a move to a given position, data is necessary in this case
+//		'c' to change configuration, data is necessary in this case : high byte is the address, low byte the value.
+// and where the data can be a COMMANDERS_MOVE_TYPE enum value if this is a MOVE event,
+// or any number between -32767 and 32768 for a move position event.
 //
-// ex : 123 means ID 123 selected
-// ex : 456 | s means ID 456 selected
-// ex : 789 , A , 100  means ID 789 make an absolute movement to 100 .
+// ex : 123 means ID 123 toggled
+// ex : 456 | T means ID 456 toggled
+// ex : 789 , p , 100  means ID 789 make an absolute movement to 100 .
 
 enum TEXTINTERPRETER_STEP
 {
@@ -33,7 +35,7 @@ class TextInterpreter
 {
 private:
 	unsigned long id;
-	COMMANDERS_EVENT_TYPE eventType;
+	COMMANDERS_EVENT_TYPE lastEventType;
 	int data;
 
 	bool neg_sign;

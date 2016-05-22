@@ -3,9 +3,8 @@
 #define __buttonsCommanderKeyboard_H__
 //-------------------------------------------------------------------
 
-#include "../src/ButtonsCommanderButton.hpp"
-
-#define KEYBOARD(list, nb)	((ButtonsCommanderKeyboard *) list[nb])
+#include "Commanders.h"
+#ifndef NO_BUTTONSCOMMANDER
 
 //-------------------------------------------------------------------
 // A keyboard button is a used by debugging in VisualStudio.
@@ -30,4 +29,4 @@ class ButtonsCommanderKeyboard : public ButtonsCommanderButton
 
 //-------------------------------------------------------------------
 #endif
-//-------------------------------------------------------------------
+#endif

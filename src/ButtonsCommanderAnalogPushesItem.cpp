@@ -4,8 +4,8 @@ author: <Thierry PARIS>
 description: <Item button from analog array of push buttons with debounce.>
 *************************************************************/
 
-#include "ButtonsCommanderAnalogPushes.hpp"
-#include "ButtonsCommanderAnalogPushesItem.hpp"
+#include "Commanders.h"
+#ifndef NO_BUTTONSCOMMANDER
 
 bool ButtonsCommanderAnalogPushesItem::IsPushed(int inCurrentValue)
 {
@@ -14,3 +14,5 @@ bool ButtonsCommanderAnalogPushesItem::IsPushed(int inCurrentValue)
 
 	return false;
 }
+
+#endif

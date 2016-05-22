@@ -4,7 +4,8 @@ author: <Thierry PARIS>
 description: <Potentiometer returning a current value.>
 *************************************************************/
 
-#include "ButtonsCommanderPotentiometer.hpp"
+#include "Commanders.h"
+#ifndef NO_BUTTONSCOMMANDER
 
 ButtonsCommanderPotentiometer::ButtonsCommanderPotentiometer() : ButtonsCommanderButton(UNDEFINED_ID)
 {
@@ -20,7 +21,7 @@ void ButtonsCommanderPotentiometer::begin(int inPin, unsigned long inId, int inM
 	if (this->moveAccuracy <= 0)
 		this->moveAccuracy = 1;
 
-	int val = analogRead(pin);
+	int val = analogRead(this->pin);
 	this->currentValue = map(val, 0, 1023, this->mini, this->maxi);
 }
 
@@ -31,7 +32,7 @@ unsigned long ButtonsCommanderPotentiometer::loop()
 		Serial.println(F("This potentiometer have no ID defined : call begin() !"));
 #endif
 
-	int val = analogRead(pin);
+	int val = analogRead(this->pin);
 
 	val = map(val, 0, 1023, this->mini, this->maxi);
 
@@ -42,11 +43,9 @@ unsigned long ButtonsCommanderPotentiometer::loop()
 		Serial.println(val, DEC);
 #endif
 		this->currentValue = val;
-		eventType = COMMANDERS_EVENT_ABSOLUTEMOVE;
-		eventData = val;
-		Commander::RaiseEvent(this->GetId(), COMMANDERS_EVENT_ABSOLUTEMOVE, val);
-		return this->GetId();
+		return Commander::RaiseEvent(this->GetId(), COMMANDERS_EVENT_MOVEPOSITION, val);
 	}
 
 	return UNDEFINED_ID;
 }
+#endif

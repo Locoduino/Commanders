@@ -6,6 +6,7 @@ description: <Base functions of the library>
 
 #include "Commanders.h"
 
+CommandersEventHandlerFunction Commanders::EventHandler = 0;
 COMMANDERS_EVENT_TYPE Commanders::lastEventType;
 int Commanders::lastEventData;
 
@@ -15,7 +16,7 @@ void Commanders::StartSetup(int inStatusLedPin, unsigned int inBlinkDelay)
 	Serial.begin(115200);
 
 	Serial.println(F(""));
-	Serial.println(F("Commanders V0.92"));
+	Serial.println(F("Commanders V0.93"));
 	Serial.println(F("Developed by Thierry Paris."));
 	Serial.println(F("(c) Locoduino 2016"));
 	Serial.println(F(""));
@@ -27,7 +28,7 @@ void Commanders::StartSetup(int inStatusLedPin, unsigned int inBlinkDelay)
 
 void Commanders::StartSetup(CommandersEventHandlerFunction func, int inStatusLedPin, unsigned int inBlinkDelay)
 {
-	Commander::EventHandler = func;
+	Commanders::EventHandler = func;
 	Commanders::StartSetup(inStatusLedPin, inBlinkDelay);
 }
 
@@ -47,16 +48,25 @@ void Commanders::printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventTyp
 	switch (inEventType)
 	{
 	case COMMANDERS_EVENT_NONE:			Serial.println(F("NONE"));		break;
-	case COMMANDERS_EVENT_TOGGLE:		Serial.println(F("TOGGLE"));		break;
-	case COMMANDERS_EVENT_MOVELEFT:		Serial.println(F("MOVELEFT"));		break;
-	case COMMANDERS_EVENT_MOVERIGHT:	Serial.println(F("MOVERIGHT"));		break;
-	case COMMANDERS_EVENT_MOVESTOP:		Serial.println(F("MOVESTOP"));		break;
-	case COMMANDERS_EVENT_ABSOLUTEMOVE:
-		Serial.print(F("ABSOLUTEMOVE : "));
-		Serial.println(inEventData, DEC);
+	case COMMANDERS_EVENT_TOGGLE:		Serial.println(F("TOGGLE"));	break;
+	case COMMANDERS_EVENT_MOVE:
+		Serial.print(F("MOVE "));
+		switch ((COMMANDERS_MOVE_TYPE)inEventData)
+		{
+		case COMMANDERS_MOVE_MORE:		Serial.println(F("MORE"));		break;
+		case COMMANDERS_MOVE_LESS:		Serial.println(F("LESS"));		break;
+		case COMMANDERS_MOVE_STOP:		Serial.println(F("STOP"));		break;
+		case COMMANDERS_MOVE_LEFT:		Serial.println(F("LEFT"));		break;
+		case COMMANDERS_MOVE_RIGHT:		Serial.println(F("RIGHT"));		break;
+		case COMMANDERS_MOVE_CENTER:	Serial.println(F("CENTER"));	break;
+		case COMMANDERS_MOVE_TOP:		Serial.println(F("TOP"));		break;
+		case COMMANDERS_MOVE_BOTTOM:	Serial.println(F("BOTTOM"));	break;
+		case COMMANDERS_MOVE_ON:		Serial.println(F("ON"));		break;
+		case COMMANDERS_MOVE_OFF:		Serial.println(F("OFF"));		break;
+		}
 		break;
-	case COMMANDERS_EVENT_RELATIVEMOVE:
-		Serial.print(F("RELATIVEMOVE : "));
+	case COMMANDERS_EVENT_MOVEPOSITION:
+		Serial.print(F("MOVEPOSITION : "));
 		Serial.println(inEventData, DEC);
 		break;
 	case COMMANDERS_EVENT_CONFIG:

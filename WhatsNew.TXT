@@ -1,3 +1,12 @@
+22/05/2016 V0.93
+	- Modification des événements pour un MOVE multiple.
+	- Optimisation mémoire et code.
+	- #define NO_BUTTONSCOMMANDER qui marche...	  
+	
+	- Events modified to add a MOVE with arguments.
+	- Code and central memory optimized.
+	- #define NO_BUTTONSCOMMANDER works now.	
+
 19/05/2016 V0.92
 	- Retrait des macros
 	- Simplification de l'écriture pour les utilisateurs par l'instanciation automatique des commanders et la suppression des  

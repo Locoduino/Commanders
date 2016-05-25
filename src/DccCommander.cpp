@@ -187,6 +187,8 @@ void DccCommanderClass::printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inE
 		case COMMANDERS_MOVE_CENTER:	Serial.println(F("CENTER"));	break;
 		case COMMANDERS_MOVE_TOP:		Serial.println(F("TOP"));		break;
 		case COMMANDERS_MOVE_BOTTOM:	Serial.println(F("BOTTOM"));	break;
+		case COMMANDERS_MOVE_STRAIGHT:	Serial.println(F("STRAIGHT"));	break;
+		case COMMANDERS_MOVE_DIVERGE:	Serial.println(F("DIVERGE"));	break;
 		case COMMANDERS_MOVE_ON:		Serial.println(F("ON"));		break;
 		case COMMANDERS_MOVE_OFF:		Serial.println(F("OFF"));		break;
 		}

@@ -16,7 +16,7 @@ void Commanders::StartSetup(int inStatusLedPin, unsigned int inBlinkDelay)
 	Serial.begin(115200);
 
 	Serial.println(F(""));
-	Serial.println(F("Commanders V0.93"));
+	Serial.println(F("Commanders V0.94"));
 	Serial.println(F("Developed by Thierry Paris."));
 	Serial.println(F("(c) Locoduino 2016"));
 	Serial.println(F(""));
@@ -61,6 +61,8 @@ void Commanders::printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventTyp
 		case COMMANDERS_MOVE_CENTER:	Serial.println(F("CENTER"));	break;
 		case COMMANDERS_MOVE_TOP:		Serial.println(F("TOP"));		break;
 		case COMMANDERS_MOVE_BOTTOM:	Serial.println(F("BOTTOM"));	break;
+		case COMMANDERS_MOVE_STRAIGHT:	Serial.println(F("STRAIGHT"));	break;
+		case COMMANDERS_MOVE_DIVERGE:	Serial.println(F("DIVERGE"));	break;
 		case COMMANDERS_MOVE_ON:		Serial.println(F("ON"));		break;
 		case COMMANDERS_MOVE_OFF:		Serial.println(F("OFF"));		break;
 		}

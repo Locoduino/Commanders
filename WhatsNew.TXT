@@ -1,3 +1,10 @@
+25/06/2016 V0.94
+	- Ajout de STRAIGHT et DIVERGE dans les événements
+	- Mise à jour de DIO2.zip dans extra.
+
+	- Added events STRAIGHT and DIVERGE.
+	- Update of DIO2.zip in extra folder.
+
 22/05/2016 V0.93
 	- Modification des événements pour un MOVE multiple.
 	- Optimisation mémoire et code.

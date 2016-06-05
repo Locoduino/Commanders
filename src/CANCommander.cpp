@@ -76,7 +76,7 @@ void CANCommanderClass::CAN_recup()
 {
 	unsigned char len = 0;  // nombre d'octets du message
 	unsigned char buf[8];   // message
-	unsigned long Id;   // Id (on devrait plutôt utiliser un int car il y a 11 bits)
+	unsigned char Id;   // Id (on devrait plutôt utiliser un int car il y a 11 bits)
 
 	while (CAN_MSGAVAIL == this->pCan->checkReceive())
 	{
@@ -172,7 +172,7 @@ unsigned long CANCommanderClass::loop()
 		foundData = foundData << 8;
 		foundData |= Rbuf[5];
 		
-		Commander::RaiseEvent(foundID, lastEventType, foundData);
+		Commanders::RaiseEvent(foundID, lastEventType, foundData);
 
 		Commanders::SetLastEventType(lastEventType);
 		Commanders::SetLastEventData(foundData);

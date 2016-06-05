@@ -7,8 +7,6 @@ description: <Push button with debounce.>
 #include "Commanders.h"
 #ifndef NO_BUTTONSCOMMANDER
 
-ButtonsCommanderPush ButtonsCommanderPush::Empty;
-
 ButtonsCommanderPush::ButtonsCommanderPush() : ButtonsCommanderButton(UNDEFINED_ID)
 {
 	this->buttonPin = (GPIO_pin_t)DP_INVALID;
@@ -76,7 +74,7 @@ unsigned long ButtonsCommanderPush::loop()
 			if (this->buttonState == LOW)
 			{
 				foundID = this->Events.pCurrentItem->Obj.Id;
-				Commander::RaiseEvent(foundID, 
+				Commanders::RaiseEvent(foundID, 
 					this->Events.pCurrentItem->Obj.EventType,
 					this->Events.pCurrentItem->Obj.Data);
 

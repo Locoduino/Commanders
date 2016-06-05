@@ -130,7 +130,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\ButtonsCommander.cpp" />
+    <ClCompile Include="..\src\ButtonsCommanderAnalogPushes.cpp" />
+    <ClCompile Include="..\src\ButtonsCommanderAnalogPushesItem.cpp" />
     <ClCompile Include="..\src\ButtonsCommanderButton.cpp" />
+    <ClCompile Include="..\src\ButtonsCommanderEncoder.cpp" />
+    <ClCompile Include="..\src\ButtonsCommanderPotentiometer.cpp" />
+    <ClCompile Include="..\src\ButtonsCommanderPush.cpp" />
+    <ClCompile Include="..\src\ButtonsCommanderSwitch.cpp" />
     <ClCompile Include="..\src\CANCommander.cpp" />
     <ClCompile Include="..\src\Commander.cpp" />
     <ClCompile Include="..\src\Commanders.cpp" />
@@ -142,7 +148,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\ButtonsCommander.hpp" />
+    <ClInclude Include="..\src\ButtonsCommanderAnalogPushes.hpp" />
+    <ClInclude Include="..\src\ButtonsCommanderAnalogPushesItem.hpp" />
     <ClInclude Include="..\src\ButtonsCommanderButton.hpp" />
+    <ClInclude Include="..\src\ButtonsCommanderEncoder.hpp" />
+    <ClInclude Include="..\src\ButtonsCommanderPotentiometer.hpp" />
+    <ClInclude Include="..\src\ButtonsCommanderPush.hpp" />
+    <ClInclude Include="..\src\ButtonsCommanderSwitch.hpp" />
     <ClInclude Include="..\src\CANCommander.hpp" />
     <ClInclude Include="..\src\Chain.hpp" />
     <ClInclude Include="..\src\Commander.hpp" />

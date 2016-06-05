@@ -41,7 +41,7 @@ void OnReceiveHandler(int inNbBytes)
 	foundData = foundData << 8;
 	foundData |= buf[5];
 
-	Commander::RaiseEvent(foundID, lastEventType, foundData);
+	Commanders::RaiseEvent(foundID, lastEventType, foundData);
 
 	Commanders::SetLastEventType(lastEventType);
 	Commanders::SetLastEventData(foundData);

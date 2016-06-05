@@ -50,18 +50,13 @@ class Commander
 
 		// Start of the linked list of all commanders. Each commander have the address of its follower or NULL !
 		static Commander *pFirstCommander;
-		static GPIO_pin_t StatusLedPin;
-		static unsigned int BlinkDelay;
-		static unsigned long StartStatusLed;
 
 	public:
 		inline Commander() { AddCommander(this); pNextCommander = 0; }
 		
 		inline virtual unsigned long loop() { return UNDEFINED_ID; }
 		inline virtual void PriorityLoop() { }
-		static void StatusBlink();
 		void CommanderPriorityLoop();
-		static unsigned long RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData);
 
 		static unsigned long loops();
 

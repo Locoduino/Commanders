@@ -41,7 +41,7 @@ unsigned long TextInterpreter::SendChar(char inCharacter)
 					this->data = -this->data;
 			}
 
-			Commander::RaiseEvent(this->id, this->lastEventType, this->data);
+			Commanders::RaiseEvent(this->id, this->lastEventType, this->data);
 			Commanders::SetLastEventType(this->lastEventType);
 			Commanders::SetLastEventData(this->data);
 			foundID = this->id;

@@ -1,4 +1,11 @@
-25/06/2016 V0.94
+05/06/2016 V0.95
+	- Déplacement de RaiseEvent de Commander à Commanders.
+	- Correction de Chain.hpp
+
+	- RaiseEvent() moved from Commander to Commanders.
+	- chain.hppp fixed
+
+25/05/2016 V0.94
 	- Ajout de STRAIGHT et DIVERGE dans les événements
 	- Mise à jour de DIO2.zip dans extra.
 

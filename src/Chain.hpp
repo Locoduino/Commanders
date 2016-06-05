@@ -37,15 +37,13 @@ template<class T> void CHAINEDLIST<T>::AddItem(const T &t)
 		pCurr = this->pFirst;
 	}
 	else
-		while (pCurr != NULL)
-		{
-			if (pCurr->pNext == NULL)
-			{
-				pCurr->pNext = new CHAINEDLISTITEM<T>();
-				pCurr = pCurr->pNext;
-				break;
-			}
-		}
+	{
+		while (pCurr->pNext != NULL)
+			pCurr = pCurr->pNext;
+
+		pCurr->pNext = new CHAINEDLISTITEM<T>();
+		pCurr = pCurr->pNext;
+	}
 
 	pCurr->pNext = NULL;
 	pCurr->Obj = t;

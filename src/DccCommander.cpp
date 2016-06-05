@@ -67,7 +67,7 @@ void DccCommanderClass::DccAccessoryDecoderPacket(int address, boolean activate,
 			(DccCommanderClass::func_AccPacket)(realAddress, activate, data);
 		else
 		{
-			Commander::RaiseEvent(DCCID(realAddress), COMMANDERS_EVENT_MOVE, data ? COMMANDERS_MOVE_LEFT : COMMANDERS_MOVE_RIGHT);
+			Commanders::RaiseEvent(DCCID(realAddress), COMMANDERS_EVENT_MOVE, data ? COMMANDERS_MOVE_LEFT : COMMANDERS_MOVE_RIGHT);
 
 			DccCommander.LastDccId = DCCID(realAddress);
 		}
@@ -89,7 +89,7 @@ void DccCommanderClass::CheckIndex(unsigned char inIndex, const __FlashStringHel
 bool status = false;
 void StatusBlink_handler()
 {
-	digitalWrite2f(Commander::StatusLedPin, status ? HIGH : LOW);
+	digitalWrite2f(Commanders::StatusLedPin, status ? HIGH : LOW);
 	status = !status;
 }
 

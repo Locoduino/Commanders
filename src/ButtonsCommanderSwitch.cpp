@@ -73,7 +73,7 @@ unsigned long ButtonsCommanderSwitch::loop()
 			if (this->EventPins.pCurrentItem->Obj.buttonState == HIGH)
 			{
 				haveFound = this->EventPins.pCurrentItem->Obj.Id;
-				Commander::RaiseEvent(haveFound, 
+				Commanders::RaiseEvent(haveFound, 
 					this->EventPins.pCurrentItem->Obj.Event, 
 					this->EventPins.pCurrentItem->Obj.Data);
 			}

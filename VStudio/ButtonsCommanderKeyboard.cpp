@@ -34,7 +34,7 @@ unsigned long ButtonsCommanderKeyboard::loop()
 		Serial.print(str);
 		Serial.println(F(" pressed "));
 #endif
-		return Commander::RaiseEvent(this->GetId(), COMMANDERS_EVENT_TOGGLE, 0);
+		return Commanders::RaiseEvent(this->GetId(), COMMANDERS_EVENT_TOGGLE, 0);
 	}
 
 	return UNDEFINED_ID;

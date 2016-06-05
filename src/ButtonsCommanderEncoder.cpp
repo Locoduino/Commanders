@@ -62,11 +62,11 @@ unsigned long ButtonsCommanderEncoder::loop()
 		if (this->currentValue < this->mini)
 			this->currentValue = this->mini;
 
-		return Commander::RaiseEvent(this->GetId(), COMMANDERS_EVENT_MOVEPOSITION, this->currentValue);
+		return Commanders::RaiseEvent(this->GetId(), COMMANDERS_EVENT_MOVEPOSITION, this->currentValue);
 	}
 
 	// if no interval defined, just return the move direction.
-	return Commander::RaiseEvent(this->GetId(), 
+	return Commanders::RaiseEvent(this->GetId(), 
 									COMMANDERS_EVENT_MOVE, 
 									inc > 0 ? COMMANDERS_MOVE_MORE : COMMANDERS_MOVE_LEFT);
 }

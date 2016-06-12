@@ -13,34 +13,9 @@ GPIO_pin_t Commanders::StatusLedPin = DP_INVALID;
 unsigned int Commanders::BlinkDelay = 1000;
 unsigned long Commanders::StartStatusLed = 0;
 
-void Commanders::StartSetup(int inStatusLedPin, unsigned int inBlinkDelay)
-{
 #ifdef COMMANDERS_DEBUG_MODE
-	Serial.begin(115200);
-
-	Serial.println(F(""));
-	Serial.println(F("Commanders V0.95"));
-	Serial.println(F("Developed by Thierry Paris."));
-	Serial.println(F("(c) Locoduino 2016"));
-	Serial.println(F(""));
-
-	Serial.println(F("*** Setup started."));
+	bool FirstLoop = true;
 #endif
-	Commanders::SetStatusLedPin(inStatusLedPin, inBlinkDelay);
-}
-
-void Commanders::StartSetup(CommandersEventHandlerFunction func, int inStatusLedPin, unsigned int inBlinkDelay)
-{
-	Commanders::EventHandler = func;
-	Commanders::StartSetup(inStatusLedPin, inBlinkDelay);
-}
-
-void Commanders::EndSetup()
-{
-#ifdef COMMANDERS_DEBUG_MODE
-	Serial.println(F("*** Setup Commanders Finished."));
-#endif
-}
 
 void Commanders::StatusBlink()
 {
@@ -106,6 +81,13 @@ void Commanders::printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventTyp
 
 unsigned long Commanders::loop()
 {
+#ifdef COMMANDERS_DEBUG_MODE
+	if (FirstLoop)
+	{
+		Serial.println(F("*** Setup Commanders Finished."));
+		FirstLoop = false;
+	}
+#endif
 
 	if (Commanders::StatusLedPin != DP_INVALID && 
 		Commanders::StartStatusLed > 0 && 
@@ -117,6 +99,3 @@ unsigned long Commanders::loop()
 
 	return Commander::loops();
 }
-
-
-

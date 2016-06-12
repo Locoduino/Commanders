@@ -1,7 +1,7 @@
 /*************************************************************
 project: <Commanders>
 author: <Thierry PARIS>
-description: <Commanders DCC sample by macros>
+description: <Dcc commander demo>
 *************************************************************/
 
 #include "Commanders.h"
@@ -25,11 +25,10 @@ void ReceiveEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
 //
 void setup()
 {
-	Commanders::StartSetup(ReceiveEvent, LED_BUILTIN);
+	Commanders::SetStatusLedPin(LED_BUILTIN);
+	Commanders::SetEventHandler(ReceiveEvent);
 
-	DccCommander.begin(0x0, 0x0, kDCC_INTERRUPT);
-
-	Commanders::EndSetup();
+	DccCommander.begin(0x0, 0x0, kDCC_INTERRUPT);	// Manufacturer ID, Product ID, interrupt
 }
 
 void loop()

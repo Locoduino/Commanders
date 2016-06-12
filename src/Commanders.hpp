@@ -20,8 +20,6 @@ public:
 	static GPIO_pin_t StatusLedPin;
 	static unsigned int BlinkDelay;
 
-	static void StartSetup(CommandersEventHandlerFunction func, int inStatusLedPin = 0, unsigned int inBlinkDelay = 1000);
-	static void StartSetup(int inStatusLedPin = 0, unsigned int inBlinkDelay = 1000);
 	static inline void SetEventHandler(CommandersEventHandlerFunction func) { Commanders::EventHandler = func; }
 	static inline void SetStatusLedPin(int inStatusLedPin, unsigned int inBlinkDelay = 1000) 
 	{
@@ -29,7 +27,6 @@ public:
 		pinMode2f(StatusLedPin, OUTPUT); 
 		BlinkDelay = inBlinkDelay; 
 	}
-	static void EndSetup();
 	static unsigned long loop();
 
 	static inline COMMANDERS_EVENT_TYPE GetLastEventType() { return lastEventType; }

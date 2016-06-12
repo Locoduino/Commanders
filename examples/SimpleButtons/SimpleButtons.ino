@@ -1,7 +1,7 @@
 /*************************************************************
 project: <Commanders>
 author: <Thierry PARIS>
-description: <Demo sample with push buttons>
+description: <Demo sample with push buttons, event handler alternative>
 *************************************************************/
 
 #include "Commanders.h"
@@ -19,15 +19,14 @@ void ReceiveHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inDat
 
 void setup()
 {
-	Commanders::StartSetup(ReceiveHandler, LED_BUILTIN);
+	Commanders::SetStatusLedPin(LED_BUILTIN);
+	Commanders::SetEventHandler(ReceiveHandler);
 
-	Left.begin(24, 100);
-	Dc.begin(26, 101);
-	Right.begin(28, 102);
-	EPS.begin(30, 103);
-	TJD.begin(32, 104);
-
-	Commanders::EndSetup();
+	Left.begin(4, 100);	// Arduino pin 4, id 100
+	Dc.begin(6, 101);
+	Right.begin(8, 102);
+	EPS.begin(10, 103);
+	TJD.begin(11, 104);
 }
 
 void loop()

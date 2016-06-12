@@ -1,7 +1,7 @@
 /*************************************************************
 project: <Commanders>
 author: <Thierry PARIS>
-description: <Demo Serial sample>
+description: <Serial commander demo>
 *************************************************************/
 
 #include "Commanders.h"
@@ -15,11 +15,10 @@ void CommandersEventHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, i
 
 void setup()
 {
-	Commanders::StartSetup(CommandersEventHandler, LED_BUILTIN);
-	
-	SerialCommander.begin(115200);
+	Commanders::SetStatusLedPin(LED_BUILTIN);
+	Commanders::SetEventHandler(CommandersEventHandler);
 
-	Commanders::EndSetup();
+	SerialCommander.begin(115200);	// Baud rate.
 }
 
 void loop()

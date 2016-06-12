@@ -1,13 +1,10 @@
 /*************************************************************
 project: <Commanders>
 author: <Thierry PARIS>
+description: <CAN commander demo>
 *************************************************************/
 
-#ifdef VISUALSTUDIO
-#include "../../Commanders/src/Commanders.h"
-#else
 #include <Commanders.h>
-#endif
 
 void ReceiveEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inEventData)
 {
@@ -20,11 +17,10 @@ void ReceiveEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inE
 //
 void setup()
 {
-	Commanders::StartSetup(ReceiveEvent, LED_BUILTIN);
+	Commanders::SetStatusLedPin(LED_BUILTIN);
+	Commanders::SetEventHandler(ReceiveEvent);
 
-	CANCommander.begin(10, CAN_500KBPS, digitalPinToInterrupt(3), 0x10);
-
-	Commanders::EndSetup();
+	CANCommander.begin(10, CAN_500KBPS, digitalPinToInterrupt(3), 0x10); // SPI pin, CAN speed, interrupt number, CAN message prefix.
 }
 
 void loop()

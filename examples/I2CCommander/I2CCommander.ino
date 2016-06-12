@@ -1,6 +1,7 @@
 /*************************************************************
-project: <Carte 8 Servos Locoduino by UAD>
+project: <Commanders>
 author: <Thierry PARIS>
+description: <I2C commander demo>
 *************************************************************/
 
 #include <Commanders.h>
@@ -16,11 +17,10 @@ void ReceiveEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inE
 //
 void setup()
 {
-	Commanders::StartSetup(ReceiveEvent, LED_BUILTIN);
+	Commanders::SetStatusLedPin(LED_BUILTIN);
+	Commanders::SetEventHandler(ReceiveEvent);
 
-	I2CCommander.begin(0x10);
-
-	Commanders::EndSetup();
+	I2CCommander.begin(0x10);	// I2C Slave identifier.
 }
 
 void loop()

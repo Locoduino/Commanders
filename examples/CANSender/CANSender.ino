@@ -1,7 +1,7 @@
 /*************************************************************
 project: <Commanders>
 author: <Thierry PARIS>
-description: <Demo independent CAN sender for UAD messages>
+description: <Demo independent CAN sender for Commanders messages>
 *************************************************************/
 
 // demo: CAN-BUS Shield, send data
@@ -14,16 +14,30 @@ const int SPI_CS_PIN = 10;
 
 MCP_CAN CAN(SPI_CS_PIN);                                    // Set CS pin
 
-// Copy of the COMMANDERS_EVENT_TYPE from Commanders library.
+// Copy of the COMMANDERS_EVENT_TYPE and MOVE_TYPE from Commanders library.
+enum COMMANDERS_MOVE_TYPE
+{
+	COMMANDERS_MOVE_MORE = +1,
+	COMMANDERS_MOVE_LESS = -1,
+	COMMANDERS_MOVE_STOP = 0,
+	COMMANDERS_MOVE_LEFT = -2,
+	COMMANDERS_MOVE_RIGHT = -3,
+	COMMANDERS_MOVE_CENTER = -4,
+	COMMANDERS_MOVE_TOP = -5,
+	COMMANDERS_MOVE_BOTTOM = -6,
+	COMMANDERS_MOVE_STRAIGHT = -7,
+	COMMANDERS_MOVE_DIVERGE = -8,
+	COMMANDERS_MOVE_ON = -9,
+	COMMANDERS_MOVE_OFF = -10
+};
+
 enum COMMANDERS_EVENT_TYPE
 {
-	NONE = 0,			// Should never appear
-	TOGGLE = 1,			// If a push button or similar is pressed
-	MLEFT = 2,			// If a switch in on its first pos
-	MRIGHT = 3,			// If a switch is on its second pos
-	MSTOP = 4,			// If a motor or light have to stop
-	ABSOLUTEMOVE = 5,	// If a potentiometer or similar is moved
-	RELATIVEMOVE = 6	// If an encoder or similar is moved
+	COMMANDERS_EVENT_NONE = 0,			// Should never appear
+	COMMANDERS_EVENT_TOGGLE = 1,		// If a push button or similar is pressed, invert the state/position
+	COMMANDERS_EVENT_MOVE = 2,			// If a push 'left' button or similar is pressed, data is a COMMANDERS_MOVE_TYPE
+	COMMANDERS_EVENT_MOVEPOSITION = 3,	// If a potentiometer or similar is moved, data is the position to reach
+	COMMANDERS_EVENT_CONFIG = 4			// Data is the configuration address and value
 };
 
 // Comment this line in production !
@@ -87,7 +101,7 @@ void loop()
 {
 	if (millis() - time > EVENT_DELAY)
 	{
-		Commanders_CAN_SendEvent(0x10, 12131415, COMMANDERS_EVENT_TYPE::ABSOLUTEMOVE, 6869);
+		Commanders_CAN_SendEvent(0x10, 12131415, COMMANDERS_EVENT_TYPE::COMMANDERS_EVENT_MOVEPOSITION, 6869);
 		time = millis();
 	}
 }

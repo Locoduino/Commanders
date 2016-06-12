@@ -1,9 +1,16 @@
+12/06/2016 V0.96
+	- Retrait de StartSetup et EndSetup
+	- Correction des exemples.
+
+	- StartSetup and EndSetup removed
+	- Samples fixed.
+
 05/06/2016 V0.95
 	- Déplacement de RaiseEvent de Commander à Commanders.
 	- Correction de Chain.hpp
 
 	- RaiseEvent() moved from Commander to Commanders.
-	- chain.hppp fixed
+	- chain.hpp fixed
 
 25/05/2016 V0.94
 	- Ajout de STRAIGHT et DIVERGE dans les événements

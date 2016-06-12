@@ -1,11 +1,10 @@
 /*************************************************************
 project: <Commanders>
 author: <Thierry PARIS>
-description: <I2C commander demo>
+description: <sample commander demo with all possible declarations>
 *************************************************************/
 
 #include "Commanders.h"
-
 
 //////////////////////////////////////////////////
 // Push buttons declarations
@@ -110,8 +109,6 @@ void setup()
 	// Potentiometer
 	// This potentiometer will always returns a value between -100 and +100, using analog pin A1, and Id 600.
 	potentiometer.begin(A1, 600, -100, +100, 2); // 2 : optional minimum movement in the final unit.
-
-	Commanders::EndSetup();
 }
 
 void loop()

@@ -8,7 +8,7 @@
 #ifndef __DCC_DECODER_H__
 #define __DCC_DECODER_H__
 
-#include "../../DIO2/VStudio/arduino.h"
+#include "arduino.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////
 

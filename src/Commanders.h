@@ -17,7 +17,7 @@
 #define  GPIO2_PREFER_SPEED    1
 
 #ifdef VISUALSTUDIO
-#include "../../DIO2/VStudio/DIO2.h"
+	#include "../../DIO2/VStudio/DIO2.h"
 #else
 #include "arduino.h"
 #include "DIO2.h"

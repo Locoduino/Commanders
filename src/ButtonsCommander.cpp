@@ -8,17 +8,13 @@ description: <Buttons Commander>
 #ifndef NO_BUTTONSCOMMANDER
 
 #ifdef VISUALSTUDIO
-#include<stdarg.h>
+#include <stdarg.h>
 #endif
 
 #ifdef COMMANDERS_DEBUG_MODE
 #define CHECK(val, text)	CheckIndex(val, F(text))
 #else
 #define CHECK(val, text)
-#endif
-
-#ifdef VISUALSTUDIO
-#include<stdarg.h>
 #endif
 
 ButtonsCommanderClass *ButtonsCommanderClass::pButtonsCommander;

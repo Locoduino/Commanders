@@ -16,7 +16,7 @@ Commander *Commander::pFirstCommander = 0;
 
 void Commander::AddCommander(Commander *inCommander)
 {
-	if (Commander::pFirstCommander == 0)
+	if (Commander::pFirstCommander == NULL)
 	{
 		Commander::pFirstCommander = inCommander;
 #ifdef COMMANDERS_DEBUG_MODE
@@ -28,14 +28,14 @@ void Commander::AddCommander(Commander *inCommander)
 		Serial.println(F("(c) Locoduino 2016"));
 		Serial.println(F(""));
 
-		Serial.println(F("*** Setup started."));
+		Serial.println(F("*** Setup Commanders started."));
 #endif
 		return;
 	}
 
 	Commander *pCurr = Commander::pFirstCommander;
 
-	while (pCurr->pNextCommander != 0)
+	while (pCurr->pNextCommander != NULL)
 		pCurr = pCurr->pNextCommander;
 
 	pCurr->pNextCommander = inCommander;
@@ -45,7 +45,7 @@ void Commander::CommanderPriorityLoop()
 {
 	Commander *pCurr = Commander::pFirstCommander;
 
-	while (pCurr != 0)
+	while (pCurr != NULL)
 	{
 		pCurr->PriorityLoop();
 		pCurr = pCurr->pNextCommander;
@@ -56,7 +56,7 @@ unsigned long Commander::loops()
 {
 	Commander *pCurr = Commander::pFirstCommander;
 
-	while (pCurr != 0)
+	while (pCurr != NULL)
 	{
 		unsigned long ret = pCurr->loop();
 		if (ret != UNDEFINED_ID)

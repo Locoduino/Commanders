@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------
-#ifndef __commander_H__
-#define __commander_H__
+#ifndef __commander_HPP__
+#define __commander_HPP__
 //-------------------------------------------------------------------
 
 #ifdef VISUALSTUDIO
@@ -43,7 +43,7 @@ enum COMMANDERS_EVENT_TYPE
 #define COMMANDERSCONFIGADDRESS(data)		highByte((int)data)
 #define COMMANDERSCONFIGVALUE(data)			lowByte((int)data)
 
-class Commander
+public class Commander
 {
 	public:
 		Commander *pNextCommander;

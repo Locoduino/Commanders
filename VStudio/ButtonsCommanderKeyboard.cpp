@@ -4,16 +4,17 @@ author: <Thierry PARIS>
 description: <Keyboard button.>
 *************************************************************/
 
-#include "Commanders.h"
+#include "../src/Commanders.h"
+#include "ButtonsCommanderKeyboard.hpp"
+
 #ifndef NO_BUTTONSCOMMANDER
 
 #include "conio.h"
 
-int ButtonsCommanderKeyboard::lastLoopKey;
-
-ButtonsCommanderKeyboard::ButtonsCommanderKeyboard(unsigned long inId) : ButtonsCommanderButton(inId)
+ButtonsCommanderKeyboard::ButtonsCommanderKeyboard() : ButtonsCommanderButton(UNDEFINED_ID)
 {
 	this->key = 0;
+	ArduiEmulator::ArduinoForm::lastKeyPressed = 0;
 }
 
 unsigned long ButtonsCommanderKeyboard::loop()
@@ -22,10 +23,10 @@ unsigned long ButtonsCommanderKeyboard::loop()
 	if (this->key == 0)
 		return UNDEFINED_ID;
 
-	if (lastLoopKey == this->key)
+	if (ArduiEmulator::ArduinoForm::lastKeyPressed == this->key)
 	{
 		//this->SelectLastLoop();
-		lastLoopKey = 0;
+		ArduiEmulator::ArduinoForm::lastKeyPressed = 0;
 #ifdef COMMANDERS_DEBUG_MODE
 		Serial.print(F("Keyboard "));
 		char str[3];

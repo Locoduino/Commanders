@@ -16,12 +16,9 @@ class ButtonsCommanderKeyboard : public ButtonsCommanderButton
 	int key;	// character to scan...
 
  public:
-	static int lastLoopKey;
+	ButtonsCommanderKeyboard();
 
- public:
-	ButtonsCommanderKeyboard(unsigned long inId);
-
-	void begin(int inKey) { this->key = inKey; lastLoopKey = 0; }
+	void begin(unsigned long inId, int inKey) { this->Id = inId; this->key = inKey; ArduiEmulator::ArduinoForm::lastKeyPressed = 0; }
 	unsigned long loop();
 	void EndLoop();
 };

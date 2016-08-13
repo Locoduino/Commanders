@@ -5,10 +5,6 @@
 
 #include "Commanders.h"
 
-#ifdef VISUALSTUDIO
-#include "../VStudio/Serial.hpp"
-#endif
-
 #define SerialCommander SerialCommanderClass::GetCurrent()
 
 //-------------------------------------------------------------------

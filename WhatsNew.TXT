@@ -1,3 +1,10 @@
+16/08/2016 0.97
+	- Correction de Chain.hpp avec des pointeurs
+	- Adaptation de ButtonsCommanderKeyboard par rapport à ButtonsCommanderPush
+
+	- Fix Chain.hpp with pointers
+	- Upgrade ButtonsCommanderKeyboard to ButtonsCommanderPush
+
 12/06/2016 V0.96
 	- Retrait de StartSetup et EndSetup
 	- Correction des exemples.
@@ -54,7 +61,7 @@
 	- Correction de l'exemple CANCommander.
 	- Mise à jour de DIO2 dans extra.
 	- Renommage de AddId en AddEvent dans les switchs.
-	- Ajout des masques et des filtres dans  CANCommander.
+	- Ajout des masques et des filtres dans CANCommander.
 
 	- Fixes of the sample CANCommander.
 	- Update of DIO2 library in extra.
@@ -157,7 +164,7 @@
 	- Nouveau nom 'Commanders' pour la bibliothèque. Les classes et les defines ont suivi le mouvement.
 	- Un moyen simple de programmer à l'aide de macros C a été ajouté.
 
-	- New name 'Commanderss' for the library. All classes and defines have been adapted when necessary.
+	- New name 'Commanders' for the library. All classes and defines have been adapted when necessary.
 	- An easy programming way have been added based on C macros.
 
 20/02/2016 V0.40

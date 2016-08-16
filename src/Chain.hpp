@@ -1,38 +1,38 @@
 //-------------------------------------------------------------------
-#ifndef __Chain_H__
-#define __Chain_H__
+#ifndef __CMDRSChain_H__
+#define __CMDRSChain_H__
 //-------------------------------------------------------------------
 
-template<class T> class CHAINEDLISTITEM
+template<class T> class CMDRSCHAINEDLISTITEM
 {
 public:
-	T Obj;					// Element carried by the link.
-	CHAINEDLISTITEM *pNext;
+	T *Obj;					// Element carried by the link.
+	CMDRSCHAINEDLISTITEM *pNext;
 
-	inline CHAINEDLISTITEM<T>() { this->pNext = NULL; }
+	inline CMDRSCHAINEDLISTITEM<T>() { this->pNext = NULL; }
 };
 
-template<class T> class CHAINEDLIST
+template<class T> class CMDRSCHAINEDLIST
 {
 public:							
-	CHAINEDLISTITEM<T> *pFirst;		// Address of next element in chain, or NULL for none.
-	CHAINEDLISTITEM<T> *pCurrentItem;	// Address of the cutrent item.
+	CMDRSCHAINEDLISTITEM<T> *pFirst;		// Address of next element in chain, or NULL for none.
+	CMDRSCHAINEDLISTITEM<T> *pCurrentItem;	// Address of the cutrent item.
 	
-	inline CHAINEDLIST() { this->pFirst = NULL; this->pCurrentItem = NULL; }
-	void AddItem(const T &t);
+	inline CMDRSCHAINEDLIST() { this->pFirst = NULL; this->pCurrentItem = NULL; }
+	void AddItem(T *t);
 	void NextCurrent();
 };
 
-#define CHAIN_ENUMERATE(T, list, func) CHAINEDLISTITEM<T> *pCurr = list.pFirst; while (pCurr != NULL) { func(pCurr->Obj); pCurr = pCurr->pNext; }
+#define CHAIN_ENUMERATE(T, list, func) CMDRSCHAINEDLISTITEM<T> *pCurr = list.pFirst; while (pCurr != NULL) { func(pCurr->Obj); pCurr = pCurr->pNext; }
 
 // This function appends element into chain.
-template<class T> void CHAINEDLIST<T>::AddItem(const T &t)
+template<class T> void CMDRSCHAINEDLIST<T>::AddItem(T *t)
 {
-	CHAINEDLISTITEM<T> *pCurr = this->pFirst;
+	CMDRSCHAINEDLISTITEM<T> *pCurr = this->pFirst;
 
 	if (pCurr == NULL)
 	{
-		this->pFirst = new CHAINEDLISTITEM<T>();
+		this->pFirst = new CMDRSCHAINEDLISTITEM<T>();
 		this->pCurrentItem = this->pFirst;
 		pCurr = this->pFirst;
 	}
@@ -41,7 +41,7 @@ template<class T> void CHAINEDLIST<T>::AddItem(const T &t)
 		while (pCurr->pNext != NULL)
 			pCurr = pCurr->pNext;
 
-		pCurr->pNext = new CHAINEDLISTITEM<T>();
+		pCurr->pNext = new CMDRSCHAINEDLISTITEM<T>();
 		pCurr = pCurr->pNext;
 	}
 
@@ -50,7 +50,7 @@ template<class T> void CHAINEDLIST<T>::AddItem(const T &t)
 }
 
 // This function move the current item to the next in the chain.
-template<class T> void CHAINEDLIST<T>::NextCurrent()
+template<class T> void CMDRSCHAINEDLIST<T>::NextCurrent()
 {
 	if (this->pFirst == NULL)
 		return;

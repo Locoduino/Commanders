@@ -28,6 +28,10 @@ void Commanders::StatusBlink()
 
 unsigned long Commanders::RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
 {
+#ifdef VISUALSTUDIO
+	ArduiEmulator::ArduinoForm::_eventLog("Sent", inId, inEvent, inData);
+#endif
+
 	Commanders::StatusBlink();
 	Commanders::SetLastEventType(inEvent);
 	Commanders::SetLastEventData(inData);

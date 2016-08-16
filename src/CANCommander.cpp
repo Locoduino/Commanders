@@ -31,6 +31,10 @@ void MCP2515_ISR()
 
 void CANCommanderClass::begin(byte inSPIpin, byte inSpeed, byte inInterrupt, uint16_t inId)
 {
+#ifdef VISUALSTUDIO
+	pinMode(inSPIpin, OUTPUT_RESERVED);
+	pinMode(inInterrupt, OUTPUT_RESERVED);
+#endif
 	this->pCan = new MCP_CAN(inSPIpin);
 	while (CAN_OK != this->pCan->begin(inSpeed))              // init can bus with baudrate
 	{

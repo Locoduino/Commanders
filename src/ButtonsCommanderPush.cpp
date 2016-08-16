@@ -28,11 +28,11 @@ void ButtonsCommanderPush::begin(unsigned long inId, int inButtonPin, COMMANDERS
 // Returns the index of the new added position.
 void ButtonsCommanderPush::AddEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inData)
 {
-	Event event;
-	event.Id = inId;
-	event.EventType = inEventType;
-	event.Data = inData;
-	this->Events.AddItem(event);
+	Event *pEvent = new Event();
+	pEvent->Id = inId;
+	pEvent->EventType = inEventType;
+	pEvent->Data = inData;
+	this->Events.AddItem(pEvent);
 }
 
 unsigned long ButtonsCommanderPush::loop()
@@ -73,10 +73,10 @@ unsigned long ButtonsCommanderPush::loop()
 			// only toggle the state if the new button state is LOW
 			if (this->buttonState == LOW)
 			{
-				foundID = this->Events.pCurrentItem->Obj.Id;
+				foundID = this->Events.pCurrentItem->Obj->Id;
 				Commanders::RaiseEvent(foundID, 
-					this->Events.pCurrentItem->Obj.EventType,
-					this->Events.pCurrentItem->Obj.Data);
+					this->Events.pCurrentItem->Obj->EventType,
+					this->Events.pCurrentItem->Obj->Data);
 
 				this->Events.NextCurrent();
 			}

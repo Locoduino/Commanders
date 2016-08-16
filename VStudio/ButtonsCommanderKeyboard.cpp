@@ -17,11 +17,36 @@ ButtonsCommanderKeyboard::ButtonsCommanderKeyboard() : ButtonsCommanderButton(UN
 	ArduiEmulator::ArduinoForm::lastKeyPressed = 0;
 }
 
+void ButtonsCommanderKeyboard::begin(unsigned long inId, int inKey, COMMANDERS_EVENT_TYPE inEventType, int inData)
+{
+	this->Id = inId; 
+	this->key = inKey; 
+	ArduiEmulator::ArduinoForm::lastKeyPressed = 0;
+
+	this->AddEvent(inId, inEventType, inData);
+}
+
+// Returns the index of the new added position.
+void ButtonsCommanderKeyboard::AddEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inData)
+{
+	KeybdEvent *pEvent = new KeybdEvent();
+	pEvent->Id = inId;
+	pEvent->EventType = inEventType;
+	pEvent->Data = inData;
+	this->Events.AddItem(pEvent);
+}
+
 unsigned long ButtonsCommanderKeyboard::loop()
 {
+	unsigned long foundID = UNDEFINED_ID;
+
+#ifdef COMMANDERS_DEBUG_MODE
+	if (this->Events.pFirst == NULL)
+		Serial.println(F("This keyboard button have no ID defined : call begin() !"));
+#endif
 	//this->UnselectLastLoop();
 	if (this->key == 0)
-		return UNDEFINED_ID;
+		return foundID;
 
 	if (ArduiEmulator::ArduinoForm::lastKeyPressed == this->key)
 	{
@@ -35,13 +60,14 @@ unsigned long ButtonsCommanderKeyboard::loop()
 		Serial.print(str);
 		Serial.println(F(" pressed "));
 #endif
-		return Commanders::RaiseEvent(this->GetId(), COMMANDERS_EVENT_TOGGLE, 0);
+		foundID = this->Events.pCurrentItem->Obj->Id;
+		Commanders::RaiseEvent(foundID,
+			this->Events.pCurrentItem->Obj->EventType,
+			this->Events.pCurrentItem->Obj->Data);
+
+		this->Events.NextCurrent();
 	}
 
-	return UNDEFINED_ID;
-}
-
-void ButtonsCommanderKeyboard::EndLoop()
-{
+	return foundID;
 }
 #endif

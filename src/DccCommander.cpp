@@ -97,6 +97,11 @@ void DccCommanderClass::begin(int i, int j, int k, boolean inInterruptMonitor, b
 {
 	DCC.beginDecoder(i, j, k);
 	this->UseRawDccAddresses = inUseRawDccAddresses;
+#ifdef VISUALSTUDIO
+	// In VS, the exception address is also the min number.
+	// pinMode() is just here to declare the pin used...
+	pinMode(k, OUTPUT_RESERVED);
+#endif
 	this->LastDccId = UNDEFINED_ID;
 
 	DCC.SetBasicAccessoryDecoderPacketHandler(DccAccessoryDecoderPacket, true);

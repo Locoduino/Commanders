@@ -22,7 +22,8 @@ void ButtonsCommanderPush::begin(unsigned long inId, int inButtonPin, COMMANDERS
 
 	pinMode2f(this->buttonPin, INPUT_PULLUP);
 
-	this->AddEvent(inId, inEventType, inData);
+	if (inId != UNDEFINED_ID)
+		this->AddEvent(inId, inEventType, inData);
 }
 
 // Returns the index of the new added position.

@@ -23,7 +23,8 @@ void ButtonsCommanderKeyboard::begin(unsigned long inId, int inKey, COMMANDERS_E
 	this->key = inKey; 
 	ArduiEmulator::ArduinoForm::lastKeyPressed = 0;
 
-	this->AddEvent(inId, inEventType, inData);
+	if (inId != UNDEFINED_ID)
+		this->AddEvent(inId, inEventType, inData);
 }
 
 // Returns the index of the new added position.

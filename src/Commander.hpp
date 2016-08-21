@@ -28,11 +28,12 @@ enum COMMANDERS_MOVE_TYPE
 
 enum COMMANDERS_EVENT_TYPE
 {
-	COMMANDERS_EVENT_NONE = 0,			// Should never appear
-	COMMANDERS_EVENT_TOGGLE = 1,		// If a push button or similar is pressed, invert the state/position
-	COMMANDERS_EVENT_MOVE = 2,			// If a push 'left' button or similar is pressed, data is a COMMANDERS_MOVE_TYPE
-	COMMANDERS_EVENT_MOVEPOSITION = 3,	// If a potentiometer or similar is moved, data is the position to reach
-	COMMANDERS_EVENT_CONFIG = 4			// Data is the configuration address and value
+	COMMANDERS_EVENT_NONE = 0,				// Should never appear
+	COMMANDERS_EVENT_TOGGLE = 1,			// If a push button or similar is pressed, invert the state/position
+	COMMANDERS_EVENT_MOVE = 2,				// If a push 'left' button or similar is pressed, data is a COMMANDERS_MOVE_TYPE
+	COMMANDERS_EVENT_MOVEPOSITION = 3,		// Move to a given position value given by data.
+	COMMANDERS_EVENT_MOVEPOSITIONINDEX = 4,	// Move to an indexed position from pMovingPosition given by data.
+	COMMANDERS_EVENT_CONFIG = 5,			// Data is the configuration address and value
 };
 
 #ifndef UNDEFINED_ID

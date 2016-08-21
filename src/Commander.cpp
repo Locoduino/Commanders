@@ -23,7 +23,7 @@ void Commander::AddCommander(Commander *inCommander)
 		Serial.begin(115200);
 
 		Serial.println(F(""));
-		Serial.println(F("Commanders V0.97"));
+		Serial.println(F("Commanders V0.98"));
 		Serial.println(F("Developed by Thierry Paris."));
 		Serial.println(F("(c) Locoduino 2016"));
 		Serial.println(F(""));

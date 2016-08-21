@@ -202,6 +202,10 @@ void DccCommanderClass::printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inE
 		Serial.print(F("MOVEPOSITION : "));
 		Serial.println(inEventData, DEC);
 		break;
+	case COMMANDERS_EVENT_MOVEPOSITIONINDEX:
+		Serial.print(F("MOVEPOSITIONINDEX : "));
+		Serial.println(inEventData, DEC);
+		break;
 	case COMMANDERS_EVENT_CONFIG:
 		Serial.print(F("CONFIG : "));
 		Serial.print(COMMANDERSCONFIGADDRESS(inEventData), DEC);

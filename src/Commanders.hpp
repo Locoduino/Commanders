@@ -36,7 +36,7 @@ public:
 	static inline byte GetLastConfigAddress() { return lastConfigAddress; }
 
 	static void StatusBlink();
-	static unsigned long RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData);
+	static unsigned long RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent = COMMANDERS_EVENT_TOGGLE, int inData = 0);
 	//static inline void AddDelayedEvent(unsigned long inDelay, unsigned long inId, COMMANDERS_EVENT_TYPE inEvent = COMMANDERS_EVENT_TOGGLE, int inData = 0);
 #ifdef COMMANDERS_DEBUG_MODE
 	static void printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inEventData);

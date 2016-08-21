@@ -1,3 +1,10 @@
+21/08/2016 0.98
+	- Ajout de l'événement COMMANDERS_EVENT_MOVEPOSITIONINDEX.
+	- Ajout de la syntaxe id:acc pour le SerialCommander
+
+	- Added event COMMANDERS_EVENT_MOVEPOSITIONINDEX
+	- Added new syntax for Dcc Id in SerialCommander
+
 16/08/2016 0.97
 	- Correction de Chain.hpp avec des pointeurs
 	- Adaptation de ButtonsCommanderKeyboard par rapport à ButtonsCommanderPush

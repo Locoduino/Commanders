@@ -8,6 +8,7 @@ TextInterpreter::TextInterpreter()
 void TextInterpreter::Init()
 {
 	this->id = 0;
+	this->id2 = 255;
 	this->lastEventType = COMMANDERS_EVENT_NONE;
 	this->data = 0;
 	this->neg_sign = false;
@@ -41,7 +42,10 @@ unsigned long TextInterpreter::SendChar(char inCharacter)
 					this->data = -this->data;
 			}
 
-			Commanders::RaiseEvent(this->id, this->lastEventType, this->data);
+			if (this->id2 != 255)
+				Commanders::RaiseEvent(DCCINT(this->id, this->id2), this->lastEventType, this->data);
+			else
+				Commanders::RaiseEvent(this->id, this->lastEventType, this->data);
 			Commanders::SetLastEventType(this->lastEventType);
 			Commanders::SetLastEventData(this->data);
 			foundID = this->id;
@@ -51,26 +55,43 @@ unsigned long TextInterpreter::SendChar(char inCharacter)
 		return foundID;
 	}
 
-	if (inCharacter == ' ') 
-		return UNDEFINED_ID;   /* spaces dont matter */
 	if (inCharacter == (char)-1) 
 		return UNDEFINED_ID;  /* loop if empty buffer */
 
-	if (inCharacter == ',' || inCharacter == ';' || inCharacter == '/' || inCharacter == ':')
+	if (inCharacter == ':')
+	{
+		if (this->step == TEXTINTERPRETER_STEP_ID)
+		{
+			this->step = TEXTINTERPRETER_STEP_ID2;
+			return UNDEFINED_ID;
+		}
+	}
+
+	if (inCharacter == ' ' || inCharacter == ',' || inCharacter == ';' || inCharacter == '/')
 	{
 #ifdef DEBUG_VERBOSE_MODE
 		Serial.println(F("separator"));
 #endif
 			switch (step)
 			{
-			case TEXTINTERPRETER_STEP_ID:	
+			case TEXTINTERPRETER_STEP_ID:
 #ifdef COMMANDERS_DEBUG_MODE
 				Serial.print(F("id = "));
 				Serial.println(this->id);
 #endif
 				this->step = TEXTINTERPRETER_STEP_TYPE;
 				break;
-			case TEXTINTERPRETER_STEP_TYPE:	
+			case TEXTINTERPRETER_STEP_ID2:
+#ifdef COMMANDERS_DEBUG_MODE
+				Serial.print(F("id = DCCINT("));
+				Serial.print(this->id);
+				Serial.print(F(","));
+				Serial.print(this->id2);
+				Serial.print(F(")"));
+#endif
+				this->step = TEXTINTERPRETER_STEP_TYPE;
+				break;
+			case TEXTINTERPRETER_STEP_TYPE:
 #ifdef COMMANDERS_DEBUG_MODE
 				Serial.print(F("event = "));
 				Serial.println(this->lastEventType);
@@ -103,21 +124,33 @@ unsigned long TextInterpreter::SendChar(char inCharacter)
 
 	switch (this->step)
 	{
-		case TEXTINTERPRETER_STEP_ID:
-			if (inCharacter >= 48 && inCharacter <= 57)
-			{
-				this->id *= 10;                    /* *10 => shift to left */
-				this->id = ((inCharacter - 48) + this->id);  /* 48 because of ASCII value (1 => 49 in ASCII) */
-				this->data = 0;
-			}
-			break;
+	case TEXTINTERPRETER_STEP_ID:
+		if (inCharacter >= 48 && inCharacter <= 57)
+		{
+			this->id *= 10;                    /* *10 => shift to left */
+			this->id = ((inCharacter - 48) + this->id);  /* 48 because of ASCII value (1 => 49 in ASCII) */
+			this->data = 0;
+		}
+		break;
 
-		case TEXTINTERPRETER_STEP_TYPE:
+	case TEXTINTERPRETER_STEP_ID2:
+		if (inCharacter >= 48 && inCharacter <= 57)
+		{
+			if (this->id2 == 255)
+				this->id2 = 0;
+			else
+				this->id2 *= 10;                    /* *10 => shift to left */
+			this->id2 = ((inCharacter - 48) + this->id2);  /* 48 because of ASCII value (1 => 49 in ASCII) */
+		}
+		break;
+
+	case TEXTINTERPRETER_STEP_TYPE:
 			if (this->lastEventType == COMMANDERS_EVENT_NONE)
 			{
 				if (inCharacter == 't' || inCharacter == 'T')		this->lastEventType = COMMANDERS_EVENT_TOGGLE;
 				if (inCharacter == 'm' || inCharacter == 'M')		this->lastEventType = COMMANDERS_EVENT_MOVE;
 				if (inCharacter == 'p' || inCharacter == 'P')		this->lastEventType = COMMANDERS_EVENT_MOVEPOSITION;
+				if (inCharacter == 'i' || inCharacter == 'I')		this->lastEventType = COMMANDERS_EVENT_MOVEPOSITIONINDEX;
 				if (inCharacter == 'c' || inCharacter == 'C')		this->lastEventType = COMMANDERS_EVENT_CONFIG;
 			}
 			break;

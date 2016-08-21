@@ -5,12 +5,12 @@
 
 #include "Commanders.h"
 
-// Ahis class 'interprets' a string and send an event when found.
+// This class 'interprets' a string and send an event when found.
 //
 // The accepted syntax is 
 // id separator event separator data
 // where id can be a number from 0 to 4 000 000 000,
-// where separator can be ',' , ';' , '/' or ':'
+// where separator can be ',' , ';' , '/' or ' '
 // where event can be any string of 9 characters long maximum, but must begin with
 //		't' to toggle
 //		'm' to make a move, data is necessary a COMMANDERS_MOVE_TYPE enum value in this case
@@ -19,13 +19,17 @@
 // and where the data can be a COMMANDERS_MOVE_TYPE enum value if this is a MOVE event,
 // or any number between -32767 and 32768 for a move position event.
 //
+// id can be dccid:dccacc for Dcc id, where dccid is the dcc address and dccacc 0 or 1.
+//
 // ex : 123 means ID 123 toggled
 // ex : 456 | T means ID 456 toggled
 // ex : 789 , p , 100  means ID 789 make an absolute movement to 100 .
+// ex : 20:0 T means Dcc id 20/0 toggled
 
 enum TEXTINTERPRETER_STEP
 {
 	TEXTINTERPRETER_STEP_ID,
+	TEXTINTERPRETER_STEP_ID2,
 	TEXTINTERPRETER_STEP_TYPE,
 	TEXTINTERPRETER_STEP_DATA,
 	TEXTINTERPRETER_STEP_END
@@ -35,6 +39,7 @@ class TextInterpreter
 {
 private:
 	unsigned long id;
+	byte id2;
 	COMMANDERS_EVENT_TYPE lastEventType;
 	int data;
 

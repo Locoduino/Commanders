@@ -16,7 +16,7 @@ description: <CAN Commander>
 
 CANCommanderClass *CANCommanderClass::pCANCommander;
 
-volatile byte Flag_Recv = 0;   // variable d'échange avec l'interruption IRQ
+volatile uint8_t Flag_Recv = 0;   // variable d'échange avec l'interruption IRQ
 							   
 /*
 *  ISR CAN (Routine de Service d'Interruption)
@@ -29,7 +29,7 @@ void MCP2515_ISR()
 	Flag_Recv = 1;
 }
 
-void CANCommanderClass::begin(byte inSPIpin, byte inSpeed, byte inInterrupt, uint16_t inId)
+void CANCommanderClass::begin(uint8_t inSPIpin, uint8_t inSpeed, uint8_t inInterrupt, uint16_t inId)
 {
 #ifdef VISUALSTUDIO
 	pinMode(inSPIpin, OUTPUT_RESERVED);
@@ -98,7 +98,7 @@ void CANCommanderClass::CAN_recup()
 			this->Ncan++;
 			if (this->indexW == sizeof(this->Circule))
 				this->indexW = 0;
-			for (byte z = 0; z<len; z++) 
+			for (uint8_t z = 0; z<len; z++)
 			{
 				this->Circule[this->indexW] = buf[z];    // enregistrement du message
 				this->indexW++;
@@ -124,9 +124,9 @@ unsigned long CANCommanderClass::loop()
 	}
 
 	// Handle the first message in the buffer _Circule...
-	byte RId;
-	byte Rlen;
-	byte Rbuf[8];
+	uint8_t RId;
+	uint8_t Rlen;
+	uint8_t Rbuf[8];
 
 	while (this->Ncan > 2)
 	{    // The minimal size of one message is 3 bytes long !

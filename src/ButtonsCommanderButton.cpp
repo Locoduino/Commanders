@@ -9,7 +9,7 @@ description: <Basic button.>
 
 ButtonsCommanderButton::ButtonsCommanderButton(unsigned long inId) 
 { 
-	this->Id = inId; 
+	this->Id = inId;
 	this->pNextButton = 0; 
 
 	ButtonsCommanderClass::AddButton(this);

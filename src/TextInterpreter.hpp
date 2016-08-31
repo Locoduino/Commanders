@@ -5,6 +5,7 @@
 
 #include "Commanders.h"
 
+#ifndef NO_SERIALCOMMANDER
 // This class 'interprets' a string and send an event when found.
 //
 // The accepted syntax is 
@@ -39,7 +40,7 @@ class TextInterpreter
 {
 private:
 	unsigned long id;
-	byte id2;
+	uint8_t id2;
 	COMMANDERS_EVENT_TYPE lastEventType;
 	int data;
 
@@ -54,4 +55,5 @@ public:
 	unsigned long SendString(char *inpString);
 };
 
+#endif
 #endif

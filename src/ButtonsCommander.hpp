@@ -56,8 +56,6 @@ class ButtonsCommanderClass : Commander
 		static inline ButtonsCommanderClass &GetCurrent() {	return *(ButtonsCommanderClass::pButtonsCommander);}
 };
 
-#define DECLARE_BUTTONS_COMMANDER_STATIC		ButtonsCommanderClass::Declare();
-
 //-------------------------------------------------------------------
 #endif
 #endif

@@ -6,6 +6,7 @@ description: <Item button from analog array of push buttons with debounce.>
 
 #include "Commanders.h"
 #ifndef NO_BUTTONSCOMMANDER
+#ifndef NO_BUTTONSCOMMANDERANALOGPUSHES
 
 bool ButtonsCommanderAnalogPushesItem::IsPushed(int inCurrentValue)
 {
@@ -15,4 +16,5 @@ bool ButtonsCommanderAnalogPushesItem::IsPushed(int inCurrentValue)
 	return false;
 }
 
+#endif
 #endif

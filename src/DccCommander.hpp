@@ -5,23 +5,23 @@
 
 #include "Commanders.h"
 
+#ifndef NO_DCCCOMMANDER
+
 #ifdef VISUALSTUDIO
 #include "../VStudio/Dcc_Decoder.hpp"
 #else
 #include "DCC_Decoder.hpp"
 #endif
 
-#ifndef NO_DCCCOMMANDER
-
 #define DccCommander DccCommanderClass::GetCurrent()
 
 //-------------------------------------------------------------------
 
-typedef void(*DccAccDecoderPacket)(int address, boolean activate, byte data);
+typedef void(*DccAccDecoderPacket)(int address, boolean activate, uint8_t data);
 
 // A dcc id is a long int with accessory id * 10000 + dcc id .
 #define DCCID(id)			((id) % 10000)
-#define DCCACTIVATION(id)	((byte)((id) / 10000))
+#define DCCACTIVATION(id)	((uint8_t)((id) / 10000))
 #define DCCINT(id, acc)		((acc) * 10000UL + (id))
 
 class DccCommanderClass : Commander
@@ -39,7 +39,7 @@ class DccCommanderClass : Commander
 		void PriorityLoop();
 		unsigned long loop();
 		static void SetAccessoryDecoderPacketHandler(DccAccDecoderPacket func);
-		static void DccAccessoryDecoderPacket(int address, boolean activate, byte data);
+		static void DccAccessoryDecoderPacket(int address, boolean activate, uint8_t data);
 
 		inline unsigned long GetLastDccId() { return LastDccId; }
 

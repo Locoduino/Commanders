@@ -6,6 +6,7 @@ description: <Potentiometer returning a current value.>
 
 #include "Commanders.h"
 #ifndef NO_BUTTONSCOMMANDER
+#ifndef NO_BUTTONSCOMMANDERPOTENTIOMETER
 
 ButtonsCommanderPotentiometer::ButtonsCommanderPotentiometer() : ButtonsCommanderButton(UNDEFINED_ID)
 {
@@ -48,4 +49,5 @@ unsigned long ButtonsCommanderPotentiometer::loop()
 
 	return UNDEFINED_ID;
 }
+#endif
 #endif

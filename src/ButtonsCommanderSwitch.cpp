@@ -6,6 +6,7 @@ description: <Switch button with debounce.>
 
 #include "Commanders.h"
 #ifndef NO_BUTTONSCOMMANDER
+#ifndef NO_BUTTONSCOMMANDERSWITCH
 
 ButtonsCommanderSwitch::ButtonsCommanderSwitch() : ButtonsCommanderButton(UNDEFINED_ID)
 {
@@ -89,4 +90,5 @@ unsigned long ButtonsCommanderSwitch::loop()
 
 	return haveFound;
 }
+#endif
 #endif

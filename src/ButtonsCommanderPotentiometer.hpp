@@ -5,6 +5,7 @@
 
 #include "Commanders.h"
 #ifndef NO_BUTTONSCOMMANDER
+#ifndef NO_BUTTONSCOMMANDERPOTENTIOMETER
 
 //-------------------------------------------------------------------
 
@@ -27,5 +28,6 @@ class ButtonsCommanderPotentiometer : public ButtonsCommanderButton
 };
 
 //-------------------------------------------------------------------
+#endif
 #endif
 #endif

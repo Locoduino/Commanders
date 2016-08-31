@@ -60,7 +60,7 @@
 // CV 1..256 are supported
 #define kCV_MAX                       257
 
-typedef void(*BasicAccDecoderPacket)(int address, boolean activate, byte data);
+typedef void(*BasicAccDecoderPacket)(int address, boolean activate, uint8_t data);
 typedef void(*InterruptMonitor)();
 
 class DCC_Decoder
@@ -68,8 +68,8 @@ class DCC_Decoder
 public:
 	DCC_Decoder() {}
 
-	void beginDecoder(byte mfgID, byte mfgVers, byte interrupt) {}    // Used for Decoder
-	void beginMonitor(byte interrupt) {}                              // Used when building a monitor
+	void beginDecoder(uint8_t mfgID, uint8_t mfgVers, uint8_t interrupt) {}    // Used for Decoder
+	void beginMonitor(uint8_t interrupt) {}                              // Used when building a monitor
 
 	void SetBasicAccessoryDecoderPacketHandler(BasicAccDecoderPacket func, boolean allPackets) {}
 	void SetInterruptMonitor(InterruptMonitor func) {}

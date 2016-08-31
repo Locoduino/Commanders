@@ -12,6 +12,7 @@ int Commanders::lastEventData;
 GPIO_pin_t Commanders::StatusLedPin = DP_INVALID;
 unsigned int Commanders::BlinkDelay = 1000;
 unsigned long Commanders::StartStatusLed = 0;
+bool Commanders::SerialStarted = false;
 
 #ifdef COMMANDERS_DEBUG_MODE
 	bool FirstLoop = true;
@@ -35,7 +36,7 @@ unsigned long Commanders::RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE i
 	Commanders::StatusBlink();
 	Commanders::SetLastEventType(inEvent);
 	Commanders::SetLastEventData(inData);
-	if (Commanders::EventHandler != 0)
+	if (Commanders::EventHandler != NULL)
 		Commanders::EventHandler(inId, inEvent, inData);
 
 	return inId;
@@ -72,6 +73,9 @@ void Commanders::printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventTyp
 	case COMMANDERS_EVENT_MOVEPOSITION:
 		Serial.print(F("MOVEPOSITION : "));
 		Serial.println(inEventData, DEC);
+		break;
+	case COMMANDERS_EVENT_MOVEPOSITIONID:
+		Serial.println(F("MOVEPOSITIONID "));
 		break;
 	case COMMANDERS_EVENT_MOVEPOSITIONINDEX:
 		Serial.print(F("MOVEPOSITIONINDEX : "));

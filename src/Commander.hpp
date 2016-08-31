@@ -6,7 +6,6 @@
 #ifdef VISUALSTUDIO
 	#include "../../DIO2/VStudio/DIO2.h"
 #else
-	#include "arduino.h"
 	#include "DIO2.h"
 #endif
 
@@ -33,7 +32,8 @@ enum COMMANDERS_EVENT_TYPE
 	COMMANDERS_EVENT_MOVE = 2,				// If a push 'left' button or similar is pressed, data is a COMMANDERS_MOVE_TYPE
 	COMMANDERS_EVENT_MOVEPOSITION = 3,		// Move to a given position value given by data.
 	COMMANDERS_EVENT_MOVEPOSITIONINDEX = 4,	// Move to an indexed position from pMovingPosition given by data.
-	COMMANDERS_EVENT_CONFIG = 5,			// Data is the configuration address and value
+	COMMANDERS_EVENT_MOVEPOSITIONID = 5,	// Move to an identified position from pMovingPosition, given by the event id.
+	COMMANDERS_EVENT_CONFIG = 6,			// Data is the configuration address and value
 };
 
 #ifndef UNDEFINED_ID
@@ -44,7 +44,7 @@ enum COMMANDERS_EVENT_TYPE
 #define COMMANDERSCONFIGADDRESS(data)		highByte((int)data)
 #define COMMANDERSCONFIGVALUE(data)			lowByte((int)data)
 
-public class Commander
+class Commander
 {
 	public:
 		Commander *pNextCommander;
@@ -53,7 +53,7 @@ public class Commander
 		static Commander *pFirstCommander;
 
 	public:
-		inline Commander() { AddCommander(this); pNextCommander = 0; }
+		inline Commander() { pNextCommander = 0; AddCommander(this); }
 		
 		inline virtual unsigned long loop() { return UNDEFINED_ID; }
 		inline virtual void PriorityLoop() { }
@@ -66,7 +66,11 @@ public class Commander
 
 #ifdef COMMANDERS_DEBUG_MODE
 	public:
-		void CheckIndex(byte inIndex, const __FlashStringHelper *infunc);
+#ifdef ARDUINO_ARCH_SAM
+		void CheckIndex(uint8_t inIndex, const char *infunc);
+#else
+		void CheckIndex(uint8_t inIndex, const __FlashStringHelper *infunc);
+#endif
 #endif
 };
 

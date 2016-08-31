@@ -6,6 +6,7 @@ description: <Push button with debounce.>
 
 #include "Commanders.h"
 #ifndef NO_BUTTONSCOMMANDER
+#ifndef NO_BUTTONSCOMMANDERPUSH
 
 ButtonsCommanderPush::ButtonsCommanderPush() : ButtonsCommanderButton(UNDEFINED_ID)
 {
@@ -90,4 +91,5 @@ unsigned long ButtonsCommanderPush::loop()
 	this->lastButtonState = reading;
 	return foundID;
 }
+#endif
 #endif

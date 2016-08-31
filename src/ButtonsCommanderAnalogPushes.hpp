@@ -5,6 +5,7 @@
 
 #include "Commanders.h"
 #ifndef NO_BUTTONSCOMMANDER
+#ifndef NO_BUTTONSCOMMANDERANALOGPUSHES
 #include "ButtonsCommanderAnalogPushesItem.hpp"
 
 //-------------------------------------------------------------------
@@ -31,8 +32,8 @@ class ButtonsCommanderAnalogPushes : public ButtonsCommanderButton
 {
 private:
 	int analogPin;			// Number of the pushbutton analog pin. This is a normal number, not an arduino2 GPIO_pin_t.
-	byte number;			// Number of buttons
-	byte lastButtonPressed; // last button pressed number
+	uint8_t number;			// Number of buttons
+	uint8_t lastButtonPressed; // last button pressed number
 	int buttonState;		// the current reading from the input pin
 	int lastButtonState;	// the previous reading from the input pin
 	int readingTolerancy;	// if the value is between 'button value-tolerancy' and 'button value+tolerancy' , this is good !
@@ -47,15 +48,16 @@ private:
 public:
 	ButtonsCommanderAnalogPushes();
 
-	void begin(int inButtonPin, byte inNumber, unsigned long *inpIds, int *inpButtonValues, int inTolerancy = 20);
+	void begin(int inButtonPin, uint8_t inNumber, unsigned long *inpIds, int *inpButtonValues, int inTolerancy = 20);
 	unsigned long loop();
 	void EndLoop();
-	ButtonsCommanderAnalogPushesItem *GetItem(byte inNumber) { return &(this->pButtons[inNumber]); }
+	ButtonsCommanderAnalogPushesItem *GetItem(uint8_t inNumber) { return &(this->pButtons[inNumber]); }
 	ButtonsCommanderButton* GetFromId(unsigned long inId);
 
-	inline byte GetLastButtonPressed() const { return this->lastButtonPressed; }
+	inline uint8_t GetLastButtonPressed() const { return this->lastButtonPressed; }
 };
 
 //-------------------------------------------------------------------
+#endif
 #endif
 #endif

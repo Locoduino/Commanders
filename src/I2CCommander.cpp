@@ -17,7 +17,7 @@ void OnReceiveHandler(int inNbBytes)
 	I2CCommander.LastEventId = UNDEFINED_ID;
 
 	unsigned char buf[I2C_BUFFERLENGTH];
-	byte count = 0;
+	uint8_t count = 0;
 
 	while (Wire.available() && count < I2C_BUFFERLENGTH)
 		buf[count++] = Wire.read();

@@ -5,6 +5,7 @@
 
 #include "Commanders.h"
 #ifndef NO_BUTTONSCOMMANDER
+#ifndef NO_BUTTONSCOMMANDERENCODER
 
 class ButtonsCommanderPush;
 
@@ -30,5 +31,6 @@ class ButtonsCommanderEncoder : public ButtonsCommanderButton
 	unsigned long loop();
 };
 //-------------------------------------------------------------------
+#endif
 #endif
 #endif

@@ -6,6 +6,7 @@ description: <Encoder returning a current value, or a moving direction.>
 
 #include "Commanders.h"
 #ifndef NO_BUTTONSCOMMANDER
+#ifndef NO_BUTTONSCOMMANDERENCODER
 
 ButtonsCommanderEncoder::ButtonsCommanderEncoder() : ButtonsCommanderButton(UNDEFINED_ID)
 {
@@ -70,4 +71,5 @@ unsigned long ButtonsCommanderEncoder::loop()
 									COMMANDERS_EVENT_MOVE, 
 									inc > 0 ? COMMANDERS_MOVE_MORE : COMMANDERS_MOVE_LEFT);
 }
+#endif
 #endif

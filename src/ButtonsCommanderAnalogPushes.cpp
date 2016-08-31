@@ -6,6 +6,7 @@ description: <Composite push button array on analog pin with debounce.>
 
 #include "Commanders.h"
 #ifndef NO_BUTTONSCOMMANDER
+#ifndef NO_BUTTONSCOMMANDERANALOGPUSHES
 
 ButtonsCommanderAnalogPushes::ButtonsCommanderAnalogPushes() : ButtonsCommanderButton(UNDEFINED_ID)
 {
@@ -18,7 +19,7 @@ ButtonsCommanderAnalogPushes::ButtonsCommanderAnalogPushes() : ButtonsCommanderB
 	this->size = 0;
 }
 
-void ButtonsCommanderAnalogPushes::begin(int inButtonPin, byte inNumberOfItems, unsigned long *inpIds, int *inpButtonValues, int inTolerancy)
+void ButtonsCommanderAnalogPushes::begin(int inButtonPin, uint8_t inNumberOfItems, unsigned long *inpIds, int *inpButtonValues, int inTolerancy)
 {	
 	this->size = inNumberOfItems;
 	this->pButtons = new ButtonsCommanderAnalogPushesItem[this->size];
@@ -88,7 +89,7 @@ unsigned long ButtonsCommanderAnalogPushes::loop()
 				if (this->pButtons[i].IsPushed(reading))
 				{
 					foundID = this->pButtons[i].GetId();
-					Commanders::RaiseEvent(foundID, COMMANDERS_EVENT_TOGGLE, 0);
+					Commanders::RaiseEvent(foundID, COMMANDERS_EVENT_MOVEPOSITIONID, 0);
 #ifdef COMMANDERS_DEBUG_MODE
 					Serial.print(F("Analog push button "));
 					Serial.print(i);
@@ -109,4 +110,5 @@ void ButtonsCommanderAnalogPushes::EndLoop()
 {
 	this->lastButtonPressed = -1;
 }
+#endif
 #endif

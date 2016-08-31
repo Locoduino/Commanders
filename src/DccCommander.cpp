@@ -19,7 +19,7 @@ DccCommanderClass *DccCommanderClass::pDccCommander;
 //
 // DCC accessory packet handler 
 //
-void DccCommanderClass::DccAccessoryDecoderPacket(int address, boolean activate, byte data)
+void DccCommanderClass::DccAccessoryDecoderPacket(int address, boolean activate, uint8_t data)
 {
 	int realAddress = address;
 
@@ -61,7 +61,7 @@ void DccCommanderClass::DccAccessoryDecoderPacket(int address, boolean activate,
 	// id / data / 0
 	// The last byte is to activate for a while (three times at 1 !) and then desactivate the motor !
 	// DccCommander will react only on the desactivate flag to avoid double events.
-	if (activate == 0)
+	if (activate == false)
 	{
 		if (DccCommanderClass::func_AccPacket)
 			(DccCommanderClass::func_AccPacket)(realAddress, activate, data);
@@ -152,7 +152,7 @@ unsigned long DccCommanderClass::loop()
 		{
 			unsigned long last = this->LastDccId;
 			this->LastDccId = UNDEFINED_ID;
-			Commanders::SetLastEventType(COMMANDERS_EVENT_TOGGLE);
+			Commanders::SetLastEventType(COMMANDERS_EVENT_MOVEPOSITIONID);
 			Commanders::SetLastEventData(0);
 			return last;
 		}
@@ -201,6 +201,9 @@ void DccCommanderClass::printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inE
 	case COMMANDERS_EVENT_MOVEPOSITION:
 		Serial.print(F("MOVEPOSITION : "));
 		Serial.println(inEventData, DEC);
+		break;
+	case COMMANDERS_EVENT_MOVEPOSITIONID:
+		Serial.println(F("MOVEPOSITIONID"));
 		break;
 	case COMMANDERS_EVENT_MOVEPOSITIONINDEX:
 		Serial.print(F("MOVEPOSITIONINDEX : "));

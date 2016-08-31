@@ -22,7 +22,7 @@ class CANCommanderClass : Commander
 		MCP_CAN *pCan;
 
 		// Variables globales pour la gestion des Messages reçus et émis
-		byte IdR;                       // Id pour la routine CAN_recup()
+		uint8_t IdR;                       // Id pour la routine CAN_recup()
 		unsigned char lenR = 0;         // Longueur "    "       "
 		unsigned char bufR[8];          // tampon de reception      "
 		unsigned char bufS[8];          // tampon d'emission
@@ -30,12 +30,12 @@ class CANCommanderClass : Commander
 										// Variable globale Mémoire circulaire pour le stockage des messages reçus
 		unsigned char Circule[256];     // récepteur circulaire des messages CAN sous IT
 		int indexW, indexR, Ncan;       // index d'écriture et lecture, nb d'octets a lire
-		byte CANoverflow = 0;           // flag overflow (buffer _Circule plein)
+		uint8_t CANoverflow = 0;           // flag overflow (buffer _Circule plein)
 
 	public:
 		inline CANCommanderClass() : Commander() {}
 		
-		void begin(byte inPin, byte inSpeed, byte inInterrupt, uint16_t inId);
+		void begin(uint8_t inPin, uint8_t inSpeed, uint8_t inInterrupt, uint16_t inId);
 		unsigned long loop();
 		void CAN_recup();
 

@@ -5,6 +5,7 @@
 
 #include "Commanders.h"
 #ifndef NO_BUTTONSCOMMANDER
+#ifndef NO_BUTTONSCOMMANDERANALOGPUSHES
 
 class ButtonsCommanderAnalogPushesItem : public ButtonsCommanderButton
 {
@@ -20,5 +21,6 @@ class ButtonsCommanderAnalogPushesItem : public ButtonsCommanderButton
 };
 
 //-------------------------------------------------------------------
+#endif
 #endif
 #endif

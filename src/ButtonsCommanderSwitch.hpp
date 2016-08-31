@@ -5,6 +5,7 @@
 
 #include "Commanders.h"
 #ifndef NO_BUTTONSCOMMANDER
+#ifndef NO_BUTTONSCOMMANDERSWITCH
 #include "Chain.hpp"
 
 //-------------------------------------------------------------------
@@ -31,10 +32,11 @@ public:
 	ButtonsCommanderSwitch();
 	
 	void begin();
-	void AddEvent(int inPin, unsigned long inId, COMMANDERS_EVENT_TYPE inEvent = COMMANDERS_EVENT_TOGGLE, int inData = 0);
+	void AddEvent(int inPin, unsigned long inId, COMMANDERS_EVENT_TYPE inEvent = COMMANDERS_EVENT_MOVEPOSITIONID, int inData = 0);
 	unsigned long loop();
 };
 
 //-------------------------------------------------------------------
+#endif
 #endif
 #endif

@@ -1,5 +1,6 @@
 #include "TextInterpreter.hpp"
 
+#ifndef NO_SERIALCOMMANDER
 TextInterpreter::TextInterpreter()
 {
 	this->Init();
@@ -26,10 +27,10 @@ unsigned long TextInterpreter::SendChar(char inCharacter)
 		{
 			{
 				if (this->lastEventType == COMMANDERS_EVENT_NONE)
-					this->lastEventType = COMMANDERS_EVENT_TOGGLE;
+					this->lastEventType = COMMANDERS_EVENT_MOVEPOSITIONID;
 
 #ifdef COMMANDERS_DEBUG_MODE
-				if (this->lastEventType != COMMANDERS_EVENT_TOGGLE)
+				if (this->lastEventType != COMMANDERS_EVENT_TOGGLE && this->lastEventType != COMMANDERS_EVENT_MOVEPOSITIONID)
 				{
 					Serial.print(F("data = "));
 					if (this->neg_sign)
@@ -42,9 +43,11 @@ unsigned long TextInterpreter::SendChar(char inCharacter)
 					this->data = -this->data;
 			}
 
+#ifndef NO_DCCCOMMANDER
 			if (this->id2 != 255)
 				Commanders::RaiseEvent(DCCINT(this->id, this->id2), this->lastEventType, this->data);
 			else
+#endif
 				Commanders::RaiseEvent(this->id, this->lastEventType, this->data);
 			Commanders::SetLastEventType(this->lastEventType);
 			Commanders::SetLastEventData(this->data);
@@ -150,6 +153,7 @@ unsigned long TextInterpreter::SendChar(char inCharacter)
 				if (inCharacter == 't' || inCharacter == 'T')		this->lastEventType = COMMANDERS_EVENT_TOGGLE;
 				if (inCharacter == 'm' || inCharacter == 'M')		this->lastEventType = COMMANDERS_EVENT_MOVE;
 				if (inCharacter == 'p' || inCharacter == 'P')		this->lastEventType = COMMANDERS_EVENT_MOVEPOSITION;
+				if (inCharacter == 'd' || inCharacter == 'D')		this->lastEventType = COMMANDERS_EVENT_MOVEPOSITIONID;
 				if (inCharacter == 'i' || inCharacter == 'I')		this->lastEventType = COMMANDERS_EVENT_MOVEPOSITIONINDEX;
 				if (inCharacter == 'c' || inCharacter == 'C')		this->lastEventType = COMMANDERS_EVENT_CONFIG;
 			}
@@ -180,3 +184,4 @@ unsigned long TextInterpreter::SendString(char *inpString)
 
 	return this->SendChar('\n'); // End of command
 }
+#endif

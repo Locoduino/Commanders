@@ -12,8 +12,9 @@ class Commanders
 private:
 	static COMMANDERS_EVENT_TYPE lastEventType;
 	static int lastEventData;
-	static byte lastConfigAddress;
+	static uint8_t lastConfigAddress;
 	static unsigned long StartStatusLed;
+	static bool SerialStarted;
 
 public:
 	static CommandersEventHandlerFunction EventHandler;
@@ -33,11 +34,18 @@ public:
 	static inline int GetLastEventData() { return lastEventData; }
 	static inline void SetLastEventType(COMMANDERS_EVENT_TYPE inEvent) { lastEventType = inEvent; lastEventData = 0; }
 	static inline void SetLastEventData(int inData) { lastEventData = inData; }
-	static inline byte GetLastConfigAddress() { return lastConfigAddress; }
+	static inline uint8_t GetLastConfigAddress() { return lastConfigAddress; }
+	static inline void beginSerial() {
+		if (SerialStarted) return;
+		SerialStarted = true;
+		Serial.begin(9600);
+		Serial.flush();
+		delay(1000);
+	}
 
 	static void StatusBlink();
-	static unsigned long RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent = COMMANDERS_EVENT_TOGGLE, int inData = 0);
-	//static inline void AddDelayedEvent(unsigned long inDelay, unsigned long inId, COMMANDERS_EVENT_TYPE inEvent = COMMANDERS_EVENT_TOGGLE, int inData = 0);
+	static unsigned long RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent = COMMANDERS_EVENT_MOVEPOSITIONID, int inData = 0);
+	//static inline void AddDelayedEvent(unsigned long inDelay, unsigned long inId, COMMANDERS_EVENT_TYPE inEvent = COMMANDERS_EVENT_MOVEPOSITIONID, int inData = 0);
 #ifdef COMMANDERS_DEBUG_MODE
 	static void printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inEventData);
 #endif

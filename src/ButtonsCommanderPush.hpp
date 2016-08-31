@@ -5,6 +5,7 @@
 
 #include "Commanders.h"
 #ifndef NO_BUTTONSCOMMANDER
+#ifndef NO_BUTTONSCOMMANDERPUSH
 #include "Chain.hpp"
 
 struct Event
@@ -34,8 +35,8 @@ class ButtonsCommanderPush : public ButtonsCommanderButton
  public:
 	ButtonsCommanderPush();
 
-	void begin(unsigned long inId, int inButtonPin, COMMANDERS_EVENT_TYPE inEventType = COMMANDERS_EVENT_TOGGLE, int inData = 0);
-	void AddEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType = COMMANDERS_EVENT_TOGGLE, int inData = 0);
+	void begin(unsigned long inId, int inButtonPin, COMMANDERS_EVENT_TYPE inEventType = COMMANDERS_EVENT_MOVEPOSITIONID, int inData = 0);
+	void AddEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType = COMMANDERS_EVENT_MOVEPOSITIONID, int inData = 0);
 	unsigned long loop();
 
 	inline int GetPin() const { return GPIO_to_Arduino_pin(this->buttonPin); }
@@ -46,5 +47,6 @@ class ButtonsCommanderPush : public ButtonsCommanderButton
 };
 
 //-------------------------------------------------------------------
+#endif
 #endif
 #endif

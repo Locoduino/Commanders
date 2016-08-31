@@ -20,7 +20,7 @@ void Commander::AddCommander(Commander *inCommander)
 	{
 		Commander::pFirstCommander = inCommander;
 #ifdef COMMANDERS_DEBUG_MODE
-		Serial.begin(115200);
+		Commanders::beginSerial();
 
 		Serial.println(F(""));
 		Serial.println(F("Commanders V0.98"));
@@ -68,7 +68,13 @@ unsigned long Commander::loops()
 }
 
 #ifdef COMMANDERS_DEBUG_MODE
-void Commander::CheckIndex(byte inIndex, const __FlashStringHelper *inFunc)
+#ifdef ARDUINO_ARCH_SAM
+void Commander::CheckIndex(uint8_t inIndex, const char *inFunc)
 {
 }
+#else
+void Commander::CheckIndex(uint8_t inIndex, const __FlashStringHelper *inFunc)
+{
+}
+#endif
 #endif

@@ -16,7 +16,6 @@
 
 #define  GPIO2_PREFER_SPEED    1
 
-#include "arduino.h"
 #include "DIO2.h"
 
 //////////////////////////////////////////
@@ -50,6 +49,11 @@
 //NO_I2CCOMMANDER
 //	I2CCommander.cpp
 //	I2CCommander.hpp
+//
+//NO_SERIALCOMMANDER
+//	SerialCommander.hpp
+//	TextInterpreter.cpp
+//	TextInterpreter.hpp
 //
 //NO_BUTTONSCOMMANDER
 //	ButtonsCommander.cpp
@@ -86,14 +90,15 @@
 //	ButtonsCommanderPotentiometer.hpp
 
 //#define NO_BUTTONSCOMMANDER
-//#define NO_BUTTONSCOMMANDERENCODER
+#define NO_BUTTONSCOMMANDERENCODER
 //#define NO_BUTTONSCOMMANDERPUSH
-//#define NO_BUTTONSCOMMANDERANALOGPUSHES
-//#define NO_BUTTONSCOMMANDERSWITCH
-//#define NO_BUTTONSCOMMANDERPOTENTIOMETER
-//#define NO_CANCOMMANDER
-//#define NO_DCCCOMMANDER
-//#define NO_I2CCOMMANDER
+#define NO_BUTTONSCOMMANDERANALOGPUSHES
+#define NO_BUTTONSCOMMANDERSWITCH
+#define NO_BUTTONSCOMMANDERPOTENTIOMETER
+#define NO_CANCOMMANDER
+#define NO_DCCCOMMANDER
+#define NO_I2CCOMMANDER
+#define NO_SERIALCOMMANDER
 
 /////////////////////////////////////
 
@@ -116,8 +121,10 @@
 #include "ButtonsCommander.hpp"
 #endif
 
+#ifndef NO_SERIALCOMMANDER
 #include "SerialCommander.hpp"
 #include "TextInterpreter.hpp"
+#endif
 
 #ifdef VISUALSTUDIO
 #include "../VStudio/ButtonsCommanderKeyboard.hpp"

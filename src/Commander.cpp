@@ -19,17 +19,6 @@ void Commander::AddCommander(Commander *inCommander)
 	if (Commander::pFirstCommander == NULL)
 	{
 		Commander::pFirstCommander = inCommander;
-#ifdef COMMANDERS_DEBUG_MODE
-		Commanders::beginSerial();
-
-		Serial.println(F(""));
-		Serial.println(F("Commanders V0.98"));
-		Serial.println(F("Developed by Thierry Paris."));
-		Serial.println(F("(c) Locoduino 2016"));
-		Serial.println(F(""));
-
-		Serial.println(F("*** Setup Commanders started."));
-#endif
 		return;
 	}
 

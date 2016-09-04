@@ -21,13 +21,34 @@ public:
 	static GPIO_pin_t StatusLedPin;
 	static unsigned int BlinkDelay;
 
-	static inline void SetEventHandler(CommandersEventHandlerFunction func) { Commanders::EventHandler = func; }
-	static inline void SetStatusLedPin(int inStatusLedPin, unsigned int inBlinkDelay = 1000) 
+	static inline void begin(CommandersEventHandlerFunction func, int inStatusLedPin = -1, unsigned int inBlinkDelay = 1000)
 	{
-		StatusLedPin = Arduino_to_GPIO_pin(inStatusLedPin); 
-		pinMode2f(StatusLedPin, OUTPUT); 
-		BlinkDelay = inBlinkDelay; 
+		Commanders::EventHandler = func;
+		begin(inStatusLedPin, inBlinkDelay);
 	}
+
+	static inline void begin(int inStatusLedPin = -1, unsigned int inBlinkDelay = 1000)
+	{
+		SerialStarted = true;
+#ifdef COMMANDERS_DEBUG_MODE
+//		Serial.begin(115200);
+
+		Serial.println(F(""));
+		Serial.println(F("Commanders V0.99"));
+		Serial.println(F("Developed by Thierry Paris."));
+		Serial.println(F("(c) Locoduino 2016"));
+		Serial.println(F(""));
+
+		Serial.println(F("*** Setup Commanders started."));
+#endif
+		if (inStatusLedPin != -1)
+		{
+			StatusLedPin = Arduino_to_GPIO_pin(inStatusLedPin);
+			pinMode2f(StatusLedPin, OUTPUT);
+			BlinkDelay = inBlinkDelay;
+		}
+	}
+
 	static unsigned long loop();
 
 	static inline COMMANDERS_EVENT_TYPE GetLastEventType() { return lastEventType; }
@@ -35,14 +56,6 @@ public:
 	static inline void SetLastEventType(COMMANDERS_EVENT_TYPE inEvent) { lastEventType = inEvent; lastEventData = 0; }
 	static inline void SetLastEventData(int inData) { lastEventData = inData; }
 	static inline uint8_t GetLastConfigAddress() { return lastConfigAddress; }
-	static inline void beginSerial() {
-		if (SerialStarted) return;
-		SerialStarted = true;
-		Serial.begin(9600);
-		Serial.flush();
-		delay(1000);
-	}
-
 	static void StatusBlink();
 	static unsigned long RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent = COMMANDERS_EVENT_MOVEPOSITIONID, int inData = 0);
 	//static inline void AddDelayedEvent(unsigned long inDelay, unsigned long inId, COMMANDERS_EVENT_TYPE inEvent = COMMANDERS_EVENT_MOVEPOSITIONID, int inData = 0);

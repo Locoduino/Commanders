@@ -22,7 +22,7 @@ private:\
 public:\
 	inline SerialCommanderClass() : Commander() { }\
 	\
-	inline void begin(unsigned long inSpeed) { SERIAL_PORT.begin(inSpeed); }\
+	inline void begin() { }\
 	\
 	inline unsigned long loop() \
 	{\

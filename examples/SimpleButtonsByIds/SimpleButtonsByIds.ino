@@ -14,7 +14,7 @@ ButtonsCommanderPush TJD;
 	
 void setup()
 {
-	Commanders::SetStatusLedPin(LED_BUILTIN);
+	Commanders::begin(LED_BUILTIN);
 
 	Left.begin(4, 100);		// Arduino pin 4, id 100
 	Dc.begin(6, 101);

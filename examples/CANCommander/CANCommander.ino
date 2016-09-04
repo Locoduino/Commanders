@@ -17,8 +17,7 @@ void ReceiveEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inE
 //
 void setup()
 {
-	Commanders::SetStatusLedPin(LED_BUILTIN);
-	Commanders::SetEventHandler(ReceiveEvent);
+	Commanders::begin(ReceiveEvent, LED_BUILTIN);
 
 	CANCommander.begin(10, CAN_500KBPS, digitalPinToInterrupt(3), 0x10); // SPI pin, CAN speed, interrupt number, CAN message prefix.
 }

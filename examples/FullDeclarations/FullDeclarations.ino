@@ -39,20 +39,20 @@ ButtonsCommanderPotentiometer potentiometer;
 
 SERIAL_COMMANDER(Serial);
 
-void CommandersEventHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
+void ReceiveEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
 {
 	Commanders::printEvent(inId, inEvent, inData);
 }
 
 void setup()
 {
-	Commanders::SetStatusLedPin(LED_BUILTIN);
-	Commanders::SetEventHandler(CommandersEventHandler);
+	Serial.begin(115200);
+	Commanders::begin(ReceiveEvent, LED_BUILTIN);
 
 	I2CCommander.begin(01);
 	DccCommander.begin(0, 0, 1);
 	CANCommander.begin(0, 0, 1, 1);
-	SerialCommander.begin(115200);
+	SerialCommander.begin();
 
 	////////////////////////////////////////////////////////////////////////////////////
 	// Pushes

@@ -8,17 +8,17 @@ description: <Serial commander demo>
 
 SERIAL_COMMANDER(Serial);
 
-void CommandersEventHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
+void ReceiveEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
 {
 	Commanders::printEvent(inId, inEvent, inData);
 }
 
 void setup()
 {
-	Commanders::SetStatusLedPin(LED_BUILTIN);
-	Commanders::SetEventHandler(CommandersEventHandler);
+	Serial.begin(115200);	// Baud rate.
+	Commanders::begin(ReceiveEvent, LED_BUILTIN);
 
-	SerialCommander.begin(115200);	// Baud rate.
+	SerialCommander.begin();
 }
 
 void loop()

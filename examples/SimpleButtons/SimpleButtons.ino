@@ -12,15 +12,14 @@ ButtonsCommanderPush Right;
 ButtonsCommanderPush EPS;
 ButtonsCommanderPush TJD;
 	
-void ReceiveHandler(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
+void ReceiveEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
 {
 	Commanders::printEvent(inId, inEvent, inData);
 }
 
 void setup()
 {
-	Commanders::SetStatusLedPin(LED_BUILTIN);
-	Commanders::SetEventHandler(ReceiveHandler);
+	Commanders::begin(ReceiveEvent, LED_BUILTIN);
 
 	Left.begin(4, 100);	// Arduino pin 4, id 100
 	Dc.begin(6, 101);

@@ -1,3 +1,9 @@
+04/09/2016 0.99
+	- Plus d'initialisation de Serial, pour le DUE, même dans SerialCommander .
+	- Ajout de l'événement COMMANDERS_EVENT_MOVEPOSITIONID.
+	- un begin() remplace SetEventHandler et SetStatusLedPin .
+	- sur une (fausse) intuition, retrait de tous les 'byte' remplacés par des uint8_t .
+
 21/08/2016 0.98
 	- Ajout de l'événement COMMANDERS_EVENT_MOVEPOSITIONINDEX.
 	- Ajout de la syntaxe id:acc pour le SerialCommander

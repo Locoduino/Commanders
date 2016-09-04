@@ -17,8 +17,7 @@ void ReceiveEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inE
 //
 void setup()
 {
-	Commanders::SetStatusLedPin(LED_BUILTIN);
-	Commanders::SetEventHandler(ReceiveEvent);
+	Commanders::begin(ReceiveEvent, LED_BUILTIN);
 
 	I2CCommander.begin(0x10);	// I2C Slave identifier.
 }

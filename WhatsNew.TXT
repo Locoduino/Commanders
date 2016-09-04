@@ -1,8 +1,16 @@
 04/09/2016 0.99
 	- Plus d'initialisation de Serial, pour le DUE, même dans SerialCommander .
+	  Serial.begin() doit être fait dans le .ino .
 	- Ajout de l'événement COMMANDERS_EVENT_MOVEPOSITIONID.
-	- un begin() remplace SetEventHandler et SetStatusLedPin .
+	- un begin() remplace SetEventHandler et SetStatusLedPin pour Commanders.
 	- sur une (fausse) intuition, retrait de tous les 'byte' remplacés par des uint8_t .
+
+	- No more internal begin() of Serial class, to avoid problems with the DUE, even in SerialCommander.
+	  Serial.begin must be done, if necessary, in .ino file .
+	- Added event COMMANDERS_EVENT_MOVEPOSITIONID.
+	- A begin() function replace the old SetEventHandler and SetStatusLedPin for Commanders.
+	- Based on a false deduction, replacement of all 'byte' by 'uint8_t'. It is not wrong, but it 
+	  could have been avoided...
 
 21/08/2016 0.98
 	- Ajout de l'événement COMMANDERS_EVENT_MOVEPOSITIONINDEX.

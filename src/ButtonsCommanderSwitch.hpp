@@ -32,7 +32,7 @@ public:
 	ButtonsCommanderSwitch();
 	
 	void begin();
-	void AddEvent(int inPin, unsigned long inId, COMMANDERS_EVENT_TYPE inEvent = COMMANDERS_EVENT_MOVEPOSITIONID, int inData = 0);
+	void AddEvent(unsigned long inId, int inPin, COMMANDERS_EVENT_TYPE inEvent = COMMANDERS_EVENT_MOVEPOSITIONID, int inData = 0);
 	unsigned long loop();
 };
 

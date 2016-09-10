@@ -25,7 +25,7 @@ void ButtonsCommanderSwitch::begin()
 }
 
 // Returns the index of the new added position.
-void ButtonsCommanderSwitch::AddEvent(int inPin, unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
+void ButtonsCommanderSwitch::AddEvent(unsigned long inId, int inPin, COMMANDERS_EVENT_TYPE inEvent, int inData)
 {
 	EventPin *pIdpin = new EventPin();
 	pIdpin->Pin = Arduino_to_GPIO_pin(inPin);

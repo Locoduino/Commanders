@@ -12,7 +12,7 @@ ButtonsCommanderEncoder::ButtonsCommanderEncoder() : ButtonsCommanderButton(UNDE
 {
 }
 
-void ButtonsCommanderEncoder::begin(int inPin1, int inPin2, unsigned long inId, int inStartingValue, int inMinimum, int inMaximum)
+void ButtonsCommanderEncoder::begin(unsigned long inId, int inPin1, int inPin2, int inStartingValue, int inMinimum, int inMaximum)
 {
 	this->Id = inId;
 

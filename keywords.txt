@@ -45,8 +45,6 @@ GetId 						KEYWORD2
 GetPosition 				KEYWORD2
 EndLoop 					KEYWORD2
 
-SetStatusLedPin				KEYWORD2
-SetEventHandler				KEYWORD2
 printEvent					KEYWORD2
 
 #######################################

@@ -23,7 +23,7 @@ class ButtonsCommanderPotentiometer : public ButtonsCommanderButton
 	//inline bool IsAnalog() const { return true; }
 	inline int GetPosition() const { return this->currentValue; }
 
-	void begin(int inPin, unsigned long inId, int inMinimum, int inMaximum, int inMoveAccuracy = 1);
+	void begin(unsigned long inId, int inPin, int inMinimum, int inMaximum, int inMoveAccuracy = 1);
 	unsigned long loop();
 };
 

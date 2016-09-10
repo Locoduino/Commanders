@@ -12,7 +12,6 @@ int Commanders::lastEventData;
 GPIO_pin_t Commanders::StatusLedPin = DP_INVALID;
 unsigned int Commanders::BlinkDelay = 1000;
 unsigned long Commanders::StartStatusLed = 0;
-bool Commanders::SerialStarted = false;
 
 #ifdef COMMANDERS_DEBUG_MODE
 	bool FirstLoop = true;

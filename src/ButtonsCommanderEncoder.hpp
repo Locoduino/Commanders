@@ -27,7 +27,7 @@ class ButtonsCommanderEncoder : public ButtonsCommanderButton
 	inline int GetPosition() const { return this->currentValue; }
 	inline void ResetStartingPosition() { this->currentValue = this->startingCurrentValue; }
 
-	void begin(int inPin1, int inPin2, unsigned long inId, int inStartingCurrentValue = 0, int inMinimum = 0, int inMaximum = 0);
+	void begin(unsigned long inId, int inPin1, int inPin2, int inStartingCurrentValue = 0, int inMinimum = 0, int inMaximum = 0);
 	unsigned long loop();
 };
 //-------------------------------------------------------------------

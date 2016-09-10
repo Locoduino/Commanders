@@ -75,40 +75,40 @@ void setup()
 	////////////////////////////////////////////////////////////////////////////////////
 	// Switches
 	// Simple switch acting as a push, on pin 13 and with Id 401 !
-	switch_simple.AddEvent(13, 401);
+	switch_simple.AddEvent(401, 13);
 	switch_simple.begin();
 
 	// Switch button switching a motor between two positions, with pins 14 and 15, and Ids 402 & 403
-	switch_motor.AddEvent(14, 402, COMMANDERS_EVENT_MOVE, COMMANDERS_MOVE_LEFT);
-	switch_motor.AddEvent(15, 403, COMMANDERS_EVENT_MOVE, COMMANDERS_MOVE_RIGHT);
+	switch_motor.AddEvent(402, 14, COMMANDERS_EVENT_MOVE, COMMANDERS_MOVE_LEFT);
+	switch_motor.AddEvent(403, 15, COMMANDERS_EVENT_MOVE, COMMANDERS_MOVE_RIGHT);
 	switch_motor.begin();
 
 	// Switch button switching a light on and off, with pins 16 and 17, and Ids 404 and 405
-	switch_light.AddEvent(16, 404, COMMANDERS_EVENT_MOVE, COMMANDERS_MOVE_ON);
-	switch_light.AddEvent(17, 405, COMMANDERS_EVENT_MOVE, COMMANDERS_MOVE_OFF);
+	switch_light.AddEvent(404, 16, COMMANDERS_EVENT_MOVE, COMMANDERS_MOVE_ON);
+	switch_light.AddEvent(405, 17, COMMANDERS_EVENT_MOVE, COMMANDERS_MOVE_OFF);
 	switch_light.begin();
 
 	// Rotator with four positions, commanding a servo, using pins 18 to 21 and Ids from 410 to 413
-	switch_rotator.AddEvent(18, 410, COMMANDERS_EVENT_MOVEPOSITION, 15);
-	switch_rotator.AddEvent(19, 411, COMMANDERS_EVENT_MOVEPOSITION, 45);
-	switch_rotator.AddEvent(20, 412, COMMANDERS_EVENT_MOVEPOSITION, 100);
-	switch_rotator.AddEvent(21, 413, COMMANDERS_EVENT_MOVEPOSITION, 135);
+	switch_rotator.AddEvent(410, 18, COMMANDERS_EVENT_MOVEPOSITION, 15);
+	switch_rotator.AddEvent(411, 19, COMMANDERS_EVENT_MOVEPOSITION, 45);
+	switch_rotator.AddEvent(412, 20, COMMANDERS_EVENT_MOVEPOSITION, 100);
+	switch_rotator.AddEvent(413, 21, COMMANDERS_EVENT_MOVEPOSITION, 135);
 	switch_rotator.begin();
 
 	////////////////////////////////////////////////////////////////////////////////////
 	// Encoders
 	// This encoder will always returns a value between -100 and +100. The starting position is 0.
 	// Connected to pins 22 and 23, with Id 500.
-	encoder_absolute.begin(22, 23, 500, 0, -100, +100);
+	encoder_absolute.begin(500, 22, 23, 0, -100, +100);
 
 	// This encoder will always returns -1 or +1
 	// Connected to pins 24 and 25, with Id 501.
-	encoder_relative.begin(24, 25, 501);
+	encoder_relative.begin(501, 24, 25);
 
 	////////////////////////////////////////////////////////////////////////////////////
 	// Potentiometer
 	// This potentiometer will always returns a value between -100 and +100, using analog pin A1, and Id 600.
-	potentiometer.begin(A1, 600, -100, +100, 2); // 2 : optional minimum movement in the final unit.
+	potentiometer.begin(600, A1, -100, +100, 2); // 2 : optional minimum movement in the final unit.
 }
 
 void loop()

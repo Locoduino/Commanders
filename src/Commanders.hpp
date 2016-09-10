@@ -14,7 +14,6 @@ private:
 	static int lastEventData;
 	static uint8_t lastConfigAddress;
 	static unsigned long StartStatusLed;
-	static bool SerialStarted;
 
 public:
 	static CommandersEventHandlerFunction EventHandler;
@@ -29,12 +28,9 @@ public:
 
 	static inline void begin(int inStatusLedPin = -1, unsigned int inBlinkDelay = 1000)
 	{
-		SerialStarted = true;
 #ifdef COMMANDERS_DEBUG_MODE
-//		Serial.begin(115200);
-
 		Serial.println(F(""));
-		Serial.println(F("Commanders V0.99"));
+		Serial.println(F("Commanders V1.00"));
 		Serial.println(F("Developed by Thierry Paris."));
 		Serial.println(F("(c) Locoduino 2016"));
 		Serial.println(F(""));

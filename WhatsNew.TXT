@@ -1,3 +1,11 @@
+09/09/2016 1.00
+	- Inversion de la broche et de l'identifiant dans AddEvent du switch pour être homogène avec le poussoir.
+	  Idem pour l'encodeur et le potentiometre.
+	- Création du source 'Events.h' pour ne pas avoir à recopier les enums dans les exemples.
+
+	- Inverted pin and id in potentiometer, switch and encoder constructors
+	- Created 'Events.h' to avoid copying enums in samples.
+
 04/09/2016 0.99
 	- Plus d'initialisation de Serial, pour le DUE, même dans SerialCommander .
 	  Serial.begin() doit être fait dans le .ino .

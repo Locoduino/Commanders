@@ -12,7 +12,7 @@ ButtonsCommanderPotentiometer::ButtonsCommanderPotentiometer() : ButtonsCommande
 {
 }
 
-void ButtonsCommanderPotentiometer::begin(int inPin, unsigned long inId, int inMinimum, int inMaximum, int inMoveAccuracy)
+void ButtonsCommanderPotentiometer::begin(unsigned long inId, int inPin, int inMinimum, int inMaximum, int inMoveAccuracy)
 {
 	this->Id = inId;
 	this->mini = inMinimum;

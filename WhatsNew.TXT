@@ -1,4 +1,11 @@
-09/09/2016 1.00
+28/09/2016 1.1
+	- Déclaration de NO_CANCOMMANDER par défaut.
+	- mcp-can est inclus dans extra
+
+	- NO_CANCOMMANDER is the default
+	- mcp_can library in included into extra folder.
+
+09/09/2016 1.0
 	- Inversion de la broche et de l'identifiant dans AddEvent du switch pour être homogène avec le poussoir.
 	  Idem pour l'encodeur et le potentiometre.
 	- Création du source 'Events.h' pour ne pas avoir à recopier les enums dans les exemples.

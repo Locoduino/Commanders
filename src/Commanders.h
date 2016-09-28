@@ -6,7 +6,7 @@
 ////////////////////////////////////////////////////////
 // Add a '//' at the beginning of the line to be in 
 // release mode.
-#define COMMANDERS_DEBUG_MODE
+//#define COMMANDERS_DEBUG_MODE
 
 ///////////////////////////////////////////////////////
 // Verbose mode lets you see all actions done by the 
@@ -95,7 +95,7 @@
 //#define NO_BUTTONSCOMMANDERANALOGPUSHES
 //#define NO_BUTTONSCOMMANDERSWITCH
 //#define NO_BUTTONSCOMMANDERPOTENTIOMETER
-//#define NO_CANCOMMANDER
+#define NO_CANCOMMANDER
 //#define NO_DCCCOMMANDER
 //#define NO_I2CCOMMANDER
 //#define NO_SERIALCOMMANDER

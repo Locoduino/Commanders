@@ -72,7 +72,7 @@ unsigned long TextInterpreter::SendChar(char inCharacter)
 
 	if (inCharacter == ' ' || inCharacter == ',' || inCharacter == ';' || inCharacter == '/')
 	{
-#ifdef DEBUG_VERBOSE_MODE
+#ifdef COMMANDERS_DEBUG_VERBOSE_MODE
 		Serial.println(F("separator"));
 #endif
 			switch (step)
@@ -120,7 +120,7 @@ unsigned long TextInterpreter::SendChar(char inCharacter)
 	if (step == TEXTINTERPRETER_STEP_END)	/* end of useful input ! */
 		return UNDEFINED_ID;
 
-#ifdef DEBUG_VERBOSE_MODE
+#ifdef COMMANDERS_DEBUG_VERBOSE_MODE
 	Serial.print(F("read ")); \
 	Serial.println(inCharacter, DEC);
 #endif

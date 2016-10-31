@@ -24,7 +24,7 @@ void DccCommanderClass::DccAccessoryDecoderPacket(int address, boolean activate,
 	int realAddress = address;
 
 #ifdef COMMANDERS_DEBUG_MODE
-#ifdef DEBUG_VERBOSE_MODE
+#ifdef COMMANDERS_DEBUG_VERBOSE_MODE
 	Serial.print(F("Dcc packet found : real data : "));
 	Serial.print(realAddress);
 	Serial.print(F(" / "));
@@ -44,7 +44,7 @@ void DccCommanderClass::DccAccessoryDecoderPacket(int address, boolean activate,
 	}
 
 #ifdef COMMANDERS_DEBUG_MODE
-#ifdef DEBUG_VERBOSE_MODE
+#ifdef COMMANDERS_DEBUG_VERBOSE_MODE
 	Serial.print(F("  converted : "));
 	Serial.print(realAddress);
 	Serial.print(F(" / "));
@@ -117,7 +117,7 @@ void DccCommanderClass::PriorityLoop()
 
 #define MINTIME	2
 #ifdef COMMANDERS_DEBUG_MODE
-#ifdef DEBUG_VERBOSE_MODE
+#ifdef COMMANDERS_DEBUG_VERBOSE_MODE
 static int countLoop = 0;
 #endif
 #endif
@@ -133,7 +133,7 @@ unsigned long DccCommanderClass::loop()
 
 	DCC.loop();
 #ifdef COMMANDERS_DEBUG_MODE
-#ifdef DEBUG_VERBOSE_MODE
+#ifdef COMMANDERS_DEBUG_VERBOSE_MODE
 	countLoop++;
 #endif
 #endif
@@ -141,7 +141,7 @@ unsigned long DccCommanderClass::loop()
 	if (millis() - start > MINTIME)
 	{
 #ifdef COMMANDERS_DEBUG_MODE
-#ifdef DEBUG_VERBOSE_MODE
+#ifdef COMMANDERS_DEBUG_VERBOSE_MODE
 		Serial.print("DCC commander loop : ");
 		Serial.println(countLoop, DEC);
 		countLoop = 0;

@@ -90,12 +90,6 @@ unsigned long ButtonsCommanderClass::loop()
 
 	unsigned long ID = pCurrentLoopButton->loop();
 
-#ifdef DEBUG_VERBOSE_MODE
-	Serial.print(F("ButtonsCommanderButton id:"));
-	Serial.print(ID, DEC);
-	Serial.println(F(" checked !"));
-#endif
-
 	if (ID == UNDEFINED_ID)
 		return UNDEFINED_ID;
 

@@ -1,9 +1,16 @@
+28/09/2016 1.11
+	- Changement de nom pour éviter des collisions de nom avec d'autres biblios : DEBUG_VERBOSE->COMMANDERS_DEBUG_VERBOSE.
+	- Ajout des bibliothèques DIO2 et mcp-can dans 'extra'.
+	- event.h ne sera plus inclus dans un croquis utilisant Commanders.
+
+	- Name changed from DEBUG_VERBOSE to COMMANDERS_DEBUG_VERBOSE, to avoid confusion with other libraries.
+	- DIO2 and mcp_can libraries included in 'extra'.
+	- event.h will not be included anymore when Commanders will be used in a sketch.
+
 28/09/2016 1.1
 	- Déclaration de NO_CANCOMMANDER par défaut.
-	- mcp-can est inclus dans extra
 
 	- NO_CANCOMMANDER is the default
-	- mcp_can library in included into extra folder.
 
 09/09/2016 1.0
 	- Inversion de la broche et de l'identifiant dans AddEvent du switch pour être homogène avec le poussoir.
@@ -57,10 +64,8 @@
 
 25/05/2016 V0.94
 	- Ajout de STRAIGHT et DIVERGE dans les événements
-	- Mise à jour de DIO2.zip dans extra.
 
 	- Added events STRAIGHT and DIVERGE.
-	- Update of DIO2.zip in extra folder.
 
 22/05/2016 V0.93
 	- Modification des événements pour un MOVE multiple.

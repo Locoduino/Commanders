@@ -1,4 +1,9 @@
-28/09/2016 1.11
+04/11/2016 1.20
+	- Correction de DccCommander qui ne marchait plus...
+
+	- Fix of DccCommander...
+
+31/10/2016 1.11
 	- Changement de nom pour éviter des collisions de nom avec d'autres biblios : DEBUG_VERBOSE->COMMANDERS_DEBUG_VERBOSE.
 	- Ajout des bibliothèques DIO2 et mcp-can dans 'extra'.
 	- event.h ne sera plus inclus dans un croquis utilisant Commanders.

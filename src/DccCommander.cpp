@@ -67,9 +67,9 @@ void DccCommanderClass::DccAccessoryDecoderPacket(int address, boolean activate,
 			(DccCommanderClass::func_AccPacket)(realAddress, activate, data);
 		else
 		{
-			Commanders::RaiseEvent(DCCID(realAddress), COMMANDERS_EVENT_MOVE, data ? COMMANDERS_MOVE_LEFT : COMMANDERS_MOVE_RIGHT);
+			Commanders::RaiseEvent(DCCINT(realAddress, data), COMMANDERS_EVENT_MOVE, data ? COMMANDERS_MOVE_LEFT : COMMANDERS_MOVE_RIGHT);
 
-			DccCommander.LastDccId = DCCID(realAddress);
+			DccCommander.LastDccId = DCCINT(realAddress, data);
 		}
 	}
 }
@@ -98,8 +98,8 @@ void DccCommanderClass::begin(int i, int j, int k, boolean inInterruptMonitor, b
 	DCC.beginDecoder(i, j, k);
 	this->UseRawDccAddresses = inUseRawDccAddresses;
 #ifdef VISUALSTUDIO
-	// In VS, the exception address is also the min number.
-	// pinMode() is just here to declare the pin used...
+	// In VS, the exception address is also the pin number.
+	// pinMode() is just here to declare the pin used for the emulator...
 	pinMode(k, OUTPUT_RESERVED);
 #endif
 	this->LastDccId = UNDEFINED_ID;
@@ -128,8 +128,8 @@ static unsigned long start = 0;
 
 unsigned long DccCommanderClass::loop()
 {
-	if (start == 0)
-		start = millis();
+	//if (start == 0)
+		//start = millis();
 
 	DCC.loop();
 #ifdef COMMANDERS_DEBUG_MODE
@@ -138,8 +138,9 @@ unsigned long DccCommanderClass::loop()
 #endif
 #endif
 
-	if (millis() - start > MINTIME)
+	//if (millis() - start > MINTIME)
 	{
+		/*
 #ifdef COMMANDERS_DEBUG_MODE
 #ifdef COMMANDERS_DEBUG_VERBOSE_MODE
 		Serial.print("DCC commander loop : ");
@@ -147,6 +148,7 @@ unsigned long DccCommanderClass::loop()
 		countLoop = 0;
 #endif
 #endif
+*/
 		start = 0;
 		if (this->LastDccId != UNDEFINED_ID)
 		{

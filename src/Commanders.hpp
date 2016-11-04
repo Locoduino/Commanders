@@ -30,7 +30,7 @@ public:
 	{
 #ifdef COMMANDERS_DEBUG_MODE
 		Serial.println(F(""));
-		Serial.println(F("Commanders V1.11"));
+		Serial.println(F("Commanders V1.20"));
 		Serial.println(F("Developed by Thierry Paris."));
 		Serial.println(F("(c) Locoduino 2016"));
 		Serial.println(F(""));

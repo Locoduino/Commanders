@@ -58,6 +58,10 @@ public:
 	void CheckIndex(unsigned char inIndex, const __FlashStringHelper *infunc);
 	static void printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inEventData);
 #endif
+#ifdef COMMANDERS_PRINT_COMMANDERS
+	int8_t Interrupt;
+	void printCommander();
+#endif
 };
 
 //-------------------------------------------------------------------

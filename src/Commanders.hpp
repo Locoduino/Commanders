@@ -20,17 +20,11 @@ public:
 	static GPIO_pin_t StatusLedPin;
 	static unsigned int BlinkDelay;
 
-	static inline void begin(CommandersEventHandlerFunction func, int inStatusLedPin = -1, unsigned int inBlinkDelay = 1000)
-	{
-		Commanders::EventHandler = func;
-		begin(inStatusLedPin, inBlinkDelay);
-	}
-
 	static inline void begin(int inStatusLedPin = -1, unsigned int inBlinkDelay = 1000)
 	{
 #ifdef COMMANDERS_DEBUG_MODE
 		Serial.println(F(""));
-		Serial.println(F("Commanders V1.20"));
+		Serial.println(F("Commanders V1.21"));
 		Serial.println(F("Developed by Thierry Paris."));
 		Serial.println(F("(c) Locoduino 2016"));
 		Serial.println(F(""));
@@ -45,6 +39,12 @@ public:
 		}
 	}
 
+	static inline void begin(CommandersEventHandlerFunction func, int inStatusLedPin = -1, unsigned int inBlinkDelay = 1000)
+	{
+		Commanders::EventHandler = func;
+		begin(inStatusLedPin, inBlinkDelay);
+	}
+
 	static unsigned long loop();
 
 	static inline COMMANDERS_EVENT_TYPE GetLastEventType() { return lastEventType; }
@@ -55,8 +55,14 @@ public:
 	static void StatusBlink();
 	static unsigned long RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent = COMMANDERS_EVENT_MOVEPOSITIONID, int inData = 0);
 	//static inline void AddDelayedEvent(unsigned long inDelay, unsigned long inId, COMMANDERS_EVENT_TYPE inEvent = COMMANDERS_EVENT_MOVEPOSITIONID, int inData = 0);
-#ifdef COMMANDERS_DEBUG_MODE
+#if defined(COMMANDERS_DEBUG_MODE) || defined(COMMANDERS_PRINT_COMMANDERS)
+	static void printEventMoveType(COMMANDERS_MOVE_TYPE inMoveType);
+	static void printEventData(COMMANDERS_EVENT_TYPE inEventType, int inEventData);
+	static void printEventType(COMMANDERS_EVENT_TYPE inEventType, bool inDataFollow);
 	static void printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inEventData);
+#endif
+#ifdef COMMANDERS_PRINT_COMMANDERS
+	static void printCommanders();
 #endif
 };
 

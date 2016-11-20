@@ -110,5 +110,23 @@ void ButtonsCommanderAnalogPushes::EndLoop()
 {
 	this->lastButtonPressed = -1;
 }
+
+#ifdef COMMANDERS_PRINT_COMMANDERS
+void ButtonsCommanderAnalogPushes::printCommander()
+{
+	Serial.print(F("    AnalogPushes - Pin :"));
+	Serial.println(this->analogPin);
+	Serial.print(F(" / Reading Accuracy: "));
+	Serial.println(this->readingTolerancy);
+
+	for (int i = 0; i < this->size; i++)
+	{
+		Serial.print(F("        Push Id: "));
+		Serial.print(this->GetItem(i)->GetId());
+		Serial.print(F(" / value: "));
+		Serial.println(this->GetItem(i)->GetAnalogValue());
+	}
+}
+#endif
 #endif
 #endif

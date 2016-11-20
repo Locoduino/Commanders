@@ -38,6 +38,9 @@ class ButtonsCommanderButton
 
 	inline void SetNextButton(ButtonsCommanderButton *inButton) { this->pNextButton = inButton; }
 	inline ButtonsCommanderButton *GetNextButton() const { return this->pNextButton; }
+#ifdef COMMANDERS_PRINT_COMMANDERS
+	inline virtual void printCommander() {}
+#endif
 };
 
 //-------------------------------------------------------------------

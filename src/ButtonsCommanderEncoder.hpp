@@ -29,6 +29,9 @@ class ButtonsCommanderEncoder : public ButtonsCommanderButton
 
 	void begin(unsigned long inId, int inPin1, int inPin2, int inStartingCurrentValue = 0, int inMinimum = 0, int inMaximum = 0);
 	unsigned long loop();
+#ifdef COMMANDERS_PRINT_COMMANDERS
+	void printCommander();
+#endif
 };
 //-------------------------------------------------------------------
 #endif

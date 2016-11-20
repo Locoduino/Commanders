@@ -35,8 +35,11 @@ class Commander
 	private:
 		static void AddCommander(Commander *inCommander);
 
-#ifdef COMMANDERS_DEBUG_MODE
 	public:
+#ifdef COMMANDERS_PRINT_COMMANDERS
+		virtual void printCommander() {}
+#endif
+#ifdef COMMANDERS_DEBUG_MODE
 #ifdef ARDUINO_ARCH_SAM
 		void CheckIndex(uint8_t inIndex, const char *infunc);
 #else

@@ -14,6 +14,13 @@
 // Has no effect if COMMANDERS_DEBUG_MODE is not activated.
 //#define COMMANDERS_DEBUG_VERBOSE_MODE
 
+///////////////////////////////////////////////////////
+// The function Commanders::printCommanders()
+// is very heavy in program memory. So to avoid problems
+// you can make this function available by uncomment the next 
+// line.
+//#define COMMANDERS_PRINT_COMMANDERS
+
 #define  GPIO2_PREFER_SPEED    1
 
 #include "DIO2.h"

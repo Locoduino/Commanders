@@ -51,6 +51,7 @@ public:\
 			pSerialCommander = new SerialCommanderClass(); \
 		return *(SerialCommanderClass::pSerialCommander);\
 	}\
+	void printCommander() { Serial.println(F("Commander: SerialCommander")); }\
 \
 };\
 SerialCommanderClass *SerialCommanderClass::pSerialCommander; 

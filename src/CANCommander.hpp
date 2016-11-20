@@ -48,6 +48,14 @@ class CANCommanderClass : Commander
 
 			return *(CANCommanderClass::pCANCommander);
 		}
+#ifdef COMMANDERS_PRINT_COMMANDERS
+		uint8_t SPIpin;
+		uint8_t Speed;
+		uint8_t Interrupt;
+		uint16_t Id;
+
+		void printCommander();
+#endif
 };
 
 //-------------------------------------------------------------------

@@ -71,5 +71,19 @@ unsigned long ButtonsCommanderEncoder::loop()
 									COMMANDERS_EVENT_MOVE, 
 									inc > 0 ? COMMANDERS_MOVE_MORE : COMMANDERS_MOVE_LEFT);
 }
+
+#ifdef COMMANDERS_PRINT_COMMANDERS
+void ButtonsCommanderEncoder::printCommander()
+{
+	Serial.println(F("    Encoder - Pin1:"));
+	Serial.print(GPIO_to_Arduino_pin(this->pin1));
+	Serial.print(F(" / Pin2: "));
+	Serial.print(GPIO_to_Arduino_pin(this->pin2));
+	Serial.print(F(" / Mini: "));
+	Serial.print(this->maxi);
+	Serial.print(F(" / Maxi: "));
+	Serial.println(this->maxi);
+}
+#endif
 #endif
 #endif

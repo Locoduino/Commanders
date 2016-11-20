@@ -45,13 +45,13 @@ unsigned long TextInterpreter::SendChar(char inCharacter)
 
 #ifndef NO_DCCCOMMANDER
 			if (this->id2 != 255)
-				Commanders::RaiseEvent(DCCINT(this->id, this->id2), this->lastEventType, this->data);
+				foundID = DCCINT(this->id, this->id2);
 			else
 #endif
-				Commanders::RaiseEvent(this->id, this->lastEventType, this->data);
+				foundID = this->id;
+			Commanders::RaiseEvent(foundID, this->lastEventType, this->data);
 			Commanders::SetLastEventType(this->lastEventType);
 			Commanders::SetLastEventData(this->data);
-			foundID = this->id;
 		}
 
 		this->Init();

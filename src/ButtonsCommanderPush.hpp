@@ -44,6 +44,10 @@ class ButtonsCommanderPush : public ButtonsCommanderButton
 	inline int GetState() const { return this->buttonState; }
 	
 	static ButtonsCommanderPush Empty;
+
+#ifdef COMMANDERS_PRINT_COMMANDERS
+	void printCommander();
+#endif
 };
 
 //-------------------------------------------------------------------

@@ -25,6 +25,9 @@ class ButtonsCommanderPotentiometer : public ButtonsCommanderButton
 
 	void begin(unsigned long inId, int inPin, int inMinimum, int inMaximum, int inMoveAccuracy = 1);
 	unsigned long loop();
+#ifdef COMMANDERS_PRINT_COMMANDERS
+	void printCommander();
+#endif
 };
 
 //-------------------------------------------------------------------

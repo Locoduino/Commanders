@@ -42,6 +42,9 @@ class I2CCommanderClass : Commander
 
 			return *(I2CCommanderClass::pI2cCommander);
 		}
+#ifdef COMMANDERS_PRINT_COMMANDERS
+		void printCommander();
+#endif
 };
 
 //-------------------------------------------------------------------

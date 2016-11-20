@@ -63,6 +63,12 @@ void DccCommanderClass::DccAccessoryDecoderPacket(int address, boolean activate,
 	// DccCommander will react only on the desactivate flag to avoid double events.
 	if (activate == false)
 	{
+#ifdef COMMANDERS_DEBUG_MODE
+		Serial.print("DccCommander packet received :");
+		Serial.print(realAddress);
+		Serial.print(F(" / "));
+		Serial.println(data, DEC);
+#endif
 		if (DccCommanderClass::func_AccPacket)
 			(DccCommanderClass::func_AccPacket)(realAddress, activate, data);
 		else
@@ -100,7 +106,7 @@ void DccCommanderClass::begin(int i, int j, int k, boolean inInterruptMonitor, b
 #ifdef VISUALSTUDIO
 	// In VS, the exception address is also the pin number.
 	// pinMode() is just here to declare the pin used for the emulator...
-	pinMode(k, OUTPUT_RESERVED);
+	pinMode(k, OUTPUT_INTERRUPT);
 #endif
 	this->LastDccId = UNDEFINED_ID;
 
@@ -108,6 +114,10 @@ void DccCommanderClass::begin(int i, int j, int k, boolean inInterruptMonitor, b
 
 	if (inInterruptMonitor)
 		DCC.SetInterruptMonitor(StatusBlink_handler);
+
+#ifdef COMMANDERS_PRINT_COMMANDERS
+	this->Interrupt = k;
+#endif
 }
 
 void DccCommanderClass::PriorityLoop()
@@ -218,6 +228,14 @@ void DccCommanderClass::printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inE
 		Serial.println(COMMANDERSCONFIGVALUE(inEventData), DEC);
 		break;
 	}
+}
+#endif
+
+#ifdef COMMANDERS_PRINT_COMMANDERS
+void DccCommanderClass::printCommander()
+{
+	Serial.print(F("Commander: DccCommander - Interrupt: "));
+	Serial.println(this->Interrupt);
 }
 #endif
 

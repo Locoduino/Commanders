@@ -49,5 +49,19 @@ unsigned long ButtonsCommanderPotentiometer::loop()
 
 	return UNDEFINED_ID;
 }
+
+#ifdef COMMANDERS_PRINT_COMMANDERS
+void ButtonsCommanderPotentiometer::printCommander()
+{
+	Serial.print(F("    Potentiometer - Pin:"));
+	Serial.print(this->pin);
+	Serial.print(F(" / Mini: "));
+	Serial.print(this->mini);
+	Serial.print(F(" / Maxi: "));
+	Serial.print(this->maxi);
+	Serial.print(F(" / Accuracy: "));
+	Serial.println(this->moveAccuracy);
+}
+#endif
 #endif
 #endif

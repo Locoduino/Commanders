@@ -91,5 +91,26 @@ unsigned long ButtonsCommanderPush::loop()
 	this->lastButtonState = reading;
 	return foundID;
 }
+
+#ifdef COMMANDERS_PRINT_COMMANDERS
+void ButtonsCommanderPush::printCommander()
+{
+	Serial.print(F("    Push - Pin :"));
+	Serial.println(this->GetPin());
+
+	CMDRSCHAINEDLISTITEM<Event> *pCurr = this->Events.pFirst;
+	while (pCurr != NULL) 
+	{ 
+		Serial.print(F("        Event Id: "));
+		Serial.print(pCurr->Obj->Id);
+		Serial.print(F(" / Event type: "));
+		Commanders::printEventType(pCurr->Obj->EventType, true);
+		Commanders::printEventData(pCurr->Obj->EventType, pCurr->Obj->Data);
+		Serial.println(F(""));
+
+		pCurr = pCurr->pNext;
+	}
+}
+#endif
 #endif
 #endif

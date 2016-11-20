@@ -71,4 +71,25 @@ unsigned long ButtonsCommanderKeyboard::loop()
 
 	return foundID;
 }
+
+#ifdef COMMANDERS_PRINT_COMMANDERS
+void ButtonsCommanderKeyboard::printCommander()
+{
+	Serial.print(F("    Keyboard - Key:"));
+	Serial.println(this->key);
+
+	CMDRSCHAINEDLISTITEM<KeybdEvent> *pCurr = this->Events.pFirst;
+	while (pCurr != NULL)
+	{
+		Serial.print(F("        Event Id: "));
+		Serial.print(pCurr->Obj->Id);
+		Serial.print(F(" / Event type: "));
+		Commanders::printEventType(pCurr->Obj->EventType, true);
+		Commanders::printEventData(pCurr->Obj->EventType, pCurr->Obj->Data);
+		Serial.println(F(""));
+
+		pCurr = pCurr->pNext;
+	}
+}
+#endif
 #endif

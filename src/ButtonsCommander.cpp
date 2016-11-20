@@ -103,4 +103,19 @@ unsigned long ButtonsCommanderClass::loop()
 	return ID;
 }
 
+#ifdef COMMANDERS_PRINT_COMMANDERS
+void ButtonsCommanderClass::printCommander()
+{
+	Serial.println(F("Commander: ButtonsCommander "));
+
+	ButtonsCommanderButton *pCurr = this->pFirstButton;
+
+	while (pCurr != NULL)
+	{
+		pCurr->printCommander();
+		pCurr = pCurr->GetNextButton();
+	}
+}
+#endif
+
 #endif

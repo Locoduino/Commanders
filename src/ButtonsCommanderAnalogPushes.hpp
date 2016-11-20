@@ -55,6 +55,9 @@ public:
 	ButtonsCommanderButton* GetFromId(unsigned long inId);
 
 	inline uint8_t GetLastButtonPressed() const { return this->lastButtonPressed; }
+#ifdef COMMANDERS_PRINT_COMMANDERS
+	void printCommander();
+#endif
 };
 
 //-------------------------------------------------------------------

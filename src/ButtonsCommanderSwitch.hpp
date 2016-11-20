@@ -34,6 +34,10 @@ public:
 	void begin();
 	void AddEvent(unsigned long inId, int inPin, COMMANDERS_EVENT_TYPE inEvent = COMMANDERS_EVENT_MOVEPOSITIONID, int inData = 0);
 	unsigned long loop();
+
+#ifdef COMMANDERS_PRINT_COMMANDERS
+	void printCommander();
+#endif
 };
 
 //-------------------------------------------------------------------

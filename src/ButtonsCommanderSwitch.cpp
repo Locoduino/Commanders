@@ -90,5 +90,27 @@ unsigned long ButtonsCommanderSwitch::loop()
 
 	return haveFound;
 }
+
+#ifdef COMMANDERS_PRINT_COMMANDERS
+void ButtonsCommanderSwitch::printCommander()
+{
+	Serial.println(F("    Switch"));
+
+	CMDRSCHAINEDLISTITEM<EventPin> *pCurr = this->EventPins.pFirst;
+	while (pCurr != NULL)
+	{
+		Serial.print(F("        Event - Pin: "));
+		Serial.print(GPIO_to_Arduino_pin(pCurr->Obj->Pin));
+		Serial.print(F(" / Id: "));
+		Serial.print(pCurr->Obj->Id);
+		Serial.print(F(" / Event type: "));
+		Commanders::printEventType(pCurr->Obj->Event, true);
+		Commanders::printEventData(pCurr->Obj->Event, pCurr->Obj->Data);
+		Serial.println(F(""));
+
+		pCurr = pCurr->pNext;
+	}
+}
+#endif
 #endif
 #endif

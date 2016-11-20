@@ -54,6 +54,9 @@ class ButtonsCommanderClass : Commander
 	public:
 		static ButtonsCommanderButton *AddButton(ButtonsCommanderButton *inpButton);
 		static inline ButtonsCommanderClass &GetCurrent() {	return *(ButtonsCommanderClass::pButtonsCommander);}
+#ifdef COMMANDERS_PRINT_COMMANDERS
+		void printCommander();
+#endif
 };
 
 //-------------------------------------------------------------------

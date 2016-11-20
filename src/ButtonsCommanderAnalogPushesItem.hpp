@@ -10,7 +10,7 @@
 class ButtonsCommanderAnalogPushesItem : public ButtonsCommanderButton
 {
  private:
-	int analogValue;			// Number of the pushbutton analog pin. This is a normal number, not a arduino2 GPIO_pin_t.
+	int analogValue;			// analog value associated with this button
 	int readingTolerancy;
 
  public:
@@ -18,6 +18,7 @@ class ButtonsCommanderAnalogPushesItem : public ButtonsCommanderButton
 
 	void begin(unsigned long inId, int inAnalogValue, int inTolerancy) { this->Id = inId;  this->analogValue = inAnalogValue; this->readingTolerancy = inTolerancy; }
 	bool IsPushed(int inCurrentValue);
+	inline int GetAnalogValue() { return this->analogValue;	}
 };
 
 //-------------------------------------------------------------------

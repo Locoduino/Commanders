@@ -1,3 +1,8 @@
+19/11/2016 1.21
+	- Ajout de printCommanders() pour avoir le détail de ce qui est déclaré. Activable avec #define COMMANDERS_PRINT_COMMANDERS
+
+	- printCommanders() added to show on console all the declared commanders. Must be activated with #define COMMANDERS_PRINT_COMMANDERS
+
 04/11/2016 1.20
 	- Correction de DccCommander qui ne marchait plus...
 

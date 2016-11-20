@@ -68,3 +68,12 @@ unsigned long I2CCommanderClass::loop()
 	return UNDEFINED_ID;
 }
 #endif
+
+#ifdef COMMANDERS_PRINT_COMMANDERS
+void I2CCommanderClass::printCommander()
+{ 
+	Serial.print(F("Commander: I2CCommander  - slave ID: ")); 
+	Serial.println(this->I2CSlaveId);
+}
+#endif
+

@@ -31,6 +31,13 @@ void MCP2515_ISR()
 
 void CANCommanderClass::begin(uint8_t inSPIpin, uint8_t inSpeed, uint8_t inInterrupt, uint16_t inId)
 {
+#ifdef COMMANDERS_PRINT_COMMANDERS
+	uint8_t SPIpin = inSPIpin;
+	uint8_t Speed = inSpeed;
+	uint8_t Interrupt = inInterrupt;
+	uint16_t Id = inId;
+#endif
+
 #ifdef VISUALSTUDIO
 	pinMode(inSPIpin, OUTPUT_RESERVED);
 	pinMode(inInterrupt, OUTPUT_RESERVED);
@@ -185,4 +192,38 @@ unsigned long CANCommanderClass::loop()
 
 	return UNDEFINED_ID;
 }
+
+#ifdef COMMANDERS_PRINT_COMMANDERS
+void CANCommanderClass::printCommander()
+{
+	Serial.print(F("Commander: CANCommander  - Pin SPI: "));
+	Serial.print(this->SPIpin);
+	Serial.print(F(" / Speed: "));
+	switch (this->Speed)
+	{
+	case CAN_5KBPS:		Serial.print(F("5KBPS")); break;
+	case CAN_10KBPS:	Serial.print(F("10KBPS")); break;
+	case CAN_20KBPS:	Serial.print(F("20KBPS")); break;
+	case CAN_25KBPS:	Serial.print(F("25KBPS")); break;
+	case CAN_31K25BPS:	Serial.print(F("31K25BPS")); break;
+	case CAN_33KBPS:	Serial.print(F("33KBPS")); break;
+	case CAN_40KBPS:	Serial.print(F("40KBPS")); break;
+	case CAN_50KBPS:	Serial.print(F("50KBPS")); break;
+	case CAN_80KBPS:	Serial.print(F("80KBPS")); break;
+	case CAN_83K3BPS:	Serial.print(F("83K3BPS")); break;
+	case CAN_95KBPS:	Serial.print(F("95KBPS")); break;
+	case CAN_100KBPS:	Serial.print(F("100KBPS")); break;
+	case CAN_125KBPS:	Serial.print(F("125KBPS")); break;
+	case CAN_200KBPS:	Serial.print(F("200KBPS")); break;
+	case CAN_250KBPS:	Serial.print(F("250KBPS")); break;
+	case CAN_500KBPS:	Serial.print(F("500KBPS")); break;
+	case CAN_666KBPS:	Serial.print(F("666KBPS")); break;
+	case CAN_1000KBPS:	Serial.print(F("1000KBPS")); break;
+	}
+	Serial.print(F(" / Interrupt: "));
+	Serial.print(this->Interrupt);
+	Serial.print(F(" / ID: "));
+	Serial.println(this->Id);
+}
+#endif
 #endif

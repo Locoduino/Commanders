@@ -117,7 +117,9 @@ void Commanders::printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventTyp
 	printEventData(inEventType, inEventData);
 	Serial.println(F(""));
 }
+#endif
 
+#ifdef COMMANDERS_PRINT_COMMANDERS
 void Commanders::printCommanders()
 {
 	Serial.println(F("********* Commanders List"));

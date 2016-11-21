@@ -1,3 +1,8 @@
+21/11/2016 1.22
+	- Correction de compilation avec printCommanders si pas de COMMANDERS_PRINT_COMMANDERS
+
+	- Fix compilation if no COMMANDERS_PRINT_COMMANDERS defined.
+
 19/11/2016 1.21
 	- Ajout de printCommanders() pour avoir le détail de ce qui est déclaré. Activable avec #define COMMANDERS_PRINT_COMMANDERS
 

@@ -1,3 +1,8 @@
+31/12/2016 1.23
+	- Mise à jour de DIO2
+
+	- Included library DIO2 updated
+
 21/11/2016 1.22
 	- Correction de compilation avec printCommanders si pas de COMMANDERS_PRINT_COMMANDERS
 

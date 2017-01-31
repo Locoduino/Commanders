@@ -109,6 +109,10 @@
 
 /////////////////////////////////////
 
+#ifdef VISUALSTUDIO
+#define COMMANDERS_PRINT_COMMANDERS
+#endif
+
 #include "Commander.hpp"
 #include "Commanders.hpp"
 

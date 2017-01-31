@@ -1,3 +1,12 @@
+31/01/2017 1.24
+	- Ajout de DCC_Monitor_Accessories.zip dans extra.
+	- Ajout d'infpormartions sur extra dans readme.adoc .
+	- Renommage de CHAIN_ENUMERATE en CMDRSCHAIN_ENUMERATE
+
+	- DCC_Monitor_Accessories.zip added to extra.
+	- Information added about extra directory in readme.adoc file.
+	- CHAIN_ENUMERATE renamed in CMDRSCHAIN_ENUMERATE.
+
 31/12/2016 1.23
 	- Mise à jour de DIO2
 

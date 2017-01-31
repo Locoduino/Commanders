@@ -23,7 +23,7 @@ public:
 	void NextCurrent();
 };
 
-#define CHAIN_ENUMERATE(T, list, func) CMDRSCHAINEDLISTITEM<T> *pCurr = list.pFirst; while (pCurr != NULL) { func(pCurr->Obj); pCurr = pCurr->pNext; }
+#define CMDRSCHAIN_ENUMERATE(T, list, func) CMDRSCHAINEDLISTITEM<T> *pCurr = list.pFirst; while (pCurr != NULL) { func(pCurr->Obj); pCurr = pCurr->pNext; }
 
 // This function appends element into chain.
 template<class T> void CMDRSCHAINEDLIST<T>::AddItem(T *t)

@@ -21,7 +21,7 @@ void beginItem(EventPin *inpIdPin)
 
 void ButtonsCommanderSwitch::begin()
 {
-	CHAIN_ENUMERATE(EventPin, this->EventPins, beginItem);
+	CMDRSCHAIN_ENUMERATE(EventPin, this->EventPins, beginItem);
 }
 
 // Returns the index of the new added position.

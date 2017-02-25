@@ -23,7 +23,7 @@
 
 #define  GPIO2_PREFER_SPEED    1
 
-#include "DIO2.h"
+#include <DIO2.h>
 
 //////////////////////////////////////////
 //  Exclusion area

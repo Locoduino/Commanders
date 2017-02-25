@@ -1,3 +1,8 @@
+24/02/2017 1.25
+	- Correction de l'include "Dio2.h" en <Dio2.h>
+
+	- Fix "Dio2.h" include into <Dio2.h>
+
 31/01/2017 1.24
 	- Ajout de DCC_Monitor_Accessories.zip dans extra.
 	- Ajout d'infpormartions sur extra dans readme.adoc .

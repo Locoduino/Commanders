@@ -5,6 +5,10 @@
 
 #include "Commanders.h"
 
+#ifndef _MCP2515_H_
+#error To be able to compile this commander, the 'mcp_can' library must be installed. See 'extras' directory of Commanders library.
+#endif
+
 #ifndef NO_CANCOMMANDER
 #ifdef VISUALSTUDIO
 	#include "../VStudio/mcp_can.h"

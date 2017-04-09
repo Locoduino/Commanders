@@ -5,8 +5,9 @@ description: <Base functions of the library>
 *************************************************************/
 
 #include "Commanders.h"
+#include "EventStack.hpp"
 
-CommandersEventHandlerFunction Commanders::EventHandler = 0;
+CommandersEventHandlerFunction Commanders::EventHandler = NULL;
 COMMANDERS_EVENT_TYPE Commanders::lastEventType;
 int Commanders::lastEventData;
 GPIO_pin_t Commanders::StatusLedPin = DP_INVALID;
@@ -33,10 +34,14 @@ unsigned long Commanders::RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE i
 #endif
 
 	Commanders::StatusBlink();
-	Commanders::SetLastEventType(inEvent);
-	Commanders::SetLastEventData(inData);
-	if (Commanders::EventHandler != NULL)
+	if (*(Commanders::EventHandler) != NULL)
+	{
+		Commanders::SetLastEventType(inEvent);
+		Commanders::SetLastEventData(inData);
 		Commanders::EventHandler(inId, inEvent, inData);
+	}
+	else
+		EventStack::EventsStack.RaiseEvent(inId, inEvent, inData);
 
 	return inId;
 }
@@ -152,5 +157,21 @@ unsigned long Commanders::loop()
 		Commanders::StartStatusLed = 0;
 	}
 
-	return Commander::loops();
+	unsigned long id;
+	id = Commander::loops();
+
+	if (*(Commanders::EventHandler) == NULL)
+	{
+		COMMANDERS_EVENT_TYPE type;
+		int data;
+
+		byte event = EventStack::EventsStack.GetPendingEvent();
+		if (event < EVENT_MAXNUMBER)
+		{
+			EventStack::EventsStack.PushEvent(event, &id, &type, &data);
+			Commanders::SetLastEventType(type);
+			Commanders::SetLastEventData(data);
+		}
+	}
+	return id;
 }

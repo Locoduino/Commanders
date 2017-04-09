@@ -24,7 +24,7 @@ public:
 	{
 #ifdef COMMANDERS_DEBUG_MODE
 		Serial.println(F(""));
-		Serial.println(F("Commanders V1.24"));
+		Serial.println(F("Commanders V1.30"));
 		Serial.println(F("Developed by Thierry Paris."));
 		Serial.println(F("(c) Locoduino 2016-2017"));
 		Serial.println(F(""));
@@ -54,15 +54,20 @@ public:
 	static inline uint8_t GetLastConfigAddress() { return lastConfigAddress; }
 	static void StatusBlink();
 	static unsigned long RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent = COMMANDERS_EVENT_MOVEPOSITIONID, int inData = 0);
-	//static inline void AddDelayedEvent(unsigned long inDelay, unsigned long inId, COMMANDERS_EVENT_TYPE inEvent = COMMANDERS_EVENT_MOVEPOSITIONID, int inData = 0);
 #if defined(COMMANDERS_DEBUG_MODE) || defined(COMMANDERS_PRINT_COMMANDERS)
 	static void printEventMoveType(COMMANDERS_MOVE_TYPE inMoveType);
 	static void printEventData(COMMANDERS_EVENT_TYPE inEventType, int inEventData);
 	static void printEventType(COMMANDERS_EVENT_TYPE inEventType, bool inDataFollow);
 	static void printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inEventData);
+	#define COMMANDERS_PRINT_EVENT(id, type, data)		Commanders::printEvent(id, type, data);
+#else
+	#define COMMANDERS_PRINT_EVENT(id, type, data)
 #endif
 #ifdef COMMANDERS_PRINT_COMMANDERS
+	#define PRINT_COMMANDERS()	Commanders::printCommanders();
 	static void printCommanders();
+#else
+	#define PRINT_COMMANDERS()
 #endif
 };
 

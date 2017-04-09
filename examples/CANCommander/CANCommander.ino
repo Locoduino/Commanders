@@ -6,6 +6,10 @@ description: <CAN commander demo>
 
 #include <Commanders.h>
 
+#ifdef NO_CANCOMMANDER
+#error To be able to compile this sample,the line #define NO_CANCOMMANDER must be commented in Commanders.h
+#endif
+
 void ReceiveEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inEventData)
 {
     Commanders::printEvent(inId, inEventType, inEventData);

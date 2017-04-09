@@ -1,3 +1,24 @@
+09/04/2017 1.30
+	- Ajout des macros PRINT_COMMANDERS, COMMANDERS_PRINT_EVENT et PRINT_EVENT_DCC.
+	- Ajout d'une EventStack pour pouvoir émettre plusieurs events pendant un seul loop.
+	- Ajout d'un événement COMMANDER_MOVE_OFF au basculement d'un switch.
+	- Initialisation d'un switch par la lecture de son état pendant le setup.
+	- Test sur la présence d'au moins un état pour un switch.
+	- Retrait d'un pinMode inutile pour les switchs.
+	- Retrait d'une génération d'événement inutile pour un encodeur.
+	- Ajout d'une fonction SetMiniMaxi pour les potentiomètres.
+	- Test de la présence de la bibliothèque mcp_can si le CAN commander est activé.
+
+	- Macros PRINT_COMMANDERS, COMMANDERS_PRINT_EVENT and PRINT_EVENT_DCC added.
+	- EventStack sources added to be able to push more than one event during one loop() call.
+	- COMMANDER_MOVE_OFF event generated when a switch toggle.
+	- Initialisation of switch current value at startup, druing setup.
+	- Check state number for a switch.
+	- A overnumbered pinMode has been deleted for switch.
+	- A wrong event has benn removed for encoders.
+	- SetMiniMaxi function added for potentiometers.
+	- Check for mcp_can library installed if CAN commander is activated.
+
 24/02/2017 1.25
 	- Correction de l'include "Dio2.h" en <Dio2.h>
 

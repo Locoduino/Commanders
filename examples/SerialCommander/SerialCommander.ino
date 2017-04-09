@@ -10,7 +10,7 @@ SERIAL_COMMANDER(Serial);
 
 void ReceiveEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
 {
-	Commanders::printEvent(inId, inEvent, inData);
+	COMMANDERS_PRINT_EVENT(inId, inEvent, inData);
 }
 
 void setup()

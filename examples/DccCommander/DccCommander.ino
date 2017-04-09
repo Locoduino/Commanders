@@ -8,7 +8,7 @@ description: <Dcc commander demo>
 
 void ReceiveEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
 {
-	DccCommander.printEvent(inId, inEvent, inData);
+	PRINT_EVENT_DCC(inId, inEvent, inData);
 }
 
 //////////////////////////////////

@@ -11,16 +11,30 @@ description: <Switch button with debounce.>
 ButtonsCommanderSwitch::ButtonsCommanderSwitch() : ButtonsCommanderButton(UNDEFINED_ID)
 {
 	this->debounceDelay = 50;
+	this->lastSelectedId = UNDEFINED_ID;
 }
 
 void beginItem(EventPin *inpIdPin)
 {
 	if (inpIdPin->Pin != DP_INVALID)
+	{
 		pinMode2f(inpIdPin->Pin, INPUT_PULLUP);
+
+		// Initialize first switch state at start
+		// read the state of the switch into a local variable:
+		int reading = digitalRead2f(inpIdPin->Pin);
+		inpIdPin->buttonState = reading;
+		inpIdPin->lastButtonState = reading;
+	}
 }
 
 void ButtonsCommanderSwitch::begin()
 {
+#ifdef COMMANDERS_DEBUG_MODE
+	if (this->EventPins.pFirst == NULL)
+		Serial.println(F("This switch button have no ID defined : begin() must be called AFTER AddEvent !"));
+#endif
+
 	CMDRSCHAIN_ENUMERATE(EventPin, this->EventPins, beginItem);
 }
 
@@ -33,8 +47,6 @@ void ButtonsCommanderSwitch::AddEvent(unsigned long inId, int inPin, COMMANDERS_
 	pIdpin->Event = inEvent;
 	pIdpin->Data = inData;
 	this->EventPins.AddItem(pIdpin);
-
-	pinMode2f(pIdpin->Pin, INPUT_PULLUP);
 }
 
 unsigned long ButtonsCommanderSwitch::loop()
@@ -68,15 +80,20 @@ unsigned long ButtonsCommanderSwitch::loop()
 		// if the button state has changed:
 		if (reading != this->EventPins.pCurrentItem->Obj->buttonState)
 		{
+			haveFound = this->EventPins.pCurrentItem->Obj->Id;
+
+			if (this->lastSelectedId != UNDEFINED_ID)
+				if ((this->lastSelectedId != haveFound && reading == HIGH) || (this->lastSelectedId == haveFound && reading == LOW))
+					Commanders::RaiseEvent(this->lastSelectedId, COMMANDERS_EVENT_MOVE, COMMANDERS_MOVE_OFF);
+
 			this->EventPins.pCurrentItem->Obj->buttonState = reading;
 
 			// only toggle the state if the new button state is HIGH
 			if (this->EventPins.pCurrentItem->Obj->buttonState == HIGH)
 			{
-				haveFound = this->EventPins.pCurrentItem->Obj->Id;
-				Commanders::RaiseEvent(haveFound, 
-					this->EventPins.pCurrentItem->Obj->Event,
-					this->EventPins.pCurrentItem->Obj->Data);
+				// raise the event for the new pin.
+				Commanders::RaiseEvent(haveFound, this->EventPins.pCurrentItem->Obj->Event,	this->EventPins.pCurrentItem->Obj->Data);
+				this->lastSelectedId = haveFound;
 			}
 		}
 		this->EventPins.pCurrentItem->Obj->lastDebounceTime = 0;

@@ -57,6 +57,9 @@ class DccCommanderClass : Commander
 public:
 	void CheckIndex(unsigned char inIndex, const __FlashStringHelper *infunc);
 	static void printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inEventData);
+	#define PRINT_EVENT_DCC(id, type, data)		DccCommander::printEvent(id, type, data);
+#else
+	#define PRINT_EVENT_DCC(id, type, data)
 #endif
 #ifdef COMMANDERS_PRINT_COMMANDERS
 	int8_t Interrupt;

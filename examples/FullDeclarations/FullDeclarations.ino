@@ -6,6 +6,10 @@ description: <sample commander demo with all possible declarations>
 
 #include "Commanders.h"
 
+#ifdef NO_CANCOMMANDER
+#error To be able to compile this sample,the line #define NO_CANCOMMANDER must be commented in Commanders.h
+#endif
+
 //////////////////////////////////////////////////
 // Push buttons declarations
 ButtonsCommanderPush push_simple;
@@ -41,7 +45,7 @@ SERIAL_COMMANDER(Serial);
 
 void ReceiveEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
 {
-	Commanders::printEvent(inId, inEvent, inData);
+	COMMANDERS_PRINT_EVENT(inId, inEvent, inData);
 }
 
 void setup()

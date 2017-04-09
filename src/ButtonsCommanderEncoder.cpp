@@ -51,6 +51,9 @@ unsigned long ButtonsCommanderEncoder::loop()
 	
 	this->lastEncoded = encoded; //store this value for next time
 
+	if (inc == 0)
+		return UNDEFINED_ID;
+
 	if (this->mini != this->maxi)
 	{
 		// If the encoder has been defined with a mini/maxi interval,

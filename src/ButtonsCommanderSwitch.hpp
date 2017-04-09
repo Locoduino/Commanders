@@ -27,6 +27,7 @@ class ButtonsCommanderSwitch : public ButtonsCommanderButton
  private:
 	unsigned long debounceDelay;    // the debounce time; increase if the output flickers
 	CMDRSCHAINEDLIST<EventPin> EventPins;
+	unsigned long lastSelectedId;
 
 public:
 	ButtonsCommanderSwitch();

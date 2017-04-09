@@ -24,6 +24,7 @@ class ButtonsCommanderPotentiometer : public ButtonsCommanderButton
 	inline int GetPosition() const { return this->currentValue; }
 
 	void begin(unsigned long inId, int inPin, int inMinimum, int inMaximum, int inMoveAccuracy = 1);
+	inline void SetMiniMaxi(int inMini, int inMaxi) { this->mini = inMini; this->maxi = inMaxi; }
 	unsigned long loop();
 #ifdef COMMANDERS_PRINT_COMMANDERS
 	void printCommander();

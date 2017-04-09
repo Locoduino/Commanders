@@ -110,6 +110,7 @@
 /////////////////////////////////////
 
 #ifdef VISUALSTUDIO
+#define COMMANDERS_DEBUG_MODE
 #define COMMANDERS_PRINT_COMMANDERS
 #endif
 

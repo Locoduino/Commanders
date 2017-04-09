@@ -29,6 +29,6 @@ void loop()
 
 	if (eventID != UNDEFINED_ID)
 	{	
-		Commanders::printEvent(eventID, Commanders::GetLastEventType(), Commanders::GetLastEventData());
+		COMMANDERS_PRINT_EVENT(eventID, Commanders::GetLastEventType(), Commanders::GetLastEventData());
 	}
 }

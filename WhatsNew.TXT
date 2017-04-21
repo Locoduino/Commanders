@@ -1,3 +1,12 @@
+21/04/2017 1.31
+	- ButtonsCommanderSwitch.AddEvent() retourne l'événement créé au cas où...
+	- Correction de ButtonscommanderSwitch.begin() pour sélectionner le bon id au lancement.
+	- Correction de ButtonsCommanderEncoder.loop() qui retournait le mauvais événement.
+
+	- ButtonsCommanderSwitch.AddEvent() returns the newly created event.
+	- Fix ButtonscommanderSwitch.begin() to select the right Id at launch.
+	- Fix ButtonsCommanderEncoder.loop() for bad event type returned.
+
 09/04/2017 1.30
 	- Ajout des macros PRINT_COMMANDERS, COMMANDERS_PRINT_EVENT et PRINT_EVENT_DCC.
 	- Ajout d'une EventStack pour pouvoir émettre plusieurs events pendant un seul loop.

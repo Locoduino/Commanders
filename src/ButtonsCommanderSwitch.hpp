@@ -33,8 +33,9 @@ public:
 	ButtonsCommanderSwitch();
 	
 	void begin();
-	void AddEvent(unsigned long inId, int inPin, COMMANDERS_EVENT_TYPE inEvent = COMMANDERS_EVENT_MOVEPOSITIONID, int inData = 0);
+	EventPin *AddEvent(unsigned long inId, int inPin, COMMANDERS_EVENT_TYPE inEvent = COMMANDERS_EVENT_MOVEPOSITIONID, int inData = 0);
 	unsigned long loop();
+	inline unsigned long GetLastSelectedId() const { return this->lastSelectedId; }
 
 #ifdef COMMANDERS_PRINT_COMMANDERS
 	void printCommander();

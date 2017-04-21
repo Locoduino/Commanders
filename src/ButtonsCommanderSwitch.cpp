@@ -35,11 +35,19 @@ void ButtonsCommanderSwitch::begin()
 		Serial.println(F("This switch button have no ID defined : begin() must be called AFTER AddEvent !"));
 #endif
 
-	CMDRSCHAIN_ENUMERATE(EventPin, this->EventPins, beginItem);
+	CMDRSCHAINEDLISTITEM<EventPin> *pCurr = this->EventPins.pFirst;
+	while (pCurr != NULL)
+	{
+		beginItem(pCurr->Obj);
+		if (pCurr->Obj->buttonState == LOW)
+			this->lastSelectedId = pCurr->Obj->Id;
+
+		pCurr = pCurr->pNext;
+	}
 }
 
 // Returns the index of the new added position.
-void ButtonsCommanderSwitch::AddEvent(unsigned long inId, int inPin, COMMANDERS_EVENT_TYPE inEvent, int inData)
+EventPin *ButtonsCommanderSwitch::AddEvent(unsigned long inId, int inPin, COMMANDERS_EVENT_TYPE inEvent, int inData)
 {
 	EventPin *pIdpin = new EventPin();
 	pIdpin->Pin = Arduino_to_GPIO_pin(inPin);
@@ -47,6 +55,8 @@ void ButtonsCommanderSwitch::AddEvent(unsigned long inId, int inPin, COMMANDERS_
 	pIdpin->Event = inEvent;
 	pIdpin->Data = inData;
 	this->EventPins.AddItem(pIdpin);
+
+	return pIdpin;
 }
 
 unsigned long ButtonsCommanderSwitch::loop()
@@ -56,52 +66,55 @@ unsigned long ButtonsCommanderSwitch::loop()
 		Serial.println(F("This switch button have no ID defined : call AddEvent() and begin() !"));
 #endif
 
-	// read the state of the switch into a local variable:
-	int reading = digitalRead2f(this->EventPins.pCurrentItem->Obj->Pin);
-
-	// check to see if you just pressed the button 
-	// (i.e. the input went from LOW to HIGH),  and you've waited 
-	// long enough since the last press to ignore any noise:  
-
-	// If the switch changed, due to noise or pressing:
-	if (reading != this->EventPins.pCurrentItem->Obj->lastButtonState)
-	{
-		// reset the debouncing timer
-		this->EventPins.pCurrentItem->Obj->lastDebounceTime = millis();
-	}
-
 	unsigned long haveFound = UNDEFINED_ID;
 
-	if (this->EventPins.pCurrentItem->Obj->lastDebounceTime > 0 && (millis() - this->EventPins.pCurrentItem->Obj->lastDebounceTime) > this->debounceDelay)
+	if (this->EventPins.pCurrentItem->Obj->Id != DP_INVALID)
 	{
-		// whatever the reading is at, it's been there for longer
-		// than the debounce delay, so take it as the actual current state:
+		// read the state of the switch into a local variable:
+		int reading = digitalRead2f(this->EventPins.pCurrentItem->Obj->Pin);
 
-		// if the button state has changed:
-		if (reading != this->EventPins.pCurrentItem->Obj->buttonState)
+		// check to see if you just pressed the button 
+		// (i.e. the input went from HIGH to LOW, inverted by INPUT_PULLUP),  and you've waited 
+		// long enough since the last press to ignore any noise:  
+
+		// If the switch changed, due to noise or pressing:
+		if (reading != this->EventPins.pCurrentItem->Obj->lastButtonState)
 		{
-			haveFound = this->EventPins.pCurrentItem->Obj->Id;
-
-			if (this->lastSelectedId != UNDEFINED_ID)
-				if ((this->lastSelectedId != haveFound && reading == HIGH) || (this->lastSelectedId == haveFound && reading == LOW))
-					Commanders::RaiseEvent(this->lastSelectedId, COMMANDERS_EVENT_MOVE, COMMANDERS_MOVE_OFF);
-
-			this->EventPins.pCurrentItem->Obj->buttonState = reading;
-
-			// only toggle the state if the new button state is HIGH
-			if (this->EventPins.pCurrentItem->Obj->buttonState == HIGH)
-			{
-				// raise the event for the new pin.
-				Commanders::RaiseEvent(haveFound, this->EventPins.pCurrentItem->Obj->Event,	this->EventPins.pCurrentItem->Obj->Data);
-				this->lastSelectedId = haveFound;
-			}
+			// reset the debouncing timer
+			this->EventPins.pCurrentItem->Obj->lastDebounceTime = millis();
 		}
-		this->EventPins.pCurrentItem->Obj->lastDebounceTime = 0;
-	}
 
-	// save the reading.  Next time through the loop,
-	// it'll be the lastButtonState:
-	this->EventPins.pCurrentItem->Obj->lastButtonState = reading;
+		if (this->EventPins.pCurrentItem->Obj->lastDebounceTime > 0 && (millis() - this->EventPins.pCurrentItem->Obj->lastDebounceTime) > this->debounceDelay)
+		{
+			// whatever the reading is at, it's been there for longer
+			// than the debounce delay, so take it as the actual current state:
+
+			// if the button state has changed:
+			if (reading != this->EventPins.pCurrentItem->Obj->buttonState)
+			{
+				haveFound = this->EventPins.pCurrentItem->Obj->Id;
+
+				if (this->lastSelectedId != UNDEFINED_ID)
+					if ((this->lastSelectedId != haveFound && reading == LOW) || (this->lastSelectedId == haveFound && reading == HIGH))
+						Commanders::RaiseEvent(this->lastSelectedId, COMMANDERS_EVENT_MOVE, COMMANDERS_MOVE_OFF);
+
+				this->EventPins.pCurrentItem->Obj->buttonState = reading;
+
+				// only toggle the state if the new button state is LOW
+				if (this->EventPins.pCurrentItem->Obj->buttonState == LOW)
+				{
+					// raise the event for the new pin.
+					Commanders::RaiseEvent(haveFound, this->EventPins.pCurrentItem->Obj->Event, this->EventPins.pCurrentItem->Obj->Data);
+					this->lastSelectedId = haveFound;
+				}
+			}
+			this->EventPins.pCurrentItem->Obj->lastDebounceTime = 0;
+		}
+
+		// save the reading.  Next time through the loop,
+		// it'll be the lastButtonState:
+		this->EventPins.pCurrentItem->Obj->lastButtonState = reading;
+	}
 
 	this->EventPins.NextCurrent();
 

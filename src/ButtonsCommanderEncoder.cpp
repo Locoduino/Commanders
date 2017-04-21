@@ -72,7 +72,7 @@ unsigned long ButtonsCommanderEncoder::loop()
 	// if no interval defined, just return the move direction.
 	return Commanders::RaiseEvent(this->GetId(), 
 									COMMANDERS_EVENT_MOVE, 
-									inc > 0 ? COMMANDERS_MOVE_MORE : COMMANDERS_MOVE_LEFT);
+									inc > 0 ? COMMANDERS_MOVE_MORE : COMMANDERS_MOVE_LESS);
 }
 
 #ifdef COMMANDERS_PRINT_COMMANDERS

@@ -47,16 +47,17 @@ class ButtonsCommanderClass : Commander
 		ButtonsCommanderButton* GetFromId(unsigned long inId) const;
 
 		unsigned long loop();
+#ifdef COMMANDERS_PRINT_COMMANDERS
+		void printCommander();
+#endif
 
+	// Static part
 	public:
 		static ButtonsCommanderClass *pButtonsCommander;
 
 	public:
 		static ButtonsCommanderButton *AddButton(ButtonsCommanderButton *inpButton);
 		static inline ButtonsCommanderClass &GetCurrent() {	return *(ButtonsCommanderClass::pButtonsCommander);}
-#ifdef COMMANDERS_PRINT_COMMANDERS
-		void printCommander();
-#endif
 };
 
 //-------------------------------------------------------------------

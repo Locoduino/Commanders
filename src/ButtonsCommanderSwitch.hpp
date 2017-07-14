@@ -16,10 +16,6 @@ struct EventPin
 	unsigned long Id;
 	COMMANDERS_EVENT_TYPE Event;
 	int Data;
-
-	int buttonState;       // the current reading from the input pin
-	int lastButtonState;   // the previous reading from the input pin
-	unsigned long lastDebounceTime;  // the last time the output pin was toggled
 };
 
 class ButtonsCommanderSwitch : public ButtonsCommanderButton
@@ -27,15 +23,23 @@ class ButtonsCommanderSwitch : public ButtonsCommanderButton
  private:
 	unsigned long debounceDelay;    // the debounce time; increase if the output flickers
 	CMDRSCHAINEDLIST<EventPin> EventPins;
-	unsigned long lastSelectedId;
+	GPIO_pin_t lastSelectedPin;
+
+	int lastButtonState;   // the previous reading from the current input pin
+	unsigned long lastDebounceTime;  // the last time the current output pin was toggled
 
 public:
 	ButtonsCommanderSwitch();
 	
 	void begin();
 	EventPin *AddEvent(unsigned long inId, int inPin, COMMANDERS_EVENT_TYPE inEvent = COMMANDERS_EVENT_MOVEPOSITIONID, int inData = 0);
+	void beforeFirstLoop();
 	unsigned long loop();
-	inline unsigned long GetLastSelectedId() const { return this->lastSelectedId; }
+	unsigned long GetId(GPIO_pin_t inPin) const;
+
+	static unsigned long loopOnePin(GPIO_pin_t inPin, unsigned long inId, unsigned long inPreviousId,
+		unsigned long *apDebounceDelay, GPIO_pin_t *apLastSelectedPin,
+		int *apLastButtonState, unsigned long *apLastDebounceTime, bool inSendEvent = true);
 
 #ifdef COMMANDERS_PRINT_COMMANDERS
 	void printCommander();

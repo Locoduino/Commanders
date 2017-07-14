@@ -21,7 +21,6 @@ ButtonsCommanderClass *ButtonsCommanderClass::pButtonsCommander;
 
 ButtonsCommanderClass::ButtonsCommanderClass()
 {
-	this->pLastSelectedButton = NULL;
 	this->pFirstButton = NULL;
 }
 
@@ -74,6 +73,17 @@ ButtonsCommanderButton* ButtonsCommanderClass::GetFromId(unsigned long inId) con
 }
 
 static ButtonsCommanderButton *pCurrentLoopButton = NULL;
+
+void ButtonsCommanderClass::beforeFirstLoop()
+{
+	ButtonsCommanderButton *pCurr = this->pFirstButton;
+
+	while (pCurr != NULL)
+	{
+		pCurr->beforeFirstLoop();
+		pCurr = pCurr->GetNextButton();
+	}
+}
 
 unsigned long ButtonsCommanderClass::loop()
 {

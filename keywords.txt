@@ -17,6 +17,8 @@ ButtonsCommanderPush				KEYWORD1
 ButtonsCommanderAnalogPushes		KEYWORD1
 ButtonsCommanderAnalogPushesItem	KEYWORD1
 ButtonsCommanderSwitch 				KEYWORD1
+ButtonsCommanderSwitchOnePin		KEYWORD1
+ButtonsCommanderSwitchTwoPins		KEYWORD1
 ButtonsCommanderEncoder 			KEYWORD1
 ButtonsCommanderPotentiometer 		KEYWORD1
 ButtonsCommanderButton 				KEYWORD1

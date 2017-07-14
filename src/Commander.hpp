@@ -26,6 +26,7 @@ class Commander
 	public:
 		inline Commander() { pNextCommander = 0; AddCommander(this); }
 		
+		inline virtual void beforeFirstLoop() { }
 		inline virtual unsigned long loop() { return UNDEFINED_ID; }
 		inline virtual void PriorityLoop() { }
 		void CommanderPriorityLoop();

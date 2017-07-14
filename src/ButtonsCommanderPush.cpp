@@ -11,7 +11,7 @@ description: <Push button with debounce.>
 ButtonsCommanderPush::ButtonsCommanderPush() : ButtonsCommanderButton(UNDEFINED_ID)
 {
 	this->buttonPin = (GPIO_pin_t)DP_INVALID;
-	this->lastButtonState = LOW;
+	this->lastButtonState = HIGH;
 	this->lastDebounceTime = 0;
 	this->debounceDelay = 50;
 }
@@ -68,12 +68,10 @@ unsigned long ButtonsCommanderPush::loop()
 		// than the debounce delay, so take it as the actual current state:
 
 		// if the button state has changed:
-		if (reading != this->buttonState)
+		if (reading == this->lastButtonState)
 		{
-			this->buttonState = reading;
-
 			// only toggle the state if the new button state is LOW
-			if (this->buttonState == LOW)
+			if (reading == LOW)
 			{
 				foundID = this->Events.pCurrentItem->Obj->Id;
 				Commanders::RaiseEvent(foundID, 

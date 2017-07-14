@@ -24,8 +24,7 @@ class ButtonsCommanderPush : public ButtonsCommanderButton
 {
  private:
 	GPIO_pin_t buttonPin;	// the number of the pushbutton pin
-	int buttonState;		// the current reading from the input pin
-	int lastButtonState;	// the previous reading from the input pin
+	byte lastButtonState;	// the previous reading from the input pin
 
 	unsigned long lastDebounceTime;  // the last time the output pin was toggled
 	unsigned long debounceDelay;    // the debounce time; increase if the output flickers
@@ -41,10 +40,7 @@ class ButtonsCommanderPush : public ButtonsCommanderButton
 
 	inline int GetPin() const { return GPIO_to_Arduino_pin(this->buttonPin); }
 	inline GPIO_pin_t GetDIO2Pin() const { return this->buttonPin; }
-	inline int GetState() const { return this->buttonState; }
 	
-	static ButtonsCommanderPush Empty;
-
 #ifdef COMMANDERS_PRINT_COMMANDERS
 	void printCommander();
 #endif

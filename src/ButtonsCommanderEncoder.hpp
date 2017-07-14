@@ -20,6 +20,8 @@ class ButtonsCommanderEncoder : public ButtonsCommanderButton
 	GPIO_pin_t pin2;
 	int mini, maxi;
 	int lastEncoded;
+	byte moveIncrement;	// number of encoder movements needed to change current position.
+	char incrementPosition;
 
  public:
 	ButtonsCommanderEncoder();
@@ -27,7 +29,7 @@ class ButtonsCommanderEncoder : public ButtonsCommanderButton
 	inline int GetPosition() const { return this->currentValue; }
 	inline void ResetStartingPosition() { this->currentValue = this->startingCurrentValue; }
 
-	void begin(unsigned long inId, int inPin1, int inPin2, int inStartingCurrentValue = 0, int inMinimum = 0, int inMaximum = 0);
+	void begin(unsigned long inId, int inPin1, int inPin2, byte inMoveIncrement = 3, int inStartingCurrentValue = 0, int inMinimum = 0, int inMaximum = 0);
 	unsigned long loop();
 #ifdef COMMANDERS_PRINT_COMMANDERS
 	void printCommander();

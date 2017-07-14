@@ -28,6 +28,7 @@ class ButtonsCommanderButton
 	//inline virtual bool IsAnalog() const { return false; }
 	inline virtual int GetPosition() const { return 0; }
 
+	inline virtual void beforeFirstLoop() { }
 	inline virtual unsigned long loop()
 	{ 
 		Commanders::SetLastEventType(COMMANDERS_EVENT_NONE);

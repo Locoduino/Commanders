@@ -34,7 +34,6 @@ private:
 	int analogPin;			// Number of the pushbutton analog pin. This is a normal number, not an arduino2 GPIO_pin_t.
 	uint8_t number;			// Number of buttons
 	uint8_t lastButtonPressed; // last button pressed number
-	int buttonState;		// the current reading from the input pin
 	int lastButtonState;	// the previous reading from the input pin
 	int readingTolerancy;	// if the value is between 'button value-tolerancy' and 'button value+tolerancy' , this is good !
 

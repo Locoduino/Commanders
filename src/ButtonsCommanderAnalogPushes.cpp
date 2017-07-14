@@ -81,9 +81,9 @@ unsigned long ButtonsCommanderAnalogPushes::loop()
 		// than the debounce delay, so take it as the actual current state:
 
 		// if the button state has changed:
-		if (reading < this->buttonState - this->readingTolerancy || reading > this->buttonState + this->readingTolerancy)
+		if (reading < this->lastButtonState - this->readingTolerancy || reading > this->lastButtonState + this->readingTolerancy)
 		{
-			this->buttonState = reading;
+			this->lastButtonState = reading;
 
 			for (int i = 0; i < this->size; i++)
 				if (this->pButtons[i].IsPushed(reading))

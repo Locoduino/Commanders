@@ -21,7 +21,7 @@ void EventStack::RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inType, in
 		}
 
 #ifdef COMMANDERS_DEBUG_MODE
-	Serial.println("Error : an event has been lost !");
+	Serial.println(F("Error : an event has been lost !"));
 #endif
 }
 

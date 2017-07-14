@@ -4,7 +4,7 @@ This is a library for Arduino to handle buttons, Dcc (Railroad Modeling), CAN or
 
 In extra, directory, you will find
 
--DIO2 : this library MUST be installed. Commanders cannot operate without it. This is a fast access input/ouput ports librayr almost whithout changing classic Arduino syntax.
+-DIO2 : this library MUST be installed. Commanders cannot operate without it. This is a fast access input/ouput ports library almost whithout changing classic Arduino syntax.
 -mcp-can : if you need a CAN interface with Commanders, this library is able to work with any shield or circuit using MCP2515 chip. If you comment the line #define NO_CANCOMMANDER, you MUST use this library.
 -DCC_Monitor_Accessories : This independant ino sketch is only a way to check the Dcc packets arriving to the Arduino. The DCC_decoder have been adapted to focus on accessories packets.
 

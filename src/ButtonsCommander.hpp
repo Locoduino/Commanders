@@ -17,6 +17,8 @@
 #endif
 #ifndef NO_BUTTONSCOMMANDERSWITCH
 #include "ButtonsCommanderSwitch.hpp"
+#include "ButtonsCommanderSwitchOnePin.hpp"
+#include "ButtonsCommanderSwitchTwoPins.hpp"
 #endif
 #ifndef NO_BUTTONSCOMMANDERENCODER
 #include "ButtonsCommanderEncoder.hpp"
@@ -33,8 +35,6 @@
 class ButtonsCommanderClass : Commander
 {
 	private:
-		ButtonsCommanderButton *pLastSelectedButton;
-
 		// Start of the linked list of all buttons. Each button have the address of its follower or NULL !
 		ButtonsCommanderButton *pFirstButton;
 
@@ -42,8 +42,8 @@ class ButtonsCommanderClass : Commander
 		ButtonsCommanderClass();
 
 		void begin();
+		void beforeFirstLoop();
 		ButtonsCommanderButton *Add(ButtonsCommanderButton *inpButton);
-		inline ButtonsCommanderButton *GetLastSelectedButton() const { return this->pLastSelectedButton; }
 		ButtonsCommanderButton* GetFromId(unsigned long inId) const;
 
 		unsigned long loop();

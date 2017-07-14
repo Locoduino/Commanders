@@ -12,7 +12,7 @@ ButtonsCommanderEncoder::ButtonsCommanderEncoder() : ButtonsCommanderButton(UNDE
 {
 }
 
-void ButtonsCommanderEncoder::begin(unsigned long inId, int inPin1, int inPin2, int inStartingValue, int inMinimum, int inMaximum)
+void ButtonsCommanderEncoder::begin(unsigned long inId, int inPin1, int inPin2, byte inMoveIncrement, int inStartingValue, int inMinimum, int inMaximum)
 {
 	this->Id = inId;
 
@@ -23,6 +23,8 @@ void ButtonsCommanderEncoder::begin(unsigned long inId, int inPin1, int inPin2, 
 	digitalWrite2f(this->pin1, HIGH); //turn pullup resistor on
 	digitalWrite2f(this->pin2, HIGH); //turn pullup resistor on
 
+	this->moveIncrement = inMoveIncrement;
+	this->incrementPosition = 0;
 	this->lastEncoded = 0;
 	this->mini = inMinimum;
 	this->maxi = inMaximum;
@@ -53,6 +55,26 @@ unsigned long ButtonsCommanderEncoder::loop()
 
 	if (inc == 0)
 		return UNDEFINED_ID;
+
+/*	if (inc > 0)
+		Serial.print(F("Encoder ++"));
+	else
+		Serial.print(F("Encoder --"));*/
+
+	if (this->moveIncrement > 1)
+	{
+		this->incrementPosition += inc;
+//		Serial.print(F("   incrementPosition:"));
+//		Serial.print(this->incrementPosition);
+		if (abs(this->incrementPosition) < this->moveIncrement)
+		{
+//			Serial.println(F(" Aborted"));
+			return UNDEFINED_ID;	// needs to move more to obtain a position change...
+		}
+
+//		Serial.println(F(" Move"));
+		this->incrementPosition = 0;	// moves have been made enough to change position !
+	}
 
 	if (this->mini != this->maxi)
 	{

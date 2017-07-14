@@ -64,7 +64,7 @@ void DccCommanderClass::DccAccessoryDecoderPacket(int address, boolean activate,
 	if (activate == false)
 	{
 #ifdef COMMANDERS_DEBUG_MODE
-		Serial.print("DccCommander packet received :");
+		Serial.print(F("DccCommander packet received :"));
 		Serial.print(realAddress);
 		Serial.print(F(" / "));
 		Serial.println(data, DEC);
@@ -153,7 +153,7 @@ unsigned long DccCommanderClass::loop()
 		/*
 #ifdef COMMANDERS_DEBUG_MODE
 #ifdef COMMANDERS_DEBUG_VERBOSE_MODE
-		Serial.print("DCC commander loop : ");
+		Serial.print(F("DCC commander loop : "));
 		Serial.println(countLoop, DEC);
 		countLoop = 0;
 #endif

@@ -13,10 +13,7 @@ int Commanders::lastEventData;
 GPIO_pin_t Commanders::StatusLedPin = DP_INVALID;
 unsigned int Commanders::BlinkDelay = 1000;
 unsigned long Commanders::StartStatusLed = 0;
-
-#ifdef COMMANDERS_DEBUG_MODE
-	bool FirstLoop = true;
-#endif
+bool FirstLoop = true;
 
 void Commanders::StatusBlink()
 {
@@ -39,11 +36,11 @@ unsigned long Commanders::RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE i
 		Commanders::SetLastEventType(inEvent);
 		Commanders::SetLastEventData(inData);
 		Commanders::EventHandler(inId, inEvent, inData);
+		return inId;
 	}
-	else
-		EventStack::EventsStack.RaiseEvent(inId, inEvent, inData);
 
-	return inId;
+	EventStack::EventsStack.RaiseEvent(inId, inEvent, inData);
+	return UNDEFINED_ID;
 }
 
 #if defined(COMMANDERS_DEBUG_MODE) || defined(COMMANDERS_PRINT_COMMANDERS)
@@ -141,13 +138,21 @@ void Commanders::printCommanders()
 
 unsigned long Commanders::loop()
 {
-#ifdef COMMANDERS_DEBUG_MODE
 	if (FirstLoop)
 	{
+#ifdef COMMANDERS_DEBUG_MODE
 		Serial.println(F("*** Setup Commanders Finished."));
+#endif
+		Commander *pCurr = Commander::pFirstCommander;
+
+		while (pCurr != NULL)
+		{
+			pCurr->beforeFirstLoop();
+			pCurr = pCurr->pNextCommander;
+		}
+
 		FirstLoop = false;
 	}
-#endif
 
 	if (Commanders::StatusLedPin != DP_INVALID && 
 		Commanders::StartStatusLed > 0 && 

@@ -1,3 +1,14 @@
+14/07/2017 1.40
+	- Nouvelles classes ButtonscommanderSwitchOnePin et ButtonscommanderSwitchTwoPins pour gérer les cas les plus fréquents sur des switchs...
+	- Nouvelle fonction virtuelle BeforeFirstLoop() dans ButtonsCommander et certains boutons.
+	- Ajout d'un paramètre MoveIncrement sur les encodeurs.
+	- Ajouts de messages de compilation 'No *** Commander' quand un NO_***COMMANDER a été déclaré.
+
+	- New classes ButtonscommanderSwitchOnePin and ButtonscommanderSwitchTwoPins to handle the more common cases for switch usage.
+	- New function BeforeFirstLoop() for ButtonsCommander and some buttons.
+	- New parameter MoveIncrement for encoders.
+	- New compilation messages 'No *** Commander' when a NO_***COMMANDER has been defined.
+
 21/04/2017 1.31
 	- ButtonsCommanderSwitch.AddEvent() retourne l'événement créé au cas où...
 	- Correction de ButtonscommanderSwitch.begin() pour sélectionner le bon id au lancement.

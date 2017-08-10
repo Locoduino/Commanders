@@ -4,9 +4,10 @@ author: <Thierry PARIS>
 description: <Buttons Commander>
 *************************************************************/
 
-#include "Commanders.h"
-#ifndef NO_BUTTONSCOMMANDER
-
+#include <Commanders.h>
+#ifdef NO_BUTTONSCOMMANDER
+#pragma message ("Commanders : No Buttons commander !")
+#else
 #ifdef VISUALSTUDIO
 #include <stdarg.h>
 #endif
@@ -87,8 +88,6 @@ void ButtonsCommanderClass::beforeFirstLoop()
 
 unsigned long ButtonsCommanderClass::loop()
 {
-	Commander::CommanderPriorityLoop();
-
 	if (pCurrentLoopButton != NULL)
 		pCurrentLoopButton = pCurrentLoopButton->GetNextButton();
 

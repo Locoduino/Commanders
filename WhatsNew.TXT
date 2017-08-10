@@ -1,3 +1,16 @@
+10/08/2017 1.50
+	- Nouvelle doc en anglais dans extras/Doc .
+	- Retrait de DccCommanderClass.CheckIndex()
+	- Ajout de Commander.BeforeFirstLoop() et Commander.printCommanders()
+	- Renommage des fonctions de EventStack.
+	- Passage de statique classe à statique fichier de LastEventId dans I2CCommander
+
+	- New complete english documentation in extras/Doc
+	- Removing of DccCommanderClass.CheckIndex()
+	- Add Commander.BeforeFirstLoop() and Commander.printCommanders()
+	- Renaming of EventStack functions.
+	- Pass from static of class to file static of LastEventId in I2CCommander.
+
 14/07/2017 1.40
 	- Nouvelles classes ButtonscommanderSwitchOnePin et ButtonscommanderSwitchTwoPins pour gérer les cas les plus fréquents sur des switchs...
 	- Nouvelle fonction virtuelle BeforeFirstLoop() dans ButtonsCommander et certains boutons.

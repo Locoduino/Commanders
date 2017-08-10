@@ -3,31 +3,49 @@
 #define __buttonsCommanderAnalogPushes_H__
 //-------------------------------------------------------------------
 
-#include "Commanders.h"
+#include <Commanders.h>
 #ifndef NO_BUTTONSCOMMANDER
 #ifndef NO_BUTTONSCOMMANDERANALOGPUSHES
 #include "ButtonsCommanderAnalogPushesItem.hpp"
 
-//-------------------------------------------------------------------
-// A push button is a hardware device giving a time limited impulsion.
-// It will return one Dccid at a time, passing through the whole list of DccIds.
-// The analog pushes variant use one analog pin with some pushes connected 
-// through resistors.
-//
-// Sample for five pushes.
-// |	     |	       |	     |	       |
-// /	     /	       /	     /	       / Pushes
-// |	     |	       |	     |	       |
-// |  3kOhms | 1kOhms  | 620 Ohms| 330 Ohms|
-// +---***---+---***---+---***---+---***---+------> Analog pin
-//
-// When one push button is pressed, the value read on the analog pin depends of the 
-// resistor addition from the button to the pin.
-// It is important that only one button was pushed at a time.
-// It is possible to use more or less buttons, but resistor values have to be computed
-// to avoid confusing analog values between near pushes...
-//-------------------------------------------------------------------
+/**
+A push button is a hardware device giving a time limited impulsion.
+It will return one Dccid at a time, passing through the whole list of DccIds.
+The analog pushes variant use one analog pin with some pushes connected 
+through resistors.
 
+\verbatim
+Sample for five pushes.
++		 +		   +		 +		   + GND
+|	     |	       |	     |	       |
+/	     /	       /	     /	       / Pushes
+|	     |	       |	     |	       |
+| 3kOhms | 1kOhms  | 620 Ohms| 330 Ohms|
+|	     |	       |	     |	       |
++--***---+---***---+---***---+---***---+------> Analog pin
+                                       |
+									   *
+									   * 10kOhms
+									   *
+									   |
+									   + 5v
+\endverbatim
+
+When one push button is pressed, the value read on the analog pin depends of the 
+resistor addition from the button to the pin.
+It is important that only one button was pushed at a time.
+It is possible to use more or less buttons, but resistor values have to be computed
+to avoid confusing analog values between near pushes...
+
+This class is a list of ButtonsCommanderAnalogPushesItem, basicaly a push button.
+Each item has its own id, analog value and tolerancy interval.
+
+Events thrown:
+
+reason               |   id      |                 type          | data
+---------------------|-----------|-------------------------------|------
+pin state to LOW     | push id | COMMANDERS_EVENT_MOVEPOSITIONID | 0
+*/
 class ButtonsCommanderAnalogPushes : public ButtonsCommanderButton
 {
 private:
@@ -45,16 +63,32 @@ private:
 	unsigned long debounceDelay;    // the debounce time; increase if the output flickers
 
 public:
+	/** Default constructor.*/
 	ButtonsCommanderAnalogPushes();
 
+	/** Initialize the instance.
+	@param inButtonPin	Analog Arduino pin connected to this group of pushes.
+	@param inNumber		number of push buttons.
+	@param inpIds		Array of ids of each button.
+	@param inpButtonValues	array of analog values, one for each button.
+	@param inTolerancy	tolerancy of the read analog value to identify the correct push button.
+	*/
 	void begin(int inButtonPin, uint8_t inNumber, unsigned long *inpIds, int *inpButtonValues, int inTolerancy = 20);
+	/** Main loop function. */
 	unsigned long loop();
+	/** Reinitialize the list for future use. Called at the end of the loop, if an event has been raised.*/
 	void EndLoop();
+	/** Gets one push item.*/
 	ButtonsCommanderAnalogPushesItem *GetItem(uint8_t inNumber) { return &(this->pButtons[inNumber]); }
+	/** Gets one push item through its id.*/
 	ButtonsCommanderButton* GetFromId(unsigned long inId);
 
+	/**Gets the last push button pressed.*/
 	inline uint8_t GetLastButtonPressed() const { return this->lastButtonPressed; }
 #ifdef COMMANDERS_PRINT_COMMANDERS
+	/** Print this Commander on the console.
+	@remark Only available if COMMANDERS_PRINT_COMMANDERS is defined.
+	*/
 	void printCommander();
 #endif
 };

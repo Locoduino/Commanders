@@ -4,7 +4,7 @@ author: <Thierry PARIS>
 description: <Base functions of the library>
 *************************************************************/
 
-#include "Commanders.h"
+#include <Commanders.h>
 #include "EventStack.hpp"
 
 CommandersEventHandlerFunction Commanders::EventHandler = NULL;
@@ -39,7 +39,7 @@ unsigned long Commanders::RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE i
 		return inId;
 	}
 
-	EventStack::EventsStack.RaiseEvent(inId, inEvent, inData);
+	EventStack::EventsStack.PushEvent(inId, inEvent, inData);
 	return UNDEFINED_ID;
 }
 
@@ -121,21 +121,6 @@ void Commanders::printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventTyp
 }
 #endif
 
-#ifdef COMMANDERS_PRINT_COMMANDERS
-void Commanders::printCommanders()
-{
-	Serial.println(F("********* Commanders List"));
-	Commander *pCurr = Commander::pFirstCommander;
-
-	while (pCurr != NULL)
-	{
-		pCurr->printCommander();
-		pCurr = pCurr->pNextCommander;
-	}
-	Serial.println(F("********* End of List"));
-}
-#endif
-
 unsigned long Commanders::loop()
 {
 	if (FirstLoop)
@@ -143,14 +128,7 @@ unsigned long Commanders::loop()
 #ifdef COMMANDERS_DEBUG_MODE
 		Serial.println(F("*** Setup Commanders Finished."));
 #endif
-		Commander *pCurr = Commander::pFirstCommander;
-
-		while (pCurr != NULL)
-		{
-			pCurr->beforeFirstLoop();
-			pCurr = pCurr->pNextCommander;
-		}
-
+		Commander::BeforeFirstLoops();
 		FirstLoop = false;
 	}
 
@@ -170,10 +148,10 @@ unsigned long Commanders::loop()
 		COMMANDERS_EVENT_TYPE type;
 		int data;
 
-		byte event = EventStack::EventsStack.GetPendingEvent();
+		byte event = EventStack::EventsStack.GetPendingEventIndex();
 		if (event < EVENT_MAXNUMBER)
 		{
-			EventStack::EventsStack.PushEvent(event, &id, &type, &data);
+			EventStack::EventsStack.GetEvent(event, &id, &type, &data);
 			Commanders::SetLastEventType(type);
 			Commanders::SetLastEventData(data);
 		}

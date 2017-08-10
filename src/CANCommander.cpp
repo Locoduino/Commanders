@@ -4,15 +4,13 @@ author: <Thierry PARIS>
 description: <CAN Commander>
 *************************************************************/
 
-#include "Commanders.h"
+#include <Commanders.h>
 
-#ifndef NO_CANCOMMANDER
-#ifdef VISUALSTUDIO
-#include "../VStudio/mcp_can.h"
+#ifdef NO_CANCOMMANDER
+#pragma message ("Commanders : No CAN commander !")
 #else
 #include <mcp_can.h>
 #include <SPI.h>
-#endif
 
 CANCommanderClass *CANCommanderClass::pCANCommander;
 
@@ -92,7 +90,7 @@ void CANCommanderClass::CAN_recup()
 	while (CAN_MSGAVAIL == this->pCan->checkReceive())
 	{
 		this->pCan->readMsgBuf(&len, buf);        // read data, len: data length, buf: data buf
-		Id = this->pCan->getCanId();
+		Id = (unsigned char) this->pCan->getCanId();
 		if ((unsigned int) (this->Ncan + len + 2) < sizeof(this->Circule))
 		{ // il reste de la place dans _Circule
 			this->Circule[this->indexW] = Id;         // enregistrement de Id
@@ -131,14 +129,22 @@ unsigned long CANCommanderClass::loop()
 	}
 
 	// Handle the first message in the buffer _Circule...
+#ifdef COMMANDERS_DEBUG_MODE
 	uint8_t RId;
+#endif
 	uint8_t Rlen;
 	uint8_t Rbuf[8];
 
 	while (this->Ncan > 2)
 	{    // The minimal size of one message is 3 bytes long !
 		this->Ncan--;
+#ifdef COMMANDERS_DEBUG_MODE
 		RId = this->Circule[this->indexR];        // recup Id
+
+		Serial.print(F("CAN id "));
+		Serial.print(RId);
+		Serial.print(F(", data "));
+#endif
 		this->indexR++;
 		if (this->indexR == sizeof(this->Circule))
 			this->indexR = 0;
@@ -147,11 +153,6 @@ unsigned long CANCommanderClass::loop()
 		this->indexR++;
 		if (this->indexR == sizeof(this->Circule))
 			this->indexR = 0;
-#ifdef COMMANDERS_DEBUG_MODE
-		Serial.print(F("CAN id "));
-		Serial.print(RId);
-		Serial.print(F(", data "));
-#endif
 		for (int k = 0; k < Rlen; k++) 
 		{
 			this->Ncan--;

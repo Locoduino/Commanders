@@ -4,7 +4,7 @@ author: <Thierry PARIS>
 description: <Composite push button array on analog pin with debounce.>
 *************************************************************/
 
-#include "Commanders.h"
+#include <Commanders.h>
 #ifndef NO_BUTTONSCOMMANDER
 #ifndef NO_BUTTONSCOMMANDERANALOGPUSHES
 
@@ -121,10 +121,8 @@ void ButtonsCommanderAnalogPushes::printCommander()
 
 	for (int i = 0; i < this->size; i++)
 	{
-		Serial.print(F("        Push Id: "));
-		Serial.print(this->GetItem(i)->GetId());
-		Serial.print(F(" / value: "));
-		Serial.println(this->GetItem(i)->GetAnalogValue());
+		Serial.print(F("        "));
+		this->GetItem(i)->printCommander();
 	}
 }
 #endif

@@ -9,26 +9,29 @@
 COMMANDERS_EVENT_TYPE				KEYWORD1
 COMMANDERS_MOVE_TYPE				KEYWORD1
 
-Commander							KEYWORD1
-Commanders							KEYWORD1
-ButtonsCommander					KEYWORD1
-ButtonsCommanderEvent				KEYWORD1
-ButtonsCommanderPush				KEYWORD1
-ButtonsCommanderAnalogPushes		KEYWORD1
-ButtonsCommanderAnalogPushesItem	KEYWORD1
-ButtonsCommanderSwitch 				KEYWORD1
-ButtonsCommanderSwitchOnePin		KEYWORD1
-ButtonsCommanderSwitchTwoPins		KEYWORD1
-ButtonsCommanderEncoder 			KEYWORD1
-ButtonsCommanderPotentiometer 		KEYWORD1
-ButtonsCommanderButton 				KEYWORD1
-
-CommandersEventHandlerFunction		KETWORD1
-
 DccCommander						KEYWORD1
 SerialCommander						KEYWORD1
 CANCommander						KEYWORD1
 I2CCommander						KEYWORD1
+
+Commander							KEYWORD1
+Commanders							KEYWORD1
+ButtonsCommander					KEYWORD1
+ButtonsCommanderAnalogPushes		KEYWORD1
+ButtonsCommanderAnalogPushesItem	KEYWORD1
+ButtonsCommanderButton				KEYWORD1
+ButtonsCommanderEncoder 			KEYWORD1
+ButtonsCommanderPotentiometer 		KEYWORD1
+ButtonsCommanderPush				KEYWORD1
+ButtonsCommanderSwitch 				KEYWORD1
+ButtonsCommanderSwitchOnePin		KEYWORD1
+ButtonsCommanderSwitchTwoPins		KEYWORD1
+
+CommandersEventHandlerFunction		KETWORD1
+Event								KEYWORD1
+EventPin							KEYWORD1
+EventStack							KEYWORD1
+TextInterpreter						KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
@@ -46,9 +49,12 @@ GetLastSelectedButton 		KEYWORD2
 
 GetId 						KEYWORD2
 GetPosition 				KEYWORD2
+BeforeFirstLoop 			KEYWORD2
 EndLoop 					KEYWORD2
+PriorityLoop				KEYWORD2
 
 printEvent					KEYWORD2
+printCommander				KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
@@ -58,8 +64,8 @@ COMMANDERS_EVENT_NONE			LITERAL1
 COMMANDERS_EVENT_TOGGLE			LITERAL1
 COMMANDERS_EVENT_MOVE			LITERAL1
 COMMANDERS_EVENT_MOVEPOSITION	LITERAL1
-COMMANDERS_EVENT_MOVEPOSITIONID	LITERAL1
 COMMANDERS_EVENT_MOVEPOSITIONINDEX	LITERAL1
+COMMANDERS_EVENT_MOVEPOSITIONID	LITERAL1
 COMMANDERS_EVENT_CONFIG			LITERAL1
 
 COMMANDERS_MOVE_MORE			LITERAL1
@@ -70,10 +76,10 @@ COMMANDERS_MOVE_RIGHT			LITERAL1
 COMMANDERS_MOVE_CENTER			LITERAL1
 COMMANDERS_MOVE_TOP				LITERAL1
 COMMANDERS_MOVE_BOTTOM			LITERAL1
-COMMANDERS_MOVE_ON				LITERAL1
-COMMANDERS_MOVE_OFF				LITERAL1
 COMMANDERS_MOVE_STRAIGHT		LITERAL1
 COMMANDERS_MOVE_DIVERGE			LITERAL1
+COMMANDERS_MOVE_ON				LITERAL1
+COMMANDERS_MOVE_OFF				LITERAL1
 
 COMMANDERS_PRINT_COMMANDERS		LITERAL1
 PRINT_COMMANDERS				LITERAL1

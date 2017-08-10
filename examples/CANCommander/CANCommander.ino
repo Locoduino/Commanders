@@ -12,7 +12,7 @@ description: <CAN commander demo>
 
 void ReceiveEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inEventData)
 {
-    Commanders::printEvent(inId, inEventType, inEventData);
+    COMMANDERS_PRINT_EVENT(inId, inEventType, inEventData);
 }
 
 //////////////////////////////////

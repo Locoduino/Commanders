@@ -4,10 +4,11 @@ author: <Thierry PARIS>
 description: <Dcc Commander>
 *************************************************************/
 
-#include "Commanders.h"
+#include <Commanders.h>
 
-#ifndef NO_DCCCOMMANDER
-
+#ifdef NO_DCCCOMMANDER
+#pragma message ("Commanders : No DCC commander !")
+#else
 #ifdef VISUALSTUDIO
 DCC_Decoder DCC_Decoder::DCCInstance;
 #endif
@@ -84,12 +85,6 @@ void DccCommanderClass::DccAccessoryDecoderPacket(int address, boolean activate,
 #define CHECK(val, text)	CheckIndex(val, F(text))
 #else
 #define CHECK(val, text)
-#endif
-
-#ifdef COMMANDERS_DEBUG_MODE
-void DccCommanderClass::CheckIndex(unsigned char inIndex, const __FlashStringHelper *inFunc)
-{
-}
 #endif
 
 bool status = false;

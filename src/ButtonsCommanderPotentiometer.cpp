@@ -4,7 +4,7 @@ author: <Thierry PARIS>
 description: <Potentiometer returning a current value.>
 *************************************************************/
 
-#include "Commanders.h"
+#include <Commanders.h>
 #ifndef NO_BUTTONSCOMMANDER
 #ifndef NO_BUTTONSCOMMANDERPOTENTIOMETER
 

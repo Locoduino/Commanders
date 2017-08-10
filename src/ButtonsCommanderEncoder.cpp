@@ -4,7 +4,7 @@ author: <Thierry PARIS>
 description: <Encoder returning a current value, or a moving direction.>
 *************************************************************/
 
-#include "Commanders.h"
+#include <Commanders.h>
 #ifndef NO_BUTTONSCOMMANDER
 #ifndef NO_BUTTONSCOMMANDERENCODER
 
@@ -56,23 +56,14 @@ unsigned long ButtonsCommanderEncoder::loop()
 	if (inc == 0)
 		return UNDEFINED_ID;
 
-/*	if (inc > 0)
-		Serial.print(F("Encoder ++"));
-	else
-		Serial.print(F("Encoder --"));*/
-
 	if (this->moveIncrement > 1)
 	{
 		this->incrementPosition += inc;
-//		Serial.print(F("   incrementPosition:"));
-//		Serial.print(this->incrementPosition);
 		if (abs(this->incrementPosition) < this->moveIncrement)
 		{
-//			Serial.println(F(" Aborted"));
 			return UNDEFINED_ID;	// needs to move more to obtain a position change...
 		}
 
-//		Serial.println(F(" Move"));
 		this->incrementPosition = 0;	// moves have been made enough to change position !
 	}
 

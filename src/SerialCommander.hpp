@@ -3,15 +3,64 @@
 #define __serialCommander_H__
 //-------------------------------------------------------------------
 
-#include "Commanders.h"
+#include <Commanders.h>
 
+/**Defines the normal name of the class.*/
 #define SerialCommander SerialCommanderClass::GetCurrent()
+
+#ifdef NO_SERIALCOMMANDER
+#pragma message ("Commanders : No Serial commander !")
+#endif
+
+/** @file SerialCommander.hpp
+
+This is the most curious commander, because the class itself does not exists until you add the macro SERIAL_COMMANDER to your sketch.
+
+    #include "Commanders.h"
+
+    SERIAL_COMMANDER(Serial);
+
+and in this case, it has the usual form of a Commander :
+
+    class SerialCommanderClass : Commander
+    {
+    public:
+		inline SerialCommanderClass() : Commander() { }
+    
+		inline void begin() { }
+    
+		inline unsigned long loop() 
+		{
+			...
+    	}
+    	
+    	static inline SerialCommanderClass &GetCurrent() 
+    	{
+    		...
+     	}
+    	void printCommander() { ... }
+    };    
+
+You should avoid to declare a SERIAL_COMMANDER if not necessary, because the Serial library delivered with the Arduino IDE
+allocates a lot of memory for each serial channel used.
+The only variable thing in this macro is the name of the serial channel to use : Serial for a UNO or a Nano, but Serial or
+Serial1 to 3 on a Mega or a Due. Even a SoftwareSerial (from SoftwareSerial library (https://www.arduino.cc/en/Reference/SoftwareSerial) ) or a AltSoftSerial
+(from the well named library.. AltSoftSerial (https://github.com/PaulStoffregen/AltSoftSerial) !) can be used.
+
+The syntax of the message to get to throw a new event is given by the class TextInterpreter.
+
+Events thrown:
+
+reason           | id | type | data
+-----------------|----|------|------
+message received | id | type | data
+*/
 
 //-------------------------------------------------------------------
 
-// SERIAL_PORT argument can be any of the available serials of the used card, but also any other
-// class implementing begin(), read() and available() functions, like in SoftwareSerial or AltSoftSerial !
-
+/** Use this macro to define a SerialCommander.
+@param SERIAL_PORT	name of the serial port. See the file description for more information.
+*/
 #define SERIAL_COMMANDER(SERIAL_PORT) \
 \
 class SerialCommanderClass : Commander \
@@ -27,7 +76,6 @@ public:\
 	inline unsigned long loop() \
 	{\
 		unsigned long foundID = UNDEFINED_ID;\
-		Commander::CommanderPriorityLoop(); \
 \
 		if (SERIAL_PORT.available() > 0)\
 		{\

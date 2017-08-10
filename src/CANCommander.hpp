@@ -3,48 +3,92 @@
 #define __canCommander_H__
 //-------------------------------------------------------------------
 
-#include "Commanders.h"
-
-#ifndef _MCP2515_H_
-#error To be able to compile this commander, the 'mcp_can' library must be installed. See 'extras' directory of Commanders library.
-#endif
+#include <Commanders.h>
 
 #ifndef NO_CANCOMMANDER
-#ifdef VISUALSTUDIO
-	#include "../VStudio/mcp_can.h"
-#else
-	#include <mcp_can.h>
-#endif
+
+#include <mcp_can.h>
 
 #define CANCommander CANCommanderClass::GetCurrent()
 
-//-------------------------------------------------------------------
+/** This Commanders receive orders from the CAN bus, and translate it into Commanders events.
 
+This CAN bus used a MCP2515 chip, and use the library mcp_can for that. This library uses also the SPI bus to
+get data.
+
+A sample of the library Commanders give a sender of CAN events to Commanders.
+
+To work, the sender must send a message with the form of
+\verbatim
+IIIIEDD
+\endverbatim
+where IIII is an unsigned long (four bytes) for the event id, E is the event type (see values of COMMANDERS_EVENT_TYPE), and DD the associated data.
+
+Events thrown:
+
+reason           | id | type | data
+-----------------|----|------|------
+message received | id | type | data
+*/
 class CANCommanderClass : Commander
 {
 	private:
+		static CANCommanderClass *pCANCommander;
 		MCP_CAN *pCan;
 
-		// Variables globales pour la gestion des Messages reçus et émis
-		uint8_t IdR;                       // Id pour la routine CAN_recup()
-		unsigned char lenR = 0;         // Longueur "    "       "
-		unsigned char bufR[8];          // tampon de reception      "
-		unsigned char bufS[8];          // tampon d'emission
+		// Global variables for reading and writing messages.
+		uint8_t IdR;				// Id for CAN_recup()
+		unsigned char lenR = 0;		// Current length of the messaga
+		unsigned char bufR[8];		// Recieving buffer.
+		unsigned char bufS[8];		// Sending buffer.
 
-										// Variable globale Mémoire circulaire pour le stockage des messages reçus
-		unsigned char Circule[256];     // récepteur circulaire des messages CAN sous IT
-		int indexW, indexR, Ncan;       // index d'écriture et lecture, nb d'octets a lire
-		uint8_t CANoverflow = 0;           // flag overflow (buffer _Circule plein)
+		// Global variables for the circular buffer.
+		unsigned char Circule[256];	// Circular buffer for read messages, handled by interrupt.
+		int indexW, indexR, Ncan;	// Index of writing and reading buffer, and byte number to read.
+		uint8_t CANoverflow = 0;	// flag overflow (buffer Circule full)
 
-	public:
-		inline CANCommanderClass() : Commander() {}
-		
-		void begin(uint8_t inPin, uint8_t inSpeed, uint8_t inInterrupt, uint16_t inId);
-		unsigned long loop();
 		void CAN_recup();
 
 	public:
-		static CANCommanderClass *pCANCommander;
+		/** Default constructor.*/
+		inline CANCommanderClass() : Commander() {}
+		
+		/** Initialize the instance.
+		@param inSPIpin pin for SPI to get data.
+		@param inSpeed The speed can be (of course, use the defines from mcp_can_dfs.h)
+
+		Value  | Speed (define name)
+		------ | -------------------
+		1	   | CAN_5KBPS    
+		2	   | CAN_10KBPS   
+		3	   | CAN_20KBPS   
+		4	   | CAN_25KBPS   
+		5	   | CAN_31K25BPS 
+		6	   | CAN_33KBPS   
+		7	   | CAN_40KBPS   
+		8	   | CAN_50KBPS   
+		9	   | CAN_80KBPS   
+		10	   | CAN_83K3BPS  
+		11	   | CAN_95KBPS   
+		12	   | CAN_100KBPS  
+		13	   | CAN_125KBPS  
+		14	   | CAN_200KBPS  
+		15	   | CAN_250KBPS  
+		16	   | CAN_500KBPS  
+		17	   | CAN_666KBPS  
+		18	   | CAN_1000KBPS 
+
+		@param inInterrupt	interrupt number for the reception.
+		@param inId			CAN id. Only the messages with this ID in the header will be read.
+		*/
+		void begin(uint8_t inSPIpin, uint8_t inSpeed, uint8_t inInterrupt, uint16_t inId);
+		/** Main loop function. */
+		unsigned long loop();
+
+	public:
+		/** Get the current instance of DccCommanderClass
+		@remark This is an internal function.
+		*/
 		static inline CANCommanderClass &GetCurrent()
 		{
 			if (pCANCommander == NULL)
@@ -53,11 +97,15 @@ class CANCommanderClass : Commander
 			return *(CANCommanderClass::pCANCommander);
 		}
 #ifdef COMMANDERS_PRINT_COMMANDERS
+	private:
 		uint8_t SPIpin;
 		uint8_t Speed;
 		uint8_t Interrupt;
 		uint16_t Id;
-
+	public:
+		/** Print this Commander on the console.
+		@remark Only available if COMMANDERS_PRINT_COMMANDERS is defined.
+		*/
 		void printCommander();
 #endif
 };

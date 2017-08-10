@@ -365,7 +365,7 @@ void DCC_Decoder::State_Execute()
 			}
 			GOTO_DecoderReset( kDCC_OK_BASIC_ACCESSORY );
 		}
-		/* In UAD : Only handle idle and accessory packets.
+		/* In Commanders : Only handle idle and accessory packets.
 
 			///////////////////////////////////////////////////////////
 			// Handle as a baseline packet
@@ -805,5 +805,5 @@ int DCC_Decoder::GetAddress(int inAddress, int inData)
 
 bool DCC_Decoder::IsEnabled(int inData)
 {
-	return (inData & 0x01) ? 1 : 0;;
+	return (inData & 0x01) ? 1 : 0;
 }

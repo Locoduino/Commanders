@@ -1,9 +1,9 @@
 //-------------------------------------------------------------------
-#ifndef __buttonsCommanderKeyboard_H__
-#define __buttonsCommanderKeyboard_H__
+#ifndef __buttonsCommanderKeyboard_HPP__
+#define __buttonsCommanderKeyboard_HPP__
 //-------------------------------------------------------------------
 
-#include "Commanders.h"
+#include <Commanders.h>
 #ifndef NO_BUTTONSCOMMANDER
 
 struct KeybdEvent

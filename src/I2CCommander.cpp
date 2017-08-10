@@ -4,17 +4,21 @@ author: <Thierry PARIS>
 description: <I2C Commander>
 *************************************************************/
 
-#include "Commanders.h"
+#include <Commanders.h>
 
-#ifndef NO_I2CCOMMANDER
-
+#ifdef NO_I2CCOMMANDER
+#pragma message ("Commanders : No I2C commander !")
+#else
 I2CCommanderClass *I2CCommanderClass::pI2cCommander;
 
 #define I2C_BUFFERLENGTH	(sizeof(unsigned long) + 1 + sizeof(int) + 5)
 
+// Just here and not in the class, because this value must be updated by a 'C' style function, and should be declared public in the class....
+static unsigned long I2CLastEventId;
+
 void OnReceiveHandler(int inNbBytes)
 {
-	I2CCommander.LastEventId = UNDEFINED_ID;
+	I2CLastEventId = UNDEFINED_ID;
 
 	unsigned char buf[I2C_BUFFERLENGTH];
 	uint8_t count = 0;
@@ -45,7 +49,7 @@ void OnReceiveHandler(int inNbBytes)
 
 	Commanders::SetLastEventType(lastEventType);
 	Commanders::SetLastEventData(foundData);
-	I2CCommander.LastEventId = foundID;
+	I2CLastEventId = foundID;
 }
 
 void I2CCommanderClass::begin(uint8_t inSlaveID)
@@ -53,15 +57,15 @@ void I2CCommanderClass::begin(uint8_t inSlaveID)
 	Wire.begin(inSlaveID);
 	Wire.onReceive(OnReceiveHandler);
 	this->I2CSlaveId = inSlaveID;
-	this->LastEventId = UNDEFINED_ID;
+	I2CLastEventId = UNDEFINED_ID;
 }
 
 unsigned long I2CCommanderClass::loop()
 {
-	if (this->LastEventId != UNDEFINED_ID)
+	if (I2CLastEventId != UNDEFINED_ID)
 	{
-		unsigned long id = this->LastEventId;
-		this->LastEventId = UNDEFINED_ID;
+		unsigned long id = I2CLastEventId;
+		I2CLastEventId = UNDEFINED_ID;
 		return id;
 	}
 

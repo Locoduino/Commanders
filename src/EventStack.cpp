@@ -9,7 +9,7 @@ void EventStack::FreeEvent(byte inEvent)
 	data[inEvent] = 0; 
 }
 
-void EventStack::RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inType, int inData)
+void EventStack::PushEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inType, int inData)
 {
 	for (int i =0; i < EVENT_MAXNUMBER; i++)
 		if (this->id[i] == UNDEFINED_ID)
@@ -21,11 +21,11 @@ void EventStack::RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inType, in
 		}
 
 #ifdef COMMANDERS_DEBUG_MODE
-	Serial.println(F("Error : an event has been lost !"));
+	Serial.println(F("Error : an event has been lost ! Stack is full !"));
 #endif
 }
 
-byte EventStack::GetPendingEvent()
+byte EventStack::GetPendingEventIndex()
 {
 	for (int i = 0; i < EVENT_MAXNUMBER; i++)
 		if (this->id[i] != UNDEFINED_ID)
@@ -34,10 +34,10 @@ byte EventStack::GetPendingEvent()
 	return 255;
 }
 
-void EventStack::PushEvent(byte inEvent, unsigned long *inpId, COMMANDERS_EVENT_TYPE *inpType, int *inpData)
+void EventStack::GetEvent(byte inEvent, unsigned long *inpId, COMMANDERS_EVENT_TYPE *inpType, int *inpData)
 {
 	*inpId = this->id[inEvent];
 	*inpType = this->type[inEvent];
 	*inpData = this->data[inEvent];
-	FreeEvent(inEvent);
+	this->FreeEvent(inEvent);
 }

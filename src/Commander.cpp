@@ -4,32 +4,11 @@ author: <Thierry PARIS>
 description: <Base Commander>
 *************************************************************/
 
-#include "Commanders.h"
+#include <Commanders.h>
 
 Commander *Commander::pFirstCommander = 0;
 
 #ifdef COMMANDERS_DEBUG_MODE
-
-#ifdef NO_CANCOMMANDER
-	#pragma message ("Commanders : No CAN commander !")
-#endif
-
-#ifdef NO_DCCCOMMANDER
-	#pragma message ("Commanders : No DCC commander !")
-#endif
-
-#ifdef NO_I2CCOMMANDER
-	#pragma message ("Commanders : No I2C commander !")
-#endif
-
-#ifdef NO_BUTTONSCOMMANDER
-	#pragma message ("Commanders : No Buttons commander !")
-#endif
-
-#ifdef NO_SERIALCOMMANDER
-	#pragma message ("Commanders : No Serial commander !")
-#endif
-
 #define CHECK(val, text)	CheckIndex(val, F(text))
 #else
 #define CHECK(val, text)
@@ -51,7 +30,18 @@ void Commander::AddCommander(Commander *inCommander)
 	pCurr->pNextCommander = inCommander;
 }
 
-void Commander::CommanderPriorityLoop()
+void Commander::BeforeFirstLoops()
+{
+	Commander *pCurr = Commander::pFirstCommander;
+
+	while (pCurr != NULL)
+	{
+		pCurr->beforeFirstLoop();
+		pCurr = pCurr->pNextCommander;
+	}
+}
+
+void Commander::CommanderPriorityLoops()
 {
 	Commander *pCurr = Commander::pFirstCommander;
 
@@ -68,6 +58,7 @@ unsigned long Commander::loops()
 
 	while (pCurr != NULL)
 	{
+		Commander::CommanderPriorityLoops();
 		unsigned long ret = pCurr->loop();
 		if (ret != UNDEFINED_ID)
 			return ret;
@@ -77,14 +68,17 @@ unsigned long Commander::loops()
 	return UNDEFINED_ID;
 }
 
-#ifdef COMMANDERS_DEBUG_MODE
-#ifdef ARDUINO_ARCH_SAM
-void Commander::CheckIndex(uint8_t inIndex, const char *inFunc)
+#ifdef COMMANDERS_PRINT_COMMANDERS
+void Commander::printCommanders()
 {
+	Serial.println(F("********* Commanders List"));
+	Commander *pCurr = Commander::pFirstCommander;
+
+	while (pCurr != NULL)
+	{
+		pCurr->printCommander();
+		pCurr = pCurr->pNextCommander;
+	}
+	Serial.println(F("********* End of List"));
 }
-#else
-void Commander::CheckIndex(uint8_t inIndex, const __FlashStringHelper *inFunc)
-{
-}
-#endif
 #endif

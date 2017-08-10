@@ -4,7 +4,7 @@ author: <Thierry PARIS>
 description: <Basic button.>
 *************************************************************/
 
-#include "Commanders.h"
+#include <Commanders.h>
 #ifndef NO_BUTTONSCOMMANDER
 
 ButtonsCommanderButton::ButtonsCommanderButton(unsigned long inId) 

@@ -33,11 +33,9 @@ A notion of 'current item' is used, to let the user of the list to move through 
 template<class T> class CMDRSCHAINEDLIST
 {
 public:							
-	/** Address of next element in chain, or NULL for none. In this case the list is empty.
-	*/
+	/** Address of next element in chain, or NULL for none. In this case the list is empty.	*/
 	CMDRSCHAINEDLISTITEM<T> *pFirst;		
-	/** Address of current item in the chain, or NULL for none.
-	*/
+	/** Address of current item in the chain, or NULL for none.	*/
 	CMDRSCHAINEDLISTITEM<T> *pCurrentItem;
 	
 	/** Default constructor.*/
@@ -51,7 +49,7 @@ public:
 	void NextCurrent();
 };
 
-/** Macro to calla given function on all items in a list.
+/** Macro to call a given function on all items in a list.
 @param T type of the item
 @param list	Chained/linked list to scan.
 @param func Function to call. Must be of type

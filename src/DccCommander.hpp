@@ -22,7 +22,7 @@ typedef void(*DccAccDecoderPacket)(int address, boolean activate, uint8_t data);
 #define DCCINT(id, acc)		((acc) * 10000UL + (id))
 
 /**
-This commanders receive accessory packets from DCC controler, and convert it in Commanders events.
+This commanders receive accessory packets from DCC controller, and convert it in Commanders events.
 The event id is a compressed version of dcc id and dcc accessory id.
 
 Text from NMRA standard definition (https://www.nmra.org/sites/default/files/s-9.2.1_2012_07.pdf , paragraph 420):
@@ -49,8 +49,8 @@ id / data / 0
 \endverbatim
 
 In the Commanders interpretation of a DCC packet, id is given by 'A' bits, data from the 'D' bits, and the activate flag by the 'C' bit.
-The id is not the number you can see on a MS2, and on most DCC controlers. There is a small computation between id and data to obtain 
-the real MS2 accessory number : real_id (1 to 320) and real_data (0 or 1 for right or left). It works on all known controlers, except on Multimaus...
+The id is not the number you can see on a MS2, and on most DCC controllers. There is a small computation between id and data to obtain 
+the real MS2 accessory number : real_id (1 to 320) and real_data (0 or 1 for right or left). It works on all known controllers, except on Multimaus...
 
 The translated id and the activation flag are then translated into an unsigned long to be used as a Commanders id. The formula is
 \verbatim

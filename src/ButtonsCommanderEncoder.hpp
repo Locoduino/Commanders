@@ -12,7 +12,7 @@ class ButtonsCommanderPush;
 
 /** This class describes a rotary encoder.
 A rotary or "shaft" encoder is an angular measuring device. It is used to precisely measure rotation
-of motors or to create wheel controlers (knobs) that can turn infinitely (with no end stop like a potentiometer has).
+of motors or to create wheel controllers (knobs) that can turn infinitely (with no end stop like a potentiometer has).
 Some of them are also equipped with a pushbutton when you press on the axis (like the ones used for navigation on many music controllers).
 In this case, only add a new ButtonsCommanderPush class instance beside the encoder.
 This class can handles also a current position, using the encoder like a potentiometer...

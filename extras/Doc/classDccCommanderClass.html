@@ -100,7 +100,7 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a65088d66788156ea4a41027af1528298"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This commanders receive accessory packets from DCC controler, and convert it in <a class="el" href="classCommanders.html">Commanders</a> events. The event id is a compressed version of dcc id and dcc accessory id.</p>
+<div class="textblock"><p>This commanders receive accessory packets from DCC controller, and convert it in <a class="el" href="classCommanders.html">Commanders</a> events. The event id is a compressed version of dcc id and dcc accessory id.</p>
 <p>Text from NMRA standard definition (<a href="https://www.nmra.org/sites/default/files/s-9.2.1_2012_07.pdf">https://www.nmra.org/sites/default/files/s-9.2.1_2012_07.pdf</a> , paragraph 420):</p>
 <blockquote class="doxtable">
 <p>The format for packets intended for Accessory Digital Decoders is: </p><pre class="fragment">        {preamble} 0 10AAAAAA 0 1AAACDDD 0 EEEEEEEE 1
@@ -110,7 +110,7 @@ Static Public Member Functions</h2></td></tr>
 id / data / 1
 id / data / 1
 id / data / 0
-</pre><p>In the <a class="el" href="classCommanders.html">Commanders</a> interpretation of a DCC packet, id is given by 'A' bits, data from the 'D' bits, and the activate flag by the 'C' bit. The id is not the number you can see on a MS2, and on most DCC controlers. There is a small computation between id and data to obtain the real MS2 accessory number : real_id (1 to 320) and real_data (0 or 1 for right or left). It works on all known controlers, except on Multimaus...</p>
+</pre><p>In the <a class="el" href="classCommanders.html">Commanders</a> interpretation of a DCC packet, id is given by 'A' bits, data from the 'D' bits, and the activate flag by the 'C' bit. The id is not the number you can see on a MS2, and on most DCC controllers. There is a small computation between id and data to obtain the real MS2 accessory number : real_id (1 to 320) and real_data (0 or 1 for right or left). It works on all known controllers, except on Multimaus...</p>
 <p>The translated id and the activation flag are then translated into an unsigned long to be used as a <a class="el" href="classCommanders.html">Commanders</a> id. The formula is </p><pre class="fragment">real_data * 10000 + real_id   .
 </pre><p> DCCINT is the macro used to build the unsigned long, DCCID the one to use to get the real id number from this long int, and DCCACTIVATION the other to get the real_data.</p>
 <p>This flag is to activate for a while (three times at 1 !) and then desactivate the motor ! DccCommander will react only on the desactivate flag to avoid double events.</p>
@@ -465,7 +465,7 @@ id / data / 0
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classDccCommanderClass.html">DccCommanderClass</a></li>
-    <li class="footer">Generated on jeu. août 10 2017 14:30:09 for Commanders &nbsp; by
+    <li class="footer">Generated on mer. oct. 18 2017 17:55:02 for Commanders &nbsp; by
     <a href="http://www.copperspice.com/documentation-doxypress.html">
     <img class="footer" src="doxypress.png" alt="DoxyPress"/></a> 1.2.10 </li>
   </ul>

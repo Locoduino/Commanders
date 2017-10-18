@@ -134,12 +134,6 @@ var NAVTREE =
           [ "begin", "classI2CCommanderClass.html#ac6575229251840ec767b7595e172ea1e", null ],
           [ "loop", "classI2CCommanderClass.html#a11fda5e10b4caf40275fea5854018808", null ],
           [ "printCommander", "classI2CCommanderClass.html#af6819052ca1a9dc32d07d2ad79be064e", null ]
-        ] ],
-        [ "TextInterpreter", "classTextInterpreter.html", [
-          [ "TextInterpreter", "classTextInterpreter.html#a22c1254be49ece97985d325d37a363f4", null ],
-          [ "Init", "classTextInterpreter.html#af0c3da1f3d6967d0f01b75dbae03c3a2", null ],
-          [ "SendChar", "classTextInterpreter.html#a3f9c1da5671b6a913d131ec6c613e91f", null ],
-          [ "SendString", "classTextInterpreter.html#a94d1cd8f4e9a333b01ccf19ac43e5188", null ]
         ] ]
       ] ],
       [ "Class Index", "classes.html", null ],
@@ -169,8 +163,7 @@ var NAVTREE =
         [ "Commanders", "classCommanders.html", null ],
         [ "Event", "structEvent.html", null ],
         [ "EventPin", "structEventPin.html", null ],
-        [ "EventStack", "classEventStack.html", null ],
-        [ "TextInterpreter", "classTextInterpreter.html", null ]
+        [ "EventStack", "classEventStack.html", null ]
       ] ],
       [ "Class Members", "functions_all.html", [
         [ "All", "functions_all.html", null ],
@@ -185,7 +178,9 @@ var NAVTREE =
             [ "COMMANDERS_DEBUG_MODE", "Commanders_8h.html#a1fdf52a0fdf8778a4472686eaa278b15", null ],
             [ "COMMANDERS_DEBUG_VERBOSE_MODE", "Commanders_8h.html#a43b270926f3753345583c1ed6f03c831", null ],
             [ "COMMANDERS_PRINT_COMMANDERS", "Commanders_8h.html#a903f43d89a21cb3955b4fac654f6f8e8", null ],
-            [ "GPIO2_PREFER_SPEED", "Commanders_8h.html#abe48e551c87434efe75af8e7d4df457c", null ]
+            [ "GPIO2_PREFER_SPEED", "Commanders_8h.html#abe48e551c87434efe75af8e7d4df457c", null ],
+            [ "NO_CANCOMMANDER", "Commanders_8h.html#a8647526d256312a8b21f15af5805fb2a", null ],
+            [ "NO_SERIALCOMMANDER", "Commanders_8h.html#a190ad583ee12fb3fdbce6761a9b914e7", null ]
           ] ],
           [ "Events.h", "Events_8h.html", [
             [ "UNDEFINED_ID", "Events_8h.html#a48ad4dd16b8e22f2c8bc92b154479e92", null ],

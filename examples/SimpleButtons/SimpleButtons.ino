@@ -6,6 +6,10 @@ description: <Demo sample with push buttons, event handler alternative>
 
 #include "Commanders.h"
 
+#ifdef NO_BUTTONSCOMMANDER
+#error To be able to compile this sample,the line #define NO_BUTTONSCOMMANDER must be commented in Commanders.h
+#endif
+
 ButtonsCommanderPush Left;
 ButtonsCommanderPush Dc;
 ButtonsCommanderPush Right;

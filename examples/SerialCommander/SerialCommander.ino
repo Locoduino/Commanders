@@ -6,6 +6,10 @@ description: <Serial commander demo>
 
 #include "Commanders.h"
 
+#ifdef NO_SERIALCOMMANDER
+#error To be able to compile this sample,the line #define NO_SERIALCOMMANDER must be commented in Commanders.h
+#endif
+
 SERIAL_COMMANDER(Serial);
 
 void ReceiveEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)

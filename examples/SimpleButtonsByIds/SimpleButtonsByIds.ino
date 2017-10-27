@@ -4,6 +4,10 @@ author: <Thierry PARIS>
 description: <Demo sample with buttons, loop alternative>
 *************************************************************/
 
+#ifdef NO_BUTTONSCOMMANDER
+#error To be able to compile this sample,the line #define NO_BUTTONSCOMMANDER must be commented in Commanders.h
+#endif
+
 #include "Commanders.h"
 
 ButtonsCommanderPush Left;

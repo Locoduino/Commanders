@@ -45,6 +45,8 @@ Main include file of the library.*/
 //#define COMMANDERS_PRINT_COMMANDERS
 
 #ifdef DOXYGEN_SPECIFIC
+// DO NOT CHANGE THE LINES IN THIS BLOCK 'DOXYGEN_SPECIFIC' : Only here for documentation !
+
 /** If this is defined, the library will do many checks during setup and execution, and print errors, warnings and
 information messages on console. These messages can take a lot of memory, so be careful about the free memory of
 your program if you activate debug mode.*/

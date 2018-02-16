@@ -24,10 +24,10 @@ class ButtonsCommanderAnalogPushesItem : public ButtonsCommanderButton
 	/** Initialize the instance.
 	@param inId				id of this button.
 	@param inAnalogValue	Analog value associated with this button.
-	@param inTolerancy	tolerancy of the read analog value to identify this push button.
+	@param inTolerancy	tolerance of the read analog value to identify this push button.
 	*/
 	void begin(unsigned long inId, int inAnalogValue, int inTolerancy) { this->Id = inId;  this->analogValue = inAnalogValue; this->readingTolerancy = inTolerancy; }
-	/**Checks if the given value is in the interval [value-tolerancy , value+tolerancy].
+	/**Checks if the given value is in the interval [value-tolerance , value+tolerance].
 	@param inCurrentValue	value to check.
 	@return true in the given value is in the interval.
 	*/

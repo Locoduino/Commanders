@@ -68,8 +68,8 @@ $(document).ready(function(){initNavTree('classCMDRSCHAINEDLIST.html','');});
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a6a8536f2cb62714624e8a1ae2c021191"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCMDRSCHAINEDLIST.html#a6a8536f2cb62714624e8a1ae2c021191">CMDRSCHAINEDLIST</a> ()</td></tr>
 <tr class="separator:a6a8536f2cb62714624e8a1ae2c021191"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9376873ee15cd2ad4f239b832c700c56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCMDRSCHAINEDLIST.html#a9376873ee15cd2ad4f239b832c700c56">AddItem</a> (T *inpt)</td></tr>
-<tr class="separator:a9376873ee15cd2ad4f239b832c700c56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c572275e0adf1a6cf9fa82a9baab066"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCMDRSCHAINEDLIST.html#a8c572275e0adf1a6cf9fa82a9baab066">AddItem</a> (T *input)</td></tr>
+<tr class="separator:a8c572275e0adf1a6cf9fa82a9baab066"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c95325c818d2e63d6ccf0b7f5250103"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCMDRSCHAINEDLIST.html#a7c95325c818d2e63d6ccf0b7f5250103">NextCurrent</a> ()</td></tr>
 <tr class="separator:a7c95325c818d2e63d6ccf0b7f5250103"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -84,7 +84,7 @@ Public Attributes</h2></td></tr>
 <div class="textblock"><h3>template&lt;class T&gt;<br />
 class CMDRSCHAINEDLIST&lt; T &gt;</h3>
 
-<p>This class describes a chained list of items (<a href="https://en.wikipedia.org/wiki/Linked_list">https://en.wikipedia.org/wiki/Linked_list</a>). It can be called also a linked list. This is an elegant way to build a list without any big allocation, bypassing the needs to estimate a minimum size and to increase or decrease this size during execution. The disavantage is a slower and more complex way to access to an item on the list, and a more complex way to add a new item.</p>
+<p>This class describes a chained list of items (<a href="https://en.wikipedia.org/wiki/Linked_list">https://en.wikipedia.org/wiki/Linked_list</a>). It can be called also a linked list. This is an elegant way to build a list without any big allocation, bypassing the needs to estimate a minimum size and to increase or decrease this size during execution. The disadvantage is a slower and more complex way to access to an item on the list, and a more complex way to add a new item.</p>
 <p>To start, a chained list needs a starting pointer referencing the first item of the list. After that, each item have a pointer to the next item. If this pointer is NULL, this is the end of the list !</p>
 <p>The 'T' type can be of any type, including base types like int or char. But keep in mind that each item must save a pointer to the next item. If the size of the pointer is greater than the size of the item itself, consider using a true array...</p>
 <p>A notion of 'current item' is used, to let the user of the list to move through the list without doing a loop itself... </p>
@@ -120,7 +120,7 @@ template&lt;class T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a9376873ee15cd2ad4f239b832c700c56"></a>
+<a class="anchor" id="a8c572275e0adf1a6cf9fa82a9baab066"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -130,14 +130,14 @@ template&lt;class T &gt; </div>
           <td class="memname">void CMDRSCHAINEDLIST&lt; T &gt;::AddItem </td>
           <td>(</td>
           <td class="paramtype">T *&#160;</td>
-          <td class="paramname"><em>inpt</em></td><td>)</td>
+          <td class="paramname"><em>input</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 <p>Add a new item to the list. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">inpt</td><td>Address of the item to add. </td></tr>
+    <tr><td class="paramname">input</td><td>Address of the item to add. </td></tr>
   </table>
   </dd>
 </dl>
@@ -210,7 +210,7 @@ template&lt;class T &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classCMDRSCHAINEDLIST.html">CMDRSCHAINEDLIST</a></li>
-    <li class="footer">Generated on mer. oct. 18 2017 17:55:02 for Commanders &nbsp; by
+    <li class="footer">Generated on dim. févr. 18 2018 17:10:29 for Commanders &nbsp; by
     <a href="http://www.copperspice.com/documentation-doxypress.html">
     <img class="footer" src="doxypress.png" alt="DoxyPress"/></a> 1.2.10 </li>
   </ul>

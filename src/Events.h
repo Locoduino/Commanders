@@ -8,7 +8,7 @@ These values will be interpreted by the receiving object. Some values could not 
 enum COMMANDERS_MOVE_TYPE
 {
 	COMMANDERS_MOVE_MORE = +1,		/**< Add an incremental value, like an encoder can do.*/
-	COMMANDERS_MOVE_LESS = -1,		/**< Substract an incremental value, like an encoder can do.*/
+	COMMANDERS_MOVE_LESS = -1,		/**< Subtract an incremental value, like an encoder can do.*/
 	COMMANDERS_MOVE_STOP = 0,		/**< Stop the current movement.*/
 	COMMANDERS_MOVE_LEFT = -2,		/**< Move to left side.*/
 	COMMANDERS_MOVE_RIGHT = -3,		/**< Move to right side.*/

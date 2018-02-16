@@ -60,8 +60,8 @@ void DccCommanderClass::DccAccessoryDecoderPacket(int address, boolean activate,
 	// id / data / 1		 
 	// id / data / 1		 
 	// id / data / 0
-	// The last byte is to activate for a while (three times at 1 !) and then desactivate the motor !
-	// DccCommander will react only on the desactivate flag to avoid double events.
+	// The last byte is to activate for a while (three times at 1 !) and then deactivate the motor !
+	// DccCommander will react only on the deactivate flag to avoid double events.
 	if (activate == false)
 	{
 #ifdef COMMANDERS_DEBUG_MODE

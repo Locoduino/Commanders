@@ -5,7 +5,7 @@
 
 #include <Commanders.h>
 
-// Commanders dont have need for more events at this moment : more events, more memory consumed !
+// Commanders don't have need for more events at this moment : more events, more memory consumed !
 // A debug message will be shown if an event is lost because of this tiny size !
 #define EVENT_MAXNUMBER	3
 

@@ -43,7 +43,7 @@ and in this case, it has the usual form of a Commander :
 
 You should avoid to declare a SERIAL_COMMANDER if not necessary, because the Serial library delivered with the Arduino IDE
 allocates a lot of memory for each serial channel used.
-The only variable thing in this macro is the name of the serial channel to use : Serial for a UNO or a Nano, but Serial or
+The only variable thing in this macro is the name of the serial channel to use : Serial for a UNO or a NANO, but Serial or
 Serial1 to 3 on a Mega or a Due. Even a SoftwareSerial (from SoftwareSerial library (https://www.arduino.cc/en/Reference/SoftwareSerial) ) or a AltSoftSerial
 (from the well named library.. AltSoftSerial (https://github.com/PaulStoffregen/AltSoftSerial) !) can be used.
 

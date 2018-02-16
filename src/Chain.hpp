@@ -18,7 +18,7 @@ public:
 
 /** This class describes a chained list of items (https://en.wikipedia.org/wiki/Linked_list).
 It can be called also a linked list. This is an elegant way to build a list without any big allocation, bypassing
-the needs to estimate a minimum size and to increase or decrease this size during execution. The disavantage is a
+the needs to estimate a minimum size and to increase or decrease this size during execution. The disadvantage is a
 slower and more complex way to access to an item on the list, and a more complex way to add a new item.
 
 To start, a chained list needs a starting pointer referencing the first item of the list. After that, each item
@@ -41,9 +41,9 @@ public:
 	/** Default constructor.*/
 	inline CMDRSCHAINEDLIST() { this->pFirst = NULL; this->pCurrentItem = NULL; }
 	/** Add a new item to the list.
-	@param inpt Address of the item to add.
+	@param input Address of the item to add.
 	*/
-	void AddItem(T *inpt);
+	void AddItem(T *input);
 	/** Move the current pointer to the next one in the list. If the current was the last one, the current pointer
 	will be set to the start of the list, its first item.*/
 	void NextCurrent();
@@ -52,10 +52,10 @@ public:
 /** Macro to call a given function on all items in a list.
 @param T type of the item
 @param list	Chained/linked list to scan.
-@param func Function to call. Must be of type
+@param function Function to call. Must be of type
     void function(T *pItem);
 */
-#define CMDRSCHAIN_ENUMERATE(T, list, func) CMDRSCHAINEDLISTITEM<T> *pCurr = list.pFirst; while (pCurr != NULL) { func(pCurr->Obj); pCurr = pCurr->pNext; }
+#define CMDRSCHAIN_ENUMERATE(T, list, function) CMDRSCHAINEDLISTITEM<T> *pCurr = list.pFirst; while (pCurr != NULL) { func(pCurr->Obj); pCurr = pCurr->pNext; }
 
 // This function appends element into chain.
 template<class T> void CMDRSCHAINEDLIST<T>::AddItem(T *t)

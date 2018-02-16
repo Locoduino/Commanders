@@ -47,7 +47,7 @@ public:
 	/** Initialize the instance.*/
 	void begin();
 	/** Each position of the switch can be defined with an Arduino pin, and an event definition...
-	In this case of switch, there is an event when one pin is activated, but there is no OFF event for the disactivated pin.
+	In this case of switch, there is an event when one pin is activated, but there is no OFF event for the inactivated pin.
 	@param inId			id of the position.
 	@param inPin		Arduino pin connected to the button.
 	@param inEvent		Event type used when the pin is activated. Default COMMANDERS_EVENT_MOVEPOSITIONID.

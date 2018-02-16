@@ -36,7 +36,7 @@ void OnReceiveHandler(int inNbBytes)
 	long two = buf[2];
 	long one = buf[3];
 
-	//Rebuild the recomposed long by using bitshift.
+	//Rebuild the recomposed long by using bit-shift.
 	unsigned long foundID = ((four << 0) & 0xFF) + ((three << 8) & 0xFFFF) + ((two << 16) & 0xFFFFFF) + ((one << 24) & 0xFFFFFFFF);
 
 	COMMANDERS_EVENT_TYPE lastEventType = (COMMANDERS_EVENT_TYPE)buf[4];

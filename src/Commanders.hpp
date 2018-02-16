@@ -9,7 +9,7 @@ typedef void(*CommandersEventHandlerFunction)(unsigned long inId, COMMANDERS_EVE
 
 /**
 This is the main class of the library. All data and functions are static.
-There is no way to instanciate this class.
+There is no way to instantiate this class.
 
 To handle events from external hardware of buses, there is two ways:
 
@@ -42,9 +42,9 @@ public:
 	{
 #ifdef COMMANDERS_DEBUG_MODE
 		Serial.println(F(""));
-		Serial.println(F("Commanders V1.51.0"));
+		Serial.println(F("Commanders V1.51.2"));
 		Serial.println(F("Developed by Thierry Paris."));
-		Serial.println(F("(c) Locoduino 2016-2017"));
+		Serial.println(F("(c) Locoduino 2016-2018"));
 		Serial.println(F(""));
 
 		Serial.println(F("*** Setup Commanders started."));
@@ -106,7 +106,7 @@ public:
 	*/
 	static unsigned long RaiseEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent = COMMANDERS_EVENT_MOVEPOSITIONID, int inData = 0);
 #if defined(COMMANDERS_DEBUG_MODE) || defined(COMMANDERS_PRINT_COMMANDERS)
-	/** Print on the console the given moving type in plain english.
+	/** Print on the console the given moving type in plain English.
 	@remark Only available if COMMANDERS_DEBUG_MODE or COMMANDERS_PRINT_COMMANDERS is defined.
 	*/
 	static void printEventMoveType(COMMANDERS_MOVE_TYPE inMoveType);
@@ -114,11 +114,11 @@ public:
 	@remark Only available if COMMANDERS_DEBUG_MODE or COMMANDERS_PRINT_COMMANDERS is defined.
 	*/
 	static void printEventData(COMMANDERS_EVENT_TYPE inEventType, int inEventData);
-	/** Print on the console the given type in plain english.
+	/** Print on the console the given type in plain English.
 	@remark Only available if COMMANDERS_DEBUG_MODE or COMMANDERS_PRINT_COMMANDERS is defined.
 	*/
 	static void printEventType(COMMANDERS_EVENT_TYPE inEventType, bool inDataFollow);
-	/** Print on the console the given event in plain english.
+	/** Print on the console the given event in plain English.
 	@remark Only available if COMMANDERS_DEBUG_MODE or COMMANDERS_PRINT_COMMANDERS is defined.
 	*/
 	static void printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inEventData);
@@ -131,7 +131,7 @@ public:
 	/** This define is empty if COMMANDERS_PRINT_COMMANDERS is not defined. */
 	#define PRINT_COMMANDERS()	Commanders::printCommanders();
 	/** Print the full list of commanders.
-	The list is printed on the console in a hierachical way, with details like buttons and events. There is also all data (pins, events)
+	The list is printed on the console in a hierarchical way, with details like buttons and events. There is also all data (pins, events)
 	associated with each item.
 	@remark Only available if COMMANDERS_PRINT_COMMANDERS is defined.
 	*/

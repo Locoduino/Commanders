@@ -38,14 +38,14 @@ class CANCommanderClass : Commander
 
 		// Global variables for reading and writing messages.
 		uint8_t IdR;				// Id for CAN_recup()
-		unsigned char lenR = 0;		// Current length of the messaga
-		unsigned char bufR[8];		// Recieving buffer.
+		unsigned char lenR = 0;		// Current length of the message
+		unsigned char bufR[8];		// Receiving buffer.
 		unsigned char bufS[8];		// Sending buffer.
 
 		// Global variables for the circular buffer.
 		unsigned char Circule[256];	// Circular buffer for read messages, handled by interrupt.
 		int indexW, indexR, Ncan;	// Index of writing and reading buffer, and byte number to read.
-		uint8_t CANoverflow = 0;	// flag overflow (buffer Circule full)
+		uint8_t CANoverflow = 0;	// flag overflow (Circular buffer full)
 
 		void CAN_recup();
 

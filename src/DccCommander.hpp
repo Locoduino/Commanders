@@ -9,7 +9,7 @@
 
 #include <DCC_Decoder.hpp>
 
-/** In your sketch, you use Dcccommander, but in reality, this is the current instance of the DccCommanderClass !*/
+/** In your sketch, you use DccCommander, but in reality, this is the current instance of the DccCommanderClass !*/
 #define DccCommander DccCommanderClass::GetCurrent()
 
 //-------------------------------------------------------------------
@@ -59,8 +59,8 @@ real_data * 10000 + real_id   .
 DCCINT is the macro used to build the unsigned long, DCCID the one to use to get the real id number from this long int, and DCCACTIVATION the 
 other to get the real_data.
 
-This flag is to activate for a while (three times at 1 !) and then desactivate the motor !
-DccCommander will react only on the desactivate flag to avoid double events.
+This flag is to activate for a while (three times at 1 !) and then deactivate the motor !
+DccCommander will react only on the deactivate flag to avoid double events.
 
 Events thrown:
 
@@ -86,7 +86,7 @@ class DccCommanderClass : Commander
 		@param i	Manufacturer ID of this decoder. Can be 0 in common case...
 		@param j	Manufacturer version number for this decoder. Can be 0 in common case...
 		@param k	Interrupt number used by DCC_Decoder. The interrupt is raised when a signal is detected on the associated pin.
-		@param inInterruptMonitor	If true, ths Commnaders status led will blink when DccCommander receive a new accessory packet. Default is false.
+		@param inInterruptMonitor	If true, the Commanders status led will blink when DccCommander receive a new accessory packet. Default is false.
 		@param inUseRawDccAddresses	Dcc id and accessory id are converted into a more readable way to be used, but if this flag is true, 
 		the original values can be preserved instead of these converted value. Default is false.
 		*/
@@ -97,12 +97,12 @@ class DccCommanderClass : Commander
 		void PriorityLoop();
 		/** Main loop function. */
 		unsigned long loop();
-		/** Set the callback function whih will be called when an accessory packet will be decoded. Set it to NULL or 0 to inactivate this function.*/
+		/** Set the callback function which will be called when an accessory packet will be decoded. Set it to NULL or 0 to inactivate this function.*/
 		static void SetAccessoryDecoderPacketHandler(DccAccDecoderPacket func);
 		/** Decode the packet data, and raise a Commander event.
 		@param address	raw address of the decoder, directly got from the DCC packet.
 		@param activate flag from the DCC packet. True means activate the accessory motor.
-		@param data additionnal data, adding bits to decoder accessory, and including the number of the accessory.
+		@param data additional data, adding bits to decoder accessory, and including the number of the accessory.
 		*/
 		static void DccAccessoryDecoderPacket(int address, boolean activate, uint8_t data);
 		/** Gets the last DCC id received.*/
@@ -122,7 +122,7 @@ class DccCommanderClass : Commander
 
 #ifdef COMMANDERS_DEBUG_MODE
 public:
-	/** Print thhe given event on the console.
+	/** Print the given event on the console.
 	@remark Only available if COMMANDERS_DEBUG_MODE is defined.
 	*/
 	static void printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inEventData);

@@ -37,8 +37,8 @@ It is important that only one button was pushed at a time.
 It is possible to use more or less buttons, but resistor values have to be computed
 to avoid confusing analog values between near pushes...
 
-This class is a list of ButtonsCommanderAnalogPushesItem, basicaly a push button.
-Each item has its own id, analog value and tolerancy interval.
+This class is a list of ButtonsCommanderAnalogPushesItem, basically a push button.
+Each item has its own id, analog value and tolerance interval.
 
 Events thrown:
 
@@ -53,7 +53,7 @@ private:
 	uint8_t number;			// Number of buttons
 	uint8_t lastButtonPressed; // last button pressed number
 	int lastButtonState;	// the previous reading from the input pin
-	int readingTolerancy;	// if the value is between 'button value-tolerancy' and 'button value+tolerancy' , this is good !
+	int readingTolerancy;	// if the value is between 'button value-tolerance' and 'button value+tolerance' , this is good !
 
 	// List of items which must be allocated by the constructor.
 	unsigned char size;

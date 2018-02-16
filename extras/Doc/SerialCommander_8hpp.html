@@ -92,7 +92,7 @@ public:
     }
     void printCommander() { ... }
 };    
-</pre><p>You should avoid to declare a <a class="el" href="SerialCommander_8hpp.html#a93c1234e764041277200d7d2f5ff4468">SERIAL_COMMANDER</a> if not necessary, because the Serial library delivered with the Arduino IDE allocates a lot of memory for each serial channel used. The only variable thing in this macro is the name of the serial channel to use : Serial for a UNO or a Nano, but Serial or Serial1 to 3 on a Mega or a Due. Even a SoftwareSerial (from SoftwareSerial library (<a href="https://www.arduino.cc/en/Reference/SoftwareSerial">https://www.arduino.cc/en/Reference/SoftwareSerial</a>) ) or a AltSoftSerial (from the well named library.. AltSoftSerial (<a href="https://github.com/PaulStoffregen/AltSoftSerial">https://github.com/PaulStoffregen/AltSoftSerial</a>) !) can be used.</p>
+</pre><p>You should avoid to declare a <a class="el" href="SerialCommander_8hpp.html#a93c1234e764041277200d7d2f5ff4468">SERIAL_COMMANDER</a> if not necessary, because the Serial library delivered with the Arduino IDE allocates a lot of memory for each serial channel used. The only variable thing in this macro is the name of the serial channel to use : Serial for a UNO or a NANO, but Serial or Serial1 to 3 on a Mega or a Due. Even a SoftwareSerial (from SoftwareSerial library (<a href="https://www.arduino.cc/en/Reference/SoftwareSerial">https://www.arduino.cc/en/Reference/SoftwareSerial</a>) ) or a AltSoftSerial (from the well named library.. AltSoftSerial (<a href="https://github.com/PaulStoffregen/AltSoftSerial">https://github.com/PaulStoffregen/AltSoftSerial</a>) !) can be used.</p>
 <p>The syntax of the message to get to throw a new event is given by the class TextInterpreter.</p>
 <p>Events thrown:</p>
 <table class="doxtable">
@@ -145,7 +145,7 @@ public:
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d41d8cd98f00b204e9800998ecf8427e.html">src</a></li><li class="navelem"><a class="el" href="SerialCommander_8hpp.html">SerialCommander.hpp</a></li>
-    <li class="footer">Generated on mer. oct. 18 2017 17:55:02 for Commanders &nbsp; by
+    <li class="footer">Generated on ven. févr. 16 2018 22:27:20 for Commanders &nbsp; by
     <a href="http://www.copperspice.com/documentation-doxypress.html">
     <img class="footer" src="doxypress.png" alt="DoxyPress"/></a> 1.2.10 </li>
   </ul>

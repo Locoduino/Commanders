@@ -9,7 +9,7 @@
 
 /** This class describes a potentiometer.
 This is an analog item, with a minimal, a maximal and a current analog value.
-An analog pin of the Arduino will retun a value between 0 and 1023. The current value of this item
+An analog pin of the Arduino will return a value between 0 and 1023. The current value of this item
 will be mapped from 0/1023 to minimum/maximum current value.
 An event will be thrown when a change of the value will be greater than moveAccuracy.
 

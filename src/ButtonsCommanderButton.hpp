@@ -10,7 +10,7 @@
 A button is a hardware device allowing user to act when this device is used. Its id is sent, 
 and the listener of the commander events can do the job.
 
-This is the base class for all buttons, this class should not be instanciate !
+This is the base class for all buttons, this class should not be instantiate !
 */
 class ButtonsCommanderButton
 {

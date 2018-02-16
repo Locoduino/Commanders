@@ -36,7 +36,7 @@ void ButtonsCommanderAnalogPushes::begin(int inButtonPin, uint8_t inNumberOfItem
 			Serial.print(inpButtonValues[i]);
 			Serial.print(F(" for button "));
 			Serial.print(i);
-			Serial.println(F(". Value must betwwen 0 and 1023 !"));
+			Serial.println(F(". Value must between 0 and 1023 !"));
 		}
 #endif
 		this->pButtons[i].begin(inpIds[i], inpButtonValues[i], inTolerancy);

@@ -42,8 +42,8 @@ public:
 	{
 #ifdef COMMANDERS_DEBUG_MODE
 		Serial.println(F(""));
-		Serial.println(F("Commanders V1.51.2"));
-		Serial.println(F("Developed by Thierry Paris."));
+		Serial.println(F("Commanders V1.60.0"));
+		Serial.println(F("Created by Thierry Paris."));
 		Serial.println(F("(c) Locoduino 2016-2018"));
 		Serial.println(F(""));
 
@@ -126,18 +126,6 @@ public:
 	#define COMMANDERS_PRINT_EVENT(id, type, data)		Commanders::printEvent(id, type, data);
 #else
 	#define COMMANDERS_PRINT_EVENT(id, type, data)
-#endif
-#ifdef COMMANDERS_PRINT_COMMANDERS
-	/** This define is empty if COMMANDERS_PRINT_COMMANDERS is not defined. */
-	#define PRINT_COMMANDERS()	Commanders::printCommanders();
-	/** Print the full list of commanders.
-	The list is printed on the console in a hierarchical way, with details like buttons and events. There is also all data (pins, events)
-	associated with each item.
-	@remark Only available if COMMANDERS_PRINT_COMMANDERS is defined.
-	*/
-	static void printCommanders();
-#else
-	#define PRINT_COMMANDERS()
 #endif
 };
 

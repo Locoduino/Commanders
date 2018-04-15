@@ -32,6 +32,8 @@ Event								KEYWORD1
 EventPin							KEYWORD1
 EventStack							KEYWORD1
 TextInterpreter						KEYWORD1
+EventsSequencer						KEYWORD1
+EventsSequencerItem					KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
@@ -45,6 +47,7 @@ GetLastConfigAddress		KEYWORD2
 RaiseEvent					KEYWORD2
 
 AddEvent					KEYWORD2
+AddEvents					KEYWORD2
 GetLastSelectedButton 		KEYWORD2
 
 GetId 						KEYWORD2
@@ -55,6 +58,15 @@ PriorityLoop				KEYWORD2
 
 printEvent					KEYWORD2
 printCommander				KEYWORD2
+printSequencer				KEYWORD2
+printAllSequencers			KEYWORD2
+
+begin						KEYWORD2
+StartItem					KEYWORD2
+Start						KEYWORD2
+Stop						KEYWORD2
+Pause						KEYWORD2
+Continue					KEYWORD2
 
 #######################################
 # Constants (LITERAL1)

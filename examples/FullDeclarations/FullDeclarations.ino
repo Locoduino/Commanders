@@ -102,8 +102,9 @@ void setup()
 	////////////////////////////////////////////////////////////////////////////////////
 	// Encoders
 	// This encoder will always returns a value between -100 and +100. The starting position is 0.
+	// The movement quantity of the encoder is 3 to rise an event. 
 	// Connected to pins 22 and 23, with Id 500.
-	encoder_absolute.begin(500, 22, 23, 0, -100, +100);
+	encoder_absolute.begin(500, 22, 23, 3, 0, -100, +100);
 
 	// This encoder will always returns -1 or +1
 	// Connected to pins 24 and 25, with Id 501.

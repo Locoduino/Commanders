@@ -140,6 +140,10 @@ unsigned long Commanders::loop()
 		Commanders::StartStatusLed = 0;
 	}
 
+#ifndef NO_EVENTSSEQUENCER
+	EventsSequencer::loops();
+#endif
+
 	unsigned long id;
 	id = Commander::loops();
 

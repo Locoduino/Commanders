@@ -68,5 +68,12 @@ class Commander
 #endif
 };
 
+#ifdef COMMANDERS_PRINT_COMMANDERS
+/** This define is empty if COMMANDERS_PRINT_COMMANDERS is not defined. */
+#define PRINT_COMMANDERS()	Commander::printCommanders();
+#else
+#define PRINT_COMMANDERS()
+#endif
+
 //-------------------------------------------------------------------
 #endif

@@ -62,32 +62,26 @@ $(document).ready(function(){initNavTree('Commanders_8h.html','');});
 <div class="textblock"><code>#include &lt;DIO2.h&gt;</code><br />
 <code>#include &quot;Commander.hpp&quot;</code><br />
 <code>#include &quot;Commanders.hpp&quot;</code><br />
+<code>#include &quot;CANCommander.hpp&quot;</code><br />
+<code>#include &quot;DccCommander.hpp&quot;</code><br />
+<code>#include &quot;I2CCommander.hpp&quot;</code><br />
 <code>#include &quot;ButtonsCommander.hpp&quot;</code><br />
+<code>#include &quot;<a class="el" href="SerialCommander_8hpp_source.html">SerialCommander.hpp</a>&quot;</code><br />
+<code>#include &quot;TextInterpreter.hpp&quot;</code><br />
+<code>#include &quot;EventsSequencer.hpp&quot;</code><br />
 </div>
 <p><a href="Commanders_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:abe48e551c87434efe75af8e7d4df457c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Commanders_8h.html#abe48e551c87434efe75af8e7d4df457c">GPIO2_PREFER_SPEED</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:abe48e551c87434efe75af8e7d4df457c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fdf52a0fdf8778a4472686eaa278b15"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Commanders_8h.html#a1fdf52a0fdf8778a4472686eaa278b15">COMMANDERS_DEBUG_MODE</a></td></tr>
 <tr class="separator:a1fdf52a0fdf8778a4472686eaa278b15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43b270926f3753345583c1ed6f03c831"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Commanders_8h.html#a43b270926f3753345583c1ed6f03c831">COMMANDERS_DEBUG_VERBOSE_MODE</a></td></tr>
 <tr class="separator:a43b270926f3753345583c1ed6f03c831"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a903f43d89a21cb3955b4fac654f6f8e8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Commanders_8h.html#a903f43d89a21cb3955b4fac654f6f8e8">COMMANDERS_PRINT_COMMANDERS</a></td></tr>
 <tr class="separator:a903f43d89a21cb3955b4fac654f6f8e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe48e551c87434efe75af8e7d4df457c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Commanders_8h.html#abe48e551c87434efe75af8e7d4df457c">GPIO2_PREFER_SPEED</a>&#160;&#160;&#160;1</td></tr>
-<tr class="separator:abe48e551c87434efe75af8e7d4df457c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8647526d256312a8b21f15af5805fb2a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8647526d256312a8b21f15af5805fb2a"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>NO_CANCOMMANDER</b></td></tr>
-<tr class="separator:a8647526d256312a8b21f15af5805fb2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0413efc930c14270a8d2caf241163cbe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0413efc930c14270a8d2caf241163cbe"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>NO_DCCCOMMANDER</b></td></tr>
-<tr class="separator:a0413efc930c14270a8d2caf241163cbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa63d8345e7748626f0c63d02ecdff633"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa63d8345e7748626f0c63d02ecdff633"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>NO_I2CCOMMANDER</b></td></tr>
-<tr class="separator:aa63d8345e7748626f0c63d02ecdff633"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a190ad583ee12fb3fdbce6761a9b914e7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a190ad583ee12fb3fdbce6761a9b914e7"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>NO_SERIALCOMMANDER</b></td></tr>
-<tr class="separator:a190ad583ee12fb3fdbce6761a9b914e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Main include file of the library. </p>
@@ -105,7 +99,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <p>If this is defined, the library will do many checks during setup and execution, and print errors, warnings and information messages on console. These messages can take a lot of memory, so be careful about the free memory of your program if you activate debug mode. </p>
 
-<p class="definition">Definition at line <a class="el" href="Commanders_8h_source.html#l00419">419</a> of file <a class="el" href="Commanders_8h_source.html">Commanders.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Commanders_8h_source.html#l00535">535</a> of file <a class="el" href="Commanders_8h_source.html">Commanders.h</a>.</p>
 
 </div>
 </div>
@@ -120,7 +114,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <p>If this is defined, the Verbose mode lets you see all actions done by the library, but with a real flood of text to the console... It has no effect if <a class="el" href="Commanders_8h.html#a1fdf52a0fdf8778a4472686eaa278b15">COMMANDERS_DEBUG_MODE</a> is not activated. </p>
 
-<p class="definition">Definition at line <a class="el" href="Commanders_8h_source.html#l00422">422</a> of file <a class="el" href="Commanders_8h_source.html">Commanders.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Commanders_8h_source.html#l00538">538</a> of file <a class="el" href="Commanders_8h_source.html">Commanders.h</a>.</p>
 
 </div>
 </div>
@@ -133,9 +127,9 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>If this is defined, the function <a class="el" href="classCommanders.html#a9e4b17238d8bd80bc0813d82c4211cbc">Commanders::printCommanders()</a> will become available. This is useful to try to understand why a commander, or a commander item is not correctly defined. This function uses a lot of memory, so activate it only if necessary, and be careful about your program's memory. You can use the define PRINT_COMMANDERS() in your sketch instead of a call to <a class="el" href="classCommanders.html#a9e4b17238d8bd80bc0813d82c4211cbc">Commanders::printCommanders()</a>. If <a class="el" href="Commanders_8h.html#a903f43d89a21cb3955b4fac654f6f8e8">COMMANDERS_PRINT_COMMANDERS</a> is not defined, PRINT_COMMANDERS is defined as empty, so you will not have a compilation error. </p>
+<p>If this is defined, the function Commanders::printCommanders() will become available. This is useful to try to understand why a commander, or a commander item is not correctly defined. This function uses a lot of memory, so activate it only if necessary, and be careful about your program's memory. You can use the define PRINT_COMMANDERS() in your sketch instead of a call to Commanders::printCommanders(). If <a class="el" href="Commanders_8h.html#a903f43d89a21cb3955b4fac654f6f8e8">COMMANDERS_PRINT_COMMANDERS</a> is not defined, PRINT_COMMANDERS is defined as empty, so you will not have a compilation error. </p>
 
-<p class="definition">Definition at line <a class="el" href="Commanders_8h_source.html#l00428">428</a> of file <a class="el" href="Commanders_8h_source.html">Commanders.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Commanders_8h_source.html#l00544">544</a> of file <a class="el" href="Commanders_8h_source.html">Commanders.h</a>.</p>
 
 </div>
 </div>
@@ -150,7 +144,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <p>This is used internally by DIO2.h </p>
 
-<p class="definition">Definition at line <a class="el" href="Commanders_8h_source.html#l00432">432</a> of file <a class="el" href="Commanders_8h_source.html">Commanders.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Commanders_8h_source.html#l00423">423</a> of file <a class="el" href="Commanders_8h_source.html">Commanders.h</a>.</p>
 
 </div>
 </div>
@@ -160,7 +154,7 @@ Macros</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d41d8cd98f00b204e9800998ecf8427e.html">src</a></li><li class="navelem"><a class="el" href="Commanders_8h.html">Commanders.h</a></li>
-    <li class="footer">Generated on dim. févr. 18 2018 17:10:29 for Commanders &nbsp; by
+    <li class="footer">Generated on dim. avr. 15 2018 20:35:06 for Commanders &nbsp; by
     <a href="http://www.copperspice.com/documentation-doxypress.html">
     <img class="footer" src="doxypress.png" alt="DoxyPress"/></a> 1.2.10 </li>
   </ul>

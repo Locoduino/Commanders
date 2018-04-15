@@ -106,6 +106,14 @@ var NAVTREE =
           [ "PriorityLoop", "classCommander.html#ade3914b5c62cd08a4e97050bc5314734", null ]
         ] ],
         [ "Commanders", "classCommanders.html", null ],
+        [ "DccCommanderClass", "classDccCommanderClass.html", [
+          [ "DccCommanderClass", "classDccCommanderClass.html#ac10ea64d33e686c877bdcb3024068e02", null ],
+          [ "begin", "classDccCommanderClass.html#a6ec17894419857a33c2667e925da456e", null ],
+          [ "GetLastDccId", "classDccCommanderClass.html#a97a3afabe3aca9b97728b3d8679ad66b", null ],
+          [ "loop", "classDccCommanderClass.html#a0c97ea34dfdf4c13de53a58937df5580", null ],
+          [ "printCommander", "classDccCommanderClass.html#a9eb04a79497f70417cbb690e9dc3614c", null ],
+          [ "PriorityLoop", "classDccCommanderClass.html#a688f192c9f26dfe824a86b6aa00152df", null ]
+        ] ],
         [ "Event", "structEvent.html", [
           [ "Data", "structEvent.html#add1010c7a7dfb056fee72df7c1575d90", null ],
           [ "EventType", "structEvent.html#a30e11257e8ec1f970fb3159060bc2d17", null ],
@@ -117,10 +125,50 @@ var NAVTREE =
           [ "Id", "structEventPin.html#ad356be83493e83623b5f8756f9f99808", null ],
           [ "Pin", "structEventPin.html#a55bd77f9470bf8903042423278f950c2", null ]
         ] ],
+        [ "EventsSequencer", "classEventsSequencer.html", [
+          [ "EventsSequencer", "classEventsSequencer.html#a96416a5255f11c368083b5b18fc7b355", null ],
+          [ "AddEvent", "classEventsSequencer.html#acf3401ae5bb11ade77c3a81e54182f57", null ],
+          [ "AddEvents", "classEventsSequencer.html#ad349b91332038edc1a11c09e52741f5a", null ],
+          [ "begin", "classEventsSequencer.html#aa8b511ff3c12cfd7904a1db874001c07", null ],
+          [ "Continue", "classEventsSequencer.html#a081d5cbbfd30fedb74f9ffd3e8673a37", null ],
+          [ "IsPaused", "classEventsSequencer.html#af029590bb04cca85eb5f252f72d35536", null ],
+          [ "IsPerpetual", "classEventsSequencer.html#a7464a660355587df3d0fade0ce2f7b8f", null ],
+          [ "IsPPointer", "classEventsSequencer.html#a8e705b0baa89b9c92274eae8ef9d7bb4", null ],
+          [ "loop", "classEventsSequencer.html#a57a3e28e2c94aa3c961bade3465df5a8", null ],
+          [ "Pause", "classEventsSequencer.html#a1ff19e15287ddc6018dbc4dac3bd9269", null ],
+          [ "printSequencer", "classEventsSequencer.html#a30a2b0532bd510041adff04b3703a44d", null ],
+          [ "Start", "classEventsSequencer.html#ae8e770319efbcbf64d339c15f1c7e607", null ],
+          [ "StartItem", "classEventsSequencer.html#a73c159ac8f7758de875e50d85d7fa727", null ],
+          [ "Stop", "classEventsSequencer.html#a3410e322875972c22952e2ca0084356a", null ],
+          [ "pCurrent", "classEventsSequencer.html#a3b2235765fba9de94e3cbdb621991649", null ],
+          [ "pFirst", "classEventsSequencer.html#a11414cfa62dc9100265cd2e567fcdc28", null ]
+        ] ],
+        [ "EventsSequencerItem", "structEventsSequencerItem.html", [
+          [ "GetDelay", "structEventsSequencerItem.html#ad34bbe05d8011344950c8301fa68ed5e", null ],
+          [ "GetNext", "structEventsSequencerItem.html#a1ad822811fd0a36fcde2bd33d14e01ff", null ],
+          [ "SetNext", "structEventsSequencerItem.html#ab7ef9b065c1b870e7081538c1e103beb", null ],
+          [ "data", "structEventsSequencerItem.html#a737b951c75d5bb157b64b813b20acff5", null ],
+          [ "delay", "structEventsSequencerItem.html#adf1c33ad991dfa3c442c64826b56d277", null ],
+          [ "id", "structEventsSequencerItem.html#aa6a3f55517e1c90070e40bb1db1e96d0", null ],
+          [ "next", "structEventsSequencerItem.html#aec4270ff027ff1d4257b2558023ef616", null ],
+          [ "type", "structEventsSequencerItem.html#a60f055a17d010f1dbd77058ff3870b2e", null ]
+        ] ],
         [ "EventStack", "classEventStack.html", [
           [ "GetEvent", "classEventStack.html#a0cd732c42b231ae7e31ec5b77d23faec", null ],
           [ "GetPendingEventIndex", "classEventStack.html#ac926c16835a21a1710d986040ce76b57", null ],
           [ "PushEvent", "classEventStack.html#ae68541fb067cda62a399a9cea46ca202", null ]
+        ] ],
+        [ "I2CCommanderClass", "classI2CCommanderClass.html", [
+          [ "I2CCommanderClass", "classI2CCommanderClass.html#a9c8d2f7e5eb24f31086fd8e4cd5acf58", null ],
+          [ "begin", "classI2CCommanderClass.html#ac6575229251840ec767b7595e172ea1e", null ],
+          [ "loop", "classI2CCommanderClass.html#a11fda5e10b4caf40275fea5854018808", null ],
+          [ "printCommander", "classI2CCommanderClass.html#af6819052ca1a9dc32d07d2ad79be064e", null ]
+        ] ],
+        [ "TextInterpreter", "classTextInterpreter.html", [
+          [ "TextInterpreter", "classTextInterpreter.html#a22c1254be49ece97985d325d37a363f4", null ],
+          [ "Init", "classTextInterpreter.html#af0c3da1f3d6967d0f01b75dbae03c3a2", null ],
+          [ "SendChar", "classTextInterpreter.html#a3f9c1da5671b6a913d131ec6c613e91f", null ],
+          [ "SendString", "classTextInterpreter.html#a94d1cd8f4e9a333b01ccf19ac43e5188", null ]
         ] ]
       ] ],
       [ "Class Index", "classes.html", null ],
@@ -143,12 +191,17 @@ var NAVTREE =
         [ "CMDRSCHAINEDLISTITEM< EventPin >", "classCMDRSCHAINEDLISTITEM.html", null ],
         [ "Commander", "classCommander.html", [
           [ "ButtonsCommanderClass", "classButtonsCommanderClass.html", null ],
-          [ "CANCommanderClass", "classCANCommanderClass.html", null ]
+          [ "CANCommanderClass", "classCANCommanderClass.html", null ],
+          [ "DccCommanderClass", "classDccCommanderClass.html", null ],
+          [ "I2CCommanderClass", "classI2CCommanderClass.html", null ]
         ] ],
         [ "Commanders", "classCommanders.html", null ],
         [ "Event", "structEvent.html", null ],
         [ "EventPin", "structEventPin.html", null ],
-        [ "EventStack", "classEventStack.html", null ]
+        [ "EventsSequencer", "classEventsSequencer.html", null ],
+        [ "EventsSequencerItem", "structEventsSequencerItem.html", null ],
+        [ "EventStack", "classEventStack.html", null ],
+        [ "TextInterpreter", "classTextInterpreter.html", null ]
       ] ],
       [ "Class Members", "functions_all.html", [
         [ "All", "functions_all.html", null ],
@@ -163,11 +216,7 @@ var NAVTREE =
             [ "COMMANDERS_DEBUG_MODE", "Commanders_8h.html#a1fdf52a0fdf8778a4472686eaa278b15", null ],
             [ "COMMANDERS_DEBUG_VERBOSE_MODE", "Commanders_8h.html#a43b270926f3753345583c1ed6f03c831", null ],
             [ "COMMANDERS_PRINT_COMMANDERS", "Commanders_8h.html#a903f43d89a21cb3955b4fac654f6f8e8", null ],
-            [ "GPIO2_PREFER_SPEED", "Commanders_8h.html#abe48e551c87434efe75af8e7d4df457c", null ],
-            [ "NO_CANCOMMANDER", "Commanders_8h.html#a8647526d256312a8b21f15af5805fb2a", null ],
-            [ "NO_DCCCOMMANDER", "Commanders_8h.html#a0413efc930c14270a8d2caf241163cbe", null ],
-            [ "NO_I2CCOMMANDER", "Commanders_8h.html#aa63d8345e7748626f0c63d02ecdff633", null ],
-            [ "NO_SERIALCOMMANDER", "Commanders_8h.html#a190ad583ee12fb3fdbce6761a9b914e7", null ]
+            [ "GPIO2_PREFER_SPEED", "Commanders_8h.html#abe48e551c87434efe75af8e7d4df457c", null ]
           ] ],
           [ "Events.h", "Events_8h.html", [
             [ "UNDEFINED_ID", "Events_8h.html#a48ad4dd16b8e22f2c8bc92b154479e92", null ],
@@ -241,6 +290,8 @@ var NAVTREE =
         [ "DccCommander.cpp", "DccCommander_8cpp_source.html", null ],
         [ "DccCommander.hpp", "DccCommander_8hpp_source.html", null ],
         [ "Events.h", "Events_8h_source.html", null ],
+        [ "EventsSequencer.cpp", "EventsSequencer_8cpp_source.html", null ],
+        [ "EventsSequencer.hpp", "EventsSequencer_8hpp_source.html", null ],
         [ "EventStack.cpp", "EventStack_8cpp_source.html", null ],
         [ "EventStack.hpp", "EventStack_8hpp_source.html", null ],
         [ "I2CCommander.cpp", "I2CCommander_8cpp_source.html", null ],

@@ -44,6 +44,15 @@ and you are not prepared to distribute and share the source code of your
 application. Contact info@open.com.au for details.
 
 \page Revision History
+\par 14/04/2018 1.60.0
+- Ajout de EventsSequencer
+- Ajout d'un exemple pour EventsSequencer
+- Correction de l'exemple FullDeclaration
+_______________
+- Added EventsSequencer
+- Added a sample for EventsSequencer
+- Fix of FullDeclaration sample.
+
 \par 16/02/2018 1.51.2
 - Correction de la syntaxe de la documentation anglaise.
 _______________
@@ -410,24 +419,6 @@ Main include file of the library.*/
 // Remove the '//' at the beginning of the line to activate the print function.
 //#define COMMANDERS_PRINT_COMMANDERS
 
-#ifdef DOXYGEN_SPECIFIC
-// DO NOT CHANGE THE LINES IN THIS BLOCK 'DOXYGEN_SPECIFIC' : Only here for documentation !
-
-/** If this is defined, the library will do many checks during setup and execution, and print errors, warnings and
-information messages on console. These messages can take a lot of memory, so be careful about the free memory of
-your program if you activate debug mode.*/
-#define COMMANDERS_DEBUG_MODE
-/** If this is defined, the Verbose mode lets you see all actions done by the  library, but with a real flood of
-text to the console... It has no effect if COMMANDERS_DEBUG_MODE is not activated.*/
-#define COMMANDERS_DEBUG_VERBOSE_MODE
-/** If this is defined, the function Commanders::printCommanders() will become available. This is useful to try
-to understand why a commander, or a commander item is not correctly defined.
-This function uses a lot of memory, so activate it only if necessary, and be careful about your program's memory.
-You can use the define PRINT_COMMANDERS() in your sketch instead of a call to Commanders::printCommanders().
-If COMMANDERS_PRINT_COMMANDERS is not defined, PRINT_COMMANDERS is defined as empty, so you will not have a compilation error.*/
-#define COMMANDERS_PRINT_COMMANDERS
-#endif
-
 /** This is used internally by DIO2.h */
 #define  GPIO2_PREFER_SPEED    1
 
@@ -488,17 +479,22 @@ If COMMANDERS_PRINT_COMMANDERS is not defined, PRINT_COMMANDERS is defined as em
 //NO_BUTTONSCOMMANDERPOTENTIOMETER
 //	ButtonsCommanderPotentiometer.cpp
 //	ButtonsCommanderPotentiometer.hpp
+//
+//NO_EVENTsSEQUENCER
+//	EventsSequencer.cpp
+//	EventsSequencer.hpp
 
 //#define NO_BUTTONSCOMMANDER
-//#define NO_BUTTONSCOMMANDERENCODER
+#define NO_BUTTONSCOMMANDERENCODER
 //#define NO_BUTTONSCOMMANDERPUSH
 //#define NO_BUTTONSCOMMANDERANALOGPUSHES
 //#define NO_BUTTONSCOMMANDERSWITCH
-//#define NO_BUTTONSCOMMANDERPOTENTIOMETER
+#define NO_BUTTONSCOMMANDERPOTENTIOMETER
 #define NO_CANCOMMANDER
 #define NO_DCCCOMMANDER
 #define NO_I2CCOMMANDER
-#define NO_SERIALCOMMANDER
+//#define NO_SERIALCOMMANDER
+#define NO_EVENTSSEQUENCER
 
 /////////////////////////////////////
 
@@ -524,6 +520,28 @@ If COMMANDERS_PRINT_COMMANDERS is not defined, PRINT_COMMANDERS is defined as em
 #ifndef NO_SERIALCOMMANDER
 #include "SerialCommander.hpp"
 #include "TextInterpreter.hpp"
+#endif
+
+#ifndef NO_EVENTSSEQUENCER
+#include "EventsSequencer.hpp"
+#endif
+
+#ifdef DOXYGEN_SPECIFIC
+// DO NOT CHANGE THESE LINES IN THIS BLOCK 'DOXYGEN_SPECIFIC' : Only here for documentation !
+
+/** If this is defined, the library will do many checks during setup and execution, and print errors, warnings and
+information messages on console. These messages can take a lot of memory, so be careful about the free memory of
+your program if you activate debug mode.*/
+#define COMMANDERS_DEBUG_MODE
+/** If this is defined, the Verbose mode lets you see all actions done by the  library, but with a real flood of
+text to the console... It has no effect if COMMANDERS_DEBUG_MODE is not activated.*/
+#define COMMANDERS_DEBUG_VERBOSE_MODE
+/** If this is defined, the function Commanders::printCommanders() will become available. This is useful to try
+to understand why a commander, or a commander item is not correctly defined.
+This function uses a lot of memory, so activate it only if necessary, and be careful about your program's memory.
+You can use the define PRINT_COMMANDERS() in your sketch instead of a call to Commanders::printCommanders().
+If COMMANDERS_PRINT_COMMANDERS is not defined, PRINT_COMMANDERS is defined as empty, so you will not have a compilation error.*/
+#define COMMANDERS_PRINT_COMMANDERS
 #endif
 
 #endif

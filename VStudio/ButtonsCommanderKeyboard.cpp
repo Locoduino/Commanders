@@ -4,7 +4,7 @@ author: <Thierry PARIS>
 description: <Keyboard button.>
 *************************************************************/
 
-#include <arduino.h>
+#include <Arduino.h>
 #include <Commanders.h>
 #include "ButtonsCommanderKeyboard.hpp"
 

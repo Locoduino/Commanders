@@ -44,6 +44,11 @@ and you are not prepared to distribute and share the source code of your
 application. Contact info@open.com.au for details.
 
 \page Revision History
+\par 20/05/2018 1.60.1
+- Correction des exemples SimpleButtons et SimpleButtonsByIds
+_______________
+- Fix of samples SimpleButtons and SimpleButtonsByIds.
+
 \par 14/04/2018 1.60.0
 - Ajout de EventsSequencer
 - Ajout d'un exemple pour EventsSequencer
@@ -409,7 +414,7 @@ Main include file of the library.*/
 
 ///////////////////////////////////////////////////////////////////
 // Remove the '//' at the beginning of the line to be in debug mode.
-//#define COMMANDERS_DEBUG_MODE
+#define COMMANDERS_DEBUG_MODE
 
 //////////////////////////////////////////////////////////////////
 // Remove the '//' at the beginning of the line to be in verbose debug mode.
@@ -417,7 +422,7 @@ Main include file of the library.*/
 
 //////////////////////////////////////////////////////////////////
 // Remove the '//' at the beginning of the line to activate the print function.
-//#define COMMANDERS_PRINT_COMMANDERS
+#define COMMANDERS_PRINT_COMMANDERS
 
 /** This is used internally by DIO2.h */
 #define  GPIO2_PREFER_SPEED    1
@@ -494,7 +499,7 @@ Main include file of the library.*/
 #define NO_DCCCOMMANDER
 #define NO_I2CCOMMANDER
 //#define NO_SERIALCOMMANDER
-#define NO_EVENTSSEQUENCER
+//#define NO_EVENTSSEQUENCER
 
 /////////////////////////////////////
 

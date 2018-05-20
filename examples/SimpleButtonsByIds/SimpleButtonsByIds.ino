@@ -8,23 +8,27 @@ description: <Demo sample with buttons, loop alternative>
 #error To be able to compile this sample,the line #define NO_BUTTONSCOMMANDER must be commented in Commanders.h
 #endif
 
+#if defined(ARDUINO_ARCH_ESP32)
+#define LED_BUILTIN 2
+#endif
+
 #include "Commanders.h"
 
 ButtonsCommanderPush Left;
 ButtonsCommanderPush Dc;
 ButtonsCommanderPush Right;
-ButtonsCommanderPush EPS;
-ButtonsCommanderPush TJD;
+ButtonsCommanderPush pushEPS;
+ButtonsCommanderPush pushTJD;
 	
 void setup()
 {
 	Commanders::begin(LED_BUILTIN);
 
-	Left.begin(4, 100);		// Arduino pin 4, id 100
-	Dc.begin(6, 101);
-	Right.begin(8, 102);
-	EPS.begin(10, 103);
-	TJD.begin(11, 104);
+	Left.begin(100, 4);		// Arduino pin 4, id 100
+	Dc.begin(101, 6);
+	Right.begin(102, 8);
+	pushEPS.begin(103, 10);
+	pushTJD.begin(104, 11);
 }
 
 void loop()

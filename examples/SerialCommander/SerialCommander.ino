@@ -10,6 +10,10 @@ description: <Serial commander demo>
 #error To be able to compile this sample,the line #define NO_SERIALCOMMANDER must be commented in Commanders.h
 #endif
 
+#if defined(ARDUINO_ARCH_ESP32)
+#define LED_BUILTIN 2
+#endif
+
 SERIAL_COMMANDER(Serial);
 
 void ReceiveEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)

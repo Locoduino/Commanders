@@ -10,6 +10,10 @@ description: <CAN commander demo>
 #error To be able to compile this sample,the line #define NO_CANCOMMANDER must be commented in Commanders.h
 #endif
 
+#if defined(ARDUINO_ARCH_ESP32)
+#define LED_BUILTIN 2
+#endif
+
 void ReceiveEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inEventData)
 {
     COMMANDERS_PRINT_EVENT(inId, inEventType, inEventData);

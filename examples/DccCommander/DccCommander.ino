@@ -10,6 +10,10 @@ description: <Dcc commander demo>
 #error To be able to compile this sample,the line #define NO_DCCCOMMANDER must be commented in Commanders.h
 #endif
 
+#if defined(ARDUINO_ARCH_ESP32)
+#define LED_BUILTIN 2
+#endif
+
 void ReceiveEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEvent, int inData)
 {
 	PRINT_EVENT_DCC(inId, inEvent, inData);

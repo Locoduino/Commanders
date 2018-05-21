@@ -44,6 +44,11 @@ and you are not prepared to distribute and share the source code of your
 application. Contact info@open.com.au for details.
 
 \page Revision History
+\par 21/05/2018 1.60.2
+- Correction de ButtonsCommanderAnalogPushes
+_______________
+- Fix of ButtonsCommanderAnalogPushes.
+
 \par 20/05/2018 1.60.1
 - Correction des exemples SimpleButtons et SimpleButtonsByIds
 _______________

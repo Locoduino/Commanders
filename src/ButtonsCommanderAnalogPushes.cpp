@@ -69,7 +69,7 @@ unsigned long ButtonsCommanderAnalogPushes::loop()
 	// long enough since the last press to ignore any noise:  
 
 	// If the button changed, due to noise or pressing:
-	if (reading < this->lastButtonState - this->readingTolerancy || reading > this->lastButtonState + this->readingTolerancy)
+	if (this->lastDebounceTime == 0 && (reading < this->lastButtonState - this->readingTolerancy || reading > this->lastButtonState + this->readingTolerancy))
 	{
 		// reset the debouncing timer
 		this->lastDebounceTime = millis();
@@ -83,6 +83,8 @@ unsigned long ButtonsCommanderAnalogPushes::loop()
 		// if the button state has changed:
 		if (reading < this->lastButtonState - this->readingTolerancy || reading > this->lastButtonState + this->readingTolerancy)
 		{
+			// save the reading.  Next time through the loop,
+			// it'll be the lastButtonState:
 			this->lastButtonState = reading;
 
 			for (int i = 0; i < this->size; i++)
@@ -100,9 +102,6 @@ unsigned long ButtonsCommanderAnalogPushes::loop()
 		this->lastDebounceTime = 0;    
 	}
 
-	// save the reading.  Next time through the loop,
-	// it'll be the lastButtonState:
-	lastButtonState = reading;
 	return foundID;
 }
 

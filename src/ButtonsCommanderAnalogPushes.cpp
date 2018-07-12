@@ -24,6 +24,7 @@ void ButtonsCommanderAnalogPushes::begin(int inButtonPin, uint8_t inNumberOfItem
 	this->size = inNumberOfItems;
 	this->pButtons = new ButtonsCommanderAnalogPushesItem[this->size];
 
+	digitalWrite(inButtonPin, HIGH);
 	this->analogPin = inButtonPin;
 	this->readingTolerancy = inTolerancy;
 

@@ -22,6 +22,7 @@ void ButtonsCommanderPotentiometer::begin(unsigned long inId, int inPin, int inM
 	if (this->moveAccuracy <= 0)
 		this->moveAccuracy = 1;
 
+	digitalWrite(this->pin, HIGH);
 	int val = analogRead(this->pin);
 	this->currentValue = map(val, 0, 1023, this->mini, this->maxi);
 }

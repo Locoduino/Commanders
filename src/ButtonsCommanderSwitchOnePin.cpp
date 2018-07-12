@@ -11,7 +11,8 @@ description: <Switch button with one pin only with debounce.>
 ButtonsCommanderSwitchOnePin::ButtonsCommanderSwitchOnePin() : ButtonsCommanderButton(UNDEFINED_ID)
 {
 	this->debounceDelay = 50;
-	this->lastSelectedPin = DP_INVALID;
+	this->lastButtonState = HIGH;
+	this->lastDebounceTime = 0;
 }
 
 void ButtonsCommanderSwitchOnePin::begin(unsigned long inId, int inPin)
@@ -30,16 +31,12 @@ void ButtonsCommanderSwitchOnePin::beforeFirstLoop()
 		this->lastButtonState = digitalRead2f(this->Pin);
 
 		Commanders::RaiseEvent(this->Id, COMMANDERS_EVENT_MOVE, this->lastButtonState == LOW ? COMMANDERS_MOVE_ON : COMMANDERS_MOVE_OFF);
-		if (this->lastButtonState == LOW)
-			this->lastSelectedPin = this->Pin;
 	}
 }
 
 unsigned long ButtonsCommanderSwitchOnePin::loop()
 { 
-	return ButtonsCommanderSwitch::loopOnePin(this->Pin, this->Id, this->lastSelectedPin == DP_INVALID ? UNDEFINED_ID : this->Id,
-		&this->debounceDelay, &this->lastSelectedPin,
-		&this->lastButtonState, &this->lastDebounceTime);
+	return ButtonsCommanderSwitch::loopOnePin(this->Id, this->Pin, this->Id, this->debounceDelay, &this->lastButtonState, &this->lastDebounceTime);
 }
 
 #ifdef COMMANDERS_PRINT_COMMANDERS

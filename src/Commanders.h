@@ -16,7 +16,8 @@ is added with some events to complete the event information : the position value
 Each kind of Commanders can be excluded from compilation, for memory problems purpose or for naming conflicts.
 Inside some Commanders, sub items can be excluded too, like the different buttons in the ButtonsCommander. 
 You can exclude some parts of library here, to avoid losing program and data memory on parts you don't use.
-For example, if you don't want DCC, just uncomment the line #define NO_DCCCOMMANDER by removing // at the beginning.
+For example, if you don't want DCC railroad modelling command protocol, 
+just uncomment the line #define NO_DCCCOMMANDER by removing // at the beginning.
 
 CANCommander is excluded by default, because this is a rare usage of the library, and the associated CAN library mcp_can
 consume memory for nothing if this commander is not used.
@@ -44,6 +45,13 @@ and you are not prepared to distribute and share the source code of your
 application. Contact info@open.com.au for details.
 
 \page Revision History
+\par 12/07/2018 1.61.0
+- Correction de ButtonsCommanderSwitch
+- Amélioration de la doc dans Commanders.h pour éviter les #define NO_* ...
+_______________
+- Fix of ButtonsCommanderSwitch.
+- Improvement of the documentation to avoid influence of #define NO_* inside Commanders.h
+
 \par 21/05/2018 1.60.2
 - Correction de ButtonsCommanderAnalogPushes
 _______________
@@ -495,16 +503,81 @@ Main include file of the library.*/
 //	EventsSequencer.hpp
 
 //#define NO_BUTTONSCOMMANDER
-#define NO_BUTTONSCOMMANDERENCODER
+//#define NO_BUTTONSCOMMANDERENCODER
 //#define NO_BUTTONSCOMMANDERPUSH
 //#define NO_BUTTONSCOMMANDERANALOGPUSHES
 //#define NO_BUTTONSCOMMANDERSWITCH
-#define NO_BUTTONSCOMMANDERPOTENTIOMETER
+//#define NO_BUTTONSCOMMANDERPOTENTIOMETER
 #define NO_CANCOMMANDER
 #define NO_DCCCOMMANDER
 #define NO_I2CCOMMANDER
 //#define NO_SERIALCOMMANDER
 //#define NO_EVENTSSEQUENCER
+
+#ifdef DOXYGEN_SPECIFIC
+			// DO NOT CHANGE THESE LINES IN THIS BLOCK 'DOXYGEN_SPECIFIC' : Only here for library documentation !
+
+			/** If this is defined, all the buttons part of the library is removed from the compilation. 
+			It can result in a smaller memory footprint for the final program.*/
+			#define NO_BUTTONSCOMMANDER
+			/** If this is defined, the encoders buttons part of the library is removed from the compilation.
+			It can result in a smaller memory footprint for the final program.*/
+			#define NO_BUTTONSCOMMANDERENCODER
+			/** If this is defined, the push buttons part of the library is removed from the compilation.
+			It can result in a smaller memory footprint for the final program.*/
+			#define NO_BUTTONSCOMMANDERPUSH
+			/** If this is defined, the analog push buttons part of the library is removed from the compilation.
+			It can result in a smaller memory footprint for the final program.*/
+			#define NO_BUTTONSCOMMANDERANALOGPUSHES
+			/** If this is defined, the switches part of the library is removed from the compilation.
+			It can result in a smaller memory footprint for the final program.*/
+			#define NO_BUTTONSCOMMANDERSWITCH
+			/** If this is defined, the potentiometer part of the library is removed from the compilation.
+			It can result in a smaller memory footprint for the final program.*/
+			#define NO_BUTTONSCOMMANDERPOTENTIOMETER
+
+			/** If this is defined, the full bus CAN part of the library is removed from the compilation.
+			It can result in a smaller memory footprint for the final program.*/
+			#define NO_CANCOMMANDER
+			/** If this is defined, the DCC railroad modelling protocol command part of the library is removed from the compilation.
+			It can result in a smaller memory footprint for the final program.*/
+			#define NO_DCCCOMMANDER
+			/** If this is defined, the I2C bus part of the library is removed from the compilation.
+			It can result in a smaller memory footprint for the final program.*/
+			#define NO_I2CCOMMANDER
+			/** If this is defined, the serial communication part of the library is removed from the compilation.
+			It can result in a smaller memory footprint for the final program.*/
+			#define NO_SERIALCOMMANDER
+			/** If this is defined, the sequencer of events of the library is removed from the compilation.
+			It can result in a smaller memory footprint for the final program.*/
+			#define NO_EVENTSSEQUENCER
+
+			#undef NO_BUTTONSCOMMANDER
+			#undef NO_BUTTONSCOMMANDERENCODER
+			#undef NO_BUTTONSCOMMANDERPUSH
+			#undef NO_BUTTONSCOMMANDERANALOGPUSHES
+			#undef NO_BUTTONSCOMMANDERSWITCH
+			#undef NO_BUTTONSCOMMANDERPOTENTIOMETER
+			#undef NO_CANCOMMANDER
+			#undef NO_DCCCOMMANDER
+			#undef NO_I2CCOMMANDER
+			#undef NO_SERIALCOMMANDER
+			#undef NO_EVENTSSEQUENCER
+
+			/** If this is defined, the library will do many checks during setup and execution, and print errors, warnings and
+			information messages on console. These messages can take a lot of memory, so be careful about the free memory of
+			your program if you activate debug mode.*/
+			#define COMMANDERS_DEBUG_MODE
+			/** If this is defined, the Verbose mode lets you see all actions done by the  library, but with a real flood of
+			text to the console... It has no effect if COMMANDERS_DEBUG_MODE is not activated.*/
+			#define COMMANDERS_DEBUG_VERBOSE_MODE
+			/** If this is defined, the function Commanders::printCommanders() will become available. This is useful to try
+			to understand why a commander, or a commander item is not correctly defined.
+			This function uses a lot of memory, so activate it only if necessary, and be careful about your program's memory.
+			You can use the define PRINT_COMMANDERS() in your sketch instead of a call to Commanders::printCommanders().
+			If COMMANDERS_PRINT_COMMANDERS is not defined, PRINT_COMMANDERS is defined as empty, so you will not have a compilation error.*/
+			#define COMMANDERS_PRINT_COMMANDERS
+#endif
 
 /////////////////////////////////////
 
@@ -534,24 +607,6 @@ Main include file of the library.*/
 
 #ifndef NO_EVENTSSEQUENCER
 #include "EventsSequencer.hpp"
-#endif
-
-#ifdef DOXYGEN_SPECIFIC
-// DO NOT CHANGE THESE LINES IN THIS BLOCK 'DOXYGEN_SPECIFIC' : Only here for documentation !
-
-/** If this is defined, the library will do many checks during setup and execution, and print errors, warnings and
-information messages on console. These messages can take a lot of memory, so be careful about the free memory of
-your program if you activate debug mode.*/
-#define COMMANDERS_DEBUG_MODE
-/** If this is defined, the Verbose mode lets you see all actions done by the  library, but with a real flood of
-text to the console... It has no effect if COMMANDERS_DEBUG_MODE is not activated.*/
-#define COMMANDERS_DEBUG_VERBOSE_MODE
-/** If this is defined, the function Commanders::printCommanders() will become available. This is useful to try
-to understand why a commander, or a commander item is not correctly defined.
-This function uses a lot of memory, so activate it only if necessary, and be careful about your program's memory.
-You can use the define PRINT_COMMANDERS() in your sketch instead of a call to Commanders::printCommanders().
-If COMMANDERS_PRINT_COMMANDERS is not defined, PRINT_COMMANDERS is defined as empty, so you will not have a compilation error.*/
-#define COMMANDERS_PRINT_COMMANDERS
 #endif
 
 #endif

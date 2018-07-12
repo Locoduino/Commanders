@@ -12,14 +12,17 @@ Each event has an id, a type and a data. Each item contains a delay before the f
 */
 struct EventsSequencerItem
 {
-	unsigned long id;
-	COMMANDERS_EVENT_TYPE type;
-	int data;
-	unsigned long delay;			// delay for 'this' command
-	EventsSequencerItem *next;
+	unsigned long id;	/**< id of this event.*/
+	COMMANDERS_EVENT_TYPE type;	/**< Type of this event.*/
+	int data;	/**< associated data of this event.*/
+	unsigned long delay;			/**< delay for 'this' command.*/
+	EventsSequencerItem *next;	/**< next event in the chained list.*/
 
+	/** Get the next event in the chained list.*/
 	EventsSequencerItem *GetNext() { return this->next; }
+	/** Link to a next event in the chained list of events.*/
 	void SetNext(EventsSequencerItem *inNext) { this->next = inNext; }
+	/** Get the delay in millisecond for this event, before passing to the next event.*/
 	unsigned long GetDelay() { return this->delay; }
 };
 

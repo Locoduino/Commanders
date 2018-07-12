@@ -165,7 +165,7 @@
         "strip-from-path": [
             ""
         ],
-        "tab-size": 4
+        "tab-size": 2
     },
     "index": {
         "alpha-index": true,
@@ -204,7 +204,7 @@
         "image-path": [
             ""
         ],
-        "input-encoding": "UTF-8",
+        "input-encoding": "ISO-8859-1",
         "input-patterns": [
             "*.as",
             "*.c",
@@ -292,7 +292,7 @@
     "output-html": {
         "disable-index": true,
         "enum-values-per-line": 4,
-        "external-links-in-window": false,
+        "external-links-in-window": true,
         "formula-fontsize": 10,
         "formula-transparent": true,
         "generate-html": true,
@@ -310,7 +310,7 @@
         "html-header": "",
         "html-index-num-entries": 100,
         "html-output": "..",
-        "html-search": false,
+        "html-search": true,
         "html-stylesheets": [
             ""
         ],

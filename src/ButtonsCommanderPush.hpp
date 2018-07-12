@@ -22,7 +22,7 @@ It will return one id at a time, passing through the whole list of Ids.
 
 Events thrown:
 
-     reason      |   id      |    type    | data
+reason           |   id      |    type    | data
 -----------------|-----------|------------|------
 pin state to LOW | button id | event type | data
 */

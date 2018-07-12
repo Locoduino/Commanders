@@ -66,7 +66,7 @@ var NAVTREE =
           [ "AddEvent", "classButtonsCommanderSwitch.html#a5b1a16f717941df169781ab96a5d1650", null ],
           [ "beforeFirstLoop", "classButtonsCommanderSwitch.html#ac5acada95c180aa8011e8b4c4ba3e6ce", null ],
           [ "begin", "classButtonsCommanderSwitch.html#adf7871a996c39e3dcbc30d1ad98de2ba", null ],
-          [ "GetId", "classButtonsCommanderSwitch.html#a2b9922d2b262776d8b49909329280bc5", null ],
+          [ "GetId", "classButtonsCommanderSwitch.html#a64d333a4964509ae4aecc01e068495e5", null ],
           [ "loop", "classButtonsCommanderSwitch.html#a3e66f87ce692b0524bf9940dec663d21", null ]
         ] ],
         [ "ButtonsCommanderSwitchOnePin", "classButtonsCommanderSwitchOnePin.html", [
@@ -106,6 +106,14 @@ var NAVTREE =
           [ "PriorityLoop", "classCommander.html#ade3914b5c62cd08a4e97050bc5314734", null ]
         ] ],
         [ "Commanders", "classCommanders.html", null ],
+        [ "DccCommanderClass", "classDccCommanderClass.html", [
+          [ "DccCommanderClass", "classDccCommanderClass.html#ac10ea64d33e686c877bdcb3024068e02", null ],
+          [ "begin", "classDccCommanderClass.html#a6ec17894419857a33c2667e925da456e", null ],
+          [ "GetLastDccId", "classDccCommanderClass.html#a97a3afabe3aca9b97728b3d8679ad66b", null ],
+          [ "loop", "classDccCommanderClass.html#a0c97ea34dfdf4c13de53a58937df5580", null ],
+          [ "printCommander", "classDccCommanderClass.html#a9eb04a79497f70417cbb690e9dc3614c", null ],
+          [ "PriorityLoop", "classDccCommanderClass.html#a688f192c9f26dfe824a86b6aa00152df", null ]
+        ] ],
         [ "Event", "structEvent.html", [
           [ "Data", "structEvent.html#add1010c7a7dfb056fee72df7c1575d90", null ],
           [ "EventType", "structEvent.html#a30e11257e8ec1f970fb3159060bc2d17", null ],
@@ -115,6 +123,8 @@ var NAVTREE =
           [ "Data", "structEventPin.html#a76a1ef2eda3115e051f49861093cd6ff", null ],
           [ "Event", "structEventPin.html#a8b4c6321f1b8abe7db2a5308f077533b", null ],
           [ "Id", "structEventPin.html#ad356be83493e83623b5f8756f9f99808", null ],
+          [ "LastButtonState", "structEventPin.html#abb37cc6189d84d6a11ab4b7a46337bd8", null ],
+          [ "LastDebounceTime", "structEventPin.html#a21a693bb91243b2ad19feebecfc474fb", null ],
           [ "Pin", "structEventPin.html#a55bd77f9470bf8903042423278f950c2", null ]
         ] ],
         [ "EventsSequencer", "classEventsSequencer.html", [
@@ -150,6 +160,12 @@ var NAVTREE =
           [ "GetPendingEventIndex", "classEventStack.html#ac926c16835a21a1710d986040ce76b57", null ],
           [ "PushEvent", "classEventStack.html#ae68541fb067cda62a399a9cea46ca202", null ]
         ] ],
+        [ "I2CCommanderClass", "classI2CCommanderClass.html", [
+          [ "I2CCommanderClass", "classI2CCommanderClass.html#a9c8d2f7e5eb24f31086fd8e4cd5acf58", null ],
+          [ "begin", "classI2CCommanderClass.html#ac6575229251840ec767b7595e172ea1e", null ],
+          [ "loop", "classI2CCommanderClass.html#a11fda5e10b4caf40275fea5854018808", null ],
+          [ "printCommander", "classI2CCommanderClass.html#af6819052ca1a9dc32d07d2ad79be064e", null ]
+        ] ],
         [ "TextInterpreter", "classTextInterpreter.html", [
           [ "TextInterpreter", "classTextInterpreter.html#a22c1254be49ece97985d325d37a363f4", null ],
           [ "Init", "classTextInterpreter.html#af0c3da1f3d6967d0f01b75dbae03c3a2", null ],
@@ -177,7 +193,9 @@ var NAVTREE =
         [ "CMDRSCHAINEDLISTITEM< EventPin >", "classCMDRSCHAINEDLISTITEM.html", null ],
         [ "Commander", "classCommander.html", [
           [ "ButtonsCommanderClass", "classButtonsCommanderClass.html", null ],
-          [ "CANCommanderClass", "classCANCommanderClass.html", null ]
+          [ "CANCommanderClass", "classCANCommanderClass.html", null ],
+          [ "DccCommanderClass", "classDccCommanderClass.html", null ],
+          [ "I2CCommanderClass", "classI2CCommanderClass.html", null ]
         ] ],
         [ "Commanders", "classCommanders.html", null ],
         [ "Event", "structEvent.html", null ],
@@ -203,11 +221,20 @@ var NAVTREE =
             [ "COMMANDERS_PRINT_COMMANDERS", "Commanders_8h.html#a903f43d89a21cb3955b4fac654f6f8e8", null ],
             [ "COMMANDERS_PRINT_COMMANDERS", "Commanders_8h.html#a903f43d89a21cb3955b4fac654f6f8e8", null ],
             [ "GPIO2_PREFER_SPEED", "Commanders_8h.html#abe48e551c87434efe75af8e7d4df457c", null ],
+            [ "NO_BUTTONSCOMMANDER", "Commanders_8h.html#ae7dd7c67a4532415014e362df2369975", null ],
+            [ "NO_BUTTONSCOMMANDERANALOGPUSHES", "Commanders_8h.html#af9126e9be452405be33ad87850e347d2", null ],
             [ "NO_BUTTONSCOMMANDERENCODER", "Commanders_8h.html#a2985d95a0a626310eae72096ce19ac2f", null ],
             [ "NO_BUTTONSCOMMANDERPOTENTIOMETER", "Commanders_8h.html#a0f0bd7466403be1b94b0dbb88c9e621a", null ],
+            [ "NO_BUTTONSCOMMANDERPUSH", "Commanders_8h.html#a3498f6a7191d0a717e5e442ac284c0c1", null ],
+            [ "NO_BUTTONSCOMMANDERSWITCH", "Commanders_8h.html#aadc6236e05ca3e6ea974036cdbfd4e81", null ],
+            [ "NO_CANCOMMANDER", "Commanders_8h.html#a8647526d256312a8b21f15af5805fb2a", null ],
             [ "NO_CANCOMMANDER", "Commanders_8h.html#a8647526d256312a8b21f15af5805fb2a", null ],
             [ "NO_DCCCOMMANDER", "Commanders_8h.html#a0413efc930c14270a8d2caf241163cbe", null ],
-            [ "NO_I2CCOMMANDER", "Commanders_8h.html#aa63d8345e7748626f0c63d02ecdff633", null ]
+            [ "NO_DCCCOMMANDER", "Commanders_8h.html#a0413efc930c14270a8d2caf241163cbe", null ],
+            [ "NO_EVENTSSEQUENCER", "Commanders_8h.html#af4e3b964737bc5d02cd21a6eb375751f", null ],
+            [ "NO_I2CCOMMANDER", "Commanders_8h.html#aa63d8345e7748626f0c63d02ecdff633", null ],
+            [ "NO_I2CCOMMANDER", "Commanders_8h.html#aa63d8345e7748626f0c63d02ecdff633", null ],
+            [ "NO_SERIALCOMMANDER", "Commanders_8h.html#a190ad583ee12fb3fdbce6761a9b914e7", null ]
           ] ],
           [ "Events.h", "Events_8h.html", [
             [ "UNDEFINED_ID", "Events_8h.html#a48ad4dd16b8e22f2c8bc92b154479e92", null ],

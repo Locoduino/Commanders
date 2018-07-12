@@ -7,19 +7,20 @@
 #ifndef NO_BUTTONSCOMMANDER
 #ifndef NO_BUTTONSCOMMANDERSWITCH
 
-/** A switch can be used in a A/B way. In this case only two Arduino pins are connected to the switch.
+/** A switch can be used in a A/B way, or A/Neutral/B. In this case only two Arduino pins are connected to the switch.
 The event raised is always of type COMMANDERS_EVENT_MOVE and data is COMMANDERS_MOVE_ON or COMMANDERS_MOVE_OFF,
-but the id used depends on the activated pin. Two events are always thrown by Commanders :
-the activation of one pin, and the disactvation of the other !
+but the id used depends on the activated pin. The pins are independant, but probably when one is activated,
+the other is disactivated. In a case of a central/neutral position is available on the switch, none of the pins 
+will be activated !
 
 Events thrown:
 
-         reason            |   id       |         type          | data
+reason                     |   id       |         type          | data
 ---------------------------|------------|-----------------------|--------------------
-pin1 state to HIGH         | button id1 | COMMANDERS_EVENT_MOVE | COMMANDERS_MOVE_ON
-previous pin2 state to LOW | button id2 | COMMANDERS_EVENT_MOVE | COMMANDERS_MOVE_OFF
-pin2 state to HIGH         | button id2 | COMMANDERS_EVENT_MOVE | COMMANDERS_MOVE_ON
-previous pin1 state to LOW | button id1 | COMMANDERS_EVENT_MOVE | COMMANDERS_MOVE_OFF
+event pin1 state to HIGH   | event id1  | COMMANDERS_EVENT_MOVE | COMMANDERS_MOVE_ON
+event pin1 state to LOW    | event id1  | COMMANDERS_EVENT_MOVE | COMMANDERS_MOVE_OFF
+event pin2 state to HIGH   | event id2  | COMMANDERS_EVENT_MOVE | COMMANDERS_MOVE_ON
+event pin2 state to LOW    | event id2  | COMMANDERS_EVENT_MOVE | COMMANDERS_MOVE_OFF
 */
 class ButtonsCommanderSwitchTwoPins : public ButtonsCommanderButton
 {
@@ -30,11 +31,12 @@ class ButtonsCommanderSwitchTwoPins : public ButtonsCommanderButton
 	unsigned long Id2;
 
 	unsigned long debounceDelay;    // the debounce time; increase if the output flickers
-	GPIO_pin_t lastSelectedPin;
 
-	int lastButtonState;   // the previous reading from the current input pin
-	unsigned long lastDebounceTime;  // the last time the current output pin was toggled
-	
+	byte lastButtonState1;
+	unsigned long lastDebounceTime1;
+	byte lastButtonState2;
+	unsigned long lastDebounceTime2;
+
 public:
 	/** Default constructor.*/
 	ButtonsCommanderSwitchTwoPins();

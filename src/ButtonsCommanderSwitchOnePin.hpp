@@ -12,21 +12,19 @@ The event raised is always of type COMMANDERS_EVENT_MOVE and data is COMMANDERS_
 
 Events thrown:
 
-         reason            |   id      |         type          | data
+reason                     |   id      |         type          | data
 ---------------------------|-----------|-----------------------|--------------------
 pin state to HIGH          | button id | COMMANDERS_EVENT_MOVE | COMMANDERS_MOVE_ON
-previous pin state to LOW  | button id | COMMANDERS_EVENT_MOVE | COMMANDERS_MOVE_OFF
+pin state to LOW					 | button id | COMMANDERS_EVENT_MOVE | COMMANDERS_MOVE_OFF
 */
 class ButtonsCommanderSwitchOnePin : public ButtonsCommanderButton
 {
  private:
 	GPIO_pin_t Pin;
 	unsigned long debounceDelay;    // the debounce time; increase if the output flickers
-	GPIO_pin_t lastSelectedPin;
+	byte lastButtonState;
+	unsigned long lastDebounceTime;
 
-	int lastButtonState;   // the previous reading from the current input pin
-	unsigned long lastDebounceTime;  // the last time the current output pin was toggled
-	
 public:
 	/** Default constructor.*/
 	ButtonsCommanderSwitchOnePin();

@@ -15,7 +15,7 @@ An event will be thrown when a change of the value will be greater than moveAccu
 
 Events thrown:
 
-  reason      |   id      |                 type          | data
+reason        |   id      |                 type          | data
 --------------|-----------|-------------------------------|------
 value changed | button id | COMMANDERS_EVENT_MOVEPOSITION | value
 */

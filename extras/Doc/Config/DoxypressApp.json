@@ -165,7 +165,7 @@
         "strip-from-path": [
             ""
         ],
-        "tab-size": 4
+        "tab-size": 2
     },
     "index": {
         "alpha-index": true,
@@ -438,7 +438,7 @@
         "ref-by-relation": false,
         "ref-link-source": true,
         "ref-relation": false,
-        "source-code": true,
+        "source-code": false,
         "source-tooltips": true,
         "strip-code-comments": true,
         "suffix-exclude-navtree": [

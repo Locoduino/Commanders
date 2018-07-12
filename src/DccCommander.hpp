@@ -64,7 +64,7 @@ DccCommander will react only on the deactivate flag to avoid double events.
 
 Events thrown:
 
-  reason |      id      |         type          | data
+reason   |      id      |         type          | data
 ---------|--------------|-----------------------|-----------------------
 data = 0 | accessory id | COMMANDERS_EVENT_MOVE | COMMANDERS_MOVE_RIGHT
 data = 1 | accessory id | COMMANDERS_EVENT_MOVE | COMMANDERS_MOVE_LEFT

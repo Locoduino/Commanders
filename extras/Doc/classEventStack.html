@@ -80,8 +80,6 @@ Static Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The event stack is a small location for a few events ready to be send to the caller. This is a barely a list. If the 'id' for the given index is <a class="el" href="Events_8h.html#a48ad4dd16b8e22f2c8bc92b154479e92">UNDEFINED_ID</a>, so no event is defined at this index. Each RaiseEvent will be push the new one in the first free index of the list. Each <a class="el" href="classEventStack.html#ae68541fb067cda62a399a9cea46ca202">PushEvent</a> will returns the first not free event content, and free the event list for this index. There is no priority in the list... </p>
-
-<p class="definition">Definition at line <a class="el" href="EventStack_8hpp_source.html#l00019">19</a> of file <a class="el" href="EventStack_8hpp_source.html">EventStack.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a0cd732c42b231ae7e31ec5b77d23faec"></a>
 <div class="memitem">
@@ -129,8 +127,6 @@ Static Public Attributes</h2></td></tr>
 </dl>
 <dl class="section remark"><dt>Remarks</dt><dd>A previous call to <a class="el" href="classEventStack.html#ac926c16835a21a1710d986040ce76b57">GetPendingEventIndex()</a> will give the first available event index. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="EventStack_8cpp_source.html#l00037">37</a> of file <a class="el" href="EventStack_8cpp_source.html">EventStack.cpp</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="ac926c16835a21a1710d986040ce76b57"></a>
@@ -146,8 +142,6 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Gets the first available event index in the stack. There is no history of stack filling, so the first one is not necessary the oldest in the list... </p>
-
-<p class="definition">Definition at line <a class="el" href="EventStack_8cpp_source.html#l00028">28</a> of file <a class="el" href="EventStack_8cpp_source.html">EventStack.cpp</a>.</p>
 
 </div>
 </div>
@@ -189,8 +183,6 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="EventStack_8cpp_source.html#l00012">12</a> of file <a class="el" href="EventStack_8cpp_source.html">EventStack.cpp</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -213,13 +205,11 @@ Static Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Stack of events itself. </p>
 
-<p class="definition">Definition at line <a class="el" href="EventStack_8hpp_source.html#l00036">36</a> of file <a class="el" href="EventStack_8hpp_source.html">EventStack.hpp</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>D:/Mes documents/Trusty/Arduino/Libraries/Commanders/src/<a class="el" href="EventStack_8hpp_source.html">EventStack.hpp</a></li>
-<li>D:/Mes documents/Trusty/Arduino/Libraries/Commanders/src/<a class="el" href="EventStack_8cpp_source.html">EventStack.cpp</a></li>
+<li>D:/Mes documents/Trusty/Arduino/Libraries/Commanders/src/EventStack.cpp</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -227,7 +217,7 @@ Static Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classEventStack.html">EventStack</a></li>
-    <li class="footer">Generated on lun. mai 21 2018 20:33:05 for Commanders &nbsp; by
+    <li class="footer">Generated on jeu. juil. 12 2018 18:14:55 for Commanders &nbsp; by
     <a href="http://www.copperspice.com/documentation-doxypress.html">
     <img class="footer" src="doxypress.png" alt="DoxyPress"/></a> 1.2.10 </li>
   </ul>

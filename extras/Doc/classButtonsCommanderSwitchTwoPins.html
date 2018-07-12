@@ -107,11 +107,20 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a3b40667770ab04694a2ea85f11aebfe0 inherit pro_attribs_classButtonsCommanderButton"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A switch can be used in a A/B way. In this case only two Arduino pins are connected to the switch. The event raised is always of type <a class="el" href="Events_8h.html#a36239a7eea6194f04e73e80d7419490caebdb45ee96bd05e90e9e633c114e9cba">COMMANDERS_EVENT_MOVE</a> and data is <a class="el" href="Events_8h.html#a347ec2e7ad5bc98b641a887ce34cc2baa1675bf6790ab941818b2623b710d9826">COMMANDERS_MOVE_ON</a> or <a class="el" href="Events_8h.html#a347ec2e7ad5bc98b641a887ce34cc2baa72085934c5621169aa9f5e3f7a32a7c6">COMMANDERS_MOVE_OFF</a>, but the id used depends on the activated pin. Two events are always thrown by <a class="el" href="classCommanders.html">Commanders</a> : the activation of one pin, and the disactvation of the other !</p>
-<p>Events thrown: </p><pre class="fragment">     reason            |   id       |         type          | data
-</pre><p> ------------------------&mdash;|---------&mdash;|--------------------&mdash;|-----------------&mdash; pin1 state to HIGH | button id1 | <a class="el" href="Events_8h.html#a36239a7eea6194f04e73e80d7419490caebdb45ee96bd05e90e9e633c114e9cba">COMMANDERS_EVENT_MOVE</a> | <a class="el" href="Events_8h.html#a347ec2e7ad5bc98b641a887ce34cc2baa1675bf6790ab941818b2623b710d9826">COMMANDERS_MOVE_ON</a> previous pin2 state to LOW | button id2 | <a class="el" href="Events_8h.html#a36239a7eea6194f04e73e80d7419490caebdb45ee96bd05e90e9e633c114e9cba">COMMANDERS_EVENT_MOVE</a> | <a class="el" href="Events_8h.html#a347ec2e7ad5bc98b641a887ce34cc2baa72085934c5621169aa9f5e3f7a32a7c6">COMMANDERS_MOVE_OFF</a> pin2 state to HIGH | button id2 | <a class="el" href="Events_8h.html#a36239a7eea6194f04e73e80d7419490caebdb45ee96bd05e90e9e633c114e9cba">COMMANDERS_EVENT_MOVE</a> | <a class="el" href="Events_8h.html#a347ec2e7ad5bc98b641a887ce34cc2baa1675bf6790ab941818b2623b710d9826">COMMANDERS_MOVE_ON</a> previous pin1 state to LOW | button id1 | <a class="el" href="Events_8h.html#a36239a7eea6194f04e73e80d7419490caebdb45ee96bd05e90e9e633c114e9cba">COMMANDERS_EVENT_MOVE</a> | <a class="el" href="Events_8h.html#a347ec2e7ad5bc98b641a887ce34cc2baa72085934c5621169aa9f5e3f7a32a7c6">COMMANDERS_MOVE_OFF</a> </p>
-
-<p class="definition">Definition at line <a class="el" href="ButtonsCommanderSwitchTwoPins_8hpp_source.html#l00024">24</a> of file <a class="el" href="ButtonsCommanderSwitchTwoPins_8hpp_source.html">ButtonsCommanderSwitchTwoPins.hpp</a>.</p>
+<div class="textblock"><p>A switch can be used in a A/B way, or A/Neutral/B. In this case only two Arduino pins are connected to the switch. The event raised is always of type <a class="el" href="Events_8h.html#a36239a7eea6194f04e73e80d7419490caebdb45ee96bd05e90e9e633c114e9cba">COMMANDERS_EVENT_MOVE</a> and data is <a class="el" href="Events_8h.html#a347ec2e7ad5bc98b641a887ce34cc2baa1675bf6790ab941818b2623b710d9826">COMMANDERS_MOVE_ON</a> or <a class="el" href="Events_8h.html#a347ec2e7ad5bc98b641a887ce34cc2baa72085934c5621169aa9f5e3f7a32a7c6">COMMANDERS_MOVE_OFF</a>, but the id used depends on the activated pin. The pins are independant, but probably when one is activated, the other is disactivated. In a case of a central/neutral position is available on the switch, none of the pins will be activated !</p>
+<p>Events thrown:</p>
+<table class="doxtable">
+<tr>
+<th>reason </th><th>id </th><th>type </th><th>data  </th></tr>
+<tr>
+<td>event pin1 state to HIGH </td><td>event id1 </td><td><a class="el" href="Events_8h.html#a36239a7eea6194f04e73e80d7419490caebdb45ee96bd05e90e9e633c114e9cba">COMMANDERS_EVENT_MOVE</a> </td><td><a class="el" href="Events_8h.html#a347ec2e7ad5bc98b641a887ce34cc2baa1675bf6790ab941818b2623b710d9826">COMMANDERS_MOVE_ON</a> </td></tr>
+<tr>
+<td>event pin1 state to LOW </td><td>event id1 </td><td><a class="el" href="Events_8h.html#a36239a7eea6194f04e73e80d7419490caebdb45ee96bd05e90e9e633c114e9cba">COMMANDERS_EVENT_MOVE</a> </td><td><a class="el" href="Events_8h.html#a347ec2e7ad5bc98b641a887ce34cc2baa72085934c5621169aa9f5e3f7a32a7c6">COMMANDERS_MOVE_OFF</a> </td></tr>
+<tr>
+<td>event pin2 state to HIGH </td><td>event id2 </td><td><a class="el" href="Events_8h.html#a36239a7eea6194f04e73e80d7419490caebdb45ee96bd05e90e9e633c114e9cba">COMMANDERS_EVENT_MOVE</a> </td><td><a class="el" href="Events_8h.html#a347ec2e7ad5bc98b641a887ce34cc2baa1675bf6790ab941818b2623b710d9826">COMMANDERS_MOVE_ON</a> </td></tr>
+<tr>
+<td>event pin2 state to LOW </td><td>event id2 </td><td><a class="el" href="Events_8h.html#a36239a7eea6194f04e73e80d7419490caebdb45ee96bd05e90e9e633c114e9cba">COMMANDERS_EVENT_MOVE</a> </td><td><a class="el" href="Events_8h.html#a347ec2e7ad5bc98b641a887ce34cc2baa72085934c5621169aa9f5e3f7a32a7c6">COMMANDERS_MOVE_OFF</a> </td></tr>
+</table>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aaf37dd87398ee10198c287100cbeb77a"></a>
 <div class="memitem">
@@ -126,8 +135,6 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Default constructor. </p>
-
-<p class="definition">Definition at line <a class="el" href="ButtonsCommanderSwitchTwoPins_8cpp_source.html#l00011">11</a> of file <a class="el" href="ButtonsCommanderSwitchTwoPins_8cpp_source.html">ButtonsCommanderSwitchTwoPins.cpp</a>.</p>
 
 </div>
 </div>
@@ -155,8 +162,6 @@ Additional Inherited Members</h2></td></tr>
 <p>This function will be called after sketch Setup(), but before the first call to <a class="el" href="classButtonsCommanderSwitchTwoPins.html#a096c4bc62bdc8144a6fe68808726bc73">loop()</a>. It will be called only one time. </p>
 
 <p>Reimplemented from <a class="el" href="classButtonsCommanderButton.html#ae1f260c75fbe475f674107bdc96f26cd">ButtonsCommanderButton</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="ButtonsCommanderSwitchTwoPins_8cpp_source.html#l00028">28</a> of file <a class="el" href="ButtonsCommanderSwitchTwoPins_8cpp_source.html">ButtonsCommanderSwitchTwoPins.cpp</a>.</p>
 
 </div>
 </div>
@@ -205,8 +210,6 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ButtonsCommanderSwitchTwoPins_8cpp_source.html#l00017">17</a> of file <a class="el" href="ButtonsCommanderSwitchTwoPins_8cpp_source.html">ButtonsCommanderSwitchTwoPins.cpp</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="a386658bc972b186977a92cd6d7721d5c"></a>
@@ -231,8 +234,6 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Gets the right id according to the activated pin. </p>
-
-<p class="definition">Definition at line <a class="el" href="ButtonsCommanderSwitchTwoPins_8hpp_source.html#l00055">55</a> of file <a class="el" href="ButtonsCommanderSwitchTwoPins_8hpp_source.html">ButtonsCommanderSwitchTwoPins.hpp</a>.</p>
 
 </div>
 </div>
@@ -260,13 +261,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classButtonsCommanderButton.html#a44bbb289ce1f64b42a88126e8dd42f7e">ButtonsCommanderButton</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="ButtonsCommanderSwitchTwoPins_8cpp_source.html#l00053">53</a> of file <a class="el" href="ButtonsCommanderSwitchTwoPins_8cpp_source.html">ButtonsCommanderSwitchTwoPins.cpp</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>D:/Mes documents/Trusty/Arduino/Libraries/Commanders/src/<a class="el" href="ButtonsCommanderSwitchTwoPins_8hpp_source.html">ButtonsCommanderSwitchTwoPins.hpp</a></li>
-<li>D:/Mes documents/Trusty/Arduino/Libraries/Commanders/src/<a class="el" href="ButtonsCommanderSwitchTwoPins_8cpp_source.html">ButtonsCommanderSwitchTwoPins.cpp</a></li>
+<li>D:/Mes documents/Trusty/Arduino/Libraries/Commanders/src/ButtonsCommanderSwitchTwoPins.cpp</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -274,7 +273,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classButtonsCommanderSwitchTwoPins.html">ButtonsCommanderSwitchTwoPins</a></li>
-    <li class="footer">Generated on lun. mai 21 2018 20:33:05 for Commanders &nbsp; by
+    <li class="footer">Generated on jeu. juil. 12 2018 18:14:55 for Commanders &nbsp; by
     <a href="http://www.copperspice.com/documentation-doxypress.html">
     <img class="footer" src="doxypress.png" alt="DoxyPress"/></a> 1.2.10 </li>
   </ul>

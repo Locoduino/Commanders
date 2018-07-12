@@ -111,19 +111,19 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A push button is a hardware device giving a time limited impulsion. It will return one Dccid at a time, passing through the whole list of DccIds. The analog pushes variant use one analog pin with some pushes connected through resistors.</p>
 <pre class="fragment">Sample for five pushes.
-+        +         +         +         + GND
-|        |         |         |         |
-/        /         /         /         / Pushes
-|        |         |         |         |
++    +       +     +       + GND
+|      |         |       |         |
+/      /         /       /         / Pushes
+|      |         |       |         |
 | 3kOhms | 1kOhms  | 620 Ohms| 330 Ohms|
-|        |         |         |         |
+|      |         |       |         |
 +--***---+---***---+---***---+---***---+------&gt; Analog pin
                                        |
-                                       *
-                                       * 10kOhms
-                                       *
-                                       |
-                                       + 5v
+                     *
+                     * 10kOhms
+                     *
+                     |
+                     + 5v
 </pre><p>When one push button is pressed, the value read on the analog pin depends of the resistor addition from the button to the pin. It is important that only one button was pushed at a time. It is possible to use more or less buttons, but resistor values have to be computed to avoid confusing analog values between near pushes...</p>
 <p>This class is a list of <a class="el" href="classButtonsCommanderAnalogPushesItem.html">ButtonsCommanderAnalogPushesItem</a>, basically a push button. Each item has its own id, analog value and tolerance interval.</p>
 <p>Events thrown:</p>
@@ -133,8 +133,6 @@ Additional Inherited Members</h2></td></tr>
 <tr>
 <td>pin state to LOW </td><td>push id </td><td><a class="el" href="Events_8h.html#a36239a7eea6194f04e73e80d7419490ca4c6e59b277bf1f4430a136faab150a61">COMMANDERS_EVENT_MOVEPOSITIONID</a> </td><td>0 </td></tr>
 </table>
-
-<p class="definition">Definition at line <a class="el" href="ButtonsCommanderAnalogPushes_8hpp_source.html#l00049">49</a> of file <a class="el" href="ButtonsCommanderAnalogPushes_8hpp_source.html">ButtonsCommanderAnalogPushes.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a838603d13e894d923700ec9ad9958cd7"></a>
 <div class="memitem">
@@ -149,8 +147,6 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Default constructor. </p>
-
-<p class="definition">Definition at line <a class="el" href="ButtonsCommanderAnalogPushes_8cpp_source.html#l00011">11</a> of file <a class="el" href="ButtonsCommanderAnalogPushes_8cpp_source.html">ButtonsCommanderAnalogPushes.cpp</a>.</p>
 
 </div>
 </div>
@@ -207,8 +203,6 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ButtonsCommanderAnalogPushes_8cpp_source.html#l00022">22</a> of file <a class="el" href="ButtonsCommanderAnalogPushes_8cpp_source.html">ButtonsCommanderAnalogPushes.cpp</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="aed6eacfc1656e7aacd24cf3ab6565ea1"></a>
@@ -234,8 +228,6 @@ Additional Inherited Members</h2></td></tr>
 <p>Reinitialize the list for future use. Called at the end of the loop, if an event has been raised. </p>
 
 <p>Reimplemented from <a class="el" href="classButtonsCommanderButton.html#a270eade0db966b7e72b6dc5462377593">ButtonsCommanderButton</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="ButtonsCommanderAnalogPushes_8cpp_source.html#l00108">108</a> of file <a class="el" href="ButtonsCommanderAnalogPushes_8cpp_source.html">ButtonsCommanderAnalogPushes.cpp</a>.</p>
 
 </div>
 </div>
@@ -264,8 +256,6 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classButtonsCommanderButton.html#a1ab1295abfbfafef48d38a8795fb0be7">ButtonsCommanderButton</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="ButtonsCommanderAnalogPushes_8cpp_source.html#l00048">48</a> of file <a class="el" href="ButtonsCommanderAnalogPushes_8cpp_source.html">ButtonsCommanderAnalogPushes.cpp</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="a6f796b9880e1d9b7a41a26fdf972a3c0"></a>
@@ -291,8 +281,6 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p>Gets one push item. </p>
 
-<p class="definition">Definition at line <a class="el" href="ButtonsCommanderAnalogPushes_8hpp_source.html#l00082">82</a> of file <a class="el" href="ButtonsCommanderAnalogPushes_8hpp_source.html">ButtonsCommanderAnalogPushes.hpp</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="af42beb367b2a6278527ef79a30cd892d"></a>
@@ -316,8 +304,6 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Gets the last push button pressed. </p>
-
-<p class="definition">Definition at line <a class="el" href="ButtonsCommanderAnalogPushes_8hpp_source.html#l00087">87</a> of file <a class="el" href="ButtonsCommanderAnalogPushes_8hpp_source.html">ButtonsCommanderAnalogPushes.hpp</a>.</p>
 
 </div>
 </div>
@@ -345,13 +331,11 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classButtonsCommanderButton.html#a44bbb289ce1f64b42a88126e8dd42f7e">ButtonsCommanderButton</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="ButtonsCommanderAnalogPushes_8cpp_source.html#l00057">57</a> of file <a class="el" href="ButtonsCommanderAnalogPushes_8cpp_source.html">ButtonsCommanderAnalogPushes.cpp</a>.</p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>D:/Mes documents/Trusty/Arduino/Libraries/Commanders/src/<a class="el" href="ButtonsCommanderAnalogPushes_8hpp_source.html">ButtonsCommanderAnalogPushes.hpp</a></li>
-<li>D:/Mes documents/Trusty/Arduino/Libraries/Commanders/src/<a class="el" href="ButtonsCommanderAnalogPushes_8cpp_source.html">ButtonsCommanderAnalogPushes.cpp</a></li>
+<li>D:/Mes documents/Trusty/Arduino/Libraries/Commanders/src/ButtonsCommanderAnalogPushes.cpp</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -359,7 +343,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classButtonsCommanderAnalogPushes.html">ButtonsCommanderAnalogPushes</a></li>
-    <li class="footer">Generated on lun. mai 21 2018 20:33:05 for Commanders &nbsp; by
+    <li class="footer">Generated on jeu. juil. 12 2018 18:14:55 for Commanders &nbsp; by
     <a href="http://www.copperspice.com/documentation-doxypress.html">
     <img class="footer" src="doxypress.png" alt="DoxyPress"/></a> 1.2.10 </li>
   </ul>

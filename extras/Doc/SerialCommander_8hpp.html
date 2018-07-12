@@ -77,20 +77,20 @@ SERIAL_COMMANDER(Serial);
 </pre><p>and in this case, it has the usual form of a <a class="el" href="classCommander.html">Commander</a> : </p><pre class="fragment">class SerialCommanderClass : Commander
 {
 public:
-    inline SerialCommanderClass() : Commander() { }
+inline SerialCommanderClass() : Commander() { }
 
-    inline void begin() { }
+inline void begin() { }
 
-    inline unsigned long loop() 
-    {
-        ...
-    }
+inline unsigned long loop() 
+{
+  ...
+  }
 
-    static inline SerialCommanderClass &amp;GetCurrent() 
-    {
-        ...
-    }
-    void printCommander() { ... }
+  static inline SerialCommanderClass &amp;GetCurrent() 
+  {
+    ...
+  }
+  void printCommander() { ... }
 };    
 </pre><p>You should avoid to declare a <a class="el" href="SerialCommander_8hpp.html#a93c1234e764041277200d7d2f5ff4468">SERIAL_COMMANDER</a> if not necessary, because the Serial library delivered with the Arduino IDE allocates a lot of memory for each serial channel used. The only variable thing in this macro is the name of the serial channel to use : Serial for a UNO or a NANO, but Serial or Serial1 to 3 on a Mega or a Due. Even a SoftwareSerial (from SoftwareSerial library (<a href="https://www.arduino.cc/en/Reference/SoftwareSerial">https://www.arduino.cc/en/Reference/SoftwareSerial</a>) ) or a AltSoftSerial (from the well named library.. AltSoftSerial (<a href="https://github.com/PaulStoffregen/AltSoftSerial">https://github.com/PaulStoffregen/AltSoftSerial</a>) !) can be used.</p>
 <p>The syntax of the message to get to throw a new event is given by the class <a class="el" href="classTextInterpreter.html">TextInterpreter</a>.</p>
@@ -101,8 +101,6 @@ public:
 <tr>
 <td>message received </td><td>id </td><td>type </td><td>data </td></tr>
 </table>
-
-<p class="definition">Definition in file <a class="el" href="SerialCommander_8hpp_source.html">SerialCommander.hpp</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a class="anchor" id="a93c1234e764041277200d7d2f5ff4468"></a>
 <div class="memitem">
@@ -120,8 +118,6 @@ public:
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="SerialCommander_8hpp_source.html#l00064">64</a> of file <a class="el" href="SerialCommander_8hpp_source.html">SerialCommander.hpp</a>.</p>
-
 </div>
 </div>
 <a class="anchor" id="a55428133460a9c3e06b46a20b87aea05"></a>
@@ -135,8 +131,6 @@ public:
 </div><div class="memdoc">
 <p>Defines the normal name of the class. </p>
 
-<p class="definition">Definition at line <a class="el" href="SerialCommander_8hpp_source.html#l00009">9</a> of file <a class="el" href="SerialCommander_8hpp_source.html">SerialCommander.hpp</a>.</p>
-
 </div>
 </div>
 </div><!-- contents -->
@@ -145,7 +139,7 @@ public:
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d41d8cd98f00b204e9800998ecf8427e.html">src</a></li><li class="navelem"><a class="el" href="SerialCommander_8hpp.html">SerialCommander.hpp</a></li>
-    <li class="footer">Generated on lun. mai 21 2018 20:33:05 for Commanders &nbsp; by
+    <li class="footer">Generated on jeu. juil. 12 2018 18:14:55 for Commanders &nbsp; by
     <a href="http://www.copperspice.com/documentation-doxypress.html">
     <img class="footer" src="doxypress.png" alt="DoxyPress"/></a> 1.2.10 </li>
   </ul>

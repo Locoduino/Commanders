@@ -66,7 +66,7 @@ var NAVTREE =
           [ "AddEvent", "classButtonsCommanderSwitch.html#a5b1a16f717941df169781ab96a5d1650", null ],
           [ "beforeFirstLoop", "classButtonsCommanderSwitch.html#ac5acada95c180aa8011e8b4c4ba3e6ce", null ],
           [ "begin", "classButtonsCommanderSwitch.html#adf7871a996c39e3dcbc30d1ad98de2ba", null ],
-          [ "GetId", "classButtonsCommanderSwitch.html#a2b9922d2b262776d8b49909329280bc5", null ],
+          [ "GetId", "classButtonsCommanderSwitch.html#a64d333a4964509ae4aecc01e068495e5", null ],
           [ "loop", "classButtonsCommanderSwitch.html#a3e66f87ce692b0524bf9940dec663d21", null ]
         ] ],
         [ "ButtonsCommanderSwitchOnePin", "classButtonsCommanderSwitchOnePin.html", [
@@ -106,6 +106,14 @@ var NAVTREE =
           [ "PriorityLoop", "classCommander.html#ade3914b5c62cd08a4e97050bc5314734", null ]
         ] ],
         [ "Commanders", "classCommanders.html", null ],
+        [ "DccCommanderClass", "classDccCommanderClass.html", [
+          [ "DccCommanderClass", "classDccCommanderClass.html#ac10ea64d33e686c877bdcb3024068e02", null ],
+          [ "begin", "classDccCommanderClass.html#a6ec17894419857a33c2667e925da456e", null ],
+          [ "GetLastDccId", "classDccCommanderClass.html#a97a3afabe3aca9b97728b3d8679ad66b", null ],
+          [ "loop", "classDccCommanderClass.html#a0c97ea34dfdf4c13de53a58937df5580", null ],
+          [ "printCommander", "classDccCommanderClass.html#a9eb04a79497f70417cbb690e9dc3614c", null ],
+          [ "PriorityLoop", "classDccCommanderClass.html#a688f192c9f26dfe824a86b6aa00152df", null ]
+        ] ],
         [ "Event", "structEvent.html", [
           [ "Data", "structEvent.html#add1010c7a7dfb056fee72df7c1575d90", null ],
           [ "EventType", "structEvent.html#a30e11257e8ec1f970fb3159060bc2d17", null ],
@@ -115,6 +123,8 @@ var NAVTREE =
           [ "Data", "structEventPin.html#a76a1ef2eda3115e051f49861093cd6ff", null ],
           [ "Event", "structEventPin.html#a8b4c6321f1b8abe7db2a5308f077533b", null ],
           [ "Id", "structEventPin.html#ad356be83493e83623b5f8756f9f99808", null ],
+          [ "LastButtonState", "structEventPin.html#abb37cc6189d84d6a11ab4b7a46337bd8", null ],
+          [ "LastDebounceTime", "structEventPin.html#a21a693bb91243b2ad19feebecfc474fb", null ],
           [ "Pin", "structEventPin.html#a55bd77f9470bf8903042423278f950c2", null ]
         ] ],
         [ "EventsSequencer", "classEventsSequencer.html", [
@@ -150,6 +160,12 @@ var NAVTREE =
           [ "GetPendingEventIndex", "classEventStack.html#ac926c16835a21a1710d986040ce76b57", null ],
           [ "PushEvent", "classEventStack.html#ae68541fb067cda62a399a9cea46ca202", null ]
         ] ],
+        [ "I2CCommanderClass", "classI2CCommanderClass.html", [
+          [ "I2CCommanderClass", "classI2CCommanderClass.html#a9c8d2f7e5eb24f31086fd8e4cd5acf58", null ],
+          [ "begin", "classI2CCommanderClass.html#ac6575229251840ec767b7595e172ea1e", null ],
+          [ "loop", "classI2CCommanderClass.html#a11fda5e10b4caf40275fea5854018808", null ],
+          [ "printCommander", "classI2CCommanderClass.html#af6819052ca1a9dc32d07d2ad79be064e", null ]
+        ] ],
         [ "TextInterpreter", "classTextInterpreter.html", [
           [ "TextInterpreter", "classTextInterpreter.html#a22c1254be49ece97985d325d37a363f4", null ],
           [ "Init", "classTextInterpreter.html#af0c3da1f3d6967d0f01b75dbae03c3a2", null ],
@@ -177,7 +193,9 @@ var NAVTREE =
         [ "CMDRSCHAINEDLISTITEM< EventPin >", "classCMDRSCHAINEDLISTITEM.html", null ],
         [ "Commander", "classCommander.html", [
           [ "ButtonsCommanderClass", "classButtonsCommanderClass.html", null ],
-          [ "CANCommanderClass", "classCANCommanderClass.html", null ]
+          [ "CANCommanderClass", "classCANCommanderClass.html", null ],
+          [ "DccCommanderClass", "classDccCommanderClass.html", null ],
+          [ "I2CCommanderClass", "classI2CCommanderClass.html", null ]
         ] ],
         [ "Commanders", "classCommanders.html", null ],
         [ "Event", "structEvent.html", null ],
@@ -203,8 +221,6 @@ var NAVTREE =
             [ "COMMANDERS_PRINT_COMMANDERS", "Commanders_8h.html#a903f43d89a21cb3955b4fac654f6f8e8", null ],
             [ "COMMANDERS_PRINT_COMMANDERS", "Commanders_8h.html#a903f43d89a21cb3955b4fac654f6f8e8", null ],
             [ "GPIO2_PREFER_SPEED", "Commanders_8h.html#abe48e551c87434efe75af8e7d4df457c", null ],
-            [ "NO_BUTTONSCOMMANDERENCODER", "Commanders_8h.html#a2985d95a0a626310eae72096ce19ac2f", null ],
-            [ "NO_BUTTONSCOMMANDERPOTENTIOMETER", "Commanders_8h.html#a0f0bd7466403be1b94b0dbb88c9e621a", null ],
             [ "NO_CANCOMMANDER", "Commanders_8h.html#a8647526d256312a8b21f15af5805fb2a", null ],
             [ "NO_DCCCOMMANDER", "Commanders_8h.html#a0413efc930c14270a8d2caf241163cbe", null ],
             [ "NO_I2CCOMMANDER", "Commanders_8h.html#aa63d8345e7748626f0c63d02ecdff633", null ]
@@ -250,45 +266,27 @@ var NAVTREE =
     ] ],
     [ "File Source", "filesource.html", [
       [ "src", "dir_d41d8cd98f00b204e9800998ecf8427e.html", [
-        [ "ButtonsCommander.cpp", "ButtonsCommander_8cpp_source.html", null ],
         [ "ButtonsCommander.hpp", "ButtonsCommander_8hpp_source.html", null ],
-        [ "ButtonsCommanderAnalogPushes.cpp", "ButtonsCommanderAnalogPushes_8cpp_source.html", null ],
         [ "ButtonsCommanderAnalogPushes.hpp", "ButtonsCommanderAnalogPushes_8hpp_source.html", null ],
-        [ "ButtonsCommanderAnalogPushesItem.cpp", "ButtonsCommanderAnalogPushesItem_8cpp_source.html", null ],
         [ "ButtonsCommanderAnalogPushesItem.hpp", "ButtonsCommanderAnalogPushesItem_8hpp_source.html", null ],
-        [ "ButtonsCommanderButton.cpp", "ButtonsCommanderButton_8cpp_source.html", null ],
         [ "ButtonsCommanderButton.hpp", "ButtonsCommanderButton_8hpp_source.html", null ],
-        [ "ButtonsCommanderEncoder.cpp", "ButtonsCommanderEncoder_8cpp_source.html", null ],
         [ "ButtonsCommanderEncoder.hpp", "ButtonsCommanderEncoder_8hpp_source.html", null ],
-        [ "ButtonsCommanderPotentiometer.cpp", "ButtonsCommanderPotentiometer_8cpp_source.html", null ],
         [ "ButtonsCommanderPotentiometer.hpp", "ButtonsCommanderPotentiometer_8hpp_source.html", null ],
-        [ "ButtonsCommanderPush.cpp", "ButtonsCommanderPush_8cpp_source.html", null ],
         [ "ButtonsCommanderPush.hpp", "ButtonsCommanderPush_8hpp_source.html", null ],
-        [ "ButtonsCommanderSwitch.cpp", "ButtonsCommanderSwitch_8cpp_source.html", null ],
         [ "ButtonsCommanderSwitch.hpp", "ButtonsCommanderSwitch_8hpp_source.html", null ],
-        [ "ButtonsCommanderSwitchOnePin.cpp", "ButtonsCommanderSwitchOnePin_8cpp_source.html", null ],
         [ "ButtonsCommanderSwitchOnePin.hpp", "ButtonsCommanderSwitchOnePin_8hpp_source.html", null ],
-        [ "ButtonsCommanderSwitchTwoPins.cpp", "ButtonsCommanderSwitchTwoPins_8cpp_source.html", null ],
         [ "ButtonsCommanderSwitchTwoPins.hpp", "ButtonsCommanderSwitchTwoPins_8hpp_source.html", null ],
-        [ "CANCommander.cpp", "CANCommander_8cpp_source.html", null ],
         [ "CANCommander.hpp", "CANCommander_8hpp_source.html", null ],
         [ "Chain.hpp", "Chain_8hpp_source.html", null ],
-        [ "Commander.cpp", "Commander_8cpp_source.html", null ],
         [ "Commander.hpp", "Commander_8hpp_source.html", null ],
-        [ "Commanders.cpp", "Commanders_8cpp_source.html", null ],
         [ "Commanders.h", "Commanders_8h_source.html", null ],
         [ "Commanders.hpp", "Commanders_8hpp_source.html", null ],
-        [ "DccCommander.cpp", "DccCommander_8cpp_source.html", null ],
         [ "DccCommander.hpp", "DccCommander_8hpp_source.html", null ],
         [ "Events.h", "Events_8h_source.html", null ],
-        [ "EventsSequencer.cpp", "EventsSequencer_8cpp_source.html", null ],
         [ "EventsSequencer.hpp", "EventsSequencer_8hpp_source.html", null ],
-        [ "EventStack.cpp", "EventStack_8cpp_source.html", null ],
         [ "EventStack.hpp", "EventStack_8hpp_source.html", null ],
-        [ "I2CCommander.cpp", "I2CCommander_8cpp_source.html", null ],
         [ "I2CCommander.hpp", "I2CCommander_8hpp_source.html", null ],
         [ "SerialCommander.hpp", "SerialCommander_8hpp_source.html", null ],
-        [ "TextInterpreter.cpp", "TextInterpreter_8cpp_source.html", null ],
         [ "TextInterpreter.hpp", "TextInterpreter_8hpp_source.html", null ]
       ] ]
     ] ]
@@ -297,7 +295,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"ButtonsCommanderAnalogPushesItem_8cpp_source.html"
+"ButtonsCommanderAnalogPushesItem_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

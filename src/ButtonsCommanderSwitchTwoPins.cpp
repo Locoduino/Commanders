@@ -11,15 +11,18 @@ description: <Switch button with one pin only with debounce.>
 ButtonsCommanderSwitchTwoPins::ButtonsCommanderSwitchTwoPins() : ButtonsCommanderButton(UNDEFINED_ID)
 {
 	this->debounceDelay = 50;
-	this->lastSelectedPin = DP_INVALID;
 }
 
 void ButtonsCommanderSwitchTwoPins::begin(unsigned long inId1, int inPin1, unsigned long inId2, int inPin2)
 {
 	this->Pin1 = Arduino_to_GPIO_pin(inPin1);
 	this->Id = inId1;
+	this->lastButtonState1 = HIGH;
+	this->lastDebounceTime1 = 0;
 	this->Pin2 = Arduino_to_GPIO_pin(inPin2);
 	this->Id2 = inId2;
+	this->lastButtonState2 = HIGH;
+	this->lastDebounceTime2 = 0;
 
 	pinMode2f(this->Pin1, INPUT_PULLUP);
 	pinMode2f(this->Pin2, INPUT_PULLUP);
@@ -31,37 +34,30 @@ void ButtonsCommanderSwitchTwoPins::beforeFirstLoop()
 	{
 		// Initialize first switch state at start
 		int reading = digitalRead2f(this->Pin1);
+		this->lastButtonState1 = reading;
 
 		if (reading == LOW)
 		{
-			this->lastSelectedPin = this->Pin1;
 			Commanders::RaiseEvent(this->Id, COMMANDERS_EVENT_MOVE, COMMANDERS_MOVE_ON);
 		}
 		else
 		{
 			Commanders::RaiseEvent(this->Id, COMMANDERS_EVENT_MOVE, COMMANDERS_MOVE_OFF);
 			reading = digitalRead2f(this->Pin2);
-			if (reading == LOW)
-				this->lastSelectedPin = this->Pin2;
+			this->lastButtonState2 = reading;
 			Commanders::RaiseEvent(this->Id2, COMMANDERS_EVENT_MOVE, reading == LOW ? COMMANDERS_MOVE_ON : COMMANDERS_MOVE_OFF);
 		}
-
-		this->lastButtonState = reading;
 	}
 }
 
 unsigned long ButtonsCommanderSwitchTwoPins::loop()
 {
-	unsigned long haveFound = ButtonsCommanderSwitch::loopOnePin(this->Pin1, this->Id, this->GetId(this->lastSelectedPin), 
-		&this->debounceDelay, &this->lastSelectedPin,
-		&this->lastButtonState, &this->lastDebounceTime);
+	unsigned long haveFound = ButtonsCommanderSwitch::loopOnePin(this->Id, this->Pin1, this->Id, this->debounceDelay, &this->lastButtonState1, &this->lastDebounceTime1);
 
 	if (haveFound != UNDEFINED_ID)
 		return haveFound;
 
-	return ButtonsCommanderSwitch::loopOnePin(this->Pin2, this->Id2, this->GetId(this->lastSelectedPin),
-		&this->debounceDelay, &this->lastSelectedPin,
-		&this->lastButtonState, &this->lastDebounceTime);
+	return ButtonsCommanderSwitch::loopOnePin(this->Id2, this->Pin2, this->Id2, this->debounceDelay, &this->lastButtonState2, &this->lastDebounceTime2);
 }
 
 #ifdef COMMANDERS_PRINT_COMMANDERS

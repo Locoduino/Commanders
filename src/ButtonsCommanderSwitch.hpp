@@ -17,6 +17,8 @@ struct EventPin
 	unsigned long Id; /**<id.*/
 	COMMANDERS_EVENT_TYPE Event; /**<Event type.*/
 	int Data; /**<Associated data.*/
+	byte LastButtonState;
+	unsigned long LastDebounceTime;
 };
 
 /** This class describes a switch with a variable number of pins/positions. 
@@ -25,10 +27,10 @@ but if you have a switch with any other number of positions, this class is for y
 
 Events thrown:
 
-        reason            |           id       |         type          | data
---------------------------|--------------------|-----------------------|--------------------
-pin state to HIGH         | button id pin      | COMMANDERS_EVENT_MOVE | COMMANDERS_MOVE_ON
-previous pin state to LOW | button id prev pin | COMMANDERS_EVENT_MOVE | COMMANDERS_MOVE_OFF
+reason                   |           id       |         type          | data
+-------------------------|--------------------|-----------------------|--------------------
+event pin state to HIGH  | event id           | Event Type            | Event Data
+event pin state to LOW   | nothing            |                       | 
 */
 class ButtonsCommanderSwitch : public ButtonsCommanderButton
 {
@@ -36,9 +38,6 @@ class ButtonsCommanderSwitch : public ButtonsCommanderButton
 	unsigned long debounceDelay;    // the debounce time; increase if the output flickers
 	CMDRSCHAINEDLIST<EventPin> EventPins;
 	GPIO_pin_t lastSelectedPin;
-
-	int lastButtonState;   // the previous reading from the current input pin
-	unsigned long lastDebounceTime;  // the last time the current output pin was toggled
 
 public:
 	/** Default constructor.*/
@@ -60,14 +59,13 @@ public:
 	/** Main loop function. */
 	unsigned long loop();
 	/** Gets the right id according to the activated pin.*/
-	unsigned long GetId(GPIO_pin_t inPin) const;
+	unsigned long GetId(GPIO_pin_t inPin, COMMANDERS_EVENT_TYPE *apEvent = NULL, int *apData = NULL) const;
 
 	/** Check if a pin has changed its state, and send an event if necessary.
 	@remark This is an internal function.
 	*/
-	static unsigned long loopOnePin(GPIO_pin_t inPin, unsigned long inId, unsigned long inPreviousId,
-		unsigned long *apDebounceDelay, GPIO_pin_t *apLastSelectedPin,
-		int *apLastButtonState, unsigned long *apLastDebounceTime, bool inSendEvent = true);
+	static unsigned long loopOnePin(unsigned long inId, GPIO_pin_t inPin, unsigned long inPreviousId, unsigned long inDebounceDelay,
+																		byte *inpLastPinState, unsigned long *inpLastDebounceTime, bool inSendEvent = true);
 
 #ifdef COMMANDERS_PRINT_COMMANDERS
 	/** Print this Commander on the console.

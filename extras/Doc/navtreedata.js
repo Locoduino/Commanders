@@ -221,6 +221,7 @@ var NAVTREE =
             [ "COMMANDERS_PRINT_COMMANDERS", "Commanders_8h.html#a903f43d89a21cb3955b4fac654f6f8e8", null ],
             [ "COMMANDERS_PRINT_COMMANDERS", "Commanders_8h.html#a903f43d89a21cb3955b4fac654f6f8e8", null ],
             [ "GPIO2_PREFER_SPEED", "Commanders_8h.html#abe48e551c87434efe75af8e7d4df457c", null ],
+            [ "LIBRARY_VERSION", "Commanders_8h.html#a8650e6793d46032c617bb7b824f90bfd", null ],
             [ "NO_BUTTONSCOMMANDER", "Commanders_8h.html#ae7dd7c67a4532415014e362df2369975", null ],
             [ "NO_BUTTONSCOMMANDERANALOGPUSHES", "Commanders_8h.html#af9126e9be452405be33ad87850e347d2", null ],
             [ "NO_BUTTONSCOMMANDERENCODER", "Commanders_8h.html#a2985d95a0a626310eae72096ce19ac2f", null ],
@@ -324,7 +325,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"ButtonsCommanderAnalogPushesItem_8cpp_source.html"
+"ButtonsCommanderAnalogPushesItem_8cpp_source.html",
+"structEventsSequencerItem.html#aec4270ff027ff1d4257b2558023ef616"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

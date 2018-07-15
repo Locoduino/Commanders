@@ -45,6 +45,17 @@ and you are not prepared to distribute and share the source code of your
 application. Contact info@open.com.au for details.
 
 \page Revision History
+\par 15/07/2018 V1.61.1
+- Correction du format de Keywords.txt
+- Création de LIBRARY_VERSION
+- Mise en conformité de la partie doc HTML avec DOXYGEN_SPECIFIC
+- Ajout du fichier LICENSE
+_______________
+- Fix Keywords.txt format.
+- LIBRARY_VERSION created
+- Update of DOXYGEN_SPECIFIC part for HTML documentation.
+- Add of LICENSE file
+
 \par 12/07/2018 1.61.0
 - Correction de ButtonsCommanderSwitch
 - Amélioration de la doc dans Commanders.h pour éviter les #define NO_* ...
@@ -424,6 +435,8 @@ _______________
 
 /** @file Commanders.h
 Main include file of the library.*/
+
+#define LIBRARY_VERSION		"Commanders V1.61.1"
 
 ///////////////////////////////////////////////////////////////////
 // Remove the '//' at the beginning of the line to be in debug mode.

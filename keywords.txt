@@ -20,8 +20,8 @@ ButtonsCommander	KEYWORD1
 ButtonsCommanderAnalogPushes	KEYWORD1
 ButtonsCommanderAnalogPushesItem	KEYWORD1
 ButtonsCommanderButton	KEYWORD1
-ButtonsCommanderEncoder KEYWORD1
-ButtonsCommanderPotentiometer KEYWORD1
+ButtonsCommanderEncoder	KEYWORD1
+ButtonsCommanderPotentiometer	KEYWORD1
 ButtonsCommanderPush	KEYWORD1
 ButtonsCommanderSwitch	KEYWORD1
 ButtonsCommanderSwitchOnePin	KEYWORD1
@@ -48,7 +48,7 @@ RaiseEvent	KEYWORD2
 
 AddEvent	KEYWORD2
 AddEvents	KEYWORD2
-GetLastSelectedButton KEYWORD2
+GetLastSelectedButton	KEYWORD2
 
 GetId	KEYWORD2
 GetPosition	KEYWORD2

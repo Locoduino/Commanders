@@ -27,7 +27,7 @@ ButtonsCommanderSwitch	KEYWORD1
 ButtonsCommanderSwitchOnePin	KEYWORD1
 ButtonsCommanderSwitchTwoPins	KEYWORD1
 
-CommandersEventHandlerFunction	KETWORD1
+CommandersEventHandlerFunction	KEYWORD1
 Event	KEYWORD1
 EventPin	KEYWORD1
 EventStack	KEYWORD1
@@ -43,7 +43,7 @@ GetLastEventType	KEYWORD2
 GetLastEventData	KEYWORD2
 SetLastEventType	KEYWORD2
 SetLastEventData	KEYWORD2
-GetLastConfigAddress	
+GetLastConfigAddress	KEYWORD2
 RaiseEvent	KEYWORD2
 
 AddEvent	KEYWORD2

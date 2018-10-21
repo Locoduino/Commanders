@@ -216,15 +216,15 @@ var NAVTREE =
         [ "src", "dir_d41d8cd98f00b204e9800998ecf8427e.html", [
           [ "Commanders.h", "Commanders_8h.html", [
             [ "COMMANDERS_DEBUG_MODE", "Commanders_8h.html#a1fdf52a0fdf8778a4472686eaa278b15", null ],
-            [ "COMMANDERS_DEBUG_MODE", "Commanders_8h.html#a1fdf52a0fdf8778a4472686eaa278b15", null ],
             [ "COMMANDERS_DEBUG_VERBOSE_MODE", "Commanders_8h.html#a43b270926f3753345583c1ed6f03c831", null ],
-            [ "COMMANDERS_PRINT_COMMANDERS", "Commanders_8h.html#a903f43d89a21cb3955b4fac654f6f8e8", null ],
             [ "COMMANDERS_PRINT_COMMANDERS", "Commanders_8h.html#a903f43d89a21cb3955b4fac654f6f8e8", null ],
             [ "GPIO2_PREFER_SPEED", "Commanders_8h.html#abe48e551c87434efe75af8e7d4df457c", null ],
             [ "LIBRARY_VERSION", "Commanders_8h.html#a8650e6793d46032c617bb7b824f90bfd", null ],
             [ "NO_BUTTONSCOMMANDER", "Commanders_8h.html#ae7dd7c67a4532415014e362df2369975", null ],
             [ "NO_BUTTONSCOMMANDERANALOGPUSHES", "Commanders_8h.html#af9126e9be452405be33ad87850e347d2", null ],
+            [ "NO_BUTTONSCOMMANDERANALOGPUSHES", "Commanders_8h.html#af9126e9be452405be33ad87850e347d2", null ],
             [ "NO_BUTTONSCOMMANDERENCODER", "Commanders_8h.html#a2985d95a0a626310eae72096ce19ac2f", null ],
+            [ "NO_BUTTONSCOMMANDERPOTENTIOMETER", "Commanders_8h.html#a0f0bd7466403be1b94b0dbb88c9e621a", null ],
             [ "NO_BUTTONSCOMMANDERPOTENTIOMETER", "Commanders_8h.html#a0f0bd7466403be1b94b0dbb88c9e621a", null ],
             [ "NO_BUTTONSCOMMANDERPUSH", "Commanders_8h.html#a3498f6a7191d0a717e5e442ac284c0c1", null ],
             [ "NO_BUTTONSCOMMANDERSWITCH", "Commanders_8h.html#aadc6236e05ca3e6ea974036cdbfd4e81", null ],
@@ -235,6 +235,7 @@ var NAVTREE =
             [ "NO_EVENTSSEQUENCER", "Commanders_8h.html#af4e3b964737bc5d02cd21a6eb375751f", null ],
             [ "NO_I2CCOMMANDER", "Commanders_8h.html#aa63d8345e7748626f0c63d02ecdff633", null ],
             [ "NO_I2CCOMMANDER", "Commanders_8h.html#aa63d8345e7748626f0c63d02ecdff633", null ],
+            [ "NO_SERIALCOMMANDER", "Commanders_8h.html#a190ad583ee12fb3fdbce6761a9b914e7", null ],
             [ "NO_SERIALCOMMANDER", "Commanders_8h.html#a190ad583ee12fb3fdbce6761a9b914e7", null ]
           ] ],
           [ "Events.h", "Events_8h.html", [
@@ -326,7 +327,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "ButtonsCommanderAnalogPushesItem_8cpp_source.html",
-"structEventsSequencerItem.html#aec4270ff027ff1d4257b2558023ef616"
+"structEventsSequencerItem.html#adf1c33ad991dfa3c442c64826b56d277"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

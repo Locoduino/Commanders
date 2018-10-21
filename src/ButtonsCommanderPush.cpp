@@ -5,6 +5,7 @@ description: <Push button with debounce.>
 *************************************************************/
 
 #include <Commanders.h>
+#include <stdint.h>
 #ifndef NO_BUTTONSCOMMANDER
 #ifndef NO_BUTTONSCOMMANDERPUSH
 
@@ -39,10 +40,19 @@ void ButtonsCommanderPush::AddEvent(unsigned long inId, COMMANDERS_EVENT_TYPE in
 
 unsigned long ButtonsCommanderPush::loop()
 {
-#ifdef COMMANDERS_DEBUG_MODE
 	if (this->Events.pFirst == NULL)
-		Serial.println(F("This push button have no ID defined : call begin() !"));
+	{
+#ifdef COMMANDERS_DEBUG_MODE
+		if (this->debounceDelay != UINT32_MAX) // If the error message has not been yet shown...
+		{
+			Serial.println(F("This push button have no ID defined : call begin() !"));
+			// use it as a debug flag !
+			this->debounceDelay = UINT32_MAX;	// The error message has been shown...
+		}
 #endif
+		return UNDEFINED_ID;
+	}
+
 	unsigned long foundID = UNDEFINED_ID;
 
 	if (this->buttonPin == DP_INVALID)
@@ -104,6 +114,8 @@ void ButtonsCommanderPush::printCommander()
 		Serial.print(F(" / Event type: "));
 		Commanders::printEventType(pCurr->Obj->EventType, true);
 		Commanders::printEventData(pCurr->Obj->EventType, pCurr->Obj->Data);
+		Serial.print(F(" / Debounce delay: "));
+		Serial.print(this->debounceDelay);
 		Serial.println(F(""));
 
 		pCurr = pCurr->pNext;

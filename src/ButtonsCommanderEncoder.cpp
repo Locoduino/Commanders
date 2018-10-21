@@ -91,7 +91,7 @@ unsigned long ButtonsCommanderEncoder::loop()
 #ifdef COMMANDERS_PRINT_COMMANDERS
 void ButtonsCommanderEncoder::printCommander()
 {
-	Serial.println(F("    Encoder - Pin1:"));
+	Serial.print(F("    Encoder - Pin1:"));
 	Serial.print(GPIO_to_Arduino_pin(this->pin1));
 	Serial.print(F(" / Pin2: "));
 	Serial.print(GPIO_to_Arduino_pin(this->pin2));

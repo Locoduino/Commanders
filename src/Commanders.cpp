@@ -160,5 +160,11 @@ unsigned long Commanders::loop()
 			Commanders::SetLastEventData(data);
 		}
 	}
+
+#ifdef COMMANDERS_DEBUG_MODE
+	if (id != UNDEFINED_ID)
+		printEvent(id, Commanders::GetLastEventType(), Commanders::GetLastEventData());
+#endif
+
 	return id;
 }

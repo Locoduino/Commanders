@@ -102,12 +102,6 @@ unsigned long ButtonsCommanderClass::loop()
 	if (ID == UNDEFINED_ID)
 		return UNDEFINED_ID;
 
-#ifdef COMMANDERS_DEBUG_MODE
-	Serial.print(F("ButtonsCommanderButton id:"));
-	Serial.print(ID, DEC);
-	Serial.println(F(" selected !"));
-#endif
-
 	pCurrentLoopButton->EndLoop();
 	return ID;
 }

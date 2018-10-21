@@ -118,6 +118,8 @@ void ButtonsCommanderAnalogPushes::printCommander()
 	Serial.println(this->analogPin);
 	Serial.print(F(" / Reading Accuracy: "));
 	Serial.println(this->readingTolerancy);
+	Serial.print(F(" / Debounce delay: "));
+	Serial.print(this->debounceDelay);
 
 	for (int i = 0; i < this->size; i++)
 	{

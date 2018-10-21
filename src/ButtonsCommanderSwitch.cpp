@@ -5,6 +5,7 @@ description: <Switch button with debounce.>
 *************************************************************/
 
 #include <Commanders.h>
+#include <stdint.h>
 #ifndef NO_BUTTONSCOMMANDER
 #ifndef NO_BUTTONSCOMMANDERSWITCH
 
@@ -93,6 +94,12 @@ unsigned long ButtonsCommanderSwitch::loopOnePin(unsigned long inId, GPIO_pin_t 
 		if (pinState != *inpLastPinState)
 		{
 			// reset the debouncing timer
+#ifdef COMMANDERS_DEBUG_MODE
+			Serial.print(F("Pin "));
+			Serial.print(inPin);
+			Serial.print(pinState == HIGH ? F(" high") : F(" low"));
+			Serial.println(F(" debounced !"));
+#endif
 			*inpLastPinState = pinState;
 			*inpLastDebounceTime = millis();
 			return UNDEFINED_ID;
@@ -152,10 +159,18 @@ void ButtonsCommanderSwitch::beforeFirstLoop()
 
 unsigned long ButtonsCommanderSwitch::loop()
 {
-#ifdef COMMANDERS_DEBUG_MODE
 	if (this->EventPins.pFirst == NULL)
-		Serial.println(F("This switch button have no ID defined : call AddEvent() and begin() !"));
+	{
+#ifdef COMMANDERS_DEBUG_MODE
+		if (this->debounceDelay != UINT32_MAX) // If the error message has not been yet shown...
+		{
+			Serial.println(F("This switch button have no ID defined : call AddEvent() and begin() !"));
+			// use it as a debug flag !
+			this->debounceDelay = UINT32_MAX;	// The error message has been shown...
+		}
 #endif
+		return UNDEFINED_ID;
+	}
 
 	EventPin *pCurr = this->EventPins.pCurrentItem->Obj;
 
@@ -187,6 +202,8 @@ void ButtonsCommanderSwitch::printCommander()
 		Serial.print(F(" / Event type: "));
 		Commanders::printEventType(pCurr->Obj->Event, true);
 		Commanders::printEventData(pCurr->Obj->Event, pCurr->Obj->Data);
+		Serial.print(F(" / Debounce delay: "));
+		Serial.print(this->debounceDelay);
 		Serial.println(F(""));
 
 		pCurr = pCurr->pNext;

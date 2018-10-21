@@ -45,6 +45,11 @@ and you are not prepared to distribute and share the source code of your
 application. Contact info@open.com.au for details.
 
 \page Revision History
+\par 21/10/2018 V1.61.2
+- Améliorations de l'affichage de debug	sur la console
+_______________
+- Improvements of debug prints on serial window.
+
 \par 15/07/2018 V1.61.1
 - Correction du format de Keywords.txt
 - Création de LIBRARY_VERSION
@@ -436,11 +441,11 @@ _______________
 /** @file Commanders.h
 Main include file of the library.*/
 
-#define LIBRARY_VERSION		"Commanders V1.61.1"
+#define LIBRARY_VERSION		"Commanders V1.61.2"
 
 ///////////////////////////////////////////////////////////////////
 // Remove the '//' at the beginning of the line to be in debug mode.
-#define COMMANDERS_DEBUG_MODE
+//#define COMMANDERS_DEBUG_MODE
 
 //////////////////////////////////////////////////////////////////
 // Remove the '//' at the beginning of the line to be in verbose debug mode.
@@ -448,7 +453,7 @@ Main include file of the library.*/
 
 //////////////////////////////////////////////////////////////////
 // Remove the '//' at the beginning of the line to activate the print function.
-#define COMMANDERS_PRINT_COMMANDERS
+//#define COMMANDERS_PRINT_COMMANDERS
 
 /** This is used internally by DIO2.h */
 #define  GPIO2_PREFER_SPEED    1
@@ -524,8 +529,8 @@ Main include file of the library.*/
 #define NO_CANCOMMANDER
 #define NO_DCCCOMMANDER
 #define NO_I2CCOMMANDER
-//#define NO_SERIALCOMMANDER
-//#define NO_EVENTSSEQUENCER
+#define NO_SERIALCOMMANDER
+#define NO_EVENTSSEQUENCER
 
 #ifdef DOXYGEN_SPECIFIC
 			// DO NOT CHANGE THESE LINES IN THIS BLOCK 'DOXYGEN_SPECIFIC' : Only here for library documentation !

@@ -46,6 +46,8 @@ void ButtonsCommanderSwitchOnePin::printCommander()
 	Serial.print(GPIO_to_Arduino_pin(this->Pin));
 	Serial.print(F(" / Id: "));
 	Serial.print(this->Id);
+	Serial.print(F(" / Debounce delay: "));
+	Serial.print(this->debounceDelay);
 	Serial.println(F(""));
 }
 #endif

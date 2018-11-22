@@ -117,6 +117,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac10ea64d33e686c877bdcb3024068e02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ec17894419857a33c2667e925da456e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDccCommanderClass.html#a6ec17894419857a33c2667e925da456e">begin</a> (int i, int j, int k, boolean inInterruptMonitor = false, boolean inUseRawDccAddresses = false)</td></tr>
 <tr class="separator:a6ec17894419857a33c2667e925da456e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a29cb12afbc0ca343ee4a9aeeed5e7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDccCommanderClass.html#a6a29cb12afbc0ca343ee4a9aeeed5e7f">RaiseEventWhen</a> (boolean inRaiseEventOnActivation, int inRaiseEventDebounceDelay = 200)</td></tr>
+<tr class="separator:a6a29cb12afbc0ca343ee4a9aeeed5e7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a688f192c9f26dfe824a86b6aa00152df"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDccCommanderClass.html#a688f192c9f26dfe824a86b6aa00152df">PriorityLoop</a> ()</td></tr>
 <tr class="separator:a688f192c9f26dfe824a86b6aa00152df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c97ea34dfdf4c13de53a58937df5580"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDccCommanderClass.html#a0c97ea34dfdf4c13de53a58937df5580">loop</a> ()</td></tr>
@@ -148,10 +150,13 @@ Static Public Member Functions</h2></td></tr>
 id / data / 1
 id / data / 1
 id / data / 0
-</pre><p>In the <a class="el" href="classCommanders.html">Commanders</a> interpretation of a DCC packet, id is given by 'A' bits, data from the 'D' bits, and the activate flag by the 'C' bit. The id is not the number you can see on a MS2, and on most DCC controllers. There is a small computation between id and data to obtain the real MS2 accessory number : real_id (1 to 320) and real_data (0 or 1 for right or left). It works on all known controllers, except on Multimaus...</p>
+</pre><p>One an Ecos, only the '1' packets are sent, out of the standard... </p><pre class="fragment">id / data / 1
+id / data / 1
+id / data / 1
+</pre><p>The last flag is to activate for a while (three times at 1 !) and then deactivate the motor ! DccCommander will react only on the first event to avoid double events. By default the '0' packet is used to raise an event, but for an Ecos or a '1' only Dcc central, use <a class="el" href="classDccCommanderClass.html#a6a29cb12afbc0ca343ee4a9aeeed5e7f">RaiseEventWhen()</a> function with first argument to true.</p>
+<p>In the <a class="el" href="classCommanders.html">Commanders</a> interpretation of a DCC packet, id is given by 'A' bits, data from the 'D' bits, and the activate flag by the 'C' bit. The id is not the number you can see on a MS2, and on most DCC controllers. There is a small computation between id and data to obtain the real MS2 accessory number : real_id (1 to 320) and real_data (0 or 1 for right or left). It works on all known controllers, except on Multimaus...</p>
 <p>The translated id and the activation flag are then translated into an unsigned long to be used as a <a class="el" href="classCommanders.html">Commanders</a> id. The formula is </p><pre class="fragment">real_data * 10000 + real_id   .
 </pre><p> DCCINT is the macro used to build the unsigned long, DCCID the one to use to get the real id number from this long int, and DCCACTIVATION the other to get the real_data.</p>
-<p>This flag is to activate for a while (three times at 1 !) and then deactivate the motor ! DccCommander will react only on the deactivate flag to avoid double events.</p>
 <p>Events thrown:</p>
 <table class="doxtable">
 <tr>
@@ -162,7 +167,7 @@ id / data / 0
 <td>data = 1 </td><td>accessory id </td><td><a class="el" href="Events_8h.html#a36239a7eea6194f04e73e80d7419490caebdb45ee96bd05e90e9e633c114e9cba">COMMANDERS_EVENT_MOVE</a> </td><td><a class="el" href="Events_8h.html#a347ec2e7ad5bc98b641a887ce34cc2baa196b887b79ca8df5b10e94318d32df7e">COMMANDERS_MOVE_LEFT</a> </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="DccCommander_8hpp_source.html#l00073">73</a> of file <a class="el" href="DccCommander_8hpp_source.html">DccCommander.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DccCommander_8hpp_source.html#l00081">81</a> of file <a class="el" href="DccCommander_8hpp_source.html">DccCommander.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ac10ea64d33e686c877bdcb3024068e02"></a>
 <div class="memitem">
@@ -186,7 +191,7 @@ id / data / 0
 </div><div class="memdoc">
 <p>Default constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="DccCommander_8hpp_source.html#l00083">83</a> of file <a class="el" href="DccCommander_8hpp_source.html">DccCommander.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DccCommander_8hpp_source.html#l00094">94</a> of file <a class="el" href="DccCommander_8hpp_source.html">DccCommander.hpp</a>.</p>
 
 </div>
 </div>
@@ -243,7 +248,7 @@ id / data / 0
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="DccCommander_8cpp_source.html#l00097">97</a> of file <a class="el" href="DccCommander_8cpp_source.html">DccCommander.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DccCommander_8cpp_source.html#l00111">111</a> of file <a class="el" href="DccCommander_8cpp_source.html">DccCommander.cpp</a>.</p>
 
 </div>
 </div>
@@ -319,7 +324,7 @@ id / data / 0
 </div><div class="memdoc">
 <p>Get the current instance of DccCommanderClass </p><dl class="section remark"><dt>Remarks</dt><dd>This is an internal function. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="DccCommander_8hpp_source.html#l00115">115</a> of file <a class="el" href="DccCommander_8hpp_source.html">DccCommander.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DccCommander_8hpp_source.html#l00134">134</a> of file <a class="el" href="DccCommander_8hpp_source.html">DccCommander.hpp</a>.</p>
 
 </div>
 </div>
@@ -345,7 +350,7 @@ id / data / 0
 </div><div class="memdoc">
 <p>Gets the last DCC id received. </p>
 
-<p class="definition">Definition at line <a class="el" href="DccCommander_8hpp_source.html#l00109">109</a> of file <a class="el" href="DccCommander_8hpp_source.html">DccCommander.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DccCommander_8hpp_source.html#l00128">128</a> of file <a class="el" href="DccCommander_8hpp_source.html">DccCommander.hpp</a>.</p>
 
 </div>
 </div>
@@ -373,7 +378,7 @@ id / data / 0
 
 <p>Reimplemented from <a class="el" href="classCommander.html#ad071adf2b8c272269394c2c66bf46f00">Commander</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="DccCommander_8cpp_source.html#l00134">134</a> of file <a class="el" href="DccCommander_8cpp_source.html">DccCommander.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DccCommander_8cpp_source.html#l00157">157</a> of file <a class="el" href="DccCommander_8cpp_source.html">DccCommander.cpp</a>.</p>
 
 </div>
 </div>
@@ -391,7 +396,7 @@ id / data / 0
 </div><div class="memdoc">
 <p>Print this commander on the console. </p><dl class="section remark"><dt>Remarks</dt><dd>Only available if <a class="el" href="Commanders_8h.html#a903f43d89a21cb3955b4fac654f6f8e8">COMMANDERS_PRINT_COMMANDERS</a> is defined. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="DccCommander_8cpp_source.html#l00230">230</a> of file <a class="el" href="DccCommander_8cpp_source.html">DccCommander.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DccCommander_8cpp_source.html#l00253">253</a> of file <a class="el" href="DccCommander_8cpp_source.html">DccCommander.cpp</a>.</p>
 
 </div>
 </div>
@@ -434,7 +439,7 @@ id / data / 0
 </div><div class="memdoc">
 <p>Print the given event on the console. </p><dl class="section remark"><dt>Remarks</dt><dd>Only available if <a class="el" href="Commanders_8h.html#a1fdf52a0fdf8778a4472686eaa278b15">COMMANDERS_DEBUG_MODE</a> is defined. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="DccCommander_8cpp_source.html#l00179">179</a> of file <a class="el" href="DccCommander_8cpp_source.html">DccCommander.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DccCommander_8cpp_source.html#l00202">202</a> of file <a class="el" href="DccCommander_8cpp_source.html">DccCommander.cpp</a>.</p>
 
 </div>
 </div>
@@ -462,7 +467,42 @@ id / data / 0
 
 <p>Reimplemented from <a class="el" href="classCommander.html#ade3914b5c62cd08a4e97050bc5314734">Commander</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="DccCommander_8cpp_source.html#l00118">118</a> of file <a class="el" href="DccCommander_8cpp_source.html">DccCommander.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DccCommander_8cpp_source.html#l00141">141</a> of file <a class="el" href="DccCommander_8cpp_source.html">DccCommander.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6a29cb12afbc0ca343ee4a9aeeed5e7f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DccCommanderClass::RaiseEventWhen </td>
+          <td>(</td>
+          <td class="paramtype">boolean&#160;</td>
+          <td class="paramname"><em>inRaiseEventOnActivation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>inRaiseEventDebounceDelay</em> = <code>200</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Defines on which DCC packet the <a class="el" href="classCommanders.html">Commanders</a> event should be raised. By default, an event is raised when the desactivation packet is received. After the reception on the 'event' packet, there is no other reception on the accessory during a given delay, 200ms by default. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">inRaiseEventOnActivation</td><td>if true, the event will be raised only at reception of a desactivation packet. </td></tr>
+    <tr><td class="paramname">When</td><td>a 'event' packet has been received, no other event will be raised on this accessory during this delay. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="DccCommander_8cpp_source.html#l00135">135</a> of file <a class="el" href="DccCommander_8cpp_source.html">DccCommander.cpp</a>.</p>
 
 </div>
 </div>
@@ -489,7 +529,7 @@ id / data / 0
 </div><div class="memdoc">
 <p>Set the callback function which will be called when an accessory packet will be decoded. Set it to NULL or 0 to inactivate this function. </p>
 
-<p class="definition">Definition at line <a class="el" href="DccCommander_8cpp_source.html#l00173">173</a> of file <a class="el" href="DccCommander_8cpp_source.html">DccCommander.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DccCommander_8cpp_source.html#l00196">196</a> of file <a class="el" href="DccCommander_8cpp_source.html">DccCommander.cpp</a>.</p>
 
 </div>
 </div>
@@ -503,7 +543,7 @@ id / data / 0
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classDccCommanderClass.html">DccCommanderClass</a></li>
-    <li class="footer">Generated on dim. oct. 21 2018 14:25:38 for Commanders &nbsp; by
+    <li class="footer">Generated on jeu. nov. 22 2018 18:52:30 for Commanders &nbsp; by
     <a href="http://www.copperspice.com/documentation-doxypress.html">
     <img class="footer" src="doxypress.png" alt="DoxyPress"/></a> 1.2.10 </li>
   </ul>

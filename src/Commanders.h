@@ -45,15 +45,24 @@ and you are not prepared to distribute and share the source code of your
 application. Contact info@open.com.au for details.
 
 \page Revision History
+\par 22/11/2018 V1.62
+- Correction de ButtonsCommanderAnalogPushes qui ne marchait pas.
+- Ajout de RaiseEventWhen() Ã  DccCommander pour gÃ©rer les centrales type Ecos.
+- Correction de l'affichage de debug d'une pin dans ButtonsCommanderSwitch
+_______________
+- Fix of ButtonsCommanderAnalogPushes.
+- RaiseEventWhen() added to DccCommander to handle centrals like Ecos.
+- Fix debug print of pin number in ButtonsCommanderSwitch
+
 \par 21/10/2018 V1.61.2
-- Améliorations de l'affichage de debug	sur la console
+- AmÃ©liorations de l'affichage de debug	sur la console
 _______________
 - Improvements of debug prints on serial window.
 
 \par 15/07/2018 V1.61.1
 - Correction du format de Keywords.txt
-- Création de LIBRARY_VERSION
-- Mise en conformité de la partie doc HTML avec DOXYGEN_SPECIFIC
+- CrÃ©ation de LIBRARY_VERSION
+- Mise en conformitÃ© de la partie doc HTML avec DOXYGEN_SPECIFIC
 - Ajout du fichier LICENSE
 _______________
 - Fix Keywords.txt format.
@@ -63,7 +72,7 @@ _______________
 
 \par 12/07/2018 1.61.0
 - Correction de ButtonsCommanderSwitch
-- Amélioration de la doc dans Commanders.h pour éviter les #define NO_* ...
+- AmÃ©lioration de la doc dans Commanders.h pour Ã©viter les #define NO_* ...
 _______________
 - Fix of ButtonsCommanderSwitch.
 - Improvement of the documentation to avoid influence of #define NO_* inside Commanders.h
@@ -98,7 +107,7 @@ _______________
 - Fix all samples to have a better check of Commanders.h configuration.
 
 \par 18/10/2017 1.51.0
-- Mise en forme du numéro de version en 'semver' (Semantic Versioning 2.0.0).
+- Mise en forme du numÃ©ro de version en 'semver' (Semantic Versioning 2.0.0).
 - Ajout de ArduiEmulator dans extras.
 _______________
 - Version number converted to 'semver' format (Semantic Versioning 2.0.0).
@@ -109,7 +118,7 @@ _______________
 - Retrait de DccCommanderClass.CheckIndex()
 - Ajout de Commander.BeforeFirstLoop() et Commander.printCommanders()
 - Renommage des fonctions de EventStack.
-- Passage de statique classe à statique fichier de LastEventId dans I2CCommander
+- Passage de statique classe Ã  statique fichier de LastEventId dans I2CCommander
 _______________
 - New complete English documentation in extras/Doc
 - Removing of DccCommanderClass.CheckIndex()
@@ -118,10 +127,10 @@ _______________
 - Pass from static of class to file static of LastEventId in I2CCommander.
 
 \par 14/07/2017 1.40
-- Nouvelles classes ButtonscommanderSwitchOnePin et ButtonscommanderSwitchTwoPins pour gérer les cas les plus fréquents sur des switchs...
+- Nouvelles classes ButtonscommanderSwitchOnePin et ButtonscommanderSwitchTwoPins pour gÃ©rer les cas les plus frÃ©quents sur des switchs...
 - Nouvelle fonction virtuelle BeforeFirstLoop() dans ButtonsCommander et certains boutons.
-- Ajout d'un paramètre MoveIncrement sur les encodeurs.
-- Ajouts de messages de compilation 'No *** Commander' quand un NO_***COMMANDER a été déclaré.
+- Ajout d'un paramÃ¨tre MoveIncrement sur les encodeurs.
+- Ajouts de messages de compilation 'No *** Commander' quand un NO_***COMMANDER a Ã©tÃ© dÃ©clarÃ©.
 _______________
 - New classes ButtonscommanderSwitchOnePin and ButtonscommanderSwitchTwoPins to handle the more common cases for switch usage.
 - New function BeforeFirstLoop() for ButtonsCommander and some buttons.
@@ -129,9 +138,9 @@ _______________
 - New compilation messages 'No *** Commander' when a NO_***COMMANDER has been defined.
 
 \par 21/04/2017 1.31
-- ButtonsCommanderSwitch.AddEvent() retourne l'événement créé au cas où...
-- Correction de ButtonscommanderSwitch.begin() pour sélectionner le bon id au lancement.
-- Correction de ButtonsCommanderEncoder.loop() qui retournait le mauvais événement.
+- ButtonsCommanderSwitch.AddEvent() retourne l'Ã©vÃ©nement crÃ©Ã© au cas oÃ¹...
+- Correction de ButtonscommanderSwitch.begin() pour sÃ©lectionner le bon id au lancement.
+- Correction de ButtonsCommanderEncoder.loop() qui retournait le mauvais Ã©vÃ©nement.
 _______________
 - ButtonsCommanderSwitch.AddEvent() returns the newly created event.
 - Fix ButtonscommanderSwitch.begin() to select the right Id at launch.
@@ -139,14 +148,14 @@ _______________
 
 \par 09/04/2017 1.30
 - Ajout des macros PRINT_COMMANDERS, COMMANDERS_PRINT_EVENT et PRINT_EVENT_DCC.
-- Ajout d'une EventStack pour pouvoir émettre plusieurs events pendant un seul loop.
-- Ajout d'un événement COMMANDER_MOVE_OFF au basculement d'un switch.
-- Initialisation d'un switch par la lecture de son état pendant le setup.
-- Test sur la présence d'au moins un état pour un switch.
+- Ajout d'une EventStack pour pouvoir Ã©mettre plusieurs events pendant un seul loop.
+- Ajout d'un Ã©vÃ©nement COMMANDER_MOVE_OFF au basculement d'un switch.
+- Initialisation d'un switch par la lecture de son Ã©tat pendant le setup.
+- Test sur la prÃ©sence d'au moins un Ã©tat pour un switch.
 - Retrait d'un pinMode inutile pour les switchs.
-- Retrait d'une génération d'événement inutile pour un encodeur.
-- Ajout d'une fonction SetMiniMaxi pour les potentiomètres.
-- Test de la présence de la bibliothèque mcp_can si le CAN commander est activé.
+- Retrait d'une gÃ©nÃ©ration d'Ã©vÃ©nement inutile pour un encodeur.
+- Ajout d'une fonction SetMiniMaxi pour les potentiomÃ¨tres.
+- Test de la prÃ©sence de la bibliothÃ¨que mcp_can si le CAN commander est activÃ©.
 _______________
 - Macros PRINT_COMMANDERS, COMMANDERS_PRINT_EVENT and PRINT_EVENT_DCC added.
 - EventStack sources added to be able to push more than one event during one loop() call.
@@ -173,7 +182,7 @@ _______________
 - CHAIN_ENUMERATE renamed in CMDRSCHAIN_ENUMERATE.
 
 \par 31/12/2016 1.23
-- Mise à jour de DIO2
+- Mise Ã  jour de DIO2
 _______________
 - Included library DIO2 updated
 
@@ -183,7 +192,7 @@ _______________
 - Fix compilation if no COMMANDERS_PRINT_COMMANDERS defined.
 
 \par 19/11/2016 1.21
-- Ajout de printCommanders() pour avoir le détail de ce qui est déclaré. Activable avec #define COMMANDERS_PRINT_COMMANDERS
+- Ajout de printCommanders() pour avoir le dÃ©tail de ce qui est dÃ©clarÃ©. Activable avec #define COMMANDERS_PRINT_COMMANDERS
 _______________
 - printCommanders() added to show on console all the declared commanders. Must be activated with #define COMMANDERS_PRINT_COMMANDERS
 
@@ -193,8 +202,8 @@ _______________
 - Fix of DccCommander...
 
 \par 31/10/2016 1.11
-- Changement de nom pour éviter des collisions de nom avec d'autres biblios : DEBUG_VERBOSE->COMMANDERS_DEBUG_VERBOSE.
-- Ajout des bibliothèques DIO2 et mcp-can dans 'extra'.
+- Changement de nom pour Ã©viter des collisions de nom avec d'autres biblios : DEBUG_VERBOSE->COMMANDERS_DEBUG_VERBOSE.
+- Ajout des bibliothÃ¨ques DIO2 et mcp-can dans 'extra'.
 - event.h ne sera plus inclus dans un croquis utilisant Commanders.
 _______________
 - Name changed from DEBUG_VERBOSE to COMMANDERS_DEBUG_VERBOSE, to avoid confusion with other libraries.
@@ -202,24 +211,24 @@ _______________
 - event.h will not be included anymore when Commanders will be used in a sketch.
 
 \par 28/09/2016 1.1
-- Déclaration de NO_CANCOMMANDER par défaut.
+- DÃ©claration de NO_CANCOMMANDER par dÃ©faut.
 _______________
 - NO_CANCOMMANDER is the default
 
 \par 09/09/2016 1.0
-- Inversion de la broche et de l'identifiant dans AddEvent du switch pour être homogène avec le poussoir.
+- Inversion de la broche et de l'identifiant dans AddEvent du switch pour Ãªtre homogÃ¨ne avec le poussoir.
 Idem pour l'encodeur et le potentiometre.
-- Création du source 'Events.h' pour ne pas avoir à recopier les enums dans les exemples.
+- CrÃ©ation du source 'Events.h' pour ne pas avoir Ã  recopier les enums dans les exemples.
 _______________
 - Inverted pin and id in potentiometer, switch and encoder constructors
 - Created 'Events.h' to avoid copying enums in samples.
 
 \par 04/09/2016 0.99
-- Plus d'initialisation de Serial, pour le DUE, même dans SerialCommander .
-Serial.begin() doit être fait dans le .ino .
-- Ajout de l'événement COMMANDERS_EVENT_MOVEPOSITIONID.
+- Plus d'initialisation de Serial, pour le DUE, mÃªme dans SerialCommander .
+Serial.begin() doit Ãªtre fait dans le .ino .
+- Ajout de l'Ã©vÃ©nement COMMANDERS_EVENT_MOVEPOSITIONID.
 - un begin() remplace SetEventHandler et SetStatusLedPin pour Commanders.
-- sur une (fausse) intuition, retrait de tous les 'byte' remplacés par des uint8_t .
+- sur une (fausse) intuition, retrait de tous les 'byte' remplacÃ©s par des uint8_t .
 _______________
 - No more internal begin() of Serial class, to avoid problems with the DUE, even in SerialCommander.
 Serial.begin must be done, if necessary, in .ino file .
@@ -229,7 +238,7 @@ Serial.begin must be done, if necessary, in .ino file .
 could have been avoided...
 _______________
 \par 21/08/2016 0.98
-- Ajout de l'événement COMMANDERS_EVENT_MOVEPOSITIONINDEX.
+- Ajout de l'Ã©vÃ©nement COMMANDERS_EVENT_MOVEPOSITIONINDEX.
 - Ajout de la syntaxe id:acc pour le SerialCommander
 _______________
 - Added event COMMANDERS_EVENT_MOVEPOSITIONINDEX
@@ -237,7 +246,7 @@ _______________
 
 \par 16/08/2016 0.97
 - Correction de Chain.hpp avec des pointeurs
-- Adaptation de ButtonsCommanderKeyboard par rapport à ButtonsCommanderPush
+- Adaptation de ButtonsCommanderKeyboard par rapport Ã  ButtonsCommanderPush
 _______________
 - Fix Chain.hpp with pointers
 - Upgrade ButtonsCommanderKeyboard to ButtonsCommanderPush
@@ -250,20 +259,20 @@ _______________
 - Samples fixed.
 
 \par 05/06/2016 V0.95
-- Déplacement de RaiseEvent de Commander à Commanders.
+- DÃ©placement de RaiseEvent de Commander Ã  Commanders.
 - Correction de Chain.hpp
 _______________
 - RaiseEvent() moved from Commander to Commanders.
 - chain.hpp fixed
 
 \par 25/05/2016 V0.94
-- Ajout de STRAIGHT et DIVERGE dans les événements
+- Ajout de STRAIGHT et DIVERGE dans les Ã©vÃ©nements
 _______________
 - Added events STRAIGHT and DIVERGE.
 
 \par 22/05/2016 V0.93
-- Modification des événements pour un MOVE multiple.
-- Optimisation mémoire et code.
+- Modification des Ã©vÃ©nements pour un MOVE multiple.
+- Optimisation mÃ©moire et code.
 - #define NO_BUTTONSCOMMANDER qui marche...
 _______________
 - Events modified to add a MOVE with arguments.
@@ -272,8 +281,8 @@ _______________
 
 \par 19/05/2016 V0.92
 - Retrait des macros
-- Simplification de l'écriture pour les utilisateurs par l'instanciation automatique des commanders et la suppression des
-arguments des constructeurs renvoyés vers les begin(). Plus de pointeurs à manipuler !
+- Simplification de l'Ã©criture pour les utilisateurs par l'instanciation automatique des commanders et la suppression des
+arguments des constructeurs renvoyÃ©s vers les begin(). Plus de pointeurs Ã  manipuler !
 - Ajout de test.bat pour compiler automatiquement les exemples et obtenir un rapport.
 _______________
 - Macros removed.
@@ -283,18 +292,18 @@ and removing of all constructor arguments moved to the begin() functions. No mor
 
 \par 17/05/2016 V0.91
 - Correction de DccCommander qui ne marchait pas du tout !
-- Exemple DccMacro adapté.
+- Exemple DccMacro adaptÃ©.
 _______________
 - Fix of DccCommander.
 
 \par 15/05/2016 V0.90
-- Ajout de l'événement CONFIG avec un octet pour l'adresse, et un autre pour la valeur.
+- Ajout de l'Ã©vÃ©nement CONFIG avec un octet pour l'adresse, et un autre pour la valeur.
 _______________
 - Added CONFIG event, with a byte for the address, and another one for the value.
 
 \par 03/05/2016 V0.82
 - Correction de l'exemple CANCommander.
-- Mise à jour de DIO2 dans extra.
+- Mise Ã  jour de DIO2 dans extra.
 - Renommage de AddId en AddEvent dans les switchs.
 - Ajout des masques et des filtres dans CANCommander.
 _______________
@@ -305,19 +314,19 @@ _______________
 
 \par 03/05/2016 V0.81
 - I2C fonctionne !
-- Deux exemples simplissimes de récepteurs CAN et I2C ajoutés.
+- Deux exemples simplissimes de rÃ©cepteurs CAN et I2C ajoutÃ©s.
 _______________
 - I2C is working !
 - Two new samples with basics CAN and I2C receptors.
 
 \par 02/05/2016 V0.80
-- Utilisation de listes chainées (avec le template Chain.hpp) pour éviter les dimensionnements inutiles.
-- Ajout du type d'événement et du data associé dans les push et les switches.
-- Ajout des événements MOVELEFT, MOVERIGHT et MOVESTOP . SELECTED devient TOGGLE.
-- Utilisation de la bibliothèque externe DIO2 au lieu de la version interne Arduino2.
-- Pour éviter des conflits, DEBUG_MODE est renommé en COMMANDERS_DEBUG_MODE.
-- NULL est utilisé aussi souvent que possible.
-- CANCommander fonctionne ! Mais seulement en réception. Un exemple d'émeteur a été ajouté.
+- Utilisation de listes chainÃ©es (avec le template Chain.hpp) pour Ã©viter les dimensionnements inutiles.
+- Ajout du type d'Ã©vÃ©nement et du data associÃ© dans les push et les switches.
+- Ajout des Ã©vÃ©nements MOVELEFT, MOVERIGHT et MOVESTOP . SELECTED devient TOGGLE.
+- Utilisation de la bibliothÃ¨que externe DIO2 au lieu de la version interne Arduino2.
+- Pour Ã©viter des conflits, DEBUG_MODE est renommÃ© en COMMANDERS_DEBUG_MODE.
+- NULL est utilisÃ© aussi souvent que possible.
+- CANCommander fonctionne ! Mais seulement en rÃ©ception. Un exemple d'Ã©meteur a Ã©tÃ© ajoutÃ©.
 _______________
 - Use of chained lists (via the template Chain.hpp) instead of classic lists.
 - Event types and associated data added for event lists in pushes and switches.
@@ -340,27 +349,27 @@ _______________
 \par 20/04/2016 V0.70
 - Ajout de TextInterpreter.
 - Utilisation de TextInterpreter dans SerialCommander
-- Exclusion de CANCommander quand NO_CANCOMMANDER défini.
+- Exclusion de CANCommander quand NO_CANCOMMANDER dÃ©fini.
 _______________
 - TextInterpreter added.
 - Use of TextInterpreter inside SerialCommander.
 - Exclusion of CANCommander when asked with define NO_CANCOMMANDER.
 
 \par 05/04/2016 V0.64
-- Ajout d'une Led de statut commune à tous les Commanders.
+- Ajout d'une Led de statut commune Ã  tous les Commanders.
 - Renommage de tous les 'Setup' en 'begin' et 'Loop' en 'loop'.
 _______________
 - Added a global status Led for all the commanders.
 - All 'Setup' have been renamed in 'begin' and 'Loop' in 'loop'.
 
 \par 02/04/2016 V0.63
-- Correction du constructeur de ButtonsCommanderPush avec le nombre d'ids passés maintenant en argument du setup.
+- Correction du constructeur de ButtonsCommanderPush avec le nombre d'ids passÃ©s maintenant en argument du setup.
 - Ajout d'une macro PUSH_BUTTON_IDS pour les ID multiples d'un poussoir.
-- Ajout d'une macro ANALOGPUSH_BUTTON_TOL pour les boutons poussoir en Charlieplexing avec une tolérance.
-- Correction d'un problème de compilation de ButtonsCommanderButton
-- Correction de SerialCommander dans l'interprétation du texte...
-- ButtonsCommanderEncoder peut maintenant envoyer un événement absolu avec une valeur entre mini et maxi,
-ou un événement relatif avec +1 ou -1.
+- Ajout d'une macro ANALOGPUSH_BUTTON_TOL pour les boutons poussoir en Charlieplexing avec une tolÃ©rance.
+- Correction d'un problÃ¨me de compilation de ButtonsCommanderButton
+- Correction de SerialCommander dans l'interprÃ©tation du texte...
+- ButtonsCommanderEncoder peut maintenant envoyer un Ã©vÃ©nement absolu avec une valeur entre mini et maxi,
+ou un Ã©vÃ©nement relatif avec +1 ou -1.
 _______________
 - Fix ButtonsCommanderPush constructor, number of multiple ids now passed to the setup function.
 - Added PUSH_BUTTON_IDS macro for push button with multiple ids.
@@ -371,8 +380,8 @@ _______________
 or a Relative event, with +1 or -1 as value.
 
 \par 29/03/2016 V0.62
-- Changement de syntaxe des macros générales avec COMMANDERS au lieu de COMMANDER
-- Suppression de point-virgules à la fin des macros.
+- Changement de syntaxe des macros gÃ©nÃ©rales avec COMMANDERS au lieu de COMMANDER
+- Suppression de point-virgules Ã  la fin des macros.
 - DCCACCESSORY devient DCCACTIVATION
 - Correction de la macro ANALOGPUSH_BUTTON .
 _______________
@@ -382,13 +391,13 @@ _______________
 - Fix ANALOGPUSH_BUTTON macro.
 
 \par 25/03/2016 V0.61
-- Correction de problèmes de consommation mémoire.
+- Correction de problÃ¨mes de consommation mÃ©moire.
 _______________
 - Fix memory Consumption in events.
 
 \par 19/03/2016 V0.60
-- Correction et améliorations du SerialCommander. Par macros, et compatible avec tous les types de serial class...
-- Compatibilité ajoutée avec l'Arduino Due, mais sans bénéficier de l'accélération promise par l'accès direct aux ports.
+- Correction et amÃ©liorations du SerialCommander. Par macros, et compatible avec tous les types de serial class...
+- CompatibilitÃ© ajoutÃ©e avec l'Arduino Due, mais sans bÃ©nÃ©ficier de l'accÃ©lÃ©ration promise par l'accÃ¨s direct aux ports.
 _______________
 - Fix of SerialCommander, to be able to use any kind of serial class, from the hardware serials of Arduinos, to
 software emulations by AltSoftSerial or SoftwareSerial .
@@ -396,8 +405,8 @@ software emulations by AltSoftSerial or SoftwareSerial .
 addressing of processor ports.
 
 \par 18/03/2016 V0.50
-- Nouveau nom 'Commanders' pour la bibliothèque. Les classes et les defines ont suivi le mouvement.
-- Un moyen simple de programmer à l'aide de macros C a été ajouté.
+- Nouveau nom 'Commanders' pour la bibliothÃ¨que. Les classes et les defines ont suivi le mouvement.
+- Un moyen simple de programmer Ã  l'aide de macros C a Ã©tÃ© ajoutÃ©.
 _______________
 - New name 'Commanders' for the library. All classes and defines have been adapted when necessary.
 - An easy programming way have been added based on C macros.
@@ -405,9 +414,9 @@ _______________
 \par 20/02/2016 V0.40
 - Correction des Ids multiples de PushButton.
 - Ajout de la classe ButtonsCommanderAnalogPushes
-- ButtonsCommander::Loop renvoie une structure avec l'id du bouton sélectionné ou UNDEFINED_ID. LastSelectedButton garde en mémoire le dernier,
-même pour un bouton composite comme ButtonsCommanderAnalogPushes. Dans ce cas c'est l'item qui est conservé.
-- Un exemple SimpleButtonsByIds a été ajouté pour tester cette façon de fonctionner.
+- ButtonsCommander::Loop renvoie une structure avec l'id du bouton sÃ©lectionnÃ© ou UNDEFINED_ID. LastSelectedButton garde en mÃ©moire le dernier,
+mÃªme pour un bouton composite comme ButtonsCommanderAnalogPushes. Dans ce cas c'est l'item qui est conservÃ©.
+- Un exemple SimpleButtonsByIds a Ã©tÃ© ajoutÃ© pour tester cette faÃ§on de fonctionner.
 _______________
 - Fix multiple ids for push button.
 - New class ButtonsCommanderAnalogPushes added.
@@ -417,8 +426,8 @@ which is kept.
 - A sample SimpleButtonsByIds has been added to test this mode.
 
 \par 22/12/2015 V0.30
-- EventHandler implémenté et fonctionnel
-- Simplification de la construction des commanders avec des listes chainées
+- EventHandler implÃ©mentÃ© et fonctionnel
+- Simplification de la construction des commanders avec des listes chainÃ©es
 - Ajout du traitement clavier pour les tests PC-Windows.
 _______________
 - EventHandler is implemented and operational.
@@ -426,14 +435,14 @@ _______________
 - Keyboard handling added for PC-Windows tests.
 
 \par 20/12/2015 V0.20
-- Gros gain de mémoire dynamique entre DccCommander avec sa liste de CVs trop longue, et surtout SerialCommander qui
+- Gros gain de mÃ©moire dynamique entre DccCommander avec sa liste de CVs trop longue, et surtout SerialCommander qui
 utilisait les Serial* du noyau, chacun allouant 150 octets de buffer interne en dur !
 _______________
 - Big fix on dynamic memory size, because of CV list in DccCommander, but mostly because of SerialCommander which
 reference the Serial* default classes from the kernel, each one allocating 150 bytes of internal buffer !
 
 \par 01/09/2015 V0.10
-- Création de la librairie, extraite de ma librarie UniversalAccessoryDecoder.
+- CrÃ©ation de la librairie, extraite de ma librarie UniversalAccessoryDecoder.
 _______________
 - Creation, extracted from my UniversalAccessoryDecoder library v4.
 */
@@ -441,7 +450,7 @@ _______________
 /** @file Commanders.h
 Main include file of the library.*/
 
-#define LIBRARY_VERSION		"Commanders V1.61.2"
+#define LIBRARY_VERSION		"Commanders V1.62"
 
 ///////////////////////////////////////////////////////////////////
 // Remove the '//' at the beginning of the line to be in debug mode.
@@ -467,7 +476,7 @@ Main include file of the library.*/
 //	CANCommander.cpp
 //	CANCommander.hpp
 //
-//NO_DCCCOMMANDER
+//NO_DCCCOMMANDER																																																																 
 //	DccCommander.cpp
 //	DccCommander.hpp
 //	DCC_Decoder.cpp
@@ -530,7 +539,7 @@ Main include file of the library.*/
 #define NO_DCCCOMMANDER
 #define NO_I2CCOMMANDER
 #define NO_SERIALCOMMANDER
-#define NO_EVENTSSEQUENCER
+//#define NO_EVENTSSEQUENCER
 
 #ifdef DOXYGEN_SPECIFIC
 			// DO NOT CHANGE THESE LINES IN THIS BLOCK 'DOXYGEN_SPECIFIC' : Only here for library documentation !

@@ -45,6 +45,7 @@ SetLastEventType	KEYWORD2
 SetLastEventData	KEYWORD2
 GetLastConfigAddress	KEYWORD2
 RaiseEvent	KEYWORD2
+RaiseEventWhen	KEYWORD2
 
 AddEvent	KEYWORD2
 AddEvents	KEYWORD2

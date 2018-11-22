@@ -96,7 +96,7 @@ unsigned long ButtonsCommanderSwitch::loopOnePin(unsigned long inId, GPIO_pin_t 
 			// reset the debouncing timer
 #ifdef COMMANDERS_DEBUG_MODE
 			Serial.print(F("Pin "));
-			Serial.print(inPin);
+			Serial.print(GPIO_to_Arduino_pin(inPin));
 			Serial.print(pinState == HIGH ? F(" high") : F(" low"));
 			Serial.println(F(" debounced !"));
 #endif

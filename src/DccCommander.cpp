@@ -62,8 +62,22 @@ void DccCommanderClass::DccAccessoryDecoderPacket(int address, boolean activate,
 	// id / data / 0
 	// The last byte is to activate for a while (three times at 1 !) and then deactivate the motor !
 	// DccCommander will react only on the deactivate flag to avoid double events.
-	if (activate == false)
+	if (activate == DccCommander.RaiseEventOnActivation)
 	{
+		if (DCCINT(realAddress, data) == DccCommander.LastDccId)
+			if (millis() - DccCommander.LastEventDate < DccCommander.RaiseEventDebounceDelay)
+			{
+#ifdef COMMANDERS_DEBUG_MODE
+				Serial.print(F("DccCommander packet IGNORED :"));
+				Serial.print(realAddress);
+				Serial.print(F(" / "));
+				Serial.println(data, DEC);
+#endif
+				return;
+			}
+
+		DccCommander.LastEventDate = millis();
+
 #ifdef COMMANDERS_DEBUG_MODE
 		Serial.print(F("DccCommander packet received :"));
 		Serial.print(realAddress);
@@ -104,6 +118,9 @@ void DccCommanderClass::begin(int i, int j, int k, boolean inInterruptMonitor, b
 	pinMode(k, OUTPUT_INTERRUPT);
 #endif
 	this->LastDccId = UNDEFINED_ID;
+	this->LastEventDate = 0;
+	this->RaiseEventOnActivation = false;
+	this->RaiseEventDebounceDelay = 200;
 
 	DCC.SetBasicAccessoryDecoderPacketHandler(DccAccessoryDecoderPacket, true);
 
@@ -113,6 +130,12 @@ void DccCommanderClass::begin(int i, int j, int k, boolean inInterruptMonitor, b
 #ifdef COMMANDERS_PRINT_COMMANDERS
 	this->Interrupt = k;
 #endif
+}
+
+void DccCommanderClass::RaiseEventWhen(boolean inRaiseEventOnActivation, int inRaiseEventDebounceDelay)
+{
+	this->RaiseEventOnActivation = inRaiseEventOnActivation;
+	this->RaiseEventDebounceDelay = inRaiseEventDebounceDelay;
 }
 
 void DccCommanderClass::PriorityLoop()

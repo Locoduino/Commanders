@@ -112,7 +112,8 @@ var NAVTREE =
           [ "GetLastDccId", "classDccCommanderClass.html#a97a3afabe3aca9b97728b3d8679ad66b", null ],
           [ "loop", "classDccCommanderClass.html#a0c97ea34dfdf4c13de53a58937df5580", null ],
           [ "printCommander", "classDccCommanderClass.html#a9eb04a79497f70417cbb690e9dc3614c", null ],
-          [ "PriorityLoop", "classDccCommanderClass.html#a688f192c9f26dfe824a86b6aa00152df", null ]
+          [ "PriorityLoop", "classDccCommanderClass.html#a688f192c9f26dfe824a86b6aa00152df", null ],
+          [ "RaiseEventWhen", "classDccCommanderClass.html#a6a29cb12afbc0ca343ee4a9aeeed5e7f", null ]
         ] ],
         [ "Event", "structEvent.html", [
           [ "Data", "structEvent.html#add1010c7a7dfb056fee72df7c1575d90", null ],
@@ -222,9 +223,7 @@ var NAVTREE =
             [ "LIBRARY_VERSION", "Commanders_8h.html#a8650e6793d46032c617bb7b824f90bfd", null ],
             [ "NO_BUTTONSCOMMANDER", "Commanders_8h.html#ae7dd7c67a4532415014e362df2369975", null ],
             [ "NO_BUTTONSCOMMANDERANALOGPUSHES", "Commanders_8h.html#af9126e9be452405be33ad87850e347d2", null ],
-            [ "NO_BUTTONSCOMMANDERANALOGPUSHES", "Commanders_8h.html#af9126e9be452405be33ad87850e347d2", null ],
             [ "NO_BUTTONSCOMMANDERENCODER", "Commanders_8h.html#a2985d95a0a626310eae72096ce19ac2f", null ],
-            [ "NO_BUTTONSCOMMANDERPOTENTIOMETER", "Commanders_8h.html#a0f0bd7466403be1b94b0dbb88c9e621a", null ],
             [ "NO_BUTTONSCOMMANDERPOTENTIOMETER", "Commanders_8h.html#a0f0bd7466403be1b94b0dbb88c9e621a", null ],
             [ "NO_BUTTONSCOMMANDERPUSH", "Commanders_8h.html#a3498f6a7191d0a717e5e442ac284c0c1", null ],
             [ "NO_BUTTONSCOMMANDERSWITCH", "Commanders_8h.html#aadc6236e05ca3e6ea974036cdbfd4e81", null ],
@@ -327,7 +326,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "ButtonsCommanderAnalogPushesItem_8cpp_source.html",
-"structEventsSequencerItem.html#adf1c33ad991dfa3c442c64826b56d277"
+"structEventsSequencerItem.html#aec4270ff027ff1d4257b2558023ef616"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

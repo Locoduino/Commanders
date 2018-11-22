@@ -48,6 +48,17 @@ id / data / 1
 id / data / 0
 \endverbatim
 
+One an Ecos, only the '1' packets are sent, out of the standard...
+\verbatim
+id / data / 1
+id / data / 1
+id / data / 1
+\endverbatim
+
+The last flag is to activate for a while (three times at 1 !) and then deactivate the motor !
+DccCommander will react only on the first event to avoid double events. By default the '0' packet is used to raise an event,
+but for an Ecos or a '1' only Dcc central, use RaiseEventWhen() function with first argument to true.
+
 In the Commanders interpretation of a DCC packet, id is given by 'A' bits, data from the 'D' bits, and the activate flag by the 'C' bit.
 The id is not the number you can see on a MS2, and on most DCC controllers. There is a small computation between id and data to obtain 
 the real MS2 accessory number : real_id (1 to 320) and real_data (0 or 1 for right or left). It works on all known controllers, except on Multimaus...
@@ -58,9 +69,6 @@ real_data * 10000 + real_id   .
 \endverbatim
 DCCINT is the macro used to build the unsigned long, DCCID the one to use to get the real id number from this long int, and DCCACTIVATION the 
 other to get the real_data.
-
-This flag is to activate for a while (three times at 1 !) and then deactivate the motor !
-DccCommander will react only on the deactivate flag to avoid double events.
 
 Events thrown:
 
@@ -74,7 +82,10 @@ class DccCommanderClass : Commander
 {
 	private:
 		unsigned long LastDccId;
+		unsigned long LastEventDate;
 		boolean UseRawDccAddresses;
+		boolean RaiseEventOnActivation;
+		int RaiseEventDebounceDelay;
 		static DccAccDecoderPacket    func_AccPacket;
 		static DccCommanderClass *pDccCommander;
 
@@ -91,6 +102,14 @@ class DccCommanderClass : Commander
 		the original values can be preserved instead of these converted value. Default is false.
 		*/
 		void begin(int i, int j, int k, boolean inInterruptMonitor = false, boolean inUseRawDccAddresses = false);
+
+		/** Defines on which DCC packet the Commanders event should be raised. By default, an event is raised when the desactivation packet is received.
+		After the reception on the 'event' packet, there is no other reception on the accessory during a given delay, 200ms by default.
+		@param inRaiseEventOnActivation	if true, the event will be raised only at reception of a desactivation packet.
+		@param When a 'event' packet has been received, no other event will be raised on this accessory during this delay.
+		*/
+		void RaiseEventWhen(boolean inRaiseEventOnActivation, int inRaiseEventDebounceDelay = 200);
+
 		/** Priority loop function.	Just a new call to the loop function. By this way, the DCC commander loop is sure to be called two or more times
 		when other commanders are only called once !
 		*/

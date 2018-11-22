@@ -11,7 +11,7 @@ description: <Composite push button array on analog pin with debounce.>
 ButtonsCommanderAnalogPushes::ButtonsCommanderAnalogPushes() : ButtonsCommanderButton(UNDEFINED_ID)
 {
 	this->analogPin = 0;
-	this->lastButtonState = LOW;
+	this->lastButtonState = 10000;
 
 	this->lastDebounceTime = 0;
 	this->debounceDelay = 50;
@@ -43,6 +43,9 @@ void ButtonsCommanderAnalogPushes::begin(int inButtonPin, uint8_t inNumberOfItem
 		this->pButtons[i].begin(inpIds[i], inpButtonValues[i], inTolerancy);
 	}
 
+	this->lastButtonState = 10000;
+	this->lastDebounceTime = 0;
+
 	pinMode(this->analogPin, INPUT);
 }
 
@@ -65,6 +68,11 @@ unsigned long ButtonsCommanderAnalogPushes::loop()
 	// read the state of the switch into a local variable:
 	int reading = analogRead(this->analogPin);
 
+#ifdef COMMANDERS_DEBUG_VERBOSE_MODE
+	Serial.print(F("Analog push button value"));
+	Serial.println(reading);
+#endif
+
 	// check to see if you just pressed the button 
 	// (i.e. the input went from LOW to HIGH),  and you've waited 
 	// long enough since the last press to ignore any noise:  
@@ -74,6 +82,7 @@ unsigned long ButtonsCommanderAnalogPushes::loop()
 	{
 		// reset the debouncing timer
 		this->lastDebounceTime = millis();
+		this->lastButtonState = reading;
 	}
 
 	if (this->lastDebounceTime > 0 && (millis() - this->lastDebounceTime) > this->debounceDelay)
@@ -82,12 +91,8 @@ unsigned long ButtonsCommanderAnalogPushes::loop()
 		// than the debounce delay, so take it as the actual current state:
 
 		// if the button state has changed:
-		if (reading < this->lastButtonState - this->readingTolerancy || reading > this->lastButtonState + this->readingTolerancy)
+		if (reading >= this->lastButtonState - this->readingTolerancy && reading <= this->lastButtonState + this->readingTolerancy)
 		{
-			// save the reading.  Next time through the loop,
-			// it'll be the lastButtonState:
-			this->lastButtonState = reading;
-
 			for (int i = 0; i < this->size; i++)
 				if (this->pButtons[i].IsPushed(reading))
 				{
@@ -100,7 +105,9 @@ unsigned long ButtonsCommanderAnalogPushes::loop()
 #endif
 				}
 		}
-		this->lastDebounceTime = 0;    
+
+		this->lastDebounceTime = 0;
+		this->lastButtonState = reading;
 	}
 
 	return foundID;

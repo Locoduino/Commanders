@@ -6,6 +6,14 @@ description: <sample commander demo with all possible declarations>
 
 #include "Commanders.h"
 
+#ifdef NO_DCCCOMMANDERNMRA
+#error To be able to compile this sample, the line #define NO_DCCCOMMANDERNMRA must be commented in Commanders.h
+#endif
+
+#ifdef NO_I2CCOMMANDER
+#error To be able to compile this sample, the line #define NO_I2CCOMMANDER must be commented in Commanders.h
+#endif
+
 #ifdef NO_CANCOMMANDER
 #error To be able to compile this sample,the line #define NO_CANCOMMANDER must be commented in Commanders.h
 #endif
@@ -58,7 +66,7 @@ void setup()
 	Commanders::begin(ReceiveEvent, LED_BUILTIN);
 
 	I2CCommander.begin(01);
-	DccCommander.begin(0, 0, 1);
+	DccCommanderNMRA.begin(0, 0, 3);
 	CANCommander.begin(0, 0, 1, 1);
 	SerialCommander.begin();
 

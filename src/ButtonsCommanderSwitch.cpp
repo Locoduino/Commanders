@@ -76,11 +76,8 @@ EventPin *ButtonsCommanderSwitch::AddEvent(unsigned long inId, int inPin, COMMAN
 	return pIdpin;
 }
 
-unsigned long ButtonsCommanderSwitch::loopOnePin(unsigned long inId, GPIO_pin_t inPin, unsigned long inPreviousId,unsigned long inDebounceDelay, 
-																				byte *inpLastPinState, unsigned long *inpLastDebounceTime, bool inSendEvent)
+bool ButtonsCommanderSwitch::HavePinStateChanged(GPIO_pin_t inPin, unsigned long inDebounceDelay, byte *inpCurrentPinState, unsigned long *inpLastDebounceTime)
 {
-	unsigned long haveFound = UNDEFINED_ID;
-
 	if (inPin != DP_INVALID)
 	{
 		// read the state of the switch into a local variable:
@@ -90,50 +87,32 @@ unsigned long ButtonsCommanderSwitch::loopOnePin(unsigned long inId, GPIO_pin_t 
 		// (i.e. the input went from HIGH to LOW, inverted by INPUT_PULLUP), and you've waited 
 		// long enough since the last press to ignore any noise:  
 
-		// If the switch changed, due to noise or pressing:
-		if (pinState != *inpLastPinState)
+		// If the switch changed since last time, start a new timer
+		if (pinState != *inpCurrentPinState)
 		{
 			// reset the debouncing timer
 #ifdef COMMANDERS_DEBUG_MODE
+#ifdef COMMANDERS_DEBUG_VERBOSE_MODE
 			Serial.print(F("Pin "));
 			Serial.print(GPIO_to_Arduino_pin(inPin));
 			Serial.print(pinState == HIGH ? F(" high") : F(" low"));
 			Serial.println(F(" debounced !"));
 #endif
-			*inpLastPinState = pinState;
+#endif
 			*inpLastDebounceTime = millis();
-			return UNDEFINED_ID;
+			*inpCurrentPinState = pinState;
+			return false;		// unchanged
 		}
 
 		if (*inpLastDebounceTime > 0 && (millis() - *inpLastDebounceTime) > inDebounceDelay)
 		{
-			// whatever the pinState is at, it's been there for longer
-			// than the debounce delay, so take it as the actual current state:
-
-			if (pinState == LOW)
-			{
-				haveFound = inId;
-
-				// raise the event for the new pin.
-				if (inSendEvent)
-					Commanders::RaiseEvent(inId, COMMANDERS_EVENT_MOVE, COMMANDERS_MOVE_ON);
-			}
-			else
-			{
-				// raise the event for the old pin.
-				if (inSendEvent && inPreviousId != UNDEFINED_ID)
-					Commanders::RaiseEvent(inPreviousId, COMMANDERS_EVENT_MOVE, COMMANDERS_MOVE_OFF);
-			}
-
 			*inpLastDebounceTime = 0;
+			*inpCurrentPinState = pinState;
+			return true;
 		}
-
-		// save the pinState.  Next time through the loop,
-		// it'll be the lastButtonState:
-		*inpLastPinState = pinState;
 	}
 
-	return haveFound;		 
+	return false;
 }
 
 void ButtonsCommanderSwitch::beforeFirstLoop()
@@ -173,18 +152,18 @@ unsigned long ButtonsCommanderSwitch::loop()
 	}
 
 	EventPin *pCurr = this->EventPins.pCurrentItem->Obj;
-
-	unsigned long haveFound = ButtonsCommanderSwitch::loopOnePin(pCurr->Id, pCurr->Pin, UNDEFINED_ID,	this->debounceDelay, &pCurr->LastButtonState, &pCurr->LastDebounceTime, false);
-	
-	if (haveFound != UNDEFINED_ID)
-	{
-		this->lastSelectedPin = pCurr->Pin;
-		Commanders::RaiseEvent(haveFound, pCurr->Event, pCurr->Data);
-	}
-
 	this->EventPins.NextCurrent();
 
-	return haveFound;
+	bool changed = ButtonsCommanderSwitch::HavePinStateChanged(pCurr->Pin, this->debounceDelay, &pCurr->LastButtonState, &pCurr->LastDebounceTime);
+	
+	if (changed == true && pCurr->LastButtonState == LOW)
+	{
+		this->lastSelectedPin = pCurr->Pin;
+		Commanders::RaiseEvent(pCurr->Id, pCurr->Event, pCurr->Data);
+		return pCurr->Id;
+	}
+
+	return UNDEFINED_ID;
 }
 
 #ifdef COMMANDERS_PRINT_COMMANDERS

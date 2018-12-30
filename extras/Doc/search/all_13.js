@@ -5,7 +5,7 @@ var searchData=
   ['serial_5fcommander',['SERIAL_COMMANDER',['../SerialCommander_8hpp.html#a93c1234e764041277200d7d2f5ff4468',1,'SerialCommander.hpp']]],
   ['serialcommander',['SerialCommander',['../SerialCommander_8hpp.html#a55428133460a9c3e06b46a20b87aea05',1,'SerialCommander.hpp']]],
   ['serialcommander_2ehpp',['SerialCommander.hpp',['../SerialCommander_8hpp.html',1,'']]],
-  ['setaccessorydecoderpackethandler',['SetAccessoryDecoderPacketHandler',['../classDccCommanderClass.html#a676e59c4b5cc8c604221e0b6e32d8aca',1,'DccCommanderClass']]],
+  ['setaccessorydecoderpackethandler',['SetAccessoryDecoderPacketHandler',['../classDccCommanderClass.html#a676e59c4b5cc8c604221e0b6e32d8aca',1,'DccCommanderClass::SetAccessoryDecoderPacketHandler()'],['../classDccCommanderNMRAClass.html#a65cb16ed9e41bc2374453a0ab44b88ad',1,'DccCommanderNMRAClass::SetAccessoryDecoderPacketHandler()']]],
   ['setlasteventdata',['SetLastEventData',['../classCommanders.html#ac0885243a075244f75612900460d40ab',1,'Commanders']]],
   ['setlasteventtype',['SetLastEventType',['../classCommanders.html#a5805415d6f7e358f1b26b34e59fe89ac',1,'Commanders']]],
   ['setminimaxi',['SetMiniMaxi',['../classButtonsCommanderPotentiometer.html#aaf7fc79b72fdab3aea7f5f5a087d2ce8',1,'ButtonsCommanderPotentiometer']]],

@@ -89,8 +89,8 @@ void Commanders::printEventType(COMMANDERS_EVENT_TYPE inEventType, bool inDataFo
 {
 	switch (inEventType)
 	{
-	case COMMANDERS_EVENT_NONE:				Serial.println(F("NONE"));				break;
-	case COMMANDERS_EVENT_TOGGLE:			Serial.println(F("TOGGLE"));			break;
+	case COMMANDERS_EVENT_NONE:				Serial.print(F("NONE"));				break;
+	case COMMANDERS_EVENT_TOGGLE:			Serial.print(F("TOGGLE"));			break;
 	case COMMANDERS_EVENT_MOVE:				Serial.print(F("MOVE"));				break;
 	case COMMANDERS_EVENT_MOVEPOSITION:		Serial.print(F("MOVEPOSITION"));		break;
 	case COMMANDERS_EVENT_MOVEPOSITIONID:	Serial.print(F("MOVEPOSITIONID"));		break;

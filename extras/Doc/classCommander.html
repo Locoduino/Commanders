@@ -107,10 +107,11 @@ Inheritance diagram for Commander:</div>
  <div class="center">
   <img src="classCommander.png" usemap="#Commander_map" alt=""/>
   <map id="Commander_map" name="Commander_map">
-<area href="classButtonsCommanderClass.html" alt="ButtonsCommanderClass" shape="rect" coords="0,56,151,80"/>
-<area href="classCANCommanderClass.html" alt="CANCommanderClass" shape="rect" coords="161,56,312,80"/>
-<area href="classDccCommanderClass.html" alt="DccCommanderClass" shape="rect" coords="322,56,473,80"/>
-<area href="classI2CCommanderClass.html" alt="I2CCommanderClass" shape="rect" coords="483,56,634,80"/>
+<area href="classButtonsCommanderClass.html" alt="ButtonsCommanderClass" shape="rect" coords="0,56,170,80"/>
+<area href="classCANCommanderClass.html" alt="CANCommanderClass" shape="rect" coords="180,56,350,80"/>
+<area href="classDccCommanderClass.html" alt="DccCommanderClass" shape="rect" coords="360,56,530,80"/>
+<area href="classDccCommanderNMRAClass.html" alt="DccCommanderNMRAClass" shape="rect" coords="540,56,710,80"/>
+<area href="classI2CCommanderClass.html" alt="I2CCommanderClass" shape="rect" coords="720,56,890,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -139,7 +140,7 @@ Static Public Member Functions</h2></td></tr>
 <p>DO NOT INSTANCIATE THIS CLASS !</p>
 <p>A commander is a class with a loop function which is able to raise events for a source. Each commander is an item into a linked list of commanders. There is one and only one Commander of a given type during a library session. </p>
 
-<p class="definition">Definition at line <a class="el" href="Commander_8hpp_source.html#l00023">23</a> of file <a class="el" href="Commander_8hpp_source.html">Commander.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Commander_8hpp_source.html#l00029">29</a> of file <a class="el" href="Commander_8hpp_source.html">Commander.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ac3fc4568a88c91cb4ab97de9f77698a9"></a>
 <div class="memitem">
@@ -163,7 +164,7 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Default constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="Commander_8hpp_source.html#l00031">31</a> of file <a class="el" href="Commander_8hpp_source.html">Commander.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Commander_8hpp_source.html#l00037">37</a> of file <a class="el" href="Commander_8hpp_source.html">Commander.hpp</a>.</p>
 
 </div>
 </div>
@@ -192,7 +193,7 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classButtonsCommanderClass.html#abc33c28391bc3bedc44a157f10624ca0">ButtonsCommanderClass</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="Commander_8hpp_source.html#l00040">40</a> of file <a class="el" href="Commander_8hpp_source.html">Commander.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Commander_8hpp_source.html#l00046">46</a> of file <a class="el" href="Commander_8hpp_source.html">Commander.hpp</a>.</p>
 
 </div>
 </div>
@@ -270,9 +271,9 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Main loop of this commander. </p><dl class="section return"><dt>Returns</dt><dd><a class="el" href="structEvent.html">Event</a> Id if an event has been raised, or <a class="el" href="Events_8h.html#a48ad4dd16b8e22f2c8bc92b154479e92">UNDEFINED_ID</a> if not. </dd></dl>
 
-<p>Reimplemented in <a class="el" href="classDccCommanderClass.html#a0c97ea34dfdf4c13de53a58937df5580">DccCommanderClass</a>, <a class="el" href="classCANCommanderClass.html#ac55b4d106afa8c09764931e287eb7c42">CANCommanderClass</a>, <a class="el" href="classButtonsCommanderClass.html#acda3beac661dcf22d2593c76fde1a634">ButtonsCommanderClass</a>, and <a class="el" href="classI2CCommanderClass.html#a11fda5e10b4caf40275fea5854018808">I2CCommanderClass</a>.</p>
+<p>Reimplemented in <a class="el" href="classDccCommanderNMRAClass.html#a10bee0ffb66cc7e605bb2d9979fc0c3c">DccCommanderNMRAClass</a>, <a class="el" href="classDccCommanderClass.html#a0c97ea34dfdf4c13de53a58937df5580">DccCommanderClass</a>, <a class="el" href="classCANCommanderClass.html#ac55b4d106afa8c09764931e287eb7c42">CANCommanderClass</a>, <a class="el" href="classButtonsCommanderClass.html#acda3beac661dcf22d2593c76fde1a634">ButtonsCommanderClass</a>, and <a class="el" href="classI2CCommanderClass.html#a11fda5e10b4caf40275fea5854018808">I2CCommanderClass</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="Commander_8hpp_source.html#l00044">44</a> of file <a class="el" href="Commander_8hpp_source.html">Commander.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Commander_8hpp_source.html#l00050">50</a> of file <a class="el" href="Commander_8hpp_source.html">Commander.hpp</a>.</p>
 
 </div>
 </div>
@@ -324,9 +325,9 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Priority loop function. A commander can need more call to its loop than normal. The priority loop functions of all the commanders will be called before any commander loop. </p>
 
-<p>Reimplemented in <a class="el" href="classDccCommanderClass.html#a688f192c9f26dfe824a86b6aa00152df">DccCommanderClass</a>.</p>
+<p>Reimplemented in <a class="el" href="classDccCommanderNMRAClass.html#a579682ec596a73d6ccfb1772ebef6807">DccCommanderNMRAClass</a>, and <a class="el" href="classDccCommanderClass.html#a688f192c9f26dfe824a86b6aa00152df">DccCommanderClass</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="Commander_8hpp_source.html#l00037">37</a> of file <a class="el" href="Commander_8hpp_source.html">Commander.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Commander_8hpp_source.html#l00043">43</a> of file <a class="el" href="Commander_8hpp_source.html">Commander.hpp</a>.</p>
 
 </div>
 </div>
@@ -340,7 +341,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classCommander.html">Commander</a></li>
-    <li class="footer">Generated on jeu. nov. 22 2018 18:52:30 for Commanders &nbsp; by
+    <li class="footer">Generated on dim. déc. 30 2018 15:13:28 for Commanders &nbsp; by
     <a href="http://www.copperspice.com/documentation-doxypress.html">
     <img class="footer" src="doxypress.png" alt="DoxyPress"/></a> 1.2.10 </li>
   </ul>

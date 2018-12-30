@@ -36,7 +36,17 @@ void ButtonsCommanderSwitchOnePin::beforeFirstLoop()
 
 unsigned long ButtonsCommanderSwitchOnePin::loop()
 { 
-	return ButtonsCommanderSwitch::loopOnePin(this->Id, this->Pin, this->Id, this->debounceDelay, &this->lastButtonState, &this->lastDebounceTime);
+	bool changed = ButtonsCommanderSwitch::HavePinStateChanged(this->Pin, this->debounceDelay, &this->lastButtonState, &this->lastDebounceTime);
+
+	if (changed == true)
+	{
+		Commanders::RaiseEvent(this->Id, COMMANDERS_EVENT_MOVE, this->lastButtonState == LOW ? COMMANDERS_MOVE_ON : COMMANDERS_MOVE_OFF);
+
+		if (this->lastButtonState == LOW)
+			return this->Id;
+	}
+
+	return UNDEFINED_ID;
 }
 
 #ifdef COMMANDERS_PRINT_COMMANDERS

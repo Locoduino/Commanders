@@ -96,12 +96,12 @@ class DccCommanderClass : Commander
 		/** Initialize the instance.
 		@param i	Manufacturer ID of this decoder. Can be 0 in common case...
 		@param j	Manufacturer version number for this decoder. Can be 0 in common case...
-		@param k	Interrupt number used by DCC_Decoder. The interrupt is raised when a signal is detected on the associated pin.
+		@param interruptNumber	Interrupt number used by DCC_Decoder. The interrupt is raised when a signal is detected on the associated pin.
 		@param inInterruptMonitor	If true, the Commanders status led will blink when DccCommander receive a new accessory packet. Default is false.
 		@param inUseRawDccAddresses	Dcc id and accessory id are converted into a more readable way to be used, but if this flag is true, 
 		the original values can be preserved instead of these converted value. Default is false.
 		*/
-		void begin(int i, int j, int k, boolean inInterruptMonitor = false, boolean inUseRawDccAddresses = false);
+		void begin(int i, int j, int interruptNumber, boolean inInterruptMonitor = false, boolean inUseRawDccAddresses = false);
 
 		/** Defines on which DCC packet the Commanders event should be raised. By default, an event is raised when the desactivation packet is received.
 		After the reception on the 'event' packet, there is no other reception on the accessory during a given delay, 200ms by default.
@@ -145,7 +145,7 @@ public:
 	@remark Only available if COMMANDERS_DEBUG_MODE is defined.
 	*/
 	static void printEvent(unsigned long inId, COMMANDERS_EVENT_TYPE inEventType, int inEventData);
-	#define PRINT_EVENT_DCC(id, type, data)		DccCommander::printEvent(id, type, data);
+	#define PRINT_EVENT_DCC(id, type, data)		DccCommander.printEvent(id, type, data);
 #else
 	#define PRINT_EVENT_DCC(id, type, data)
 #endif

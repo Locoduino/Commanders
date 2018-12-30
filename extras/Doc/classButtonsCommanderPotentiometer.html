@@ -145,7 +145,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a3b40667770ab04694a2ea85f11aebfe0 inherit pro_attribs_classButtonsCommanderButton"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This class describes a potentiometer. This is an analog item, with a minimal, a maximal and a current analog value. An analog pin of the Arduino will return a value between 0 and 1023. The current value of this item will be mapped from 0/1023 to minimum/maximum current value. An event will be thrown when a change of the value will be greater than moveAccuracy.</p>
+<div class="textblock"><p>This class describes a potentiometer. This is an analog item, with a minimal, a maximal and a current analog value. An analog pin of the Arduino will return a value between 0 and ANALOG_LIMIT. The current value of this item will be mapped from 0/ANALOG_LIMIT to minimum/maximum current value. An event will be thrown when a change of the value will be greater than moveAccuracy.</p>
 <p>Events thrown:</p>
 <table class="doxtable">
 <tr>
@@ -221,7 +221,7 @@ Additional Inherited Members</h2></td></tr>
     <tr><td class="paramname">inId</td><td>id of the button. </td></tr>
     <tr><td class="paramname">inPin</td><td>Arduino analog pin connected to this potentiometer. </td></tr>
     <tr><td class="paramname">inMinimum</td><td>minimum value, when the Arduino pin returns 0. </td></tr>
-    <tr><td class="paramname">inMaximum</td><td>maximum value, when the Arduino pin returns value of 1023. </td></tr>
+    <tr><td class="paramname">inMaximum</td><td>maximum value, when the Arduino pin returns value of ANALOG_LIMIT. </td></tr>
     <tr><td class="paramname">inMoveAccuracy</td><td>minimum change value to throw a new event. </td></tr>
   </table>
   </dd>
@@ -327,7 +327,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Change the mini/maxi values. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">inMini</td><td>minimum value, when the Arduino pin returns 0. </td></tr>
-    <tr><td class="paramname">inMaxi</td><td>maximum value, when the Arduino pin returns value of 1023. </td></tr>
+    <tr><td class="paramname">inMaxi</td><td>maximum value, when the Arduino pin returns value of ANALOG_LIMIT. </td></tr>
     <tr><td class="paramname">inMoveAccuracy</td><td>minimum change value to throw a new event. </td></tr>
   </table>
   </dd>
@@ -347,7 +347,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classButtonsCommanderPotentiometer.html">ButtonsCommanderPotentiometer</a></li>
-    <li class="footer">Generated on jeu. nov. 22 2018 18:52:30 for Commanders &nbsp; by
+    <li class="footer">Generated on dim. déc. 30 2018 15:13:28 for Commanders &nbsp; by
     <a href="http://www.copperspice.com/documentation-doxypress.html">
     <img class="footer" src="doxypress.png" alt="DoxyPress"/></a> 1.2.10 </li>
   </ul>

@@ -19,6 +19,7 @@ void ButtonsCommanderSwitchTwoPins::begin(unsigned long inId1, int inPin1, unsig
 	this->Id = inId1;
 	this->lastButtonState1 = HIGH;
 	this->lastDebounceTime1 = 0;
+
 	this->Pin2 = Arduino_to_GPIO_pin(inPin2);
 	this->Id2 = inId2;
 	this->lastButtonState2 = HIGH;
@@ -52,12 +53,31 @@ void ButtonsCommanderSwitchTwoPins::beforeFirstLoop()
 
 unsigned long ButtonsCommanderSwitchTwoPins::loop()
 {
-	unsigned long haveFound = ButtonsCommanderSwitch::loopOnePin(this->Id, this->Pin1, this->Id, this->debounceDelay, &this->lastButtonState1, &this->lastDebounceTime1);
+	bool changed = ButtonsCommanderSwitch::HavePinStateChanged(this->Pin1, this->debounceDelay, &this->lastButtonState1, &this->lastDebounceTime1);
+	if (changed)
+		Serial.println(F("1 changed !"));
 
-	if (haveFound != UNDEFINED_ID)
-		return haveFound;
+	if (changed == true && this->lastButtonState1 == LOW)
+	{
+		Serial.println(F("this->lastButtonState1 = LOW"));
+		Commanders::RaiseEvent(this->Id2, COMMANDERS_EVENT_MOVE, COMMANDERS_MOVE_OFF);
+		Commanders::RaiseEvent(this->Id, COMMANDERS_EVENT_MOVE, COMMANDERS_MOVE_ON);
+		return this->Id;
+	}
 
-	return ButtonsCommanderSwitch::loopOnePin(this->Id2, this->Pin2, this->Id2, this->debounceDelay, &this->lastButtonState2, &this->lastDebounceTime2);
+	changed = ButtonsCommanderSwitch::HavePinStateChanged(this->Pin2, this->debounceDelay, &this->lastButtonState2, &this->lastDebounceTime2);
+	if (changed)
+		Serial.println(F("2 changed !"));
+
+	if (changed == true && this->lastButtonState2 == LOW)
+	{
+		Serial.println(F("this->lastButtonState2 = LOW"));
+		Commanders::RaiseEvent(this->Id, COMMANDERS_EVENT_MOVE, COMMANDERS_MOVE_OFF);
+		Commanders::RaiseEvent(this->Id2, COMMANDERS_EVENT_MOVE, COMMANDERS_MOVE_ON);
+		return this->Id2;
+	}
+
+	return UNDEFINED_ID;
 }
 
 #ifdef COMMANDERS_PRINT_COMMANDERS

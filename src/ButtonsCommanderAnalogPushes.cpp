@@ -31,13 +31,15 @@ void ButtonsCommanderAnalogPushes::begin(int inButtonPin, uint8_t inNumberOfItem
 	for (int i = 0; i < this->size; i++)
 	{
 #ifdef COMMANDERS_DEBUG_MODE
-		if (inpButtonValues[i] < 0 || inpButtonValues[i] > 1023)
+		if (inpButtonValues[i] < 0 || inpButtonValues[i] > ANALOG_LIMIT)
 		{
 			Serial.print(F("Analog push buttons. Invalid value "));
 			Serial.print(inpButtonValues[i]);
 			Serial.print(F(" for button "));
 			Serial.print(i);
-			Serial.println(F(". Value must between 0 and 1023 !"));
+			Serial.print(F(". Value must between 0 and " ));
+			Serial.print(ANALOG_LIMIT);
+			Serial.print(F(" !"));
 		}
 #endif
 		this->pButtons[i].begin(inpIds[i], inpButtonValues[i], inTolerancy);
@@ -69,7 +71,7 @@ unsigned long ButtonsCommanderAnalogPushes::loop()
 	int reading = analogRead(this->analogPin);
 
 #ifdef COMMANDERS_DEBUG_VERBOSE_MODE
-	Serial.print(F("Analog push button value"));
+	Serial.print(F("Analog push button value "));
 	Serial.println(reading);
 #endif
 
@@ -122,11 +124,11 @@ void ButtonsCommanderAnalogPushes::EndLoop()
 void ButtonsCommanderAnalogPushes::printCommander()
 {
 	Serial.print(F("    AnalogPushes - Pin :"));
-	Serial.println(this->analogPin);
+	Serial.print(this->analogPin);
 	Serial.print(F(" / Reading Accuracy: "));
-	Serial.println(this->readingTolerancy);
+	Serial.print(this->readingTolerancy);
 	Serial.print(F(" / Debounce delay: "));
-	Serial.print(this->debounceDelay);
+	Serial.println(this->debounceDelay);
 
 	for (int i = 0; i < this->size; i++)
 	{

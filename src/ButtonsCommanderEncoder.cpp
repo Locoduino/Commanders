@@ -18,10 +18,10 @@ void ButtonsCommanderEncoder::begin(unsigned long inId, int inPin1, int inPin2, 
 
 	this->pin1 = Arduino_to_GPIO_pin(inPin1);
 	this->pin2 = Arduino_to_GPIO_pin(inPin2);
-	pinMode2f(this->pin1, INPUT);
-	pinMode2f(this->pin2, INPUT);
-	digitalWrite2f(this->pin1, HIGH); //turn pullup resistor on
-	digitalWrite2f(this->pin2, HIGH); //turn pullup resistor on
+	pinMode2f(this->pin1, INPUT_PULLUP);
+	pinMode2f(this->pin2, INPUT_PULLUP);
+	//digitalWrite2f(this->pin1, HIGH); //turn pullup resistor on
+	//digitalWrite2f(this->pin2, HIGH); //turn pullup resistor on
 
 	this->moveIncrement = inMoveIncrement;
 	this->incrementPosition = 0;
@@ -35,9 +35,21 @@ void ButtonsCommanderEncoder::begin(unsigned long inId, int inPin1, int inPin2, 
 unsigned long ButtonsCommanderEncoder::loop()
 {
 #ifdef COMMANDERS_DEBUG_MODE
-	if (this->Id == UNDEFINED_ID)
-		Serial.println(F("This encoder have no ID defined : call begin() !"));
+	if (this->Id == UNDEFINED_ID || this->pin1 == DP_INVALID || this->pin2 == DP_INVALID)
+	{
+		if (this->lastEncoded != 32767) // If the error message has not been yet shown...
+		{
+			Serial.println(F("This encoder have no ID or pins defined : call begin() !"));
+			// use it as a debug flag !
+			this->lastEncoded = 32767;	// The error message has been shown...
+		}
+	}
 #endif
+
+	if (this->Id == UNDEFINED_ID || this->pin1 == DP_INVALID || this->pin2 == DP_INVALID)
+	{
+		return UNDEFINED_ID;
+	}
 
 	int MSB = digitalRead2f(this->pin1); //MSB = most significant bit
 	int LSB = digitalRead2f(this->pin2); //LSB = least significant bit
@@ -47,10 +59,20 @@ unsigned long ButtonsCommanderEncoder::loop()
 		return UNDEFINED_ID;
 	int sum = (this->lastEncoded << 2) | encoded; //adding it to the previous encoded value
 
-	char inc = 0;
+	int8_t inc = 0;
 	if (sum == 13 || sum == 4 || sum == 2 || sum == 11) inc = 1;
 	if (sum == 14 || sum == 7 || sum == 1 || sum ==  8) inc = -1;
 	
+#ifdef COMMANDERS_DEBUG_MODE
+	if (inc != 0)
+	{
+		Serial.print(F("Encoder move of "));
+		Serial.print(inc);
+		Serial.print(F(" : "));
+		Serial.println(this->currentValue+inc);
+	}
+#endif
+
 	this->lastEncoded = encoded; //store this value for next time
 
 	if (inc == 0)

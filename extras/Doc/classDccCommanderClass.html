@@ -115,8 +115,8 @@ Inheritance diagram for DccCommanderClass:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac10ea64d33e686c877bdcb3024068e02"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDccCommanderClass.html#ac10ea64d33e686c877bdcb3024068e02">DccCommanderClass</a> ()</td></tr>
 <tr class="separator:ac10ea64d33e686c877bdcb3024068e02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ec17894419857a33c2667e925da456e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDccCommanderClass.html#a6ec17894419857a33c2667e925da456e">begin</a> (int i, int j, int k, boolean inInterruptMonitor = false, boolean inUseRawDccAddresses = false)</td></tr>
-<tr class="separator:a6ec17894419857a33c2667e925da456e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39c06d8e60cd9da0f6668d123c9a1795"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDccCommanderClass.html#a39c06d8e60cd9da0f6668d123c9a1795">begin</a> (int i, int j, int interruptNumber, boolean inInterruptMonitor = false, boolean inUseRawDccAddresses = false)</td></tr>
+<tr class="separator:a39c06d8e60cd9da0f6668d123c9a1795"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a29cb12afbc0ca343ee4a9aeeed5e7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDccCommanderClass.html#a6a29cb12afbc0ca343ee4a9aeeed5e7f">RaiseEventWhen</a> (boolean inRaiseEventOnActivation, int inRaiseEventDebounceDelay = 200)</td></tr>
 <tr class="separator:a6a29cb12afbc0ca343ee4a9aeeed5e7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a688f192c9f26dfe824a86b6aa00152df"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDccCommanderClass.html#a688f192c9f26dfe824a86b6aa00152df">PriorityLoop</a> ()</td></tr>
@@ -196,7 +196,7 @@ id / data / 1
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a6ec17894419857a33c2667e925da456e"></a>
+<a class="anchor" id="a39c06d8e60cd9da0f6668d123c9a1795"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -216,7 +216,7 @@ id / data / 1
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>k</em>, </td>
+          <td class="paramname"><em>interruptNumber</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -241,7 +241,7 @@ id / data / 1
   <table class="params">
     <tr><td class="paramname">i</td><td>Manufacturer ID of this decoder. Can be 0 in common case... </td></tr>
     <tr><td class="paramname">j</td><td>Manufacturer version number for this decoder. Can be 0 in common case... </td></tr>
-    <tr><td class="paramname">k</td><td>Interrupt number used by DCC_Decoder. The interrupt is raised when a signal is detected on the associated pin. </td></tr>
+    <tr><td class="paramname">interruptNumber</td><td>Interrupt number used by DCC_Decoder. The interrupt is raised when a signal is detected on the associated pin. </td></tr>
     <tr><td class="paramname">inInterruptMonitor</td><td>If true, the <a class="el" href="classCommanders.html">Commanders</a> status led will blink when DccCommander receive a new accessory packet. Default is false. </td></tr>
     <tr><td class="paramname">inUseRawDccAddresses</td><td>Dcc id and accessory id are converted into a more readable way to be used, but if this flag is true, the original values can be preserved instead of these converted value. Default is false. </td></tr>
   </table>
@@ -543,7 +543,7 @@ id / data / 1
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classDccCommanderClass.html">DccCommanderClass</a></li>
-    <li class="footer">Generated on jeu. nov. 22 2018 18:52:30 for Commanders &nbsp; by
+    <li class="footer">Generated on dim. déc. 30 2018 15:13:28 for Commanders &nbsp; by
     <a href="http://www.copperspice.com/documentation-doxypress.html">
     <img class="footer" src="doxypress.png" alt="DoxyPress"/></a> 1.2.10 </li>
   </ul>

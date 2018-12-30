@@ -1,6 +1,7 @@
 var searchData=
 [
   ['cancommanderclass',['CANCommanderClass',['../classCANCommanderClass.html',1,'CANCommanderClass'],['../classCANCommanderClass.html#ad0e2b4faecea168636d7b36b390e465d',1,'CANCommanderClass::CANCommanderClass()']]],
+  ['checklastreception',['CheckLastReception',['../classDccCommanderNMRAClass.html#af4aecbf9be897e2de159685475803c7a',1,'DccCommanderNMRAClass']]],
   ['cmdrschainedlist',['CMDRSCHAINEDLIST',['../classCMDRSCHAINEDLIST.html',1,'CMDRSCHAINEDLIST&lt; T &gt;'],['../classCMDRSCHAINEDLIST.html#a6a8536f2cb62714624e8a1ae2c021191',1,'CMDRSCHAINEDLIST::CMDRSCHAINEDLIST()']]],
   ['cmdrschainedlist_3c_20event_20_3e',['CMDRSCHAINEDLIST&lt; Event &gt;',['../classCMDRSCHAINEDLIST.html',1,'']]],
   ['cmdrschainedlist_3c_20eventpin_20_3e',['CMDRSCHAINEDLIST&lt; EventPin &gt;',['../classCMDRSCHAINEDLIST.html',1,'']]],
@@ -11,7 +12,7 @@ var searchData=
   ['commanderpriorityloops',['CommanderPriorityLoops',['../classCommander.html#add75d0185fe8f8fc0c9a92a02f3663c8',1,'Commander']]],
   ['commanders',['Commanders',['../classCommanders.html',1,'']]],
   ['commanders_2eh',['Commanders.h',['../Commanders_8h.html',1,'']]],
-  ['commanders_5fdebug_5fmode',['COMMANDERS_DEBUG_MODE',['../Commanders_8h.html#a1fdf52a0fdf8778a4472686eaa278b15',1,'Commanders.h']]],
+  ['commanders_5fdebug_5fmode',['COMMANDERS_DEBUG_MODE',['../Commanders_8h.html#a1fdf52a0fdf8778a4472686eaa278b15',1,'COMMANDERS_DEBUG_MODE():&#160;Commanders.h'],['../Commanders_8h.html#a1fdf52a0fdf8778a4472686eaa278b15',1,'COMMANDERS_DEBUG_MODE():&#160;Commanders.h']]],
   ['commanders_5fdebug_5fverbose_5fmode',['COMMANDERS_DEBUG_VERBOSE_MODE',['../Commanders_8h.html#a43b270926f3753345583c1ed6f03c831',1,'Commanders.h']]],
   ['commanders_5fevent_5fconfig',['COMMANDERS_EVENT_CONFIG',['../Events_8h.html#a36239a7eea6194f04e73e80d7419490ca06e662a86df4cb9cc66585d7948d4a71',1,'Events.h']]],
   ['commanders_5fevent_5fmove',['COMMANDERS_EVENT_MOVE',['../Events_8h.html#a36239a7eea6194f04e73e80d7419490caebdb45ee96bd05e90e9e633c114e9cba',1,'Events.h']]],
@@ -35,5 +36,6 @@ var searchData=
   ['commanders_5fmove_5ftop',['COMMANDERS_MOVE_TOP',['../Events_8h.html#a347ec2e7ad5bc98b641a887ce34cc2baa411dad6eae5f4b6ee6a37ed360630b8a',1,'Events.h']]],
   ['commanders_5fmove_5ftype',['COMMANDERS_MOVE_TYPE',['../Events_8h.html#a347ec2e7ad5bc98b641a887ce34cc2ba',1,'Events.h']]],
   ['commanders_5fprint_5fcommanders',['COMMANDERS_PRINT_COMMANDERS',['../Commanders_8h.html#a903f43d89a21cb3955b4fac654f6f8e8',1,'Commanders.h']]],
-  ['continue',['Continue',['../classEventsSequencer.html#a081d5cbbfd30fedb74f9ffd3e8673a37',1,'EventsSequencer']]]
+  ['continue',['Continue',['../classEventsSequencer.html#a081d5cbbfd30fedb74f9ffd3e8673a37',1,'EventsSequencer']]],
+  ['cvpair',['CVPair',['../structCVPair.html',1,'']]]
 ];

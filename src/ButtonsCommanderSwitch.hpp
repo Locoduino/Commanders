@@ -64,8 +64,7 @@ public:
 	/** Check if a pin has changed its state, and send an event if necessary.
 	@remark This is an internal function.
 	*/
-	static unsigned long loopOnePin(unsigned long inId, GPIO_pin_t inPin, unsigned long inPreviousId, unsigned long inDebounceDelay,
-																		byte *inpLastPinState, unsigned long *inpLastDebounceTime, bool inSendEvent = true);
+	static bool HavePinStateChanged(GPIO_pin_t inPin, unsigned long inDebounceDelay, byte *inpCurrentPinState, unsigned long *inpLastDebounceTime);
 
 #ifdef COMMANDERS_PRINT_COMMANDERS
 	/** Print this Commander on the console.

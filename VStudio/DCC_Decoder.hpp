@@ -69,7 +69,7 @@ public:
 	DCC_Decoder() {}
 
 	void beginDecoder(uint8_t mfgID, uint8_t mfgVers, uint8_t interrupt) {}    // Used for Decoder
-	void beginMonitor(uint8_t interrupt) {}                              // Used when building a monitor
+	void SetupMonitor(uint8_t interrupt) {}                              // Used when building a monitor
 
 	void SetBasicAccessoryDecoderPacketHandler(BasicAccDecoderPacket func, boolean allPackets) {}
 	void SetInterruptMonitor(InterruptMonitor func) {}

@@ -143,8 +143,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aeeae00ba8997f66112cca738e60b57e1"><td class="memItemLeft" align="right" valign="top">static unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classButtonsCommanderSwitch.html#aeeae00ba8997f66112cca738e60b57e1">loopOnePin</a> (unsigned long inId, GPIO_pin_t inPin, unsigned long inPreviousId, unsigned long inDebounceDelay, byte *inpLastPinState, unsigned long *inpLastDebounceTime, bool inSendEvent = true)</td></tr>
-<tr class="separator:aeeae00ba8997f66112cca738e60b57e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18f4edf67e9eb643be82295624c74fd0"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classButtonsCommanderSwitch.html#a18f4edf67e9eb643be82295624c74fd0">HavePinStateChanged</a> (GPIO_pin_t inPin, unsigned long inDebounceDelay, byte *inpCurrentPinState, unsigned long *inpLastDebounceTime)</td></tr>
+<tr class="separator:a18f4edf67e9eb643be82295624c74fd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -257,7 +257,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classButtonsCommanderButton.html#ae1f260c75fbe475f674107bdc96f26cd">ButtonsCommanderButton</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="ButtonsCommanderSwitch_8cpp_source.html#l00139">139</a> of file <a class="el" href="ButtonsCommanderSwitch_8cpp_source.html">ButtonsCommanderSwitch.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ButtonsCommanderSwitch_8cpp_source.html#l00118">118</a> of file <a class="el" href="ButtonsCommanderSwitch_8cpp_source.html">ButtonsCommanderSwitch.cpp</a>.</p>
 
 </div>
 </div>
@@ -314,6 +314,55 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a18f4edf67e9eb643be82295624c74fd0"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ButtonsCommanderSwitch::HavePinStateChanged </td>
+          <td>(</td>
+          <td class="paramtype">GPIO_pin_t&#160;</td>
+          <td class="paramname"><em>inPin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramname"><em>inDebounceDelay</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">byte *&#160;</td>
+          <td class="paramname"><em>inpCurrentPinState</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long *&#160;</td>
+          <td class="paramname"><em>inpLastDebounceTime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Check if a pin has changed its state, and send an event if necessary. </p><dl class="section remark"><dt>Remarks</dt><dd>This is an internal function. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="ButtonsCommanderSwitch_8cpp_source.html#l00079">79</a> of file <a class="el" href="ButtonsCommanderSwitch_8cpp_source.html">ButtonsCommanderSwitch.cpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a3e66f87ce692b0524bf9940dec663d21"></a>
 <div class="memitem">
 <div class="memproto">
@@ -338,74 +387,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classButtonsCommanderButton.html#a44bbb289ce1f64b42a88126e8dd42f7e">ButtonsCommanderButton</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="ButtonsCommanderSwitch_8cpp_source.html#l00160">160</a> of file <a class="el" href="ButtonsCommanderSwitch_8cpp_source.html">ButtonsCommanderSwitch.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="aeeae00ba8997f66112cca738e60b57e1"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned long ButtonsCommanderSwitch::loopOnePin </td>
-          <td>(</td>
-          <td class="paramtype">unsigned long&#160;</td>
-          <td class="paramname"><em>inId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GPIO_pin_t&#160;</td>
-          <td class="paramname"><em>inPin</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned long&#160;</td>
-          <td class="paramname"><em>inPreviousId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned long&#160;</td>
-          <td class="paramname"><em>inDebounceDelay</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">byte *&#160;</td>
-          <td class="paramname"><em>inpLastPinState</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned long *&#160;</td>
-          <td class="paramname"><em>inpLastDebounceTime</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>inSendEvent</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Check if a pin has changed its state, and send an event if necessary. </p><dl class="section remark"><dt>Remarks</dt><dd>This is an internal function. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="ButtonsCommanderSwitch_8cpp_source.html#l00079">79</a> of file <a class="el" href="ButtonsCommanderSwitch_8cpp_source.html">ButtonsCommanderSwitch.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ButtonsCommanderSwitch_8cpp_source.html#l00139">139</a> of file <a class="el" href="ButtonsCommanderSwitch_8cpp_source.html">ButtonsCommanderSwitch.cpp</a>.</p>
 
 </div>
 </div>
@@ -419,7 +401,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classButtonsCommanderSwitch.html">ButtonsCommanderSwitch</a></li>
-    <li class="footer">Generated on jeu. nov. 22 2018 18:52:30 for Commanders &nbsp; by
+    <li class="footer">Generated on dim. déc. 30 2018 15:13:28 for Commanders &nbsp; by
     <a href="http://www.copperspice.com/documentation-doxypress.html">
     <img class="footer" src="doxypress.png" alt="DoxyPress"/></a> 1.2.10 </li>
   </ul>

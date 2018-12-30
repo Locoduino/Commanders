@@ -108,14 +108,14 @@ void StatusBlink_handler()
 	status = !status;
 }
 
-void DccCommanderClass::begin(int i, int j, int k, boolean inInterruptMonitor, boolean inUseRawDccAddresses)
+void DccCommanderClass::begin(int i, int j, int interruptNumber, boolean inInterruptMonitor, boolean inUseRawDccAddresses)
 {
-	DCC.beginDecoder(i, j, k);
+	DCC.beginDecoder(i, j, interruptNumber);
 	this->UseRawDccAddresses = inUseRawDccAddresses;
 #ifdef VISUALSTUDIO
 	// In VS, the exception address is also the pin number.
 	// pinMode() is just here to declare the pin used for the emulator...
-	pinMode(k, OUTPUT_INTERRUPT);
+	pinMode(interruptNumber, OUTPUT_INTERRUPT);
 #endif
 	this->LastDccId = UNDEFINED_ID;
 	this->LastEventDate = 0;
@@ -128,7 +128,7 @@ void DccCommanderClass::begin(int i, int j, int k, boolean inInterruptMonitor, b
 		DCC.SetInterruptMonitor(StatusBlink_handler);
 
 #ifdef COMMANDERS_PRINT_COMMANDERS
-	this->Interrupt = k;
+	this->Interrupt = interruptNumber;
 #endif
 }
 

@@ -14,21 +14,15 @@ Each event have an Id, a type (MOVE, TOGGLE, MOVEPOSITION, LEFT, RIGHT, TOP, BOT
 is added with some events to complete the event information : the position value for MOVEPOSITION for instance.
 
 Each kind of Commanders can be excluded from compilation, for memory problems purpose or for naming conflicts.
-Inside some Commanders, sub items can be excluded too, like the different buttons in the ButtonsCommander. 
+Inside some Commanders, sub items can be excluded too, like the different kind of buttons in the ButtonsCommander. 
 You can exclude some parts of library here, to avoid losing program and data memory on parts you don't use.
-For example, if you don't want DCC railroad modelling command protocol, 
+For example, if you don't want DCC railroad modeling command protocol, 
 just uncomment the line #define NO_DCCCOMMANDER by removing // at the beginning.
 
 CANCommander is excluded by default, because this is a rare usage of the library, and the associated CAN library mcp_can
 consume memory for nothing if this commander is not used.
 
-The Arduino IDE compiles all the files of the library 'src' directory even if its content is not used.
-The result is, if an unused source file contains static declarations (SERIAL, DCC or CAN do !), these statics 
-will be allocated and this memory will be lost. The only solution I have found is to rename the source files to
-something IDE don't know...
-So if you want to lose less memory, you can rename the linked files from .cpp to .ori, and from .hpp to .hppori.
-See below in the exclusion area the file names related to each exclusion.
-This software is Copyright (C) 2015-2018 thierry Paris / Locoduino. Use is subject to license
+This software is Copyright (C) 2015-2019 thierry Paris / Locoduino. Use is subject to license
 conditions. The main licensing options available are GPL V2 or Commercial:
 
 \par Open Source Licensing GPL V2
@@ -45,6 +39,20 @@ and you are not prepared to distribute and share the source code of your
 application. Contact info@open.com.au for details.
 
 \page Revision History
+\par 30/12/2018 V2.00
+- Compatibilité avec ESP32 : Analog, Encoder, ...
+- Intégration du décodage DCC par la bibliothèque NmraDcc	(https://github.com/mrrwa/NmraDcc) amélioré pour l'ESP32.
+- Correction de l'exemple DCC, Serial.begin manquant, COMMANDERS_DEBUG_MODE obligatoire...
+- Correction de #define PRINT_EVENT_DCC()
+- Correction de ButtonsCommanderSwitch et dérivés qui n'envoyaient pas les bons événements.
+_______________
+
+- Add support of ESP32 chips for analog devices, encoder, etc...
+- Integration of NmraDcc library for Dcc decoding, giving support for ESPs, STMs (STM32 is not tested)...
+- Fix of DCC sample, Serial.begin missing, COMMANDERS_DEBUG_MODE needs to be declared for this sample.
+- Fix of PRINT_EVENT_DCC().
+- Fix of ButtonsCommanderSwitch and inherited, not sending the right events at the right time !
+
 \par 22/11/2018 V1.62
 - Correction de ButtonsCommanderAnalogPushes qui ne marchait pas.
 - Ajout de RaiseEventWhen() à DccCommander pour gérer les centrales type Ecos.
@@ -450,7 +458,7 @@ _______________
 /** @file Commanders.h
 Main include file of the library.*/
 
-#define LIBRARY_VERSION		"Commanders V1.62"
+#define LIBRARY_VERSION		"Commanders V2.00"
 
 ///////////////////////////////////////////////////////////////////
 // Remove the '//' at the beginning of the line to be in debug mode.
@@ -470,65 +478,6 @@ Main include file of the library.*/
 #include <DIO2.h>
 
 //////////////////////////////////////////
-//  Exclusion area
-//
-//NO_CANCOMMANDER
-//	CANCommander.cpp
-//	CANCommander.hpp
-//
-//NO_DCCCOMMANDER																																																																 
-//	DccCommander.cpp
-//	DccCommander.hpp
-//	DCC_Decoder.cpp
-//	DCC_Decoder.hpp
-//
-//NO_I2CCOMMANDER
-//	I2CCommander.cpp
-//	I2CCommander.hpp
-//
-//NO_SERIALCOMMANDER
-//	SerialCommander.hpp
-//	TextInterpreter.cpp
-//	TextInterpreter.hpp
-//
-//NO_BUTTONSCOMMANDER
-//	ButtonsCommander.cpp
-//	ButtonsCommander.hpp
-//	ButtonsCommanderButtons.cpp
-//	ButtonsCommanderButtons.hpp
-//	ButtonsCommanderEncoder.cpp
-//	ButtonsCommanderEncoder.hpp
-//	ButtonsCommanderPush.cpp
-//	ButtonsCommanderPush.hpp
-//	ButtonsCommanderSwitch.cpp
-//	ButtonsCommanderSwitch.hpp
-//	ButtonsCommanderPotentiometer.cpp
-//	ButtonsCommanderPotentiometer.hpp
-//
-//NO_BUTTONSCOMMANDERENCODER
-//	ButtonsCommanderEncoder.cpp
-//	ButtonsCommanderEncoder.hpp
-//
-//NO_BUTTONSCOMMANDERPUSH
-//	ButtonsCommanderPush.cpp
-//	ButtonsCommanderPush.hpp
-//
-//NO_BUTTONSCOMMANDERANALOGPUSHES
-//	ButtonsCommanderAnalogPush.cpp
-//	ButtonsCommanderAnalogPush.hpp
-//
-//NO_BUTTONSCOMMANDERSWITCH
-//	ButtonsCommanderSwitch.cpp
-//	ButtonsCommanderSwitch.hpp
-//
-//NO_BUTTONSCOMMANDERPOTENTIOMETER
-//	ButtonsCommanderPotentiometer.cpp
-//	ButtonsCommanderPotentiometer.hpp
-//
-//NO_EVENTsSEQUENCER
-//	EventsSequencer.cpp
-//	EventsSequencer.hpp
-
 //#define NO_BUTTONSCOMMANDER
 //#define NO_BUTTONSCOMMANDERENCODER
 //#define NO_BUTTONSCOMMANDERPUSH
@@ -537,9 +486,10 @@ Main include file of the library.*/
 //#define NO_BUTTONSCOMMANDERPOTENTIOMETER
 #define NO_CANCOMMANDER
 #define NO_DCCCOMMANDER
+#define NO_DCCCOMMANDERNMRA
 #define NO_I2CCOMMANDER
 #define NO_SERIALCOMMANDER
-//#define NO_EVENTSSEQUENCER
+#define NO_EVENTSSEQUENCER
 
 #ifdef DOXYGEN_SPECIFIC
 			// DO NOT CHANGE THESE LINES IN THIS BLOCK 'DOXYGEN_SPECIFIC' : Only here for library documentation !
@@ -566,9 +516,12 @@ Main include file of the library.*/
 			/** If this is defined, the full bus CAN part of the library is removed from the compilation.
 			It can result in a smaller memory footprint for the final program.*/
 			#define NO_CANCOMMANDER
-			/** If this is defined, the DCC railroad modelling protocol command part of the library is removed from the compilation.
+			/** If this is defined, the DCC railroad modeling protocol command DCC_Decoder part of the library is removed from the compilation.
 			It can result in a smaller memory footprint for the final program.*/
 			#define NO_DCCCOMMANDER
+			/** If this is defined, the DCC railroad modeling protocol command from NMRA part of the library is removed from the compilation.
+			It can result in a smaller memory footprint for the final program.*/
+			#define NO_DCCCOMMANDERNMRA
 			/** If this is defined, the I2C bus part of the library is removed from the compilation.
 			It can result in a smaller memory footprint for the final program.*/
 			#define NO_I2CCOMMANDER
@@ -587,6 +540,7 @@ Main include file of the library.*/
 			#undef NO_BUTTONSCOMMANDERPOTENTIOMETER
 			#undef NO_CANCOMMANDER
 			#undef NO_DCCCOMMANDER
+			#undef NO_DCCCOMMANDERNMRA
 			#undef NO_I2CCOMMANDER
 			#undef NO_SERIALCOMMANDER
 			#undef NO_EVENTSSEQUENCER
@@ -616,7 +570,17 @@ Main include file of the library.*/
 #endif
 
 #ifndef NO_DCCCOMMANDER
+#ifndef ARDUINO_ARCH_AVR
+#pragma message ("Commanders : DCC commander is ONLY compatible with AVR Arduino, use DCC NMRA for others!")
+#endif
 #include "DccCommander.hpp"
+#endif
+
+#ifndef NO_DCCCOMMANDERNMRA
+#ifdef __DCC_DECODER_H__
+#pragma message ("Commanders : two DCC commanders CANNOT be used in the same sketch, choose between DCC and DCC NMRA!")
+#endif
+#include "DccCommanderNMRA.hpp"
 #endif
 
 #ifndef NO_I2CCOMMANDER

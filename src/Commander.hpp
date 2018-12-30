@@ -11,6 +11,12 @@
 #define COMMANDERSCONFIGADDRESS(data)		highByte((int)data)
 #define COMMANDERSCONFIGVALUE(data)			lowByte((int)data)
 
+#ifdef ARDUINO_ARCH_ESP32
+#define	ANALOG_LIMIT	4095
+#else
+#define	ANALOG_LIMIT	1023
+#endif
+
 /**
 This is the base class for all the commanders.
 

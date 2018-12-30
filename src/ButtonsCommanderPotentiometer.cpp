@@ -24,19 +24,35 @@ void ButtonsCommanderPotentiometer::begin(unsigned long inId, int inPin, int inM
 
 	digitalWrite(this->pin, HIGH);
 	int val = analogRead(this->pin);
-	this->currentValue = map(val, 0, 1023, this->mini, this->maxi);
+	this->currentValue = map(val, 0, ANALOG_LIMIT, this->mini, this->maxi);
 }
 
 unsigned long ButtonsCommanderPotentiometer::loop()
 {
 #ifdef COMMANDERS_DEBUG_MODE
-	if (this->Id == UNDEFINED_ID)
-		Serial.println(F("This potentiometer have no ID defined : call begin() !"));
+	if (this->Id == UNDEFINED_ID || this->pin == DP_INVALID)
+	{
+		if (this->moveAccuracy != 32767) // If the error message has not been yet shown...
+		{
+			// use it as a debug flag !
+			Serial.println(F("This potentiometer have no ID or pin defined : call begin() !"));
+			this->moveAccuracy = 32767;	// The error message has been shown...
+		}
+	}
 #endif
 
-	int val = analogRead(this->pin);
+	if (this->Id == UNDEFINED_ID || this->pin == DP_INVALID)
+	{
+		return UNDEFINED_ID;
+	}
 
-	val = map(val, 0, 1023, this->mini, this->maxi);
+	int val = analogRead(this->pin);
+#ifdef COMMANDERS_DEBUG_MODE
+	//Serial.print(F("Potentiometer real value : "));
+	//Serial.println(val, DEC);
+#endif
+
+	val = map(val, 0, ANALOG_LIMIT, this->mini, this->maxi);
 
 	if (val < this->currentValue - this->moveAccuracy || val > this->currentValue + this->moveAccuracy)
 	{

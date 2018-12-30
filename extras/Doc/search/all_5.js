@@ -1,7 +1,7 @@
 var searchData=
 [
   ['getanalogvalue',['GetAnalogValue',['../classButtonsCommanderAnalogPushesItem.html#a05b3210abff1b00954c661da7695d765',1,'ButtonsCommanderAnalogPushesItem']]],
-  ['getcurrent',['GetCurrent',['../classButtonsCommanderClass.html#a74b36f7195c430ca7bb4699e5114db83',1,'ButtonsCommanderClass::GetCurrent()'],['../classCANCommanderClass.html#af75894cb98a2442642de7f565a6d67f8',1,'CANCommanderClass::GetCurrent()'],['../classDccCommanderClass.html#a71585f785e9676ae03477557949ecd9a',1,'DccCommanderClass::GetCurrent()'],['../classI2CCommanderClass.html#a3005801c54446babf760167577be8039',1,'I2CCommanderClass::GetCurrent()']]],
+  ['getcurrent',['GetCurrent',['../classButtonsCommanderClass.html#a74b36f7195c430ca7bb4699e5114db83',1,'ButtonsCommanderClass::GetCurrent()'],['../classCANCommanderClass.html#af75894cb98a2442642de7f565a6d67f8',1,'CANCommanderClass::GetCurrent()'],['../classDccCommanderClass.html#a71585f785e9676ae03477557949ecd9a',1,'DccCommanderClass::GetCurrent()'],['../classDccCommanderNMRAClass.html#adc74468ee5d07d990f83aea7e6cc1846',1,'DccCommanderNMRAClass::GetCurrent()'],['../classI2CCommanderClass.html#a3005801c54446babf760167577be8039',1,'I2CCommanderClass::GetCurrent()']]],
   ['getdelay',['GetDelay',['../structEventsSequencerItem.html#ad34bbe05d8011344950c8301fa68ed5e',1,'EventsSequencerItem']]],
   ['getdio2pin',['GetDIO2Pin',['../classButtonsCommanderPush.html#ae3148a0249bfbec51d2fcc906e2a9603',1,'ButtonsCommanderPush']]],
   ['getevent',['GetEvent',['../classEventStack.html#a0cd732c42b231ae7e31ec5b77d23faec',1,'EventStack']]],
@@ -10,7 +10,7 @@ var searchData=
   ['getitem',['GetItem',['../classButtonsCommanderAnalogPushes.html#a6f796b9880e1d9b7a41a26fdf972a3c0',1,'ButtonsCommanderAnalogPushes']]],
   ['getlastbuttonpressed',['GetLastButtonPressed',['../classButtonsCommanderAnalogPushes.html#af42beb367b2a6278527ef79a30cd892d',1,'ButtonsCommanderAnalogPushes']]],
   ['getlastconfigaddress',['GetLastConfigAddress',['../classCommanders.html#a738b07e45ab42b267023aa41ced99794',1,'Commanders']]],
-  ['getlastdccid',['GetLastDccId',['../classDccCommanderClass.html#a97a3afabe3aca9b97728b3d8679ad66b',1,'DccCommanderClass']]],
+  ['getlastdccid',['GetLastDccId',['../classDccCommanderClass.html#a97a3afabe3aca9b97728b3d8679ad66b',1,'DccCommanderClass::GetLastDccId()'],['../classDccCommanderNMRAClass.html#ad4203d9095001834557bfaa9918141d1',1,'DccCommanderNMRAClass::GetLastDccId()']]],
   ['getlasteventdata',['GetLastEventData',['../classCommanders.html#a0187e8801676544eaa07439e3d2392ca',1,'Commanders']]],
   ['getlasteventtype',['GetLastEventType',['../classCommanders.html#adfb7074f73b2259401dec5be4cfaa17d',1,'Commanders']]],
   ['getnext',['GetNext',['../structEventsSequencerItem.html#a1ad822811fd0a36fcde2bd33d14e01ff',1,'EventsSequencerItem']]],
@@ -18,5 +18,6 @@ var searchData=
   ['getpendingeventindex',['GetPendingEventIndex',['../classEventStack.html#ac926c16835a21a1710d986040ce76b57',1,'EventStack']]],
   ['getpin',['GetPin',['../classButtonsCommanderPush.html#ad4a86075facec25cb45e703971c4e7c0',1,'ButtonsCommanderPush']]],
   ['getposition',['GetPosition',['../classButtonsCommanderButton.html#a823f11a7de3a5a01d0c076f7d5b4fae0',1,'ButtonsCommanderButton::GetPosition()'],['../classButtonsCommanderEncoder.html#af9cc403a8374e4d9493648b3cfb8c869',1,'ButtonsCommanderEncoder::GetPosition()'],['../classButtonsCommanderPotentiometer.html#a2c1d733902d73d9c57be2c408fc5bc77',1,'ButtonsCommanderPotentiometer::GetPosition()']]],
+  ['getrocomode',['GetRocoMode',['../classDccCommanderNMRAClass.html#a53ab9d386d00ff2b934d4f666a8f9199',1,'DccCommanderNMRAClass']]],
   ['gpio2_5fprefer_5fspeed',['GPIO2_PREFER_SPEED',['../Commanders_8h.html#abe48e551c87434efe75af8e7d4df457c',1,'Commanders.h']]]
 ];

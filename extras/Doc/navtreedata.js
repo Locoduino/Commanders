@@ -275,7 +275,6 @@ var NAVTREE =
         [ "src", "dir_d41d8cd98f00b204e9800998ecf8427e.html", [
           [ "Commanders.h", "Commanders_8h.html", [
             [ "COMMANDERS_DEBUG_MODE", "Commanders_8h.html#a1fdf52a0fdf8778a4472686eaa278b15", null ],
-            [ "COMMANDERS_DEBUG_MODE", "Commanders_8h.html#a1fdf52a0fdf8778a4472686eaa278b15", null ],
             [ "COMMANDERS_DEBUG_VERBOSE_MODE", "Commanders_8h.html#a43b270926f3753345583c1ed6f03c831", null ],
             [ "COMMANDERS_PRINT_COMMANDERS", "Commanders_8h.html#a903f43d89a21cb3955b4fac654f6f8e8", null ],
             [ "GPIO2_PREFER_SPEED", "Commanders_8h.html#abe48e551c87434efe75af8e7d4df457c", null ],
@@ -290,6 +289,7 @@ var NAVTREE =
             [ "NO_CANCOMMANDER", "Commanders_8h.html#a8647526d256312a8b21f15af5805fb2a", null ],
             [ "NO_DCCCOMMANDER", "Commanders_8h.html#a0413efc930c14270a8d2caf241163cbe", null ],
             [ "NO_DCCCOMMANDER", "Commanders_8h.html#a0413efc930c14270a8d2caf241163cbe", null ],
+            [ "NO_DCCCOMMANDERNMRA", "Commanders_8h.html#ad241f4a7e36556d3d9c5f686b226e012", null ],
             [ "NO_DCCCOMMANDERNMRA", "Commanders_8h.html#ad241f4a7e36556d3d9c5f686b226e012", null ],
             [ "NO_EVENTSSEQUENCER", "Commanders_8h.html#af4e3b964737bc5d02cd21a6eb375751f", null ],
             [ "NO_EVENTSSEQUENCER", "Commanders_8h.html#af4e3b964737bc5d02cd21a6eb375751f", null ],

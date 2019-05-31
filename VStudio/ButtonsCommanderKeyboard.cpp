@@ -4,25 +4,25 @@ author: <Thierry PARIS>
 description: <Keyboard button.>
 *************************************************************/
 
+#include "stdafx.h"
+
 #include <Arduino.h>
 #include <Commanders.h>
 #include "ButtonsCommanderKeyboard.hpp"
 
 #ifndef NO_BUTTONSCOMMANDER
 
-#include "conio.h"
-
 ButtonsCommanderKeyboard::ButtonsCommanderKeyboard() : ButtonsCommanderButton(UNDEFINED_ID)
 {
 	this->key = 0;
-	ArduiEmulator::ArduinoForm::lastKeyPressed = 0;
+	this->lastKeyPressed = 0;
 }
 
 void ButtonsCommanderKeyboard::begin(unsigned long inId, int inKey, COMMANDERS_EVENT_TYPE inEventType, int inData)
 {
 	this->Id = inId; 
 	this->key = inKey; 
-	ArduiEmulator::ArduinoForm::lastKeyPressed = 0;
+	this->lastKeyPressed = 0;
 
 	if (inId != UNDEFINED_ID)
 		this->AddEvent(inId, inEventType, inData);
@@ -50,10 +50,10 @@ unsigned long ButtonsCommanderKeyboard::loop()
 	if (this->key == 0)
 		return foundID;
 
-	if (ArduiEmulator::ArduinoForm::lastKeyPressed == this->key)
+	if (lastKeyPressed == this->key)
 	{
 		//this->SelectLastLoop();
-		ArduiEmulator::ArduinoForm::lastKeyPressed = 0;
+		lastKeyPressed = 0;
 #ifdef COMMANDERS_DEBUG_MODE
 		Serial.print(F("Keyboard "));
 		char str[3];

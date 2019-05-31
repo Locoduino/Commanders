@@ -116,14 +116,14 @@ Macros</h2></td></tr>
 <tr class="memitem:a8650e6793d46032c617bb7b824f90bfd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8650e6793d46032c617bb7b824f90bfd"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>LIBRARY_VERSION</b>&#160;&#160;&#160;&quot;Commanders V2.00&quot;</td></tr>
 <tr class="separator:a8650e6793d46032c617bb7b824f90bfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fdf52a0fdf8778a4472686eaa278b15"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Commanders_8h.html#a1fdf52a0fdf8778a4472686eaa278b15">COMMANDERS_DEBUG_MODE</a></td></tr>
-<tr class="separator:a1fdf52a0fdf8778a4472686eaa278b15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe48e551c87434efe75af8e7d4df457c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Commanders_8h.html#abe48e551c87434efe75af8e7d4df457c">GPIO2_PREFER_SPEED</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:abe48e551c87434efe75af8e7d4df457c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8647526d256312a8b21f15af5805fb2a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Commanders_8h.html#a8647526d256312a8b21f15af5805fb2a">NO_CANCOMMANDER</a></td></tr>
 <tr class="separator:a8647526d256312a8b21f15af5805fb2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0413efc930c14270a8d2caf241163cbe"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Commanders_8h.html#a0413efc930c14270a8d2caf241163cbe">NO_DCCCOMMANDER</a></td></tr>
 <tr class="separator:a0413efc930c14270a8d2caf241163cbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad241f4a7e36556d3d9c5f686b226e012"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Commanders_8h.html#ad241f4a7e36556d3d9c5f686b226e012">NO_DCCCOMMANDERNMRA</a></td></tr>
+<tr class="separator:ad241f4a7e36556d3d9c5f686b226e012"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa63d8345e7748626f0c63d02ecdff633"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Commanders_8h.html#aa63d8345e7748626f0c63d02ecdff633">NO_I2CCOMMANDER</a></td></tr>
 <tr class="separator:aa63d8345e7748626f0c63d02ecdff633"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a190ad583ee12fb3fdbce6761a9b914e7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Commanders_8h.html#a190ad583ee12fb3fdbce6761a9b914e7">NO_SERIALCOMMANDER</a></td></tr>
@@ -166,21 +166,6 @@ Macros</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="Commanders_8h_source.html">Commanders.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a class="anchor" id="a1fdf52a0fdf8778a4472686eaa278b15"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define COMMANDERS_DEBUG_MODE</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>If this is defined, the library will do many checks during setup and execution, and print errors, warnings and information messages on console. These messages can take a lot of memory, so be careful about the free memory of your program if you activate debug mode. </p>
-
-<p class="definition">Definition at line <a class="el" href="Commanders_8h_source.html#l00551">551</a> of file <a class="el" href="Commanders_8h_source.html">Commanders.h</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="a1fdf52a0fdf8778a4472686eaa278b15"></a>
 <div class="memitem">
 <div class="memproto">
@@ -406,6 +391,21 @@ Macros</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ad241f4a7e36556d3d9c5f686b226e012"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NO_DCCCOMMANDERNMRA</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>If this is defined, the DCC railroad modeling protocol command from NMRA part of the library is removed from the compilation. It can result in a smaller memory footprint for the final program. </p>
+
+<p class="definition">Definition at line <a class="el" href="Commanders_8h_source.html#l00524">524</a> of file <a class="el" href="Commanders_8h_source.html">Commanders.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="af4e3b964737bc5d02cd21a6eb375751f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -502,7 +502,7 @@ Macros</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d41d8cd98f00b204e9800998ecf8427e.html">src</a></li><li class="navelem"><a class="el" href="Commanders_8h.html">Commanders.h</a></li>
-    <li class="footer">Generated on dim. déc. 30 2018 15:13:28 for Commanders &nbsp; by
+    <li class="footer">Generated on ven. mai 31 2019 21:22:49 for Commanders &nbsp; by
     <a href="http://www.copperspice.com/documentation-doxypress.html">
     <img class="footer" src="doxypress.png" alt="DoxyPress"/></a> 1.2.10 </li>
   </ul>

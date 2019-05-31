@@ -12,7 +12,7 @@ var searchData=
   ['commanderpriorityloops',['CommanderPriorityLoops',['../classCommander.html#add75d0185fe8f8fc0c9a92a02f3663c8',1,'Commander']]],
   ['commanders',['Commanders',['../classCommanders.html',1,'']]],
   ['commanders_2eh',['Commanders.h',['../Commanders_8h.html',1,'']]],
-  ['commanders_5fdebug_5fmode',['COMMANDERS_DEBUG_MODE',['../Commanders_8h.html#a1fdf52a0fdf8778a4472686eaa278b15',1,'COMMANDERS_DEBUG_MODE():&#160;Commanders.h'],['../Commanders_8h.html#a1fdf52a0fdf8778a4472686eaa278b15',1,'COMMANDERS_DEBUG_MODE():&#160;Commanders.h']]],
+  ['commanders_5fdebug_5fmode',['COMMANDERS_DEBUG_MODE',['../Commanders_8h.html#a1fdf52a0fdf8778a4472686eaa278b15',1,'Commanders.h']]],
   ['commanders_5fdebug_5fverbose_5fmode',['COMMANDERS_DEBUG_VERBOSE_MODE',['../Commanders_8h.html#a43b270926f3753345583c1ed6f03c831',1,'Commanders.h']]],
   ['commanders_5fevent_5fconfig',['COMMANDERS_EVENT_CONFIG',['../Events_8h.html#a36239a7eea6194f04e73e80d7419490ca06e662a86df4cb9cc66585d7948d4a71',1,'Events.h']]],
   ['commanders_5fevent_5fmove',['COMMANDERS_EVENT_MOVE',['../Events_8h.html#a36239a7eea6194f04e73e80d7419490caebdb45ee96bd05e90e9e633c114e9cba',1,'Events.h']]],

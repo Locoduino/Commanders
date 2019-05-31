@@ -20,7 +20,7 @@ ButtonsCommanderAnalogPushes::ButtonsCommanderAnalogPushes() : ButtonsCommanderB
 }
 
 void ButtonsCommanderAnalogPushes::begin(int inButtonPin, uint8_t inNumberOfItems, unsigned long *inpIds, int *inpButtonValues, int inTolerancy)
-{	
+{
 	this->size = inNumberOfItems;
 	this->pButtons = new ButtonsCommanderAnalogPushesItem[this->size];
 
@@ -37,7 +37,7 @@ void ButtonsCommanderAnalogPushes::begin(int inButtonPin, uint8_t inNumberOfItem
 			Serial.print(inpButtonValues[i]);
 			Serial.print(F(" for button "));
 			Serial.print(i);
-			Serial.print(F(". Value must between 0 and " ));
+			Serial.print(F(". Value must be between 0 and "));
 			Serial.print(ANALOG_LIMIT);
 			Serial.print(F(" !"));
 		}
@@ -50,6 +50,7 @@ void ButtonsCommanderAnalogPushes::begin(int inButtonPin, uint8_t inNumberOfItem
 
 	pinMode(this->analogPin, INPUT);
 }
+
 
 ButtonsCommanderButton* ButtonsCommanderAnalogPushes::GetFromId(unsigned long inId)
 {

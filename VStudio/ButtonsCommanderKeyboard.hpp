@@ -21,6 +21,7 @@ class ButtonsCommanderKeyboard : public ButtonsCommanderButton
 {
  private:
 	int key;	// character to scan...
+	int lastKeyPressed;
 
 	CMDRSCHAINEDLIST<KeybdEvent> Events;
 

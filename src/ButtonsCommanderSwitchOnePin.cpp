@@ -13,6 +13,7 @@ ButtonsCommanderSwitchOnePin::ButtonsCommanderSwitchOnePin() : ButtonsCommanderB
 	this->debounceDelay = 50;
 	this->lastButtonState = HIGH;
 	this->lastDebounceTime = 0;
+	this->Pin = DP_INVALID;
 }
 
 void ButtonsCommanderSwitchOnePin::begin(unsigned long inId, int inPin)

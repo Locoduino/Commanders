@@ -24,6 +24,9 @@ void ButtonsCommanderEncoder::begin(unsigned long inId, int inPin1, int inPin2, 
 	//digitalWrite2f(this->pin2, HIGH); //turn pullup resistor on
 
 	this->moveIncrement = inMoveIncrement;
+#ifdef VISUALSTUDIO
+	this->moveIncrement = 1;	// easier to test...
+#endif
 	this->incrementPosition = 0;
 	this->lastEncoded = 0;
 	this->mini = inMinimum;

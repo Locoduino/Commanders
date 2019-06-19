@@ -107,8 +107,11 @@ bool ButtonsCommanderSwitch::HavePinStateChanged(GPIO_pin_t inPin, unsigned long
 		if (*inpLastDebounceTime > 0 && (millis() - *inpLastDebounceTime) > inDebounceDelay)
 		{
 			*inpLastDebounceTime = 0;
+			if (*inpCurrentPinState == pinState)
+			{
+				return true;
+			}
 			*inpCurrentPinState = pinState;
-			return true;
 		}
 	}
 

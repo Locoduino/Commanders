@@ -39,6 +39,12 @@ and you are not prepared to distribute and share the source code of your
 application. Contact info@open.com.au for details.
 
 \page Revision History
+\par 19/06/2019 V2.01
+- Correction de ButtonsCommanderSwitch et dérivés qui n'envoyaient pas les bons événements (encore).
+_______________
+
+- Fix of ButtonsCommanderSwitch and inherited, not sending the right events at the right time ! (one more time...)
+
 \par 30/12/2018 V2.00
 - Compatibilité avec ESP32 : Analog, Encoder, ...
 - Intégration du décodage DCC par la bibliothèque NmraDcc	(https://github.com/mrrwa/NmraDcc) amélioré pour l'ESP32.
@@ -458,7 +464,7 @@ _______________
 /** @file Commanders.h
 Main include file of the library.*/
 
-#define LIBRARY_VERSION		"Commanders V2.00"
+#define LIBRARY_VERSION		"Commanders V2.01"
 
 ///////////////////////////////////////////////////////////////////
 // Remove the '//' at the beginning of the line to be in debug mode.

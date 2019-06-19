@@ -11,8 +11,9 @@
 #include "NamedPipes.h" 
 
 //#include "../examples/CANCommander/CANCommander.ino"
+#include "../../../TPC/DCC/DCC.ino"
 
-#include "../VStudio/TestExe.Ino"
+//#include "../VStudio/TestExe.Ino"
 
 int main()
 {

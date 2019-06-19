@@ -11,6 +11,8 @@ description: <Switch button with one pin only with debounce.>
 ButtonsCommanderSwitchTwoPins::ButtonsCommanderSwitchTwoPins() : ButtonsCommanderButton(UNDEFINED_ID)
 {
 	this->debounceDelay = 50;
+	this->Pin1 = DP_INVALID;
+	this->Pin2 = DP_INVALID;
 }
 
 void ButtonsCommanderSwitchTwoPins::begin(unsigned long inId1, int inPin1, unsigned long inId2, int inPin2)

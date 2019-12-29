@@ -96,7 +96,8 @@ class DccCommanderClass : Commander
 		/** Initialize the instance.
 		@param i	Manufacturer ID of this decoder. Can be 0 in common case...
 		@param j	Manufacturer version number for this decoder. Can be 0 in common case...
-		@param interruptNumber	Interrupt number used by DCC_Decoder. The interrupt is raised when a signal is detected on the associated pin.
+		@param interruptNumber	Interrupt number used by DCC_Decoder. The interrupt is raised when a signal is detected on the associated pin. Warning : all pins cannot be used for that usage. 
+		See your Arduino model datasheet to know which pins are able to catch a change of pin state by interruption.
 		@param inInterruptMonitor	If true, the Commanders status led will blink when DccCommander receive a new accessory packet. Default is false.
 		@param inUseRawDccAddresses	Dcc id and accessory id are converted into a more readable way to be used, but if this flag is true, 
 		the original values can be preserved instead of these converted value. Default is false.

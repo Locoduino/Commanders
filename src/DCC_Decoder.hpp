@@ -60,9 +60,7 @@
     // CV 1..256 are supported
 #define kCV_MAX                       29
 
-#ifdef UAD_VC
-	#define PROG_CHAR	char
-#else
+#ifndef VISUALSTUDIO
 	#if ARDUINO > 150
 		#define PROG_CHAR	char
 	#else

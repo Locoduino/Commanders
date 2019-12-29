@@ -464,7 +464,7 @@ _______________
 /** @file Commanders.h
 Main include file of the library.*/
 
-#define LIBRARY_VERSION		"Commanders V2.01"
+#define COMMANDERS_LIBRARY_VERSION		"Commanders V2.01"
 
 ///////////////////////////////////////////////////////////////////
 // Remove the '//' at the beginning of the line to be in debug mode.

@@ -42,9 +42,9 @@ public:
 	{
 #ifdef COMMANDERS_DEBUG_MODE
 		Serial.println(F(""));
-		Serial.println(F(LIBRARY_VERSION));
+		Serial.println(F(COMMANDERS_LIBRARY_VERSION));
 		Serial.println(F("Created by Thierry Paris."));
-		Serial.println(F("(c) Locoduino 2016-2018"));
+		Serial.println(F("(c) Locoduino 2016-2019"));
 		Serial.println(F(""));
 
 		Serial.println(F("*** Setup Commanders started."));

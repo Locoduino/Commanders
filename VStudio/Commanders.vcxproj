@@ -105,7 +105,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);VISUALSTUDIO</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(VisualStudioDir)\..\Arduino\ArduiEmulatorWin\ArduiEmulatorLib;../../DIO2/VStudio/; ../src;../vstudio</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(VisualStudioDir)\..\Arduino\ArduiEmulatorWin\ArduiEmulatorLib;../../DIO2/VStudio/; ../vstudio;../src</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -167,6 +167,7 @@
     <ClCompile Include="..\src\Commander.cpp" />
     <ClCompile Include="..\src\Commanders.cpp" />
     <ClCompile Include="..\src\DccCommander.cpp" />
+    <ClCompile Include="..\src\EventsSequencer.cpp" />
     <ClCompile Include="..\src\EventStack.cpp" />
     <ClCompile Include="..\src\I2CCommander.cpp" />
     <ClCompile Include="..\src\TextInterpreter.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="..\src\Commanders.hpp" />
     <ClInclude Include="..\src\DccCommander.hpp" />
     <ClInclude Include="..\src\Events.h" />
+    <ClInclude Include="..\src\EventsSequencer.hpp" />
     <ClInclude Include="..\src\EventStack.hpp" />
     <ClInclude Include="..\src\I2CCommander.hpp" />
     <ClInclude Include="..\src\SerialCommander.hpp" />

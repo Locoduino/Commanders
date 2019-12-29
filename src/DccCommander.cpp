@@ -10,7 +10,7 @@ description: <Dcc Commander>
 #pragma message ("Commanders : No DCC commander !")
 #else
 #ifdef VISUALSTUDIO
-DCC_Decoder DCC_Decoder::DCCInstance;
+DCC_Decoder DCC;
 #endif
 
 DccAccDecoderPacket DccCommanderClass::func_AccPacket;

@@ -50,10 +50,16 @@ unsigned long ButtonsCommanderKeyboard::loop()
 	if (this->key == 0)
 		return foundID;
 
-	if (lastKeyPressed == this->key)
+	if (::lastKeyPressed != 0)
+	{
+		this->lastKeyPressed = ::lastKeyPressed;
+		::lastKeyPressed = 0;
+	}
+
+	if (this->lastKeyPressed == this->key)
 	{
 		//this->SelectLastLoop();
-		lastKeyPressed = 0;
+		this->lastKeyPressed = 0;
 #ifdef COMMANDERS_DEBUG_MODE
 		Serial.print(F("Keyboard "));
 		char str[3];
